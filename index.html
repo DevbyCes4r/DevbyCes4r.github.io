@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Gratuitos de Desarrollo Web | Web Developer desde Cero</title>
+    <meta name="description" content="10 cursos 100% gratuitos con certificado opcional para convertirte en Web Developer desde cero. Aprende HTML, CSS, JavaScript, Python, Django, PHP y más.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0077B5 0%, #00A0DC 50%, #0077B5 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 50px 35px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .emoji-title {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #0077B5;
+            font-size: 32px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .benefits {
+            background: #f8f9fb;
+            border-left: 4px solid #0077B5;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+        }
+
+        .benefits h3 {
+            color: #0077B5;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .benefits ul {
+            list-style: none;
+            color: #444;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .benefits li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .benefits li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .courses {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .course-card {
+            display: block;
+            padding: 20px 24px;
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-3px);
+            border-color: #0077B5;
+            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.15);
+        }
+
+        .course-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #0077B5;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0, 119, 181, 0.3);
+        }
+
+        .course-title {
+            color: #0077B5;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-icon {
+            font-size: 24px;
+        }
+
+        .course-description {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: #0077B5;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e8ed;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .emoji-title {
+                font-size: 48px;
+            }
+
+            .course-title {
+                font-size: 18px;
+            }
+
+            .course-card {
+                padding: 18px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="emoji-title">💻😎</div>
+            <h1>Conviértete en Web Developer desde Cero</h1>
+            <p class="subtitle">
+                10 cursos <span class="highlight">100% GRATUITOS</span> con certificado opcional 
+                para impulsar tu carrera en tecnología
+            </p>
+        </div>
+
+        <div class="benefits">
+            <h3>¿Qué vas a lograr con estos cursos?</h3>
+            <ul>
+                <li>Aprender desde cero a crear sitios y aplicaciones web</li>
+                <li>Fortalecer tus habilidades técnicas y profesionales</li>
+                <li>Mejorar tu currículum y tu perfil laboral</li>
+                <li>Impulsar tu carrera en tecnología y desarrollo web</li>
+                <li>Aumentar tus oportunidades laborales en el sector tech</li>
+            </ul>
+        </div>
+
+        <div class="courses">
+            <a href="https://edutin.com/sh-10485" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">1</div>
+                <div class="course-title">
+                    <span class="course-icon">🎨</span>
+                    Figma
+                </div>
+                <p class="course-description">
+                    Crea interfaces visuales atractivas y prototipos profesionales para páginas web o aplicaciones.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10487" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">2</div>
+                <div class="course-title">
+                    <span class="course-icon">📄</span>
+                    HTML5
+                </div>
+                <p class="course-description">
+                    Aprende a estructurar sitios web modernos y optimizados desde cero.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10490" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">3</div>
+                <div class="course-title">
+                    <span class="course-icon">🎨</span>
+                    CSS3
+                </div>
+                <p class="course-description">
+                    Dale estilo, color y vida a tus proyectos web con animaciones, transiciones y diseños responsivos.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10488" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">4</div>
+                <div class="course-title">
+                    <span class="course-icon">⚡</span>
+                    JavaScript
+                </div>
+                <p class="course-description">
+                    Aprende a programar con el lenguaje que da interactividad a las páginas web y construye proyectos dinámicos.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10489" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">5</div>
+                <div class="course-title">
+                    <span class="course-icon">🅰️</span>
+                    Angular
+                </div>
+                <p class="course-description">
+                    Crea aplicaciones web modernas y escalables con uno de los frameworks más potentes.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10227" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">6</div>
+                <div class="course-title">
+                    <span class="course-icon">🔌</span>
+                    APIs
+                </div>
+                <p class="course-description">
+                    Aprende a conectar aplicaciones y gestionar datos entre diferentes plataformas.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-7133" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">7</div>
+                <div class="course-title">
+                    <span class="course-icon">🐍</span>
+                    Desarrollo Web con Python y Django
+                </div>
+                <p class="course-description">
+                    Comprende todo el flujo del desarrollo web, desde el frontend hasta el backend, y crea sitios funcionales.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10491" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">8</div>
+                <div class="course-title">
+                    <span class="course-icon">🎯</span>
+                    Django
+                </div>
+                <p class="course-description">
+                    Construye sitios web profesionales con Django, uno de los frameworks más usados por desarrolladores.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10486" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">9</div>
+                <div class="course-title">
+                    <span class="course-icon">🐘</span>
+                    Programación Web con PHP y Laravel
+                </div>
+                <p class="course-description">
+                    Construye aplicaciones escalables con uno de los frameworks más populares y demandados del mundo backend.
+                </p>
+            </a>
+
+            <a href="https://edutin.com/sh-10492" class="course-card" target="_blank" rel="noopener">
+                <div class="course-number">10</div>
+                <div class="course-title">
+                    <span class="course-icon">🔒</span>
+                    Escalabilidad y Seguridad de Aplicaciones
+                </div>
+                <p class="course-description">
+                    Protege tus proyectos y aprende a crear aplicaciones seguras, estables y preparadas para crecer.
+                </p>
+            </a>
+        </div>
+
+        <div class="cta-section">
+            <h2>🚀 ¿Listo para comenzar?</h2>
+            <p style="margin-bottom: 20px; font-size: 16px;">
+                Explora estos y más cursos gratuitos en la plataforma
+            </p>
+            <a href="https://edutin.com/sh-10319" class="cta-button" target="_blank" rel="noopener">
+                Ver Todos los Cursos 📚
+            </a>
+        </div>
+
+        <div class="footer">
+            <p><strong>✨ Aprende en línea, a tu ritmo, con profesores expertos</strong></p>
+            <p style="margin-top: 10px;">Obtén tu certificado con descuento por tiempo limitado</p>
+        </div>
+    </div>
+</body>
+</html>
