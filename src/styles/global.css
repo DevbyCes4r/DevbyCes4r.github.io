@@ -1,0 +1,153 @@
+/* Fuentes personalizadas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Mejoras de accesibilidad */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-600;
+  }
+
+  /* Estilos para código inline */
+  :not(pre)>code {
+    @apply px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-pink-600 dark:text-pink-400 rounded text-sm font-mono;
+  }
+
+  /* Estilos para bloques de código */
+  pre {
+    @apply p-4 rounded-xl overflow-x-auto;
+  }
+
+  pre code {
+    @apply text-sm leading-relaxed;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-blue-200 text-blue-900;
+  }
+
+  /* Dark mode selection */
+  .dark ::selection {
+    @apply bg-blue-800 text-blue-100;
+  }
+}
+
+@layer components {
+
+  /* Botones reutilizables */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full font-semibold shadow-md hover:shadow-lg transition-all;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6;
+  }
+
+  /* Container */
+  .container {
+    @apply mx-auto px-4 max-w-7xl;
+  }
+}
+
+@layer utilities {
+
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600;
+  }
+
+  /* Animaciones personalizadas */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply animate-pulse bg-slate-200 dark:bg-slate-700 rounded;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Syntax highlighting (compatible con Shiki/Prism) */
+.astro-code {
+  @apply rounded-xl shadow-lg;
+}
+
+/* Mejorar legibilidad en móviles */
+@media (max-width: 640px) {
+  body {
+    @apply text-base;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply text-black bg-white;
+  }
+}

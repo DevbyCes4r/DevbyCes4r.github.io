@@ -1,0 +1,84 @@
+---
+interface Props {
+  type: 'tutorial' | 'guide' | 'reference';
+  title: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  timeToRead: string;
+  prerequisites?: string[];
+  learningOutcomes?: string[];
+}
+
+const { 
+  type, 
+  title, 
+  difficulty, 
+  timeToRead, 
+  prerequisites = [],
+  learningOutcomes = []
+} = Astro.props;
+---
+
+<!-- AI-Friendly Content Wrapper -->
+<article 
+  itemscope 
+  itemtype={type === 'tutorial' ? 'https://schema.org/TechArticle' : 'https://schema.org/Article'}
+  class="ai-optimized-content"
+>
+  <!-- Metadata visible para IA -->
+  <div class="bg-slate-800/30 border-l-4 border-blue-500 p-6 my-8 rounded-r-xl not-prose" role="complementary">
+    <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+      <svg class="w-5 h-5 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Información del Recurso
+    </h3>
+    
+    <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <div>
+        <dt class="text-slate-400 font-medium">Tipo de contenido</dt>
+        <dd class="text-white mt-1 capitalize" itemprop="articleSection">{type}</dd>
+      </div>
+      
+      <div>
+        <dt class="text-slate-400 font-medium">Nivel</dt>
+        <dd class="text-white mt-1 capitalize" itemprop="educationalLevel">{difficulty}</dd>
+      </div>
+      
+      <div>
+        <dt class="text-slate-400 font-medium">Tiempo de lectura</dt>
+        <dd class="text-white mt-1" itemprop="timeRequired">{timeToRead}</dd>
+      </div>
+      
+      {prerequisites.length > 0 && (
+        <div class="md:col-span-2">
+          <dt class="text-slate-400 font-medium mb-1">Prerequisitos</dt>
+          <dd>
+            <ul class="flex flex-wrap gap-2">
+              {prerequisites.map(prereq => (
+                <li class="px-2 py-1 bg-slate-700 rounded text-slate-200 text-xs" itemprop="educationalAlignment">
+                  {prereq}
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      )}
+      
+      {learningOutcomes.length > 0 && (
+        <div class="md:col-span-2">
+          <dt class="text-slate-400 font-medium mb-1">Lo que aprenderás</dt>
+          <dd>
+            <ul class="list-disc list-inside text-slate-200 space-y-1">
+              {learningOutcomes.map(outcome => (
+                <li itemprop="teaches">{outcome}</li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      )}
+    </dl>
+  </div>
+  
+  <!-- Slot para el contenido principal -->
+  <slot />
+</article>

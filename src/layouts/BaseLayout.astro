@@ -1,0 +1,103 @@
+---
+import { SEO } from "../utils/seo";
+import "../styles/global.css";
+
+import ThemeToggle from "../components/ThemeToggle.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  article?: boolean;
+}
+
+const { title, description, image, article } = Astro.props;
+const { site } = Astro;
+const canonicalURL = new URL(Astro.url.pathname, site);
+const socialImageURL = new URL(image || "/og-default.jpg", site);
+
+const author = "Cesar N.M"; // Update with actual name
+const twitterHandle = "@devbyces4r"; // Update with actual handle
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:site_name" content="DevbyCes4r" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
+    <!-- AI / LLM Specific Meta Tags -->
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="gptbot" content="index, follow" />
+    <meta name="google-extended" content="index, follow" />
+
+    <!-- Analytics placeholder -->
+    <!-- Google Analytics -->
+
+    <slot name="head" />
+  </head>
+  <body
+    class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300"
+  >
+    <header
+      class="py-6 px-4 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50"
+    >
+      <nav class="max-w-4xl mx-auto flex justify-between items-center">
+        <a
+          href="/"
+          class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+        >
+          DevbyCes4r
+        </a>
+        <div class="flex gap-4 items-center">
+          <a href="/blog" class="hover:text-blue-400 transition-colors">Blog</a>
+          <a href="/recursos" class="hover:text-blue-400 transition-colors"
+            >Recursos</a
+          >
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
+  </body>
+
+  <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
+    <slot />
+  </main>
+
+  <footer
+    class="py-8 px-4 border-t border-slate-800 text-center text-slate-400 text-sm"
+  >
+    <p>&copy; {new Date().getFullYear()} {author}. Hecho con ❤️ y Astro.</p>
+    <div class="mt-2 flex justify-center gap-4">
+      <a href="/rss.xml" class="hover:text-white transition-colors">RSS</a>
+      <a href="/sitemap-index.xml" class="hover:text-white transition-colors"
+        >Sitemap</a
+      >
+    </div>
+  </footer>
+</html>

@@ -1,0 +1,82 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, publishDate, updatedDate, image, author, readingTime, categories, tags } = post.data;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "image": new URL(image || '/og-default.jpg', Astro.site),
+  "datePublished": publishDate.toISOString(),
+  "dateModified": (updatedDate || publishDate).toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": new URL(Astro.url.pathname, Astro.site)
+  }
+};
+---
+
+<BaseLayout title={title} description={description} image={image} article={true}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />
+
+  <article class="prose prose-invert prose-lg max-w-none">
+    <header class="mb-8 not-prose">
+      <div class="flex gap-2 mb-4">
+        {categories.map((cat: string) => (
+          <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">
+            {cat}
+          </span>
+        ))}
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">
+        {title}
+      </h1>
+      
+      <div class="flex items-center gap-4 text-slate-400 text-sm">
+        <span>{publishDate.toLocaleDateString('es-ES', { dateStyle: 'long' })}</span>
+        <span>•</span>
+        <span>{readingTime}</span>
+        <span>•</span>
+        <span>Por {author}</span>
+      </div>
+    </header>
+
+    {image && (
+      <div class="mb-8 rounded-xl overflow-hidden shadow-2xl">
+        <img src={image} alt={title} class="w-full h-auto object-cover" />
+      </div>
+    )}
+
+    <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 mb-8 not-prose">
+      <h3 class="text-lg font-semibold mb-2 text-white">Resumen</h3>
+      <p class="text-slate-300">{description}</p>
+    </div>
+
+    <div class="ai-content-wrapper">
+      <slot />
+    </div>
+
+    <footer class="mt-12 pt-8 border-t border-slate-800 not-prose">
+      <div class="flex flex-wrap gap-2">
+        {tags.map((tag: string) => (
+          <a href={`/tags/${tag}`} class="text-sm text-slate-400 hover:text-blue-400 transition-colors">
+            #{tag}
+          </a>
+        ))}
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

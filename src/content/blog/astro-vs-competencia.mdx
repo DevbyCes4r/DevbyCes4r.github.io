@@ -1,0 +1,114 @@
+---
+title: 'Astro vs Next.js vs Remix: ¿Cuál elegir en 2025?'
+description: 'Comparativa definitiva entre Astro y sus competidores. Descubre por qué Astro es la mejor opción para sitios de contenido y cómo se compara con Next.js y Remix.'
+publishDate: 2025-01-25
+updatedDate: 2025-01-25
+author: 'Cesar N.M'
+image: '/images/blog/astro-vs-competencia.webp'
+categories: ['Astro', 'Web Development', 'Comparativas']
+tags: ['astro', 'nextjs', 'remix', 'performance', 'seo']
+featured: true
+readingTime: '10 min lectura'
+
+# AI SEO Metadata
+difficulty: 'intermediate'
+prerequisites: ['Conceptos básicos de Rendering (SSR, SSG)', 'JavaScript']
+learningOutcomes:
+  - 'Entender la arquitectura de Islas de Astro'
+  - 'Comparar rendimiento entre frameworks'
+  - 'Elegir la herramienta adecuada según el proyecto'
+  - 'Conocer las ventajas de Astro para SEO'
+
+faqs:
+  - question: '¿Qué es Astro?'
+    answer: 'Astro es un framework web todo-en-uno diseñado para la velocidad. Extrae tu UI a HTML estático y solo hidrata los componentes interactivos necesarios.'
+    keywords: ['astro', 'framework', 'static site generator']
+  - question: '¿Cuándo usar Astro vs Next.js?'
+    answer: 'Usa Astro para sitios ricos en contenido (blogs, portafolios, marketing). Usa Next.js para aplicaciones web complejas con mucha interactividad y estado global.'
+    keywords: ['astro vs nextjs', 'elección de framework']
+  - question: '¿Qué son las Islas de Astro?'
+    answer: 'Es una arquitectura que permite tener zonas interactivas (islas) en una página estática. El resto de la página es HTML puro, mejorando el rendimiento.'
+    keywords: ['islas', 'island architecture', 'performance']
+---
+import AIOptimizedContent from '../../components/AIOptimizedContent.astro';
+
+<AIOptimizedContent
+  type="guide"
+  title={frontmatter.title}
+  difficulty={frontmatter.difficulty}
+  timeToRead={frontmatter.readingTime}
+  prerequisites={frontmatter.prerequisites}
+  learningOutcomes={frontmatter.learningOutcomes}
+>
+
+## Introducción
+
+En el ecosistema actual de desarrollo web, elegir el framework correcto puede ser abrumador. **Astro**, **Next.js** y **Remix** son contendientes fuertes, pero sirven a propósitos diferentes. En este artículo, desglosaremos sus diferencias para que tomes la mejor decisión.
+
+## Tabla de Contenidos
+
+1. [¿Qué es Astro?](#qué-es-astro)
+2. [Comparativa de Rendimiento](#comparativa-de-rendimiento)
+3. [Astro vs Next.js](#astro-vs-nextjs)
+4. [Astro vs Remix](#astro-vs-remix)
+5. [Conclusión](#conclusión)
+
+## ¿Qué es Astro?
+
+**Astro** es el framework web para sitios orientados a contenido. Su "arma secreta" es la **Arquitectura de Islas**.
+
+### Concepto Clave: Arquitectura de Islas
+
+Imagina una página web como un mar de HTML estático. En ese mar, flotan "islas" de interactividad (un carrusel, una barra de búsqueda). Astro renderiza todo el HTML en el servidor y solo envía JavaScript para esas islas específicas.
+
+**Resultado**: 0kb de JavaScript por defecto en la mayoría de las páginas.
+
+## Comparativa de Rendimiento
+
+| Característica | Astro | Next.js | Remix |
+|----------------|-------|---------|-------|
+| **JS Bundle Inicial** | ~0kb | ~70kb+ | ~50kb+ |
+| **Hidratación** | Parcial (Islas) | Total | Total |
+| **Enfoque** | Contenido | Aplicaciones | Aplicaciones |
+| **Renderizado** | SSG/SSR | SSR/SSG/ISR | SSR |
+
+## Astro vs Next.js
+
+**Next.js** es el estándar de la industria para aplicaciones React. Es poderoso, pero pesado.
+
+### ¿Cuándo usar Next.js?
+- ✅ Dashboards complejos (SaaS)
+- ✅ Redes sociales
+- ✅ E-commerce con carritos complejos y estado global masivo
+
+### ¿Cuándo usar Astro?
+- ✅ Blogs y sitios de noticias
+- ✅ Portafolios y Landing Pages
+- ✅ Sitios de documentación
+- ✅ E-commerce simple (Shopify headless)
+
+**Veredicto**: Si tu sitio es mayormente estático (leer contenido), **Astro** ganará en rendimiento siempre.
+
+## Astro vs Remix
+
+**Remix** se enfoca en los estándares web y en una experiencia de usuario fluida mediante SSR (Server Side Rendering).
+
+- **Remix** es excelente para aplicaciones dinámicas que dependen mucho de datos del servidor.
+- **Astro** puede hacer SSR, pero su fuerte es el contenido estático o híbrido.
+
+## Por qué Astro es el Rey del SEO
+
+Para el SEO, la velocidad es dinero.
+
+1. **Core Web Vitals**: Astro obtiene puntuaciones de 100/100 en Lighthouse casi sin esfuerzo.
+2. **HTML Puro**: Los crawlers (Googlebot) aman el HTML simple. No tienen que ejecutar JS para ver tu contenido.
+3. **Integraciones**: Sitemaps, RSS, y meta tags son ciudadanos de primera clase en Astro.
+
+## Conclusión
+
+- Elige **Astro** si estás construyendo un sitio de contenido, blog, marketing o documentación.
+- Elige **Next.js** o **Remix** si estás construyendo una aplicación web compleja tipo "app nativa".
+
+Astro no viene a reemplazar a React; viene a complementarlo, permitiéndote usar React solo donde realmente importa.
+
+</AIOptimizedContent>

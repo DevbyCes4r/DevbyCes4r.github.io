@@ -1,0 +1,21 @@
+---
+title: 'Introducción a la Inteligencia Artificial'
+description: 'Comprende los fundamentos de la IA, sus aplicaciones y cómo está transformando el mundo.'
+icon: '🤖'
+affiliateLink: 'https://edutin.com/sh-11568'
+category: 'AI'
+group: '5 cursos gratis de inteligencia artificial'
+---
+
+## Sobre este curso
+
+Este curso es el punto de partida perfecto para entender qué es realmente la Inteligencia Artificial, más allá del hype.
+
+### Aprenderás
+- **Historia de la IA**: Desde Turing hasta el Deep Learning.
+- **Conceptos Clave**: Machine Learning, Redes Neuronales, Procesamiento del Lenguaje Natural.
+- **Ética en IA**: Los desafíos y responsabilidades de crear sistemas inteligentes.
+- **Aplicaciones Reales**: Cómo se usa en medicina, finanzas y transporte.
+
+### ¿Para quién es?
+Para cualquier persona curiosa que quiera entender la tecnología que está definiendo nuestra era.
