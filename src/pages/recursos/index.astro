@@ -7,18 +7,21 @@ const resources = await getCollection("resources");
 // Group resources
 type GroupedResources = Record<string, typeof resources>;
 const groupedResources = resources.reduce<GroupedResources>((acc, resource) => {
-  const group = resource.data.group;
-  if (!acc[group]) {
-    acc[group] = [];
-  }
-  acc[group].push(resource);
+  const groups = resource.data.group; // Already an array thanks to transform
+  groups.forEach((group) => {
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group].push(resource);
+  });
   return acc;
 }, {});
 
 // Define group order
 const groupOrder = [
-  "10-cursos-gratuitos-para-web-developer",
+  "10 cursos gratuitos para web developer",
   "5 cursos gratis de inteligencia artificial",
+  "10 Cursos GRATIS para Analistas de Datos y DBA",
 ];
 
 const pageTitle = "Cursos Gratuitos de Desarrollo Web y AI | DevbyCes4r";

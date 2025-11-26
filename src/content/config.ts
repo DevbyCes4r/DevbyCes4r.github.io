@@ -34,7 +34,10 @@ const resourcesCollection = defineCollection({
         affiliateLink: z.string(),
         price: z.string().optional(),
         category: z.string().optional(),
-        group: z.string().default('10-cursos-gratuitos-para-web-developer'),
+        group: z.union([
+            z.string(),
+            z.array(z.string())
+        ]).transform(val => Array.isArray(val) ? val : [val]).default(['10 cursos gratuitos para web developer']),
     }),
 });
 

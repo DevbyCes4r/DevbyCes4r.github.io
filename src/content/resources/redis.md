@@ -1,0 +1,21 @@
+---
+title: 'Redis'
+description: 'Aprende a trabajar con Redis y aprovecha su potencia en memoria para procesar datos en tiempo real, optimizar el rendimiento y escalar tus aplicaciones al máximo.'
+icon: '⚡'
+affiliateLink: 'https://edutin.com/sh-10317'
+category: 'Data'
+group: '10 Cursos GRATIS para Analistas de Datos y DBA'
+---
+
+## Sobre este curso
+
+Domina Redis, la base de datos en memoria más rápida del mundo, perfecta para caching, sesiones y procesamiento en tiempo real.
+
+### Aprenderás
+- **Estructuras de Datos**: Strings, listas, sets, hashes y sorted sets.
+- **Caching Avanzado**: Estrategias para mejorar el rendimiento de tus aplicaciones.
+- **Pub/Sub**: Sistemas de mensajería en tiempo real.
+- **Persistencia y Replicación**: Garantizar la durabilidad de tus datos en memoria.
+
+### ¿Para quién es?
+Para desarrolladores backend y arquitectos de software que necesitan optimizar el rendimiento de aplicaciones de alta demanda.
