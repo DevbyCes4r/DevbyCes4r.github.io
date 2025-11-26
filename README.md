@@ -1,6 +1,6 @@
-# 🚀 Blog y Linktree con Astro - SEO Optimizado
+# 🚀 Blog y Recursos con Astro - SEO Optimizado
 
-Proyecto completo de Astro optimizado para SEO tradicional y SEO para IA (LLMs), perfecto para blogs de contenido y linktree de afiliados.
+Proyecto completo de Astro optimizado para SEO tradicional y SEO para IA (LLMs), perfecto para blogs de contenido y recursos de afiliados.
 
 ## 📋 Características
 
@@ -29,7 +29,7 @@ Proyecto completo de Astro optimizado para SEO tradicional y SEO para IA (LLMs),
 
 ### Funcionalidades ⚡
 - Blog con sistema de categorías y tags
-- Linktree para afiliados
+- Recursos para afiliados
 - Cards de productos/cursos
 - Newsletter integration ready
 - Dark mode
