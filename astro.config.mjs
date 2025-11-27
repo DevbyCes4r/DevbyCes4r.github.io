@@ -21,6 +21,10 @@ export default defineConfig({
           item.priority = 0.9;
           item.changefreq = 'daily';
         }
+        if (item.url.includes('/cursos/')) {
+          item.priority = 0.9;
+          item.changefreq = 'monthly';
+        }
         if (item.url.includes('/packs/')) {
           item.priority = 0.8;
           item.changefreq = 'weekly';

@@ -25,7 +25,7 @@ const blogCollection = defineCollection({
     }),
 });
 
-const resourcesCollection = defineCollection({
+const coursesCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
@@ -43,5 +43,5 @@ const resourcesCollection = defineCollection({
 
 export const collections = {
     'blog': blogCollection,
-    'resources': resourcesCollection,
+    'courses': coursesCollection,
 };

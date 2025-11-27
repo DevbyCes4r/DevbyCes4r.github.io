@@ -1,129 +1,277 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 
-const resources = await getCollection("resources");
+const pageTitle = "Herramientas para Desarrolladores y AI | DevbyCes4r";
+const pageDescription =
+  "Colección curada de herramientas esenciales para desarrollo web e inteligencia artificial.";
 
-// Group resources
-type GroupedResources = Record<string, typeof resources>;
-const groupedResources = resources.reduce<GroupedResources>((acc, resource) => {
-  const groups = resource.data.group; // Already an array thanks to transform
-  groups.forEach((group) => {
-    if (!acc[group]) {
-      acc[group] = [];
-    }
-    acc[group].push(resource);
-  });
-  return acc;
-}, {});
-
-// Define group order
-const groupOrder = [
-  "10 cursos gratuitos para web developer",
-  "5 cursos gratis de inteligencia artificial",
-  "10 Cursos GRATIS para Analistas de Datos y DBA",
+const aiTools = [
+  {
+    name: "ChatGPT",
+    description:
+      "Asistente de IA conversacional de OpenAI para programación, escritura y más.",
+    icon: "🤖",
+    url: "https://chat.openai.com",
+    category: "IA Conversacional",
+  },
+  {
+    name: "Claude",
+    description:
+      "IA de Anthropic especializada en análisis profundo y programación.",
+    icon: "🧠",
+    url: "https://claude.ai",
+    category: "IA Conversacional",
+  },
+  {
+    name: "GitHub Copilot",
+    description:
+      "Asistente de código impulsado por IA que sugiere código en tiempo real.",
+    icon: "✨",
+    url: "https://github.com/features/copilot",
+    category: "Programación IA",
+  },
+  {
+    name: "Midjourney",
+    description: "Generador de imágenes con IA de alta calidad.",
+    icon: "🎨",
+    url: "https://www.midjourney.com",
+    category: "Generación de Imágenes",
+  },
+  {
+    name: "Perplexity",
+    description: "Motor de búsqueda potenciado por IA con respuestas precisas.",
+    icon: "🔍",
+    url: "https://www.perplexity.ai",
+    category: "Búsqueda IA",
+  },
+  {
+    name: "V0 by Vercel",
+    description: "Genera componentes de UI con IA usando prompts de texto.",
+    icon: "⚡",
+    url: "https://v0.dev",
+    category: "Desarrollo UI",
+  },
 ];
 
-const pageTitle = "Cursos Gratuitos de Desarrollo Web y AI | DevbyCes4r";
-const pageDescription =
-  "Colección de cursos gratuitos de desarrollo web, inteligencia artificial y ciencia de datos.";
+const devTools = [
+  {
+    name: "Visual Studio Code",
+    description: "Editor de código potente y extensible de Microsoft.",
+    icon: "💻",
+    url: "https://code.visualstudio.com",
+    category: "Editor de Código",
+  },
+  {
+    name: "Figma",
+    description:
+      "Herramienta colaborativa de diseño de interfaces y prototipos.",
+    icon: "🎨",
+    url: "https://www.figma.com",
+    category: "Diseño UI/UX",
+  },
+  {
+    name: "GitHub",
+    description:
+      "Plataforma de desarrollo colaborativo con control de versiones.",
+    icon: "🐙",
+    url: "https://github.com",
+    category: "Control de Versiones",
+  },
+  {
+    name: "Vercel",
+    description: "Plataforma de deployment para aplicaciones web modernas.",
+    icon: "▲",
+    url: "https://vercel.com",
+    category: "Deployment",
+  },
+  {
+    name: "Postman",
+    description: "Plataforma para desarrollo y testing de APIs.",
+    icon: "📮",
+    url: "https://www.postman.com",
+    category: "Testing API",
+  },
+  {
+    name: "Chrome DevTools",
+    description: "Herramientas de desarrollo integradas en Google Chrome.",
+    icon: "🔧",
+    url: "https://developer.chrome.com/docs/devtools",
+    category: "Debugging",
+  },
+  {
+    name: "Stack Overflow",
+    description: "Comunidad de preguntas y respuestas para programadores.",
+    icon: "📚",
+    url: "https://stackoverflow.com",
+    category: "Comunidad",
+  },
+  {
+    name: "Can I Use",
+    description:
+      "Verifica compatibilidad de características web en navegadores.",
+    icon: "🌐",
+    url: "https://caniuse.com",
+    category: "Compatibilidad",
+  },
+];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <div class="min-h-screen py-10 px-4 flex justify-center">
     <div class="w-full max-w-5xl">
+      <!-- Header -->
       <div class="text-center mb-16">
-        <div class="text-6xl mb-4 animate-bounce">🚀</div>
+        <div class="text-6xl mb-4 animate-bounce">🛠️</div>
         <h1
           class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-6"
         >
-          Recursos Gratuitos
+          Herramientas Esenciales
         </h1>
         <p class="text-xl text-slate-400 max-w-2xl mx-auto">
-          Potencia tu carrera con esta selección de cursos de alta calidad.
+          Las mejores herramientas para desarrollo web e inteligencia
+          artificial.
         </p>
       </div>
 
-      {
-        groupOrder.map(
-          (groupTitle) =>
-            groupedResources[groupTitle] && (
-              <div
-                class="mb-20"
-                id={groupTitle.toLowerCase().replace(/ /g, "-")}
+      <!-- AI Tools Section -->
+      <div class="mb-20" id="herramientas-ia">
+        <div class="flex items-center gap-4 mb-8">
+          <h2
+            class="text-2xl md:text-3xl font-bold text-white border-l-4 border-purple-500 pl-4"
+          >
+            <a
+              href="#herramientas-ia"
+              class="hover:text-purple-400 transition-colors"
+            >
+              Herramientas de Inteligencia Artificial
+            </a>
+          </h2>
+          <div class="h-px bg-slate-800 flex-grow"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            aiTools.map((tool) => (
+              <a
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative block p-6 bg-slate-800 border border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
               >
-                <div class="flex items-center gap-4 mb-8">
-                  <h2 class="text-2xl md:text-3xl font-bold text-white border-l-4 border-blue-500 pl-4">
-                    <a
-                      href={`#${groupTitle.toLowerCase().replace(/ /g, "-")}`}
-                      class="hover:text-blue-400 transition-colors"
-                    >
-                      {groupTitle.replace(/-/g, " ")}
-                    </a>
-                  </h2>
-                  <div class="h-px bg-slate-800 flex-grow" />
+                <div class="flex items-start gap-4">
+                  <div class="text-4xl bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    {tool.icon}
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                      {tool.name}
+                    </h3>
+                    <p class="text-slate-400 text-sm mb-3">
+                      {tool.description}
+                    </p>
+                    <span class="text-xs font-medium px-2 py-1 bg-purple-500/10 text-purple-300 rounded-full border border-purple-500/20">
+                      {tool.category}
+                    </span>
+                  </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {groupedResources[groupTitle].map((resource) => (
-                    <a
-                      href={`/recursos/${resource.slug}`}
-                      class="group relative block p-6 bg-slate-800 border border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
-                    >
-                      <div class="flex items-start gap-4">
-                        <div class="text-4xl bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                          {resource.data.icon}
-                        </div>
-                        <div>
-                          <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                            {resource.data.title}
-                          </h3>
-                          <p class="text-slate-400 text-sm line-clamp-2 mb-3">
-                            {resource.data.description}
-                          </p>
-                          <span class="text-xs font-medium px-2 py-1 bg-blue-500/10 text-blue-300 rounded-full border border-blue-500/20">
-                            {resource.data.category}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-400">
-                        <svg
-                          class="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
-                      </div>
-                    </a>
-                  ))}
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-400">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
                 </div>
-              </div>
-            ),
-        )
-      }
+              </a>
+            ))
+          }
+        </div>
+      </div>
 
+      <!-- Dev Tools Section -->
+      <div class="mb-20" id="herramientas-desarrollo">
+        <div class="flex items-center gap-4 mb-8">
+          <h2
+            class="text-2xl md:text-3xl font-bold text-white border-l-4 border-blue-500 pl-4"
+          >
+            <a
+              href="#herramientas-desarrollo"
+              class="hover:text-blue-400 transition-colors"
+            >
+              Herramientas de Desarrollo Web
+            </a>
+          </h2>
+          <div class="h-px bg-slate-800 flex-grow"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            devTools.map((tool) => (
+              <a
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative block p-6 bg-slate-800 border border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+              >
+                <div class="flex items-start gap-4">
+                  <div class="text-4xl bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    {tool.icon}
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                      {tool.name}
+                    </h3>
+                    <p class="text-slate-400 text-sm mb-3">
+                      {tool.description}
+                    </p>
+                    <span class="text-xs font-medium px-2 py-1 bg-blue-500/10 text-blue-300 rounded-full border border-blue-500/20">
+                      {tool.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-400">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- CTA Section -->
       <div
         class="mt-16 p-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl text-center text-white shadow-lg"
       >
-        <h2 class="text-2xl font-bold mb-4">🚀 ¿Listo para comenzar?</h2>
+        <h2 class="text-2xl font-bold mb-4">📚 ¿Buscas aprender?</h2>
         <p class="mb-6 text-blue-50">
-          Explora estos y más cursos gratuitos en la plataforma
+          Explora nuestra colección de cursos gratuitos
         </p>
         <a
-          href="https://edutin.com/sh-10319"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/cursos"
           class="inline-block px-8 py-4 bg-white text-blue-600 rounded-xl font-bold text-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
-          Ver Todos los Cursos 📚
+          Ver Cursos Gratuitos 🎓
         </a>
       </div>
     </div>
