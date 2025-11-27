@@ -38,6 +38,7 @@ const coursesCollection = defineCollection({
             z.string(),
             z.array(z.string())
         ]).transform(val => Array.isArray(val) ? val : [val]).default(['10 cursos gratuitos para web developer']),
+        videoId: z.string().optional(),
     }),
 });
 

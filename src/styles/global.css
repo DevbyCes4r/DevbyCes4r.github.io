@@ -316,3 +316,7 @@
   @apply from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/30;
   @apply border-red-500 dark:border-red-400;
 }
+
+:target {
+  scroll-margin-top: 90px;
+}
