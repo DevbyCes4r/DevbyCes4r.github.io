@@ -21,7 +21,7 @@ const { Content } = await entry.render();
     <div class="max-w-3xl mx-auto py-12">
         <a
             href="/cursos"
-            class="inline-flex items-center text-slate-400 hover:text-white mb-8 transition-colors"
+            class="inline-flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white mb-8 transition-colors"
         >
             <svg
                 class="w-5 h-5 mr-2"
@@ -39,40 +39,46 @@ const { Content } = await entry.render();
         </a>
 
         <article
-            class="bg-slate-800 rounded-3xl p-8 md:p-12 border border-slate-700 shadow-2xl"
+            class="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-slate-700 shadow-2xl"
         >
             <header class="text-center mb-10">
                 <div
-                    class="text-6xl mb-6 inline-block p-4 bg-slate-700/50 rounded-2xl shadow-inner"
+                    class="text-6xl mb-6 inline-block p-4 bg-slate-100 dark:bg-slate-700/50 rounded-2xl shadow-inner"
                 >
                     {entry.data.icon}
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                <h1
+                    class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4"
+                >
                     {entry.data.title}
                 </h1>
                 <div class="flex justify-center gap-2 mb-6">
                     <span
-                        class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium border border-blue-500/30"
+                        class="px-3 py-1 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-500/30"
                     >
                         {entry.data.category}
                     </span>
                     <span
-                        class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-medium border border-green-500/30"
+                        class="px-3 py-1 bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded-full text-sm font-medium border border-green-200 dark:border-green-500/30"
                     >
                         Gratis
                     </span>
                 </div>
-                <p class="text-xl text-slate-300 leading-relaxed">
+                <p
+                    class="text-xl text-slate-700 dark:text-slate-300 leading-relaxed"
+                >
                     {entry.data.description}
                 </p>
             </header>
 
-            <div class="prose prose-invert prose-lg max-w-none mb-12">
+            <div
+                class="prose dark:prose-invert prose-lg max-w-none mb-12 text-slate-700 dark:text-slate-300"
+            >
                 <Content />
             </div>
 
             <div
-                class="flex flex-col items-center gap-4 pt-8 border-t border-slate-700"
+                class="flex flex-col items-center gap-4 pt-8 border-t border-slate-200 dark:border-slate-700"
             >
                 <a
                     href={entry.data.affiliateLink}
@@ -95,7 +101,7 @@ const { Content } = await entry.render();
                         ></path>
                     </svg>
                 </a>
-                <p class="text-sm text-slate-500">
+                <p class="text-sm text-slate-500 dark:text-slate-500">
                     Al hacer clic serás redirigido a la plataforma del curso.
                 </p>
             </div>

@@ -35,11 +35,13 @@ const pageDescription =
             <div class="text-center mb-16">
                 <div class="text-6xl mb-4 animate-bounce">🎓</div>
                 <h1
-                    class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-6"
+                    class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6"
                 >
                     Cursos Gratuitos
                 </h1>
-                <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                <p
+                    class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                >
                     Potencia tu carrera con esta selección de cursos de alta
                     calidad.
                 </p>
@@ -54,15 +56,15 @@ const pageDescription =
                                 id={groupTitle.toLowerCase().replace(/ /g, "-")}
                             >
                                 <div class="flex items-center gap-4 mb-8">
-                                    <h2 class="text-2xl md:text-3xl font-bold text-white border-l-4 border-blue-500 pl-4">
+                                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-blue-600 dark:border-blue-500 pl-4">
                                         <a
                                             href={`#${groupTitle.toLowerCase().replace(/ /g, "-")}`}
-                                            class="hover:text-blue-400 transition-colors"
+                                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                         >
                                             {groupTitle.replace(/-/g, " ")}
                                         </a>
                                     </h2>
-                                    <div class="h-px bg-slate-800 flex-grow" />
+                                    <div class="h-px bg-slate-200 dark:bg-slate-800 flex-grow" />
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -70,23 +72,23 @@ const pageDescription =
                                         (course) => (
                                             <a
                                                 href={`/cursos/${course.slug}`}
-                                                class="group relative block p-6 bg-slate-800 border border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+                                                class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                                             >
                                                 <div class="flex items-start gap-4">
-                                                    <div class="text-4xl bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                                    <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
                                                         {course.data.icon}
                                                     </div>
                                                     <div>
-                                                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                                                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                                             {course.data.title}
                                                         </h3>
-                                                        <p class="text-slate-400 text-sm line-clamp-2 mb-3">
+                                                        <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
                                                             {
                                                                 course.data
                                                                     .description
                                                             }
                                                         </p>
-                                                        <span class="text-xs font-medium px-2 py-1 bg-blue-500/10 text-blue-300 rounded-full border border-blue-500/20">
+                                                        <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-500/20">
                                                             {
                                                                 course.data
                                                                     .category
@@ -95,7 +97,7 @@ const pageDescription =
                                                     </div>
                                                 </div>
 
-                                                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-400">
+                                                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-600 dark:text-blue-400">
                                                     <svg
                                                         class="w-6 h-6"
                                                         fill="none"

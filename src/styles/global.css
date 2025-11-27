@@ -151,3 +151,168 @@
     @apply text-black bg-white;
   }
 }
+
+/* ============================================ */
+/* Enhanced Blog Content Styling */
+/* ============================================ */
+
+.ai-content-wrapper {
+  @apply text-slate-800 dark:text-slate-200;
+}
+
+/* Headings */
+.ai-content-wrapper h2 {
+  @apply text-3xl font-bold mt-12 mb-6 text-slate-900 dark:text-white;
+  @apply border-b-2 border-blue-200 dark:border-blue-900 pb-3;
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400;
+  @apply bg-clip-text text-transparent;
+}
+
+.ai-content-wrapper h3 {
+  @apply text-2xl font-bold mt-8 mb-4 text-slate-900 dark:text-white;
+  @apply flex items-center gap-2;
+}
+
+.ai-content-wrapper h4 {
+  @apply text-xl font-semibold mt-6 mb-3 text-slate-800 dark:text-slate-100;
+}
+
+/* Paragraphs */
+.ai-content-wrapper p {
+  @apply text-lg leading-relaxed mb-6 text-slate-700 dark:text-slate-300;
+}
+
+/* Links */
+.ai-content-wrapper a {
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300;
+  @apply underline decoration-blue-400/30 hover:decoration-blue-600/60;
+  @apply transition-all duration-200;
+  @apply font-medium;
+}
+
+/* Lists */
+.ai-content-wrapper ul {
+  @apply list-none;
+}
+
+.ai-content-wrapper ol {
+  @apply list-decimal list-inside;
+}
+
+.ai-content-wrapper ol li {
+  @apply text-slate-700 dark:text-slate-300 pl-2;
+}
+
+.ai-content-wrapper li>ul,
+.ai-content-wrapper li>ol {
+  @apply mt-3 ml-6;
+}
+
+/* Code Blocks */
+.ai-content-wrapper pre {
+  @apply bg-slate-900 dark:bg-slate-950 rounded-xl p-6 my-8;
+  @apply border border-slate-700 dark:border-slate-800;
+  @apply overflow-x-auto shadow-lg;
+  @apply relative;
+}
+
+.ai-content-wrapper pre::before {
+  content: "";
+  @apply absolute top-0 left-0 right-0 h-10 bg-slate-800 dark:bg-slate-900;
+  @apply rounded-t-xl border-b border-slate-700;
+}
+
+.ai-content-wrapper pre code {
+  @apply text-sm font-mono text-slate-100;
+  @apply block relative z-10 pt-8;
+}
+
+/* Inline Code */
+.ai-content-wrapper code:not(pre code) {
+  @apply bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300;
+  @apply px-2 py-1 rounded-md text-sm font-mono;
+  @apply border border-blue-200 dark:border-blue-900;
+}
+
+/* Blockquotes */
+.ai-content-wrapper blockquote {
+  @apply border-l-4 border-blue-500 dark:border-blue-400;
+  @apply bg-blue-50 dark:bg-blue-950/20;
+  @apply pl-6 pr-6 py-4 my-8 rounded-r-xl;
+  @apply italic text-slate-700 dark:text-slate-300;
+  @apply shadow-sm;
+}
+
+.ai-content-wrapper blockquote p {
+  @apply mb-0;
+}
+
+/* Tables */
+.ai-content-wrapper table {
+  @apply w-full my-8 border-collapse;
+  @apply bg-white dark:bg-slate-800 rounded-xl overflow-hidden;
+  @apply shadow-lg;
+}
+
+.ai-content-wrapper thead {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600;
+}
+
+.ai-content-wrapper th {
+  @apply px-6 py-4 text-left text-sm font-semibold text-white;
+  @apply uppercase tracking-wider;
+}
+
+.ai-content-wrapper td {
+  @apply px-6 py-4 text-slate-700 dark:text-slate-300;
+  @apply border-b border-slate-200 dark:border-slate-700;
+}
+
+.ai-content-wrapper tbody tr:hover {
+  @apply bg-slate-50 dark:bg-slate-700/50 transition-colors;
+}
+
+/* Images */
+.ai-content-wrapper img {
+  @apply rounded-xl my-8 shadow-2xl;
+  @apply border border-slate-200 dark:border-slate-700;
+  @apply w-full h-auto;
+}
+
+/* Horizontal Rule */
+.ai-content-wrapper hr {
+  @apply my-12 border-t-2 border-slate-200 dark:border-slate-800;
+  @apply opacity-50;
+}
+
+/* Strong and Em */
+.ai-content-wrapper strong {
+  @apply font-bold text-slate-900 dark:text-white;
+}
+
+.ai-content-wrapper em {
+  @apply italic text-slate-700 dark:text-slate-300;
+}
+
+/* Callout Boxes (if using custom syntax) */
+.ai-content-wrapper .callout {
+  @apply bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30;
+  @apply border-l-4 border-blue-500 dark:border-blue-400;
+  @apply p-6 my-8 rounded-r-xl;
+  @apply shadow-md;
+}
+
+.ai-content-wrapper .callout-warning {
+  @apply from-yellow-50 to-orange-50 dark:from-yellow-950/30 dark:to-orange-950/30;
+  @apply border-yellow-500 dark:border-yellow-400;
+}
+
+.ai-content-wrapper .callout-success {
+  @apply from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30;
+  @apply border-green-500 dark:border-green-400;
+}
+
+.ai-content-wrapper .callout-danger {
+  @apply from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/30;
+  @apply border-red-500 dark:border-red-400;
+}

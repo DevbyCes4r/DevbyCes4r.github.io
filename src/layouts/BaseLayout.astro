@@ -69,18 +69,24 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
     class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300"
   >
     <header
-      class="py-6 px-4 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50"
+      class="py-6 px-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50"
     >
       <nav class="max-w-4xl mx-auto flex justify-between items-center">
         <a
           href="/"
-          class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+          class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500"
         >
           DevbyCes4r
         </a>
         <div class="flex gap-4 items-center">
-          <a href="/blog" class="hover:text-blue-400 transition-colors">Blog</a>
-          <a href="/recursos" class="hover:text-blue-400 transition-colors"
+          <a
+            href="/blog"
+            class="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >Blog</a
+          >
+          <a
+            href="/recursos"
+            class="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >Recursos</a
           >
           <ThemeToggle />
@@ -94,12 +100,18 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
   </main>
 
   <footer
-    class="py-8 px-4 border-t border-slate-800 text-center text-slate-400 text-sm"
+    class="py-8 px-4 border-t border-slate-200 dark:border-slate-800 text-center text-slate-600 dark:text-slate-400 text-sm"
   >
     <p>&copy; {new Date().getFullYear()} {author}. Hecho con ❤️ y Astro.</p>
     <div class="mt-2 flex justify-center gap-4">
-      <a href="/rss.xml" class="hover:text-white transition-colors">RSS</a>
-      <a href="/sitemap-index.xml" class="hover:text-white transition-colors"
+      <a
+        href="/rss.xml"
+        class="hover:text-blue-600 dark:hover:text-white transition-colors"
+        >RSS</a
+      >
+      <a
+        href="/sitemap-index.xml"
+        class="hover:text-blue-600 dark:hover:text-white transition-colors"
         >Sitemap</a
       >
     </div>

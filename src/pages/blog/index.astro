@@ -13,8 +13,12 @@ const pageDescription =
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <section class="mb-12 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Blog</h1>
-    <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+    <h1
+      class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4"
+    >
+      Blog
+    </h1>
+    <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
       {pageDescription}
     </p>
   </section>
@@ -23,7 +27,7 @@ const pageDescription =
     {
       posts.map((post) => (
         <a href={`/blog/${post.slug}`} class="group">
-          <article class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full flex flex-col">
+          <article class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full flex flex-col">
             {post.data.image && (
               <div class="aspect-video overflow-hidden">
                 <img
@@ -37,21 +41,21 @@ const pageDescription =
             <div class="p-6 flex flex-col flex-grow">
               <div class="flex gap-2 mb-3">
                 {post.data.categories.slice(0, 2).map((cat: string) => (
-                  <span class="text-xs font-medium px-2 py-1 bg-slate-700 text-blue-300 rounded-full">
+                  <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-slate-700 text-blue-700 dark:text-blue-300 rounded-full">
                     {cat}
                   </span>
                 ))}
               </div>
 
-              <h2 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+              <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {post.data.title}
               </h2>
 
-              <p class="text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">
+              <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">
                 {post.data.description}
               </p>
 
-              <div class="flex items-center justify-between text-xs text-slate-500 mt-auto pt-4 border-t border-slate-700">
+              <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
                 <span>{post.data.publishDate.toLocaleDateString()}</span>
                 <span>{post.data.readingTime}</span>
               </div>
