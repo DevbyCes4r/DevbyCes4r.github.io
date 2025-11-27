@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
 
 const pageTitle = "DevbyCes4r | Inicio";
 const pageDescription =
@@ -223,41 +224,29 @@ const pageDescription =
         </p>
       </div>
 
-      <div
-        class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg"
-      >
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSdYOUR_FORM_ID/viewform?embedded=true"
-          width="100%"
-          height="800"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          class="rounded-lg"
-        >
-          Cargando…
-        </iframe>
+      <div>
+        <ContactForm />
+      </div>
 
-        <div class="mt-6 text-center">
-          <p class="text-sm text-slate-500 dark:text-slate-400">
-            También puedes contactarme directamente por
-            <a
-              href="https://www.linkedin.com/in/devbyces4r/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-blue-600 dark:text-blue-400 hover:underline"
-              >LinkedIn</a
-            >
-            o
-            <a
-              href="https://x.com/DevbyCes4r"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-blue-600 dark:text-blue-400 hover:underline"
-              >X (Twitter)</a
-            >
-          </p>
-        </div>
+      <div class="mt-12 text-center">
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+          También puedes contactarme directamente por
+          <a
+            href="https://www.linkedin.com/in/devbyces4r/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            >LinkedIn</a
+          >
+          o
+          <a
+            href="https://x.com/DevbyCes4r"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            >X (Twitter)</a
+          >
+        </p>
       </div>
     </div>
   </section>
