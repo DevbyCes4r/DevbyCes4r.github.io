@@ -1,9 +1,10 @@
 ---
 title: 'APIs'
-description: 'Aprende a conectar aplicaciones y gestionar datos entre diferentes plataformas.'
-icon: '🔌'
-affiliateLink: 'https://edutin.com/sh-10227'
+description: 'Aprende a diseñar y consumir APIs RESTful para conectar aplicaciones.'
+icon: '🔗'
+affiliateLink: 'https://edutin.com/sh-10492'
 category: 'Backend'
+mainCategory: 'programacion'
 ---
 
 ## Sobre este curso

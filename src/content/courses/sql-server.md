@@ -4,6 +4,7 @@ description: 'Aprende a gestionar y optimizar grandes volúmenes de datos con SQ
 icon: '🔷'
 affiliateLink: 'https://edutin.com/sh-9947'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

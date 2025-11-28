@@ -4,6 +4,7 @@ description: 'Conoce las normativas internacionales sobre privacidad y aprende a
 icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10311'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

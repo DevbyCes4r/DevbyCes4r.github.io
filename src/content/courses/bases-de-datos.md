@@ -4,6 +4,7 @@ description: 'Aprende a diseñar, relacionar y optimizar bases de datos reales c
 icon: '🗄️'
 affiliateLink: 'https://edutin.com/sh-10314'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

@@ -1,10 +1,23 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import FAQSection from "../../components/FAQSection.astro";
+import { COURSE_CATEGORIES, type CategoryKey } from "../../lib/categories";
 
 const courses = await getCollection("courses");
 
-// Group courses
+// Group courses by main category
+type CategoryGrouped = Record<string, typeof courses>;
+const coursesByCategory = courses.reduce<CategoryGrouped>((acc, course) => {
+    const category = course.data.mainCategory || "otros";
+    if (!acc[category]) {
+        acc[category] = [];
+    }
+    acc[category].push(course);
+    return acc;
+}, {});
+
+// Group courses by custom study plans
 type GroupedCourses = Record<string, typeof courses>;
 const groupedCourses = courses.reduce<GroupedCourses>((acc, course) => {
     const groups = course.data.group; // Already an array thanks to transform
@@ -17,16 +30,49 @@ const groupedCourses = courses.reduce<GroupedCourses>((acc, course) => {
     return acc;
 }, {});
 
-// Define group order
+// Define group order for study plans
 const groupOrder = [
     "10 cursos gratuitos para web developer",
     "5 cursos gratis de inteligencia artificial",
     "10 Cursos GRATIS para Analistas de Datos y DBA",
+    "7 Cursos GRATUITOS para Aprender Inglés",
 ];
 
-const pageTitle = "Cursos Gratuitos de Desarrollo Web y AI | DevbyCes4r";
+// FAQ Data
+const generalFAQs = [
+    {
+        question: "¿Cómo funcionan los cursos?",
+        answer: "Los cursos son 100% en línea y puedes hacerlos a tu ritmo. Tienes acceso completo a todas las clases en video, lecturas y actividades desde el momento de tu inscripción gratuita.",
+    },
+    {
+        question: "¿Los cursos son realmente gratuitos?",
+        answer: "Sí, la inscripción es 100% gratuita y te da acceso completo a todas las clases en video, lecturas y actividades. No necesitas pagar nada para aprender.",
+    },
+    {
+        question: "¿Puedo obtener un certificado?",
+        answerHTML: `<p class="mb-3">Sí, puedes obtener un <strong>certificado verificable internacionalmente</strong>. Tienes dos opciones:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Adquirirlo al momento de inscribirte con un <strong>descuento especial</strong></li>
+                <li>Comprarlo al finalizar el curso en su valor normal</li>
+            </ul>`,
+    },
+    {
+        question: "¿Qué incluye la certificación?",
+        answerHTML: `<p class="mb-3">Al certificarte recibirás beneficios adicionales:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Acompañamiento personalizado</strong> del profesor</li>
+                <li><strong>Retroalimentación</strong> de actividades</li>
+                <li><strong>Soporte académico</strong> continuo</li>
+                <li><strong>Constancias de estudio</strong> verificables</li>
+            </ul>`,
+    },
+];
+
+const pageTitle =
+    "Cursos Gratuitos Online: Programación, IA, Datos, Idiomas | DevbyCes4r";
+
 const pageDescription =
-    "Colección de cursos gratuitos de desarrollo web, inteligencia artificial y ciencia de datos. URLs optimizadas para SEO y descubrimiento por IA.";
+    "Catálogo completo de cursos gratuitos certificables en programación (web, móvil), inteligencia artificial, ciencia de datos, idiomas, diseño y más. Contenido optimizado para aprendizaje autodirigido y descubrimiento por IA.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -42,9 +88,194 @@ const pageDescription =
                 <p
                     class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
                 >
-                    Potencia tu carrera con esta selección de cursos de alta
-                    calidad.
+                    Aprende programación, inteligencia artificial, análisis de
+                    datos, idiomas y más. Cursos 100% gratuitos con opción de
+                    certificación.
                 </p>
+            </div>
+
+            <!-- Category Navigation -->
+            <div id="categorias" class="mb-12 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-8">
+                    <svg
+                        class="w-6 h-6 text-blue-600 dark:text-blue-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                        ></path>
+                    </svg>
+                    <h2
+                        class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white"
+                    >
+                        Categorías
+                    </h2>
+                </div>
+                <div
+                    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                >
+                    {
+                        Object.entries(COURSE_CATEGORIES).map(
+                            ([key, category]) => {
+                                const count =
+                                    coursesByCategory[key]?.length || 0;
+                                if (count === 0) return null;
+                                return (
+                                    <a
+                                        href={`#categoria-${key}`}
+                                        class="group p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg"
+                                    >
+                                        <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                                            {category.icon}
+                                        </div>
+                                        <h3 class="font-bold text-slate-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                            {category.name}
+                                        </h3>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">
+                                            {category.description}
+                                        </p>
+                                        <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full">
+                                            {count}{" "}
+                                            {count === 1 ? "curso" : "cursos"}
+                                        </span>
+                                    </a>
+                                );
+                            },
+                        )
+                    }
+                </div>
+            </div>
+
+            <FAQSection faqs={generalFAQs} />
+
+            <!-- Category Sections -->
+            {
+                Object.entries(COURSE_CATEGORIES).map(([key, category]) => {
+                    const categoryCourses = coursesByCategory[key];
+                    if (!categoryCourses || categoryCourses.length === 0)
+                        return null;
+
+                    return (
+                        <div class="mb-20" id={`categoria-${key}`}>
+                            <div class="flex items-center gap-4 mb-8">
+                                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-purple-600 dark:border-purple-500 pl-4 flex items-center gap-3">
+                                    <span class="text-3xl">
+                                        {category.icon}
+                                    </span>
+                                    <a
+                                        href={`#categoria-${key}`}
+                                        class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                                    >
+                                        {category.name}
+                                    </a>
+                                </h2>
+                                <div class="h-px bg-slate-200 dark:bg-slate-800 flex-grow" />
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {categoryCourses.map((course) => (
+                                    <a
+                                        href={`/cursos/${course.slug}?ref=categoria-${key}`}
+                                        class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-4">
+                                            <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                                {course.data.icon}
+                                            </div>
+                                            <div>
+                                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                                    {course.data.title}
+                                                </h3>
+                                                <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
+                                                    {course.data.description}
+                                                </p>
+                                                {course.data.category && (
+                                                    <span class="text-xs font-medium px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-500/20">
+                                                        {course.data.category}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
+                                            <svg
+                                                class="w-6 h-6"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    );
+                })
+            }
+
+            <!-- Study Plans Section -->
+            <div id="planes-de-estudio" class="mb-12 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <svg
+                        class="w-6 h-6 text-blue-600 dark:text-blue-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <h2
+                        class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white"
+                    >
+                        Planes de estudio curados
+                    </h2>
+                </div>
+                <nav class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {
+                        groupOrder.map((groupTitle, index) => (
+                            <a
+                                href={`#${groupTitle.toLowerCase().replace(/ /g, "-")}`}
+                                class="group flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500/10 border border-slate-200 dark:border-slate-600 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                            >
+                                <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg font-bold text-sm group-hover:scale-110 transition-transform">
+                                    {index + 1}
+                                </span>
+                                <span class="text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 font-medium transition-colors">
+                                    {groupTitle}
+                                </span>
+                                <svg
+                                    class="w-5 h-5 ml-auto text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </a>
+                        ))
+                    }
+                </nav>
             </div>
 
             {
@@ -71,7 +302,7 @@ const pageDescription =
                                     {groupedCourses[groupTitle].map(
                                         (course) => (
                                             <a
-                                                href={`/cursos/${course.slug}`}
+                                                href={`/cursos/${course.slug}?ref=${groupTitle.toLowerCase().replace(/ /g, "-")}`}
                                                 class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                                             >
                                                 <div class="flex items-start gap-4">
@@ -140,5 +371,26 @@ const pageDescription =
                 </a>
             </div>
         </div>
+    </div>
+
+    <!-- Floating Navigation Menu -->
+    <div
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 p-1.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-full shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 transition-all hover:scale-105"
+    >
+        <a
+            href="#categorias"
+            class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+            <span class="text-lg">🏷️</span>
+            <span class="hidden sm:inline">Categorías</span>
+        </a>
+        <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
+        <a
+            href="#planes-de-estudio"
+            class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+            <span class="text-lg">📚</span>
+            <span class="hidden sm:inline">Planes de Estudio</span>
+        </a>
     </div>
 </BaseLayout>

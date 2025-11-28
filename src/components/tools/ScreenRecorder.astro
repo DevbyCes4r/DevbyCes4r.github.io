@@ -1,0 +1,262 @@
+---
+
+---
+
+<div class="max-w-4xl mx-auto">
+    <div
+        class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
+    >
+        <!-- Header Area -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-1">
+            <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-t-[20px]">
+                <div class="flex flex-col items-center gap-8">
+                    <!-- Status & Timer -->
+                    <div
+                        id="statusContainer"
+                        class="hidden flex flex-col items-center gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500"
+                    >
+                        <div
+                            class="flex items-center gap-3 px-6 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-full border border-red-100 dark:border-red-900/30 shadow-sm"
+                        >
+                            <div class="relative flex h-3 w-3">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"
+                                ></span>
+                                <span
+                                    class="relative inline-flex rounded-full h-3 w-3 bg-red-500"
+                                ></span>
+                            </div>
+                            <span
+                                class="font-mono font-bold text-lg tracking-wider"
+                                id="timer">00:00</span
+                            >
+                        </div>
+                        <p
+                            class="text-xs text-slate-500 font-medium uppercase tracking-widest"
+                        >
+                            Grabando
+                        </p>
+                    </div>
+
+                    <!-- Preview Area -->
+                    <div
+                        class="w-full aspect-video bg-slate-100 dark:bg-slate-900/50 rounded-2xl overflow-hidden relative group border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center transition-all duration-300 hover:border-blue-400 dark:hover:border-blue-500/50"
+                    >
+                        <video
+                            id="preview"
+                            class="w-full h-full object-contain hidden shadow-inner"
+                            controls
+                            autoplay
+                            muted></video>
+                        <div
+                            id="placeholder"
+                            class="text-center p-8 text-slate-400 dark:text-slate-500 transition-transform duration-300 group-hover:scale-105"
+                        >
+                            <div class="text-7xl mb-6 opacity-50">🖥️</div>
+                            <h3
+                                class="text-xl font-semibold mb-2 text-slate-600 dark:text-slate-300"
+                            >
+                                Vista Previa
+                            </h3>
+                            <p class="text-sm max-w-xs mx-auto">
+                                Tu grabación aparecerá aquí cuando termines. No
+                                se está enviando nada a internet.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex flex-wrap justify-center gap-4 w-full">
+                        <button
+                            id="startBtn"
+                            class="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 active:scale-95"
+                        >
+                            <span
+                                class="text-2xl group-hover:rotate-12 transition-transform"
+                                >⏺️</span
+                            >
+                            Empezar a Grabar
+                        </button>
+
+                        <button
+                            id="stopBtn"
+                            disabled
+                            class="hidden group flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-700 text-red-500 border-2 border-red-100 dark:border-red-900/30 hover:border-red-500 dark:hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-500/10 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <span
+                                class="text-2xl group-hover:scale-110 transition-transform"
+                                >⏹️</span
+                            >
+                            Detener Grabación
+                        </button>
+                    </div>
+
+                    <!-- Download Actions -->
+                    <div
+                        id="actions"
+                        class="hidden w-full flex justify-center animate-in fade-in zoom-in duration-300"
+                    >
+                        <a
+                            id="downloadBtn"
+                            class="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 cursor-pointer"
+                        >
+                            <span class="text-2xl">💾</span>
+                            Descargar Video
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Footer -->
+        <div
+            class="bg-slate-50 dark:bg-slate-900/80 p-6 md:p-8 border-t border-slate-200 dark:border-slate-700"
+        >
+            <h3 class="font-bold text-slate-900 dark:text-white mb-2">
+                Características:
+            </h3>
+            <ul
+                class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400"
+            >
+                <li class="flex items-center gap-2">✅ Sin marcas de agua</li>
+                <li class="flex items-center gap-2">✅ Sin límite de tiempo</li>
+                <li class="flex items-center gap-2">
+                    ✅ Privacidad total (todo ocurre en tu navegador)
+                </li>
+                <li class="flex items-center gap-2">
+                    ✅ Grabación de audio del sistema y micrófono
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    let mediaRecorder: MediaRecorder | null = null;
+    let recordedChunks: BlobPart[] = [];
+    let startTime: number;
+    let timerInterval: number;
+
+    const startBtn = document.getElementById("startBtn") as HTMLButtonElement;
+    const stopBtn = document.getElementById("stopBtn") as HTMLButtonElement;
+    const preview = document.getElementById("preview") as HTMLVideoElement;
+    const downloadBtn = document.getElementById(
+        "downloadBtn",
+    ) as HTMLAnchorElement;
+    const placeholder = document.getElementById(
+        "placeholder",
+    ) as HTMLDivElement;
+    const actions = document.getElementById("actions") as HTMLDivElement;
+    const statusContainer = document.getElementById(
+        "statusContainer",
+    ) as HTMLDivElement;
+    const timerDisplay = document.getElementById("timer") as HTMLSpanElement;
+
+    function formatTime(seconds: number) {
+        const mins = Math.floor(seconds / 60)
+            .toString()
+            .padStart(2, "0");
+        const secs = (seconds % 60).toString().padStart(2, "0");
+        return `${mins}:${secs}`;
+    }
+
+    function startTimer() {
+        startTime = Date.now();
+        timerInterval = window.setInterval(() => {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            if (timerDisplay) timerDisplay.textContent = formatTime(elapsed);
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        if (timerDisplay) timerDisplay.textContent = "00:00";
+    }
+
+    if (startBtn) {
+        startBtn.addEventListener("click", async () => {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        // @ts-ignore - mediaSource is a valid constraint for getDisplayMedia but TS might complain
+                        mediaSource: "screen",
+                    },
+                    audio: true,
+                });
+
+                mediaRecorder = new MediaRecorder(stream, {
+                    mimeType: "video/webm; codecs=vp9",
+                });
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    stopTimer();
+                    if (statusContainer)
+                        statusContainer.classList.add("hidden");
+                    if (stopBtn) stopBtn.classList.add("hidden");
+                    if (startBtn) {
+                        startBtn.classList.remove("hidden");
+                        startBtn.innerHTML =
+                            '<span class="text-xl">🔄</span> Grabar Nueva';
+                    }
+
+                    const blob = new Blob(recordedChunks, {
+                        type: "video/webm",
+                    });
+                    const url = URL.createObjectURL(blob);
+
+                    if (preview) {
+                        preview.src = url;
+                        preview.classList.remove("hidden");
+                    }
+                    if (placeholder) placeholder.classList.add("hidden");
+
+                    if (downloadBtn) {
+                        downloadBtn.href = url;
+                        downloadBtn.download = `grabacion-${new Date().toISOString().slice(0, 19).replace(/:/g, "-")}.webm`;
+                    }
+                    if (actions) actions.classList.remove("hidden");
+
+                    // Stop all tracks to release camera/screen
+                    stream.getTracks().forEach((track) => track.stop());
+                };
+
+                // Handle user clicking "Stop sharing" from browser UI
+                stream.getVideoTracks()[0].onended = () => {
+                    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+                        mediaRecorder.stop();
+                    }
+                };
+
+                mediaRecorder.start();
+                recordedChunks = [];
+
+                // UI Updates
+                startBtn.classList.add("hidden");
+                if (stopBtn) {
+                    stopBtn.classList.remove("hidden");
+                    stopBtn.disabled = false;
+                }
+                if (statusContainer) statusContainer.classList.remove("hidden");
+                if (actions) actions.classList.add("hidden");
+                if (preview) preview.classList.add("hidden");
+                if (placeholder) placeholder.classList.remove("hidden");
+
+                startTimer();
+            } catch (err) {
+                console.error("Error: " + err);
+            }
+        });
+    }
+
+    if (stopBtn) {
+        stopBtn.addEventListener("click", () => {
+            if (mediaRecorder) mediaRecorder.stop();
+        });
+    }
+</script>

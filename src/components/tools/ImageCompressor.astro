@@ -1,0 +1,326 @@
+---
+
+---
+
+<div class="max-w-4xl mx-auto">
+    <div
+        class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
+    >
+        <!-- Header Area -->
+        <div class="bg-gradient-to-r from-orange-500 to-red-500 p-1">
+            <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-t-[20px]">
+                <div class="flex flex-col gap-8">
+                    <!-- Drop Zone -->
+                    <div
+                        id="drop-zone"
+                        class="w-full h-64 border-4 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-orange-500 dark:hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-all duration-300 group"
+                    >
+                        <div
+                            class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300"
+                        >
+                            🖼️
+                        </div>
+                        <p
+                            class="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2"
+                        >
+                            Arrastra tu imagen aquí
+                        </p>
+                        <p class="text-slate-500 dark:text-slate-400">
+                            o haz clic para seleccionar (JPG, PNG, WebP)
+                        </p>
+                        <input
+                            type="file"
+                            id="file-input"
+                            accept="image/*"
+                            class="hidden"
+                        />
+                    </div>
+
+                    <!-- Editor Area (Hidden initially) -->
+                    <div
+                        id="editor-area"
+                        class="hidden space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500"
+                    >
+                        <!-- Controls -->
+                        <div
+                            class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700"
+                        >
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <label
+                                        class="flex justify-between text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                                    >
+                                        <span>Calidad</span>
+                                        <span id="quality-value">80%</span>
+                                    </label>
+                                    <input
+                                        type="range"
+                                        id="quality"
+                                        min="1"
+                                        max="100"
+                                        value="80"
+                                        class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    />
+                                </div>
+
+                                <div class="flex items-center justify-between">
+                                    <div class="text-center">
+                                        <p
+                                            class="text-xs text-slate-500 uppercase tracking-wider mb-1"
+                                        >
+                                            Original
+                                        </p>
+                                        <p
+                                            id="original-size"
+                                            class="font-mono font-bold text-lg text-slate-700 dark:text-slate-300"
+                                        >
+                                            -
+                                        </p>
+                                    </div>
+                                    <div class="text-2xl">➡️</div>
+                                    <div class="text-center">
+                                        <p
+                                            class="text-xs text-slate-500 uppercase tracking-wider mb-1"
+                                        >
+                                            Comprimido
+                                        </p>
+                                        <p
+                                            id="compressed-size"
+                                            class="font-mono font-bold text-lg text-green-600 dark:text-green-400"
+                                        >
+                                            -
+                                        </p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p
+                                            class="text-xs text-slate-500 uppercase tracking-wider mb-1"
+                                        >
+                                            Ahorro
+                                        </p>
+                                        <p
+                                            id="savings"
+                                            class="font-mono font-bold text-lg text-orange-500"
+                                        >
+                                            -
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preview Comparison -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <p
+                                    class="text-center text-sm font-medium text-slate-500"
+                                >
+                                    Original
+                                </p>
+                                <div
+                                    class="aspect-video bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700"
+                                >
+                                    <img
+                                        id="original-preview"
+                                        class="max-w-full max-h-full object-contain"
+                                    />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <p
+                                    class="text-center text-sm font-medium text-slate-500"
+                                >
+                                    Resultado
+                                </p>
+                                <div
+                                    class="aspect-video bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700"
+                                >
+                                    <img
+                                        id="compressed-preview"
+                                        class="max-w-full max-h-full object-contain"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Download Button -->
+                        <div class="flex justify-center">
+                            <a
+                                id="download-btn"
+                                class="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25 cursor-pointer"
+                            >
+                                <span class="text-2xl">💾</span>
+                                Descargar Imagen
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+            class="bg-slate-50 dark:bg-slate-900/80 p-6 md:p-8 border-t border-slate-200 dark:border-slate-700"
+        >
+            <h3 class="font-bold text-slate-900 dark:text-white mb-2">
+                ✨ Características:
+            </h3>
+            <ul
+                class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400"
+            >
+                <li class="flex items-center gap-2">
+                    ✅ Procesamiento local (Canvas API)
+                </li>
+                <li class="flex items-center gap-2">✅ Sin límite de tamaño</li>
+                <li class="flex items-center gap-2">
+                    ✅ Soporte JPG, PNG, WebP
+                </li>
+                <li class="flex items-center gap-2">✅ Privacidad total</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    const dropZone = document.getElementById("drop-zone") as HTMLDivElement;
+    const fileInput = document.getElementById("file-input") as HTMLInputElement;
+    const editorArea = document.getElementById("editor-area") as HTMLDivElement;
+    const qualityInput = document.getElementById("quality") as HTMLInputElement;
+    const qualityValue = document.getElementById(
+        "quality-value",
+    ) as HTMLSpanElement;
+    const originalPreview = document.getElementById(
+        "original-preview",
+    ) as HTMLImageElement;
+    const compressedPreview = document.getElementById(
+        "compressed-preview",
+    ) as HTMLImageElement;
+    const originalSizeDisplay = document.getElementById(
+        "original-size",
+    ) as HTMLParagraphElement;
+    const compressedSizeDisplay = document.getElementById(
+        "compressed-size",
+    ) as HTMLParagraphElement;
+    const savingsDisplay = document.getElementById(
+        "savings",
+    ) as HTMLParagraphElement;
+    const downloadBtn = document.getElementById(
+        "download-btn",
+    ) as HTMLAnchorElement;
+
+    let originalFile: File | null = null;
+
+    function formatBytes(bytes: number, decimals = 2) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (
+            parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+        );
+    }
+
+    function handleFile(file: File) {
+        if (!file.type.match(/image.*/)) return;
+
+        originalFile = file;
+        originalSizeDisplay.textContent = formatBytes(file.size);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            originalPreview.src = e.target?.result as string;
+            compressImage();
+            editorArea.classList.remove("hidden");
+            dropZone.classList.add("hidden");
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function compressImage() {
+        if (!originalFile) return;
+
+        const quality = parseInt(qualityInput.value) / 100;
+        const img = new Image();
+
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return;
+
+            ctx.drawImage(img, 0, 0);
+
+            // Compress
+            canvas.toBlob(
+                (blob) => {
+                    if (!blob) return;
+
+                    const url = URL.createObjectURL(blob);
+                    compressedPreview.src = url;
+                    compressedSizeDisplay.textContent = formatBytes(blob.size);
+
+                    // Calculate savings
+                    if (originalFile) {
+                        const savings =
+                            ((originalFile.size - blob.size) /
+                                originalFile.size) *
+                            100;
+                        savingsDisplay.textContent = `${savings.toFixed(1)}%`;
+
+                        // Update download link
+                        downloadBtn.href = url;
+                        downloadBtn.download = `compressed-${originalFile.name}`;
+                    }
+                },
+                originalFile?.type,
+                quality,
+            );
+        };
+        img.src = originalPreview.src;
+    }
+
+    // Event Listeners
+    dropZone.addEventListener("click", () => fileInput.click());
+
+    dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.classList.add(
+            "border-orange-500",
+            "bg-orange-50",
+            "dark:bg-orange-900/10",
+        );
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove(
+            "border-orange-500",
+            "bg-orange-50",
+            "dark:bg-orange-900/10",
+        );
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.classList.remove(
+            "border-orange-500",
+            "bg-orange-50",
+            "dark:bg-orange-900/10",
+        );
+        if (e.dataTransfer?.files.length) {
+            handleFile(e.dataTransfer.files[0]);
+        }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+        if (fileInput.files?.length) {
+            handleFile(fileInput.files[0]);
+        }
+    });
+
+    qualityInput.addEventListener("input", () => {
+        qualityValue.textContent = `${qualityInput.value}%`;
+        compressImage();
+    });
+</script>

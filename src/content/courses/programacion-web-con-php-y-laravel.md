@@ -4,6 +4,7 @@ description: 'Construye aplicaciones escalables con uno de los frameworks más p
 icon: '🐘'
 affiliateLink: 'https://edutin.com/sh-10486'
 category: 'Backend'
+mainCategory: 'programacion'
 ---
 
 ## Sobre este curso

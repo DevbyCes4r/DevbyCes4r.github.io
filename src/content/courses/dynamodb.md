@@ -4,6 +4,7 @@ description: 'Aprende a diseñar y optimizar bases de datos en la nube con Dynam
 icon: '☁️'
 affiliateLink: 'https://edutin.com/sh-10430'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

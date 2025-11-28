@@ -33,7 +33,20 @@ const coursesCollection = defineCollection({
         icon: z.string(),
         affiliateLink: z.string(),
         price: z.string().optional(),
+        // Main category for broad classification
+        mainCategory: z.enum([
+            'programacion',
+            'inteligencia-artificial',
+            'datos',
+            'idiomas',
+            'diseno',
+            'devops-cloud',
+            'productividad',
+            'negocios'
+        ]).optional(),
+        // Subcategory for more specific classification (kept for backward compatibility)
         category: z.string().optional(),
+        // Group for custom study plans
         group: z.union([
             z.string(),
             z.array(z.string())

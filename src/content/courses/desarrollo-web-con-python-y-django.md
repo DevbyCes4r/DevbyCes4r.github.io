@@ -1,9 +1,10 @@
 ---
 title: 'Desarrollo Web con Python y Django'
-description: 'Comprende todo el flujo del desarrollo web, desde el frontend hasta el backend, y crea sitios funcionales.'
+description: 'Aprende a crear aplicaciones web completas con Python y Django desde cero.'
 icon: '🐍'
-affiliateLink: 'https://edutin.com/sh-7133'
+affiliateLink: 'https://edutin.com/sh-10494'
 category: 'Fullstack'
+mainCategory: 'programacion'
 ---
 
 ## Sobre este curso

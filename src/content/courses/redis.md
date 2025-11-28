@@ -4,6 +4,7 @@ description: 'Aprende a trabajar con Redis y aprovecha su potencia en memoria pa
 icon: '⚡'
 affiliateLink: 'https://edutin.com/sh-10317'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

@@ -4,6 +4,7 @@ description: 'Aprende a administrar y optimizar bases de datos empresariales con
 icon: '🔴'
 affiliateLink: 'https://edutin.com/sh-10308'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

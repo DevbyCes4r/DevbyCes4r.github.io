@@ -4,6 +4,7 @@ description: 'Transforma datos en insights con informes interactivos y visuales.
 icon: '📊'
 affiliateLink: 'https://edutin.com/sh-8990'
 category: 'Data'
+mainCategory: 'datos'
 group: 
   - '5 cursos gratis de inteligencia artificial'
   - '10 Cursos GRATIS para Analistas de Datos y DBA'

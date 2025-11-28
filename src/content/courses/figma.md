@@ -4,6 +4,7 @@ description: 'Crea interfaces visuales atractivas y prototipos profesionales par
 icon: '🎨'
 affiliateLink: 'https://edutin.com/sh-10485'
 category: 'Design'
+mainCategory: 'diseno'
 group: '10 cursos gratuitos para web developer'
 videoId: 'HmMY1p0sBCc'
 ---

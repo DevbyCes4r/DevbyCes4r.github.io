@@ -4,6 +4,7 @@ description: 'Aprende a implementar algoritmos de IA utilizando el lenguaje más
 icon: '🐍'
 affiliateLink: 'https://edutin.com/sh-9911'
 category: 'AI'
+mainCategory: 'inteligencia-artificial'
 group: '5 cursos gratis de inteligencia artificial'
 ---
 

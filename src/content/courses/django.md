@@ -4,6 +4,7 @@ description: 'Construye sitios web profesionales con Django, uno de los framewor
 icon: '🎯'
 affiliateLink: 'https://edutin.com/sh-10491'
 category: 'Backend'
+mainCategory: 'programacion'
 ---
 
 ## Sobre este curso

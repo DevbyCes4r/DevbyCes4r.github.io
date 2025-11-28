@@ -4,6 +4,7 @@ description: 'Aprende a estructurar sitios web modernos y optimizados desde cero
 icon: '📄'
 affiliateLink: 'https://edutin.com/sh-10487'
 category: 'Frontend'
+mainCategory: 'programacion'
 ---
 
 ## Sobre este curso

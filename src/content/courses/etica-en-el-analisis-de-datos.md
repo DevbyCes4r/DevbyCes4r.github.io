@@ -4,6 +4,7 @@ description: 'Aprende a aplicar principios éticos en la gestión y análisis de
 icon: '⚖️'
 affiliateLink: 'https://edutin.com/sh-10313'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

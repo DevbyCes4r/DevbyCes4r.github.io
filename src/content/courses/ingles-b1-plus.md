@@ -1,0 +1,9 @@
+---
+title: 'Inglés Intermedio B1+'
+description: 'Domina estructuras gramaticales más complejas y amplía tu vocabulario para comunicarte con claridad en entornos laborales o académicos.'
+icon: '💼'
+affiliateLink: 'https://edutin.com/sh-10474'
+category: 'Nivel B1+'
+mainCategory: 'idiomas'
+group: '7 Cursos GRATUITOS para Aprender Inglés'
+---

@@ -4,6 +4,7 @@ description: 'Protege tus proyectos y aprende a crear aplicaciones seguras, esta
 icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10492'
 category: 'DevOps'
+mainCategory: 'devops-cloud'
 ---
 
 ## Sobre este curso

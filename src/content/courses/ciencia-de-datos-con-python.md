@@ -4,6 +4,7 @@ description: 'Domina el arte de extraer conocimiento de los datos para tomar mej
 icon: '📊'
 affiliateLink: 'https://edutin.com/sh-11567'
 category: 'Data Science'
+mainCategory: 'datos'
 group: '5 cursos gratis de inteligencia artificial'
 ---
 

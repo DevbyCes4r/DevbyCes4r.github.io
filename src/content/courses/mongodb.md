@@ -4,6 +4,7 @@ description: 'Aprende a gestionar datos no estructurados con MongoDB y diseña b
 icon: '🍃'
 affiliateLink: 'https://edutin.com/sh-10318'
 category: 'Data'
+mainCategory: 'datos'
 group: '10 Cursos GRATIS para Analistas de Datos y DBA'
 ---
 

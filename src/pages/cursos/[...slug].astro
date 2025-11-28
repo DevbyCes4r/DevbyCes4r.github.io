@@ -1,4 +1,5 @@
 ---
+import FAQSection from "@/components/FAQSection.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
@@ -12,15 +13,46 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// FAQ Data
+const generalFAQs = [
+    {
+        question: "¿Cómo funcionan los cursos?",
+        answer: "Los cursos son 100% en línea y puedes hacerlos a tu ritmo. Tienes acceso completo a todas las clases en video, lecturas y actividades desde el momento de tu inscripción gratuita.",
+    },
+    {
+        question: "¿Los cursos son realmente gratuitos?",
+        answer: "Sí, la inscripción es 100% gratuita y te da acceso completo a todas las clases en video, lecturas y actividades. No necesitas pagar nada para aprender.",
+    },
+    {
+        question: "¿Puedo obtener un certificado?",
+        answerHTML: `<p class="mb-3">Sí, puedes obtener un <strong>certificado verificable internacionalmente</strong>. Tienes dos opciones:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Adquirirlo al momento de inscribirte con un <strong>descuento especial</strong></li>
+                <li>Comprarlo al finalizar el curso en su valor normal</li>
+            </ul>`,
+    },
+    {
+        question: "¿Qué incluye la certificación?",
+        answerHTML: `<p class="mb-3">Al certificarte recibirás beneficios adicionales:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Acompañamiento personalizado</strong> del profesor</li>
+                <li><strong>Retroalimentación</strong> de actividades</li>
+                <li><strong>Soporte académico</strong> continuo</li>
+                <li><strong>Constancias de estudio</strong> verificables</li>
+            </ul>`,
+    },
+];
 ---
 
 <BaseLayout
     title={`${entry.data.title} | Cursos Gratuitos`}
     description={entry.data.description}
 >
-    <div class="max-w-3xl mx-auto py-12">
+    <div class="w-full max-w-5xl py-12">
         <a
-            href="/cursos"
+            id="back-button"
+            href="/cursos/"
             class="inline-flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white mb-8 transition-colors"
         >
             <svg
@@ -126,4 +158,21 @@ const { Content } = await entry.render();
             </div>
         </article>
     </div>
+
+    <FAQSection faqs={generalFAQs} />
+
+    <script>
+        // Smart Back Button Logic
+        const backButton = document.getElementById(
+            "back-button",
+        ) as HTMLAnchorElement;
+        if (backButton) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get("ref");
+
+            if (ref) {
+                backButton.href = `/cursos/#${ref}`;
+            }
+        }
+    </script>
 </BaseLayout>

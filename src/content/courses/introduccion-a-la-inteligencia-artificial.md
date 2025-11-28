@@ -4,6 +4,7 @@ description: 'Comprende los fundamentos de la IA, sus aplicaciones y cómo está
 icon: '🤖'
 affiliateLink: 'https://edutin.com/sh-11568'
 category: 'AI'
+mainCategory: 'inteligencia-artificial'
 group: '5 cursos gratis de inteligencia artificial'
 ---
 
