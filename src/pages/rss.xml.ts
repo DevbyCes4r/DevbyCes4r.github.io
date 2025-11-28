@@ -7,7 +7,7 @@ export async function GET(context: any) {
 
     return rss({
         title: 'DevbyCes4r - Blog y Cursos',
-        description: 'Recursos de desarrollo web, tutoriales, cursos gratuitos y contenido sobre IA.',
+        description: 'Herramientas de desarrollo web, tutoriales, cursos gratuitos y contenido sobre IA.',
         site: context.site,
         items: [
             // Blog posts
