@@ -6,4 +6,5 @@ affiliateLink: 'https://edutin.com/sh-10473'
 category: 'Nivel Principiante'
 mainCategory: 'idiomas'
 group: '7 Cursos GRATUITOS para Aprender Inglés'
+videoId: 's4E85lYwgQU'
 ---
