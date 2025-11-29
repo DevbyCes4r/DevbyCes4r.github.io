@@ -7,7 +7,7 @@
         class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
     >
         <!-- Header Area -->
-        <div class="bg-gradient-to-r from-orange-500 to-red-500 p-1">
+        <div class="bg-gradient-to-r from-orange-500 to-orange-400 p-1">
             <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-t-[20px]">
                 <div class="flex flex-col gap-8">
                     <!-- Drop Zone -->
@@ -142,15 +142,22 @@
                             </div>
                         </div>
 
-                        <!-- Download Button -->
-                        <div class="flex justify-center">
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap justify-center gap-4">
                             <a
                                 id="download-btn"
-                                class="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25 cursor-pointer"
+                                class="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25 cursor-pointer"
                             >
                                 <span class="text-2xl">💾</span>
                                 Descargar Imagen
                             </a>
+                            <button
+                                id="new-image-btn"
+                                class="flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-700 text-orange-600 dark:text-orange-400 border-2 border-orange-200 dark:border-orange-800 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-2xl font-bold text-lg transition-all hover:scale-105"
+                            >
+                                <span class="text-2xl">🔄</span>
+                                Nueva Imagen
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -162,7 +169,7 @@
             class="bg-slate-50 dark:bg-slate-900/80 p-6 md:p-8 border-t border-slate-200 dark:border-slate-700"
         >
             <h3 class="font-bold text-slate-900 dark:text-white mb-2">
-                ✨ Características:
+                Características:
             </h3>
             <ul
                 class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400"
@@ -206,8 +213,34 @@
     const downloadBtn = document.getElementById(
         "download-btn",
     ) as HTMLAnchorElement;
+    const newImageBtn = document.getElementById(
+        "new-image-btn",
+    ) as HTMLButtonElement;
 
     let originalFile: File | null = null;
+
+    function resetApp() {
+        // Reset state
+        originalFile = null;
+
+        // Reset input
+        fileInput.value = "";
+
+        // Reset displays
+        originalSizeDisplay.textContent = "-";
+        compressedSizeDisplay.textContent = "-";
+        savingsDisplay.textContent = "-";
+        originalPreview.src = "";
+        compressedPreview.src = "";
+
+        // Reset quality slider
+        qualityInput.value = "80";
+        qualityValue.textContent = "80%";
+
+        // Toggle visibility
+        editorArea.classList.add("hidden");
+        dropZone.classList.remove("hidden");
+    }
 
     function formatBytes(bytes: number, decimals = 2) {
         if (bytes === 0) return "0 Bytes";
@@ -252,6 +285,40 @@
 
             ctx.drawImage(img, 0, 0);
 
+            // Determine output format
+            // Use JPEG for better compression unless the image has transparency
+            let outputFormat = "image/jpeg";
+            let filename =
+                originalFile?.name.replace(/\.[^/.]+$/, ".jpg") ||
+                "compressed.jpg";
+
+            // Check if image has transparency (for PNG)
+            if (originalFile?.type === "image/png") {
+                const imageData = ctx.getImageData(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height,
+                );
+                const data = imageData.data;
+                let hasTransparency = false;
+
+                for (let i = 3; i < data.length; i += 4) {
+                    if (data[i] < 255) {
+                        hasTransparency = true;
+                        break;
+                    }
+                }
+
+                // Keep as PNG only if has transparency
+                if (hasTransparency) {
+                    outputFormat = "image/png";
+                    filename =
+                        originalFile.name.replace(/\.[^/.]+$/, ".png") ||
+                        "compressed.png";
+                }
+            }
+
             // Compress
             canvas.toBlob(
                 (blob) => {
@@ -271,10 +338,10 @@
 
                         // Update download link
                         downloadBtn.href = url;
-                        downloadBtn.download = `compressed-${originalFile.name}`;
+                        downloadBtn.download = `compressed-${filename}`;
                     }
                 },
-                originalFile?.type,
+                outputFormat,
                 quality,
             );
         };
@@ -322,5 +389,9 @@
     qualityInput.addEventListener("input", () => {
         qualityValue.textContent = `${qualityInput.value}%`;
         compressImage();
+    });
+
+    newImageBtn.addEventListener("click", () => {
+        resetApp();
     });
 </script>

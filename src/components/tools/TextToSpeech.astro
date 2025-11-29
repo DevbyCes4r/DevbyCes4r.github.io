@@ -7,23 +7,42 @@
         class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
     >
         <!-- Header Area -->
-        <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-1">
+        <div class="bg-gradient-to-r from-purple-600 to-purple-500 p-1">
             <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-t-[20px]">
                 <div class="flex flex-col gap-6">
                     <!-- Text Input -->
-                    <div class="w-full">
+                    <div class="w-full relative">
                         <label
                             for="text-input"
                             class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                         >
                             Texto a convertir
                         </label>
-                        <textarea
-                            id="text-input"
-                            rows="5"
-                            class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none transition-all"
-                            placeholder="Escribe aquí el texto que quieres escuchar..."
-                        ></textarea>
+                        <div class="relative">
+                            <textarea
+                                id="text-input"
+                                rows="5"
+                                class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none transition-all pr-10"
+                                placeholder="Escribe aquí el texto que quieres escuchar..."
+                            ></textarea>
+                            <button
+                                id="clear-btn"
+                                class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors hidden"
+                                title="Limpiar texto"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Controls Grid -->
@@ -42,6 +61,24 @@
                             >
                                 <option value="">Cargando voces...</option>
                             </select>
+
+                            <!-- Natural Voices Recommendations -->
+                            <div
+                                class="mt-3 bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-100 dark:border-purple-800/30"
+                            >
+                                <p
+                                    class="text-xs font-semibold text-purple-800 dark:text-purple-300 mb-1"
+                                >
+                                    ✨ Voces recomendadas (más naturales):
+                                </p>
+                                <ul
+                                    class="text-xs text-purple-700 dark:text-purple-400 space-y-1 list-disc list-inside"
+                                >
+                                    <li>Google Español (US/Latin America)</li>
+                                    <li>Microsoft Helena/Sabina (Desktop)</li>
+                                    <li>Samantha (macOS)</li>
+                                </ul>
+                            </div>
                         </div>
 
                         <!-- Settings -->
@@ -88,10 +125,18 @@
                     <div class="flex flex-wrap justify-center gap-4 mt-4">
                         <button
                             id="speak-btn"
-                            class="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 active:scale-95"
+                            class="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 active:scale-95"
                         >
                             <span class="text-2xl">▶️</span>
                             Reproducir
+                        </button>
+
+                        <button
+                            id="download-audio-btn"
+                            class="flex items-center gap-2 px-8 py-4 bg-white dark:bg-slate-700 text-purple-600 dark:text-purple-400 border-2 border-purple-200 dark:border-purple-800 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-2xl font-bold text-lg transition-all hover:scale-105"
+                        >
+                            <span class="text-2xl">💾</span>
+                            Descargar Audio
                         </button>
 
                         <button
@@ -111,7 +156,7 @@
             class="bg-slate-50 dark:bg-slate-900/80 p-6 md:p-8 border-t border-slate-200 dark:border-slate-700"
         >
             <h3 class="font-bold text-slate-900 dark:text-white mb-2">
-                ✨ Características:
+                Características:
             </h3>
             <ul
                 class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400"
@@ -147,8 +192,15 @@
     ) as HTMLSpanElement;
     const speakBtn = document.getElementById("speak-btn") as HTMLButtonElement;
     const stopBtn = document.getElementById("stop-btn") as HTMLButtonElement;
+    const downloadAudioBtn = document.getElementById(
+        "download-audio-btn",
+    ) as HTMLButtonElement;
+    const clearBtn = document.getElementById("clear-btn") as HTMLButtonElement;
 
     let voices: SpeechSynthesisVoice[] = [];
+    let audioBlob: Blob | null = null;
+    let mediaRecorder: MediaRecorder | null = null;
+    let audioChunks: Blob[] = [];
 
     function populateVoiceList() {
         voices = synth.getVoices().sort((a, b) => {
@@ -198,6 +250,90 @@
         speechSynthesis.onvoiceschanged = populateVoiceList;
     }
 
+    async function speakAndRecord() {
+        if (synth.speaking) {
+            console.error("speechSynthesis.speaking");
+            return;
+        }
+
+        if (textInput.value === "") return;
+
+        try {
+            // Solicitar permiso para grabar el audio de la pestaña
+            // Es necesario que el usuario seleccione la pestaña actual y active "Compartir audio"
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+                video: true, // Requerido por la API
+                audio: true,
+                preferCurrentTab: true, // Intenta sugerir la pestaña actual
+            } as any);
+
+            const audioTrack = stream.getAudioTracks()[0];
+            if (!audioTrack) {
+                alert(
+                    "Por favor, asegúrate de activar 'Compartir audio' al seleccionar la pestaña para poder descargar la voz.",
+                );
+                stream.getTracks().forEach((t) => t.stop());
+                return;
+            }
+
+            // Usar solo el track de audio para la grabación
+            const audioStream = new MediaStream([audioTrack]);
+            mediaRecorder = new MediaRecorder(audioStream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+                updateDownloadButtonState();
+
+                // Detener todos los tracks (cierra el indicador de compartir pantalla)
+                stream.getTracks().forEach((t) => t.stop());
+            };
+
+            mediaRecorder.start();
+
+            // Configurar y reproducir la voz
+            const utterThis = new SpeechSynthesisUtterance(textInput.value);
+
+            utterThis.onend = function (event) {
+                // Esperar un poco para asegurar que se grabe el final
+                setTimeout(() => {
+                    if (mediaRecorder && mediaRecorder.state === "recording") {
+                        mediaRecorder.stop();
+                    }
+                }, 200);
+            };
+
+            utterThis.onerror = function (event) {
+                console.error("SpeechSynthesisUtterance.onerror");
+                if (mediaRecorder && mediaRecorder.state === "recording") {
+                    mediaRecorder.stop();
+                }
+            };
+
+            const selectedOption =
+                voiceSelect.selectedOptions[0].getAttribute("data-name");
+            for (let i = 0; i < voices.length; i++) {
+                if (voices[i].name === selectedOption) {
+                    utterThis.voice = voices[i];
+                    break;
+                }
+            }
+
+            utterThis.pitch = parseFloat(pitchInput.value);
+            utterThis.rate = parseFloat(rateInput.value);
+
+            synth.speak(utterThis);
+        } catch (error) {
+            console.log("Grabación cancelada por el usuario o error:", error);
+        }
+    }
+
     function speak() {
         if (synth.speaking) {
             console.error("speechSynthesis.speaking");
@@ -230,6 +366,24 @@
         }
     }
 
+    // Clear Button Logic
+    textInput.addEventListener("input", () => {
+        if (textInput.value.length > 0) {
+            clearBtn.classList.remove("hidden");
+        } else {
+            clearBtn.classList.add("hidden");
+        }
+    });
+
+    clearBtn.addEventListener("click", () => {
+        textInput.value = "";
+        clearBtn.classList.add("hidden");
+        textInput.focus();
+        audioBlob = null; // Clear audio blob when text is cleared
+        updateDownloadButtonState(); // Update button state
+    });
+
+    // Play Button - Only Speaks
     speakBtn.addEventListener("click", (e) => {
         e.preventDefault();
         speak();
@@ -238,7 +392,63 @@
     stopBtn.addEventListener("click", (e) => {
         e.preventDefault();
         synth.cancel();
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+            mediaRecorder.stop();
+        }
     });
+
+    // Download Button - Records and Downloads
+    downloadAudioBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        // If we already have a blob from a previous recording, download it
+        if (audioBlob) {
+            const url = URL.createObjectURL(audioBlob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `texto-a-voz-${new Date().toISOString().slice(0, 19).replace(/:/g, "-")}.webm`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            // Reset blob after download to allow new recording
+            audioBlob = null;
+            updateDownloadButtonState(); // Update button state after download
+        } else {
+            // Start recording process
+            speakAndRecord();
+        }
+    });
+
+    // Update download button text when recording finishes
+    function updateDownloadButtonState() {
+        if (audioBlob) {
+            downloadAudioBtn.innerHTML =
+                '<span class="text-2xl">⬇️</span> Guardar Archivo';
+            downloadAudioBtn.classList.add(
+                "bg-green-50",
+                "border-green-200",
+                "text-green-600",
+            );
+            downloadAudioBtn.classList.remove(
+                "bg-white",
+                "border-purple-200",
+                "text-purple-600",
+            );
+        } else {
+            downloadAudioBtn.innerHTML =
+                '<span class="text-2xl">💾</span> Descargar Audio';
+            downloadAudioBtn.classList.remove(
+                "bg-green-50",
+                "border-green-200",
+                "text-green-600",
+            );
+            downloadAudioBtn.classList.add(
+                "bg-white",
+                "border-purple-200",
+                "text-purple-600",
+            );
+        }
+    }
 
     rateInput.addEventListener("input", () => {
         rateValue.textContent = rateInput.value + "x";

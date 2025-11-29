@@ -7,7 +7,7 @@
         class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
     >
         <!-- Header Area -->
-        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-1">
+        <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-1">
             <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-t-[20px]">
                 <div class="flex flex-col items-center gap-8">
                     <!-- Status & Timer -->
@@ -69,13 +69,37 @@
                     <div class="flex flex-wrap justify-center gap-4 w-full">
                         <button
                             id="startBtn"
-                            class="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 active:scale-95"
+                            class="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 active:scale-95"
                         >
                             <span
                                 class="text-2xl group-hover:rotate-12 transition-transform"
                                 >⏺️</span
                             >
                             Empezar a Grabar
+                        </button>
+
+                        <button
+                            id="pauseBtn"
+                            disabled
+                            class="hidden group flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-700 text-yellow-600 dark:text-yellow-400 border-2 border-yellow-200 dark:border-yellow-800 hover:border-yellow-500 dark:hover:border-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 rounded-2xl font-bold text-lg transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <span
+                                class="text-2xl group-hover:scale-110 transition-transform"
+                                >⏸️</span
+                            >
+                            Pausar
+                        </button>
+
+                        <button
+                            id="resumeBtn"
+                            disabled
+                            class="hidden group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <span
+                                class="text-2xl group-hover:scale-110 transition-transform"
+                                >▶️</span
+                            >
+                            Reanudar
                         </button>
 
                         <button
@@ -87,14 +111,14 @@
                                 class="text-2xl group-hover:scale-110 transition-transform"
                                 >⏹️</span
                             >
-                            Detener Grabación
+                            Detener
                         </button>
                     </div>
 
-                    <!-- Download Actions -->
+                    <!-- Download & New Recording Actions -->
                     <div
                         id="actions"
-                        class="hidden w-full flex justify-center animate-in fade-in zoom-in duration-300"
+                        class="hidden w-full flex flex-wrap justify-center gap-4 animate-in fade-in zoom-in duration-300"
                     >
                         <a
                             id="downloadBtn"
@@ -103,6 +127,13 @@
                             <span class="text-2xl">💾</span>
                             Descargar Video
                         </a>
+                        <button
+                            id="newRecordingBtn"
+                            class="flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-700 text-green-600 dark:text-green-400 border-2 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-2xl font-bold text-lg transition-all hover:scale-105"
+                        >
+                            <span class="text-2xl">🔄</span>
+                            Nueva Grabación
+                        </button>
                     </div>
                 </div>
             </div>
@@ -118,6 +149,9 @@
             <ul
                 class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400"
             >
+                <li class="flex items-center gap-2">
+                    ✅ Pausar y reanudar grabación
+                </li>
                 <li class="flex items-center gap-2">✅ Sin marcas de agua</li>
                 <li class="flex items-center gap-2">✅ Sin límite de tiempo</li>
                 <li class="flex items-center gap-2">
@@ -125,6 +159,9 @@
                 </li>
                 <li class="flex items-center gap-2">
                     ✅ Grabación de audio del sistema y micrófono
+                </li>
+                <li class="flex items-center gap-2">
+                    ✅ Hacer múltiples grabaciones fácilmente
                 </li>
             </ul>
         </div>
@@ -136,13 +173,20 @@
     let recordedChunks: BlobPart[] = [];
     let startTime: number;
     let timerInterval: number;
+    let isPaused = false;
+    let pausedTime = 0;
 
     const startBtn = document.getElementById("startBtn") as HTMLButtonElement;
+    const pauseBtn = document.getElementById("pauseBtn") as HTMLButtonElement;
+    const resumeBtn = document.getElementById("resumeBtn") as HTMLButtonElement;
     const stopBtn = document.getElementById("stopBtn") as HTMLButtonElement;
     const preview = document.getElementById("preview") as HTMLVideoElement;
     const downloadBtn = document.getElementById(
         "downloadBtn",
     ) as HTMLAnchorElement;
+    const newRecordingBtn = document.getElementById(
+        "newRecordingBtn",
+    ) as HTMLButtonElement;
     const placeholder = document.getElementById(
         "placeholder",
     ) as HTMLDivElement;
@@ -151,6 +195,29 @@
         "statusContainer",
     ) as HTMLDivElement;
     const timerDisplay = document.getElementById("timer") as HTMLSpanElement;
+
+    function resetApp() {
+        // Reset state
+        mediaRecorder = null;
+        recordedChunks = [];
+        isPaused = false;
+        pausedTime = 0;
+
+        // Stop timer
+        stopTimer();
+
+        // Reset UI
+        if (preview) preview.classList.add("hidden");
+        if (placeholder) placeholder.classList.remove("hidden");
+        if (actions) actions.classList.add("hidden");
+        if (statusContainer) statusContainer.classList.add("hidden");
+
+        // Reset buttons
+        startBtn.classList.remove("hidden");
+        stopBtn.classList.add("hidden");
+        pauseBtn.classList.add("hidden");
+        resumeBtn.classList.add("hidden");
+    }
 
     function formatTime(seconds: number) {
         const mins = Math.floor(seconds / 60)
@@ -242,6 +309,10 @@
                     stopBtn.classList.remove("hidden");
                     stopBtn.disabled = false;
                 }
+                if (pauseBtn) {
+                    pauseBtn.classList.remove("hidden");
+                    pauseBtn.disabled = false;
+                }
                 if (statusContainer) statusContainer.classList.remove("hidden");
                 if (actions) actions.classList.add("hidden");
                 if (preview) preview.classList.add("hidden");
@@ -257,6 +328,58 @@
     if (stopBtn) {
         stopBtn.addEventListener("click", () => {
             if (mediaRecorder) mediaRecorder.stop();
+        });
+    }
+
+    if (pauseBtn) {
+        pauseBtn.addEventListener("click", () => {
+            if (mediaRecorder && mediaRecorder.state === "recording") {
+                mediaRecorder.pause();
+                isPaused = true;
+                pausedTime = Math.floor((Date.now() - startTime) / 1000);
+                clearInterval(timerInterval);
+
+                // Update UI
+                pauseBtn.classList.add("hidden");
+                resumeBtn.classList.remove("hidden");
+                resumeBtn.disabled = false;
+
+                // Update status text
+                const statusText = statusContainer.querySelector("p");
+                if (statusText) statusText.textContent = "Pausado";
+            }
+        });
+    }
+
+    if (resumeBtn) {
+        resumeBtn.addEventListener("click", () => {
+            if (mediaRecorder && mediaRecorder.state === "paused") {
+                mediaRecorder.resume();
+                isPaused = false;
+                startTime = Date.now() - pausedTime * 1000;
+
+                // Restart timer
+                timerInterval = window.setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                    if (timerDisplay)
+                        timerDisplay.textContent = formatTime(elapsed);
+                }, 1000);
+
+                // Update UI
+                resumeBtn.classList.add("hidden");
+                pauseBtn.classList.remove("hidden");
+                pauseBtn.disabled = false;
+
+                // Update status text
+                const statusText = statusContainer.querySelector("p");
+                if (statusText) statusText.textContent = "Grabando";
+            }
+        });
+    }
+
+    if (newRecordingBtn) {
+        newRecordingBtn.addEventListener("click", () => {
+            resetApp();
         });
     }
 </script>

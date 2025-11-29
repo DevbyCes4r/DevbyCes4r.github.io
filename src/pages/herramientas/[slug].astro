@@ -107,41 +107,248 @@ const { title, description, icon, component } = Astro.props;
             <article
                 class="prose dark:prose-invert mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700"
             >
-                <h2>¿Cómo usar esta herramienta?</h2>
-                <ol>
-                    <li>
-                        Haz clic en el botón <strong>"Grabar Pantalla"</strong>.
-                    </li>
-                    <li>
-                        Selecciona qué quieres compartir: <strong
-                            >Pantalla completa</strong
-                        >, <strong>Ventana</strong> o <strong
-                            >Pestaña del navegador</strong
-                        >.
-                    </li>
-                    <li>
-                        ¡Empieza a grabar! Puedes pausar o detener la grabación
-                        cuando quieras.
-                    </li>
-                    <li>
-                        Al finalizar, podrás ver una vista previa y <strong
-                            >descargar el video</strong
-                        > en formato WebM.
-                    </li>
-                </ol>
+                {
+                    component === "ScreenRecorder" && (
+                        <>
+                            <h2>¿Cómo usar la Grabadora de Pantalla?</h2>
+                            <ol>
+                                <li>
+                                    Haz clic en el botón{" "}
+                                    <strong>"Grabar Pantalla"</strong>.
+                                </li>
+                                <li>
+                                    Selecciona qué quieres compartir:{" "}
+                                    <strong>Pantalla completa</strong>,{" "}
+                                    <strong>Ventana</strong> o{" "}
+                                    <strong>Pestaña del navegador</strong>.
+                                </li>
+                                <li>
+                                    ¡Empieza a grabar! Puedes pausar o detener
+                                    la grabación cuando quieras.
+                                </li>
+                                <li>
+                                    Al finalizar, podrás ver una vista previa y{" "}
+                                    <strong>descargar el video</strong> en
+                                    formato WebM.
+                                </li>
+                            </ol>
 
-                <div
-                    class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-100 dark:border-blue-800 my-6"
-                >
-                    <h3 class="text-blue-800 dark:text-blue-300 mt-0">
-                        🔒 Privacidad Garantizada
-                    </h3>
-                    <p class="text-blue-700 dark:text-blue-400 mb-0">
-                        Esta herramienta funciona 100% en tu navegador. El video
-                        se procesa localmente en tu dispositivo y nunca se sube
-                        a ningún servidor externo.
-                    </p>
-                </div>
+                            <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-100 dark:border-green-800 my-6">
+                                <h3 class="text-green-800 dark:text-green-300 mt-0">
+                                    🔒 Privacidad Garantizada
+                                </h3>
+                                <p class="text-green-700 dark:text-green-400 mb-0">
+                                    Esta herramienta funciona 100% en tu
+                                    navegador. El video se procesa localmente en
+                                    tu dispositivo y nunca se sube a ningún
+                                    servidor externo.
+                                </p>
+                            </div>
+
+                            <h3>¿Para qué sirve una grabadora de pantalla?</h3>
+                            <p>
+                                Una grabadora de pantalla es perfecta para crear
+                                tutoriales, presentaciones, demos de productos,
+                                reportes de bugs o simplemente compartir lo que
+                                haces en tu computadora. No necesitas instalar
+                                ningún software - funciona directamente desde tu
+                                navegador.
+                            </p>
+                        </>
+                    )
+                }
+
+                {
+                    component === "TextToSpeech" && (
+                        <>
+                            <h2>¿Cómo convertir texto a voz?</h2>
+                            <ol>
+                                <li>
+                                    Escribe o pega el texto que quieres
+                                    convertir a voz en el área de texto.
+                                </li>
+                                <li>
+                                    Selecciona el <strong>idioma</strong> y la{" "}
+                                    <strong>voz</strong> que prefieras de las
+                                    disponibles en tu sistema.
+                                </li>
+                                <li>
+                                    Ajusta la <strong>velocidad</strong> (0.5x a
+                                    2x) y el <strong>tono</strong> (0.5 a 2.0)
+                                    según tus preferencias.
+                                </li>
+                                <li>
+                                    Haz clic en <strong>"Reproducir"</strong>{" "}
+                                    para escuchar el resultado.
+                                </li>
+                            </ol>
+
+                            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl border border-purple-100 dark:border-purple-800 my-6">
+                                <h3 class="text-purple-800 dark:text-purple-300 mt-0">
+                                    🎯 Funcionalidades destacadas
+                                </h3>
+                                <ul class="text-purple-700 dark:text-purple-400 mb-0">
+                                    <li>
+                                        Soporte para múltiples idiomas (español,
+                                        inglés, francés, alemán, etc.)
+                                    </li>
+                                    <li>Control preciso de velocidad y tono</li>
+                                    <li>
+                                        Procesamiento local - sin enviar datos a
+                                        servidores
+                                    </li>
+                                    <li>
+                                        Completamente gratuito y sin límites
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h3>¿Para qué usar un conversor de texto a voz?</h3>
+                            <p>
+                                Esta herramienta TTS (Text-to-Speech) es ideal
+                                para crear narraciones de videos, audiolibros,
+                                asistir a personas con dificultades visuales,
+                                aprender pronunciación en otros idiomas, o
+                                simplemente escuchar contenido mientras haces
+                                otras tareas.
+                            </p>
+                        </>
+                    )
+                }
+
+                {
+                    component === "ImageCompressor" && (
+                        <>
+                            <h2>¿Cómo comprimir imágenes?</h2>
+                            <ol>
+                                <li>
+                                    Haz clic en{" "}
+                                    <strong>"Seleccionar Imágenes"</strong> o
+                                    arrastra tus archivos a la zona indicada.
+                                </li>
+                                <li>
+                                    Puedes subir múltiples imágenes a la vez en
+                                    formatos JPG, PNG o WebP.
+                                </li>
+                                <li>
+                                    Ajusta el nivel de{" "}
+                                    <strong>calidad de compresión</strong>{" "}
+                                    (0-100%) con el control deslizante.
+                                </li>
+                                <li>
+                                    Visualiza la comparación antes/después y el
+                                    porcentaje de reducción de tamaño.
+                                </li>
+                                <li>
+                                    Descarga las imágenes comprimidas de forma
+                                    individual o todas juntas.
+                                </li>
+                            </ol>
+
+                            <div class="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl border border-orange-100 dark:border-orange-800 my-6">
+                                <h3 class="text-orange-800 dark:text-orange-300 mt-0">
+                                    ⚡ Ventajas de comprimir localmente
+                                </h3>
+                                <ul class="text-orange-700 dark:text-orange-400 mb-0">
+                                    <li>
+                                        <strong>100% privado:</strong> Tus
+                                        imágenes nunca salen de tu dispositivo
+                                    </li>
+                                    <li>
+                                        <strong>Rapidez:</strong> Sin tiempos de
+                                        espera de carga/descarga
+                                    </li>
+                                    <li>
+                                        <strong>Sin límites:</strong> Comprime
+                                        tantas imágenes como necesites
+                                    </li>
+                                    <li>
+                                        <strong>Gratis:</strong> Sin costos
+                                        ocultos ni suscripciones
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h3>¿Por qué comprimir imágenes?</h3>
+                            <p>
+                                Reducir el peso de tus imágenes es crucial para
+                                mejorar la velocidad de carga de sitios web,
+                                ahorrar espacio de almacenamiento, facilitar el
+                                envío por email o mensajería, y optimizar el
+                                rendimiento general. Con esta herramienta puedes
+                                lograr reducciones de hasta 70-90% manteniendo
+                                una calidad visual excelente.
+                            </p>
+                        </>
+                    )
+                }
+
+                {
+                    component === "QRGenerator" && (
+                        <>
+                            <h2>¿Cómo generar un código QR?</h2>
+                            <ol>
+                                <li>
+                                    Ingresa el contenido que quieres codificar:
+                                    URL, texto, información de contacto, etc.
+                                </li>
+                                <li>
+                                    Personaliza el diseño:{" "}
+                                    <strong>color del código</strong> y{" "}
+                                    <strong>color de fondo</strong>.
+                                </li>
+                                <li>
+                                    Ajusta el <strong>tamaño</strong> del código
+                                    QR según tus necesidades.
+                                </li>
+                                <li>
+                                    El código QR se genera instantáneamente
+                                    mientras escribes.
+                                </li>
+                                <li>
+                                    Descarga el resultado en{" "}
+                                    <strong>alta resolución PNG</strong> listo
+                                    para usar.
+                                </li>
+                            </ol>
+
+                            <div class="bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-xl border border-cyan-100 dark:border-cyan-800 my-6">
+                                <h3 class="text-cyan-800 dark:text-cyan-300 mt-0">
+                                    📱 Casos de uso populares
+                                </h3>
+                                <ul class="text-cyan-700 dark:text-cyan-400 mb-0">
+                                    <li>
+                                        Compartir enlaces de forma rápida y
+                                        visual
+                                    </li>
+                                    <li>
+                                        WiFi: Permitir conexión sin escribir
+                                        contraseñas
+                                    </li>
+                                    <li>
+                                        Tarjetas de presentación digitales
+                                        (vCard)
+                                    </li>
+                                    <li>Menús de restaurantes sin contacto</li>
+                                    <li>
+                                        Pagos y transferencias bancarias rápidas
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h3>¿Qué es un código QR?</h3>
+                            <p>
+                                Un código QR (Quick Response) es un tipo de
+                                código de barras 2D que puede almacenar
+                                información como URLs, texto, datos de contacto
+                                y más. Se escanean fácilmente con la cámara de
+                                cualquier smartphone moderno, convirtiéndolos en
+                                una forma eficiente de compartir información sin
+                                necesidad de escribir.
+                            </p>
+                        </>
+                    )
+                }
             </article>
         </div>
     </div>
