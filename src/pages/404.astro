@@ -1,0 +1,282 @@
+---
+const title = "Página no encontrada - 404";
+const description =
+    "La página que buscas no existe. Serás redirigido al inicio.";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="robots" content="noindex, nofollow" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                overflow: hidden;
+            }
+
+            .container {
+                text-align: center;
+                padding: 2rem;
+                max-width: 600px;
+                animation: fadeIn 0.6s ease-out;
+            }
+
+            .error-code {
+                font-size: clamp(6rem, 15vw, 12rem);
+                font-weight: 900;
+                line-height: 1;
+                background: linear-gradient(45deg, #fff, #e0e7ff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 1rem;
+                animation: glitch 3s infinite;
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                margin-bottom: 1rem;
+                font-weight: 700;
+            }
+
+            p {
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                margin-bottom: 2rem;
+                opacity: 0.9;
+                line-height: 1.6;
+            }
+
+            .buttons {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+                border: none;
+            }
+
+            .btn-primary {
+                background: white;
+                color: #667eea;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+            }
+
+            .countdown {
+                margin-top: 2rem;
+                font-size: 0.9rem;
+                opacity: 0.8;
+            }
+
+            .countdown-number {
+                font-weight: 700;
+                font-size: 1.2rem;
+                color: #fbbf24;
+            }
+
+            /* Animaciones */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes glitch {
+                0%,
+                100% {
+                    transform: translate(0);
+                }
+                20% {
+                    transform: translate(-2px, 2px);
+                }
+                40% {
+                    transform: translate(-2px, -2px);
+                }
+                60% {
+                    transform: translate(2px, 2px);
+                }
+                80% {
+                    transform: translate(2px, -2px);
+                }
+            }
+
+            /* Partículas de fondo */
+            .particles {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: -1;
+            }
+
+            .particle {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                animation: float 15s infinite;
+            }
+
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translateY(0) translateX(0);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) translateX(100px);
+                    opacity: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="particles" id="particles"></div>
+
+        <div class="container">
+            <div class="error-code">404</div>
+            <h1>¡Oops! Página no encontrada</h1>
+            <p>
+                La página que buscas no existe o ha sido movida. No te
+                preocupes, te llevaremos de vuelta al inicio.
+            </p>
+
+            <div class="buttons">
+                <a href="/" class="btn btn-primary">
+                    <svg
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path
+                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+                        ></path>
+                    </svg>
+                    Ir al Inicio
+                </a>
+                <a href="/blog" class="btn btn-secondary">
+                    <svg
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path
+                            d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"
+                        ></path>
+                        <path
+                            d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"
+                        ></path>
+                    </svg>
+                    Ver Blog
+                </a>
+            </div>
+
+            <div class="countdown">
+                Redirigiendo automáticamente en <span
+                    class="countdown-number"
+                    id="countdown">5</span
+                > segundos...
+            </div>
+        </div>
+
+        <script>
+            // Crear partículas de fondo
+            const particlesContainer = document.getElementById("particles");
+            if (particlesContainer) {
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement("div");
+                    particle.className = "particle";
+                    particle.style.left = Math.random() * 100 + "%";
+                    particle.style.animationDelay = Math.random() * 15 + "s";
+                    particle.style.animationDuration =
+                        Math.random() * 10 + 10 + "s";
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            // Countdown y redirección automática
+            let timeLeft = 5;
+            const countdownElement = document.getElementById("countdown");
+
+            const countdownInterval = setInterval(() => {
+                timeLeft--;
+                if (countdownElement) {
+                    countdownElement.textContent = timeLeft.toString();
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = "/";
+                }
+            }, 1000);
+
+            // Cancelar redirección si el usuario interactúa
+            document.querySelectorAll(".btn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    clearInterval(countdownInterval);
+                });
+            });
+        </script>
+    </body>
+</html>
