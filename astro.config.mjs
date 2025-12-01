@@ -9,7 +9,11 @@ export default defineConfig({
   site: 'https://devbyces4r.github.io',
   output: 'static',
   integrations: [
-    mdx(),
+    mdx({
+      remarkPlugins: [],
+      rehypePlugins: [],
+      extendMarkdownConfig: true,
+    }),
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,

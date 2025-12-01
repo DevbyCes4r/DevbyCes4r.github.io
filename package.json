@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "cms": "decap-server"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.12",
@@ -17,5 +18,8 @@
     "astro": "^5.0.0",
     "qrcode": "^1.5.4",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "decap-server": "^3.4.0"
   }
 }

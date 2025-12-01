@@ -1,0 +1,64 @@
+backend:
+  name: git-gateway
+
+# Enable local development mode
+local_backend: true
+
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime"}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
+      - {label: "Author", name: "author", widget: "string", default: "César"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Categories", name: "categories", widget: "list"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Reading Time", name: "readingTime", widget: "string", default: "5 min read"}
+      - {label: "Content Type", name: "contentType", widget: "select", options: ["guide", "tutorial", "reference", "article", "review"], default: "guide"}
+      - {label: "Difficulty", name: "difficulty", widget: "select", options: ["beginner", "intermediate", "advanced"], default: "beginner"}
+      - {label: "Prerequisites", name: "prerequisites", widget: "list", required: false}
+      - {label: "Learning Outcomes", name: "learningOutcomes", widget: "list", required: false}
+      - {label: "FAQs", name: "faqs", widget: "list", required: false, fields: [
+          {label: "Question", name: "question", widget: "string"},
+          {label: "Answer", name: "answer", widget: "text"},
+          {label: "Keywords", name: "keywords", widget: "list", required: false}
+        ]}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "courses"
+    label: "Courses"
+    folder: "src/content/courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Icon", name: "icon", widget: "string", hint: "Icon name (e.g. mdi:language-typescript)"}
+      - {label: "Affiliate Link", name: "affiliateLink", widget: "string"}
+      - {label: "Price", name: "price", widget: "string", required: false}
+      - {label: "Main Category", name: "mainCategory", widget: "select", options: [
+          "programacion",
+          "inteligencia-artificial",
+          "datos",
+          "idiomas",
+          "diseno",
+          "devops-cloud",
+          "productividad",
+          "negocios"
+        ], required: false}
+      - {label: "Category", name: "category", widget: "string", required: false}
+      - {label: "Group", name: "group", widget: "list", default: ["10 cursos gratuitos para web developer"]}
+      - {label: "Video ID", name: "videoId", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}

@@ -13,6 +13,8 @@ const blogCollection = defineCollection({
         tags: z.array(z.string()),
         featured: z.boolean().default(false),
         readingTime: z.string(),
+        // Content type for AIOptimizedContent wrapper
+        contentType: z.enum(['guide', 'tutorial', 'reference', 'article', 'review']).default('guide'),
         // AI SEO Specific Fields
         difficulty: z.enum(['beginner', 'intermediate', 'advanced']).default('beginner'),
         prerequisites: z.array(z.string()).optional(),
