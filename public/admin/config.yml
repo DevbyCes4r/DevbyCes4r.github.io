@@ -2,7 +2,7 @@ backend:
   name: git-gateway
 
 # Enable local development mode (Uncomment for local dev)
-# local_backend: true
+local_backend: true
 
 media_folder: "public/images/blog"
 public_folder: "/images/blog"
