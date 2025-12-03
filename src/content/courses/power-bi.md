@@ -6,8 +6,10 @@ affiliateLink: 'https://edutin.com/sh-8990'
 category: 'Data'
 mainCategory: 'datos'
 group: 
-  - '5 cursos gratis de inteligencia artificial'
-  - '10 Cursos GRATIS para Analistas de Datos y DBA'
+  - 'Inteligencia Artificial'
+  - 'Analistas de Datos y DBA'
+orderGroup: 1
+publishDate: 2025-11-22
 ---
 
 ## Sobre este curso

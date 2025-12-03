@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import FAQSection from "../../components/FAQSection.astro";
 import { COURSE_CATEGORIES, type CategoryKey } from "../../lib/categories";
 
+import { STUDY_PLANS } from "../../lib/studyPlans";
+
 const courses = await getCollection("courses");
 
 // Group courses by main category
@@ -16,6 +18,13 @@ const coursesByCategory = courses.reduce<CategoryGrouped>((acc, course) => {
     acc[category].push(course);
     return acc;
 }, {});
+
+// Sort courses within each category by publishDate descending
+Object.keys(coursesByCategory).forEach((category) => {
+    coursesByCategory[category].sort(
+        (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+    );
+});
 
 // Group courses by custom study plans
 type GroupedCourses = Record<string, typeof courses>;
@@ -30,13 +39,15 @@ const groupedCourses = courses.reduce<GroupedCourses>((acc, course) => {
     return acc;
 }, {});
 
-// Define group order for study plans
-const groupOrder = [
-    "10 cursos gratuitos para web developer",
-    "5 cursos gratis de inteligencia artificial",
-    "10 Cursos GRATIS para Analistas de Datos y DBA",
-    "7 Cursos GRATUITOS para Aprender Inglés",
-];
+// Sort courses within each study plan group by orderGroup ascending
+Object.keys(groupedCourses).forEach((group) => {
+    groupedCourses[group].sort((a, b) => a.data.orderGroup - b.data.orderGroup);
+});
+
+// Sort study plans by order
+const sortedPlans = Object.entries(STUDY_PLANS).sort(
+    ([, a], [, b]) => a.order - b.order,
+);
 
 // FAQ Data
 const generalFAQs = [
@@ -127,7 +138,7 @@ const pageDescription =
                                 if (count === 0) return null;
                                 return (
                                     <a
-                                        href={`#categoria-${key}`}
+                                        href={`/cursos/categoria/${key}`}
                                         class="group p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg"
                                     >
                                         <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
@@ -248,61 +259,60 @@ const pageDescription =
                 </div>
                 <nav class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {
-                        groupOrder.map((groupTitle, index) => (
-                            <a
-                                href={`#${groupTitle.toLowerCase().replace(/ /g, "-")}`}
-                                class="group flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500/10 border border-slate-200 dark:border-slate-600 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                            >
-                                <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg font-bold text-sm group-hover:scale-110 transition-transform">
-                                    {index + 1}
-                                </span>
-                                <span class="text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 font-medium transition-colors">
-                                    {groupTitle}
-                                </span>
-                                <svg
-                                    class="w-5 h-5 ml-auto text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
+                        sortedPlans.map(([slug, plan], index) => {
+                            return (
+                                <a
+                                    href={`/cursos/plan/${slug}`}
+                                    class="group flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500/10 border border-slate-200 dark:border-slate-600 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                                 >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 5l7 7-7 7"
-                                    />
-                                </svg>
-                            </a>
-                        ))
+                                    <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg font-bold text-sm group-hover:scale-110 transition-transform">
+                                        {index + 1}
+                                    </span>
+                                    <span class="text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 font-medium transition-colors">
+                                        {plan.title}
+                                    </span>
+                                    <svg
+                                        class="w-5 h-5 ml-auto text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 5l7 7-7 7"
+                                        />
+                                    </svg>
+                                </a>
+                            );
+                        })
                     }
                 </nav>
             </div>
 
             {
-                groupOrder.map(
-                    (groupTitle) =>
-                        groupedCourses[groupTitle] && (
-                            <div
-                                class="mb-20"
-                                id={groupTitle.toLowerCase().replace(/ /g, "-")}
-                            >
+                sortedPlans.map(
+                    ([slug, plan]) =>
+                        groupedCourses[plan.group] && (
+                            <div class="mb-20" id={slug}>
                                 <div class="flex items-center gap-4 mb-8">
                                     <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-blue-600 dark:border-blue-500 pl-4">
                                         <a
-                                            href={`#${groupTitle.toLowerCase().replace(/ /g, "-")}`}
+                                            href={`#${slug}`}
                                             class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                         >
-                                            {groupTitle.replace(/-/g, " ")}
+                                            {plan.title}
                                         </a>
                                     </h2>
                                     <div class="h-px bg-slate-200 dark:bg-slate-800 flex-grow" />
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {groupedCourses[groupTitle].map(
+                                    {groupedCourses[plan.group].map(
                                         (course) => (
                                             <a
-                                                href={`/cursos/${course.slug}?ref=${groupTitle.toLowerCase().replace(/ /g, "-")}`}
+                                                href={`/cursos/${course.slug}?ref=${slug}`}
                                                 class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                                             >
                                                 <div class="flex items-start gap-4">
@@ -380,6 +390,7 @@ const pageDescription =
         <a
             href="#categorias"
             class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            title="Ver categorías"
         >
             <span class="text-lg">🏷️</span>
             <span class="hidden sm:inline">Categorías</span>
@@ -388,6 +399,7 @@ const pageDescription =
         <a
             href="#planes-de-estudio"
             class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            title="Ver planes de estudio"
         >
             <span class="text-lg">📚</span>
             <span class="hidden sm:inline">Planes de Estudio</span>

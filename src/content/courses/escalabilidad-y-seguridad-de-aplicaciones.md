@@ -5,6 +5,9 @@ icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10492'
 category: 'DevOps'
 mainCategory: 'devops-cloud'
+group: 'Web Developer'
+orderGroup: 1
+publishDate: 2025-10-19
 ---
 
 ## Sobre este curso

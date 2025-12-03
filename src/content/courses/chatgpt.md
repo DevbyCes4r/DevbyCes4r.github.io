@@ -5,7 +5,9 @@ icon: '💬'
 affiliateLink: 'https://edutin.com/sh-11566'
 category: 'AI Tools'
 mainCategory: 'inteligencia-artificial'
-group: '5 cursos gratis de inteligencia artificial'
+group: 'Inteligencia Artificial'
+orderGroup: 1
+publishDate: 2025-10-07
 ---
 
 ## Sobre este curso

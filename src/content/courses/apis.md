@@ -5,6 +5,9 @@ icon: '🔗'
 affiliateLink: 'https://edutin.com/sh-10492'
 category: 'Backend'
 mainCategory: 'programacion'
+group: 'Web Developer'
+orderGroup: 1
+publishDate: 2025-10-03
 ---
 
 ## Sobre este curso

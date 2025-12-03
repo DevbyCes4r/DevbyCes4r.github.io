@@ -5,7 +5,9 @@ icon: '🐍'
 affiliateLink: 'https://edutin.com/sh-9911'
 category: 'AI'
 mainCategory: 'inteligencia-artificial'
-group: '5 cursos gratis de inteligencia artificial'
+group: 'Inteligencia Artificial'
+orderGroup: 1
+publishDate: 2025-11-08
 ---
 
 ## Sobre este curso

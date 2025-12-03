@@ -62,6 +62,6 @@ collections:
           "negocios"
         ], required: false}
       - {label: "Category", name: "category", widget: "string", required: false}
-      - {label: "Group", name: "group", widget: "list", default: ["10 cursos gratuitos para web developer"]}
+      - {label: "Group", name: "group", widget: "list", default: ["Web Developer"]}
       - {label: "Video ID", name: "videoId", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown"}

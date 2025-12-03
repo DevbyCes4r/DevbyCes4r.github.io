@@ -5,6 +5,9 @@ icon: '🐍'
 affiliateLink: 'https://edutin.com/sh-10494'
 category: 'Fullstack'
 mainCategory: 'programacion'
+group: 'Web Developer'
+orderGroup: 1
+publishDate: 2025-10-13
 ---
 
 ## Sobre este curso

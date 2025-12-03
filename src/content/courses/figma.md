@@ -2,11 +2,13 @@
 title: 'Figma'
 description: 'Crea interfaces visuales atractivas y prototipos profesionales para páginas web o aplicaciones.'
 icon: '🎨'
+videoId: 'HmMY1p0sBCc'
 affiliateLink: 'https://edutin.com/sh-10485'
 category: 'Design'
 mainCategory: 'diseno'
-group: '10 cursos gratuitos para web developer'
-videoId: 'HmMY1p0sBCc'
+group: 'Web Developer'
+orderGroup: 1
+publishDate: 2025-10-23
 ---
 
 ## Sobre este curso

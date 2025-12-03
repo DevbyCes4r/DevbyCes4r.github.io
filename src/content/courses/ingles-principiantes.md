@@ -5,6 +5,8 @@ icon: '🌱'
 affiliateLink: 'https://edutin.com/sh-10473'
 category: 'Nivel Principiante'
 mainCategory: 'idiomas'
-group: '7 Cursos GRATUITOS para Aprender Inglés'
+group: 'Ruta Completa Ingles Cero a C1'
 videoId: 's4E85lYwgQU'
+orderGroup: 1
+publishDate: 2025-11-06
 ---

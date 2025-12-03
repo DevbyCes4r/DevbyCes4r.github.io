@@ -52,8 +52,12 @@ const coursesCollection = defineCollection({
         group: z.union([
             z.string(),
             z.array(z.string())
-        ]).transform(val => Array.isArray(val) ? val : [val]).default(['10 cursos gratuitos para web developer']),
+        ]).transform(val => Array.isArray(val) ? val : [val]).default(['Web Developer']),
         videoId: z.string().optional(),
+        // Order within study plans
+        orderGroup: z.number().default(1),
+        // Date for sorting in category lists
+        publishDate: z.date().default(() => new Date()),
     }),
 });
 

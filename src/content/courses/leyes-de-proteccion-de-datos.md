@@ -5,7 +5,9 @@ icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10311'
 category: 'Data'
 mainCategory: 'datos'
-group: '10 Cursos GRATIS para Analistas de Datos y DBA'
+group: 'Analistas de Datos y DBA'
+orderGroup: 1
+publishDate: 2025-11-14
 ---
 
 ## Sobre este curso

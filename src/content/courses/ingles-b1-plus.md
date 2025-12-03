@@ -5,5 +5,7 @@ icon: '💼'
 affiliateLink: 'https://edutin.com/sh-10474'
 category: 'Nivel B1+'
 mainCategory: 'idiomas'
-group: '7 Cursos GRATUITOS para Aprender Inglés'
+group: 'Ruta Completa Ingles Cero a C1'
+orderGroup: 5
+publishDate: 2025-10-31
 ---

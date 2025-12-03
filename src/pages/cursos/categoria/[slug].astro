@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import FAQSection from "../../../components/FAQSection.astro";
+import { COURSE_CATEGORIES, type CategoryKey } from "../../../lib/categories";
+
+export async function getStaticPaths() {
+    return Object.keys(COURSE_CATEGORIES).map((key) => ({
+        params: { slug: key },
+    }));
+}
+
+const { slug } = Astro.params;
+const category = COURSE_CATEGORIES[slug as CategoryKey];
+
+if (!category) {
+    return Astro.redirect("/404");
+}
+
+const allCourses = await getCollection("courses");
+const categoryCourses = allCourses
+    .filter((course) => course.data.mainCategory === slug)
+    .sort(
+        (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+    );
+
+// FAQ Data - General FAQs about courses
+const generalFAQs = [
+    {
+        question: "¿Cómo funcionan los cursos?",
+        answer: "Los cursos son 100% en línea y puedes hacerlos a tu ritmo. Tienes acceso completo a todas las clases en video, lecturas y actividades desde el momento de tu inscripción gratuita.",
+    },
+    {
+        question: "¿Los cursos son realmente gratuitos?",
+        answer: "Sí, la inscripción es 100% gratuita y te da acceso completo a todas las clases en video, lecturas y actividades. No necesitas pagar nada para aprender.",
+    },
+    {
+        question: "¿Puedo obtener un certificado?",
+        answerHTML: `<p class="mb-3">Sí, puedes obtener un <strong>certificado verificable internacionalmente</strong>. Tienes dos opciones:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Adquirirlo al momento de inscribirte con un <strong>descuento especial</strong></li>
+                <li>Comprarlo al finalizar el curso en su valor normal</li>
+            </ul>`,
+    },
+    {
+        question: "¿Qué incluye la certificación?",
+        answerHTML: `<p class="mb-3">Al certificarte recibirás beneficios adicionales:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Acompañamiento personalizado</strong> del profesor</li>
+                <li><strong>Retroalimentación</strong> de actividades</li>
+                <li><strong>Soporte académico</strong> continuo</li>
+                <li><strong>Constancias de estudio</strong> verificables</li>
+            </ul>`,
+    },
+];
+
+const pageTitle = `Cursos de ${category.name} Gratuitos | DevbyCes4r`;
+const pageDescription = `Aprende ${category.name.toLowerCase()} con nuestros ${categoryCourses.length} cursos gratuitos. ${category.description}. Certificación opcional disponible.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+    <div class="min-h-screen py-10 px-4">
+        <div class="max-w-5xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav class="mb-8 text-sm" aria-label="Breadcrumb">
+                <ol
+                    class="flex items-center gap-2 text-slate-600 dark:text-slate-400"
+                >
+                    <li>
+                        <a
+                            href="/"
+                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >Inicio</a
+                        >
+                    </li>
+                    <li aria-hidden="true">/</li>
+                    <li>
+                        <a
+                            href="/cursos"
+                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >Cursos</a
+                        >
+                    </li>
+                    <li aria-hidden="true">/</li>
+                    <li>
+                        <a
+                            href="/cursos#categorias"
+                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >Categoria</a
+                        >
+                    </li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-slate-900 dark:text-white font-medium">
+                        {category.name}
+                    </li>
+                </ol>
+            </nav>
+
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="text-6xl mb-4 animate-bounce">
+                    {category.icon}
+                </div>
+                <h1
+                    class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 dark:from-purple-400 dark:via-blue-500 dark:to-pink-500 mb-4"
+                >
+                    Cursos de {category.name}
+                </h1>
+                <p
+                    class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-2"
+                >
+                    {category.description}
+                </p>
+                <p class="text-slate-500 dark:text-slate-500">
+                    {categoryCourses.length}
+                    {categoryCourses.length === 1 ? "curso" : "cursos"} disponibles
+                </p>
+            </div>
+
+            <!-- Courses Grid -->
+            <div class="mb-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {
+                        categoryCourses.map((course) => (
+                            <a
+                                href={`/cursos/${course.slug}`}
+                                class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                            >
+                                <div class="flex items-start gap-4">
+                                    <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                        {course.data.icon}
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                            {course.data.title}
+                                        </h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
+                                            {course.data.description}
+                                        </p>
+                                        {course.data.category && (
+                                            <span class="text-xs font-medium px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-500/20">
+                                                {course.data.category}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                    </svg>
+                                </div>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- FAQs -->
+            <FAQSection faqs={generalFAQs} />
+
+            <!-- CTA -->
+            <div
+                class="mt-16 p-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl text-center text-white shadow-lg"
+            >
+                <h2 class="text-2xl font-bold mb-4">
+                    🚀 ¿Listo para comenzar?
+                </h2>
+                <p class="mb-6 text-purple-50">
+                    Explora todos nuestros cursos gratuitos
+                </p>
+                <a
+                    href="/cursos"
+                    class="inline-block px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
+                >
+                    Ver Todos los Cursos 📚
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schema.org Markup -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `Cursos de ${category.name}`,
+            description: pageDescription,
+            url: `https://devbyces4r.github.io/cursos/categoria/${slug}`,
+            mainEntity: {
+                "@type": "ItemList",
+                itemListElement: categoryCourses.map((course, index) => ({
+                    "@type": "Course",
+                    position: index + 1,
+                    name: course.data.title,
+                    description: course.data.description,
+                    url: `https://devbyces4r.github.io/cursos/${course.slug}`,
+                    provider: {
+                        "@type": "Organization",
+                        name: "DevbyCes4r",
+                    },
+                })),
+            },
+        })}
+    />
+</BaseLayout>

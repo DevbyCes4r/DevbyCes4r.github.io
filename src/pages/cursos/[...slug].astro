@@ -53,6 +53,7 @@ const generalFAQs = [
         <a
             id="back-button"
             href="/cursos/"
+            data-category={entry.data.mainCategory}
             class="inline-flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white mb-8 transition-colors"
         >
             <svg
@@ -67,7 +68,7 @@ const generalFAQs = [
                     stroke-width="2"
                     d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
-            Volver a Cursos
+            Volver
         </a>
 
         <article
@@ -167,12 +168,80 @@ const generalFAQs = [
         const backButton = document.getElementById(
             "back-button",
         ) as HTMLAnchorElement;
+
         if (backButton) {
             const urlParams = new URLSearchParams(window.location.search);
             const ref = urlParams.get("ref");
+            const referrer = document.referrer;
 
+            let backUrl = "/cursos";
+            let backText = "Volver a Cursos";
+
+            // Priority 1: Check URL parameter (ref)
             if (ref) {
-                backButton.href = `/cursos/#${ref}`;
+                if (ref.startsWith("categoria-")) {
+                    // From category page
+                    const categorySlug = ref.replace("categoria-", "");
+                    backUrl = `/cursos/categoria/${categorySlug}`;
+                    backText = "Volver a Categoría";
+                } else if (
+                    ref === "web-developer" ||
+                    ref === "inteligencia-artificial" ||
+                    ref === "analista-datos" ||
+                    ref === "ingles"
+                ) {
+                    // From study plan page
+                    backUrl = `/cursos/plan/${ref}`;
+                    backText = "Volver al Plan";
+                } else {
+                    // Old anchor-based ref
+                    backUrl = `/cursos#${ref}`;
+                }
+            }
+            // Priority 2: Check document.referrer
+            else if (referrer && referrer.includes(window.location.origin)) {
+                const referrerUrl = new URL(referrer);
+
+                if (referrerUrl.pathname.includes("/cursos/categoria/")) {
+                    // Came from a category page
+                    backUrl = referrerUrl.pathname;
+                    backText = "Volver a Categoría";
+                } else if (referrerUrl.pathname.includes("/cursos/plan/")) {
+                    // Came from a study plan page
+                    backUrl = referrerUrl.pathname;
+                    backText = "Volver al Plan";
+                } else if (referrerUrl.pathname.includes("/blog/")) {
+                    // Came from a blog post
+                    backUrl = referrerUrl.pathname;
+                    backText = "Volver al Blog";
+                } else if (
+                    referrerUrl.pathname === "/cursos" ||
+                    referrerUrl.pathname === "/cursos/"
+                ) {
+                    // Came from main courses page
+                    backUrl = "/cursos";
+                    if (referrerUrl.hash) {
+                        backUrl += referrerUrl.hash;
+                    }
+                }
+            }
+            // Priority 3: Default to category page
+            else {
+                const categorySlug = backButton.dataset.category;
+                if (categorySlug) {
+                    backUrl = `/cursos/categoria/${categorySlug}`;
+                    backText = "Volver a Categoría";
+                } else {
+                    backUrl = "/cursos";
+                    backText = "Volver a Cursos";
+                }
+            }
+
+            // Update button
+            backButton.href = backUrl;
+            const textNode = backButton.childNodes[2]; // The text node after SVG
+            if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                textNode.textContent = backText;
             }
         }
     </script>

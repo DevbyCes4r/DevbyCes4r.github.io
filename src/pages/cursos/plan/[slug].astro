@@ -1,0 +1,228 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import FAQSection from "../../../components/FAQSection.astro";
+import { STUDY_PLANS, type StudyPlanKey } from "../../../lib/studyPlans";
+
+export async function getStaticPaths() {
+    return Object.keys(STUDY_PLANS).map((key) => ({
+        params: { slug: key },
+    }));
+}
+
+const { slug } = Astro.params;
+const plan = STUDY_PLANS[slug as StudyPlanKey];
+
+if (!plan) {
+    return Astro.redirect("/404");
+}
+
+const allCourses = await getCollection("courses");
+const planCourses = allCourses
+    .filter((course) => course.data.group.includes(plan.group))
+    .sort((a, b) => a.data.orderGroup - b.data.orderGroup);
+
+const pageTitle = `${plan.title} | Plan de Estudio Gratuito | DevbyCes4r`;
+const pageDescription = `${plan.description} Aprende con ${planCourses.length} cursos gratuitos organizados en un plan de estudio completo.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+    <div class="min-h-screen py-10 px-4">
+        <div class="max-w-5xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav class="mb-8 text-sm" aria-label="Breadcrumb">
+                <ol
+                    class="flex items-center gap-2 text-slate-600 dark:text-slate-400"
+                >
+                    <li>
+                        <a
+                            href="/"
+                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >Inicio</a
+                        >
+                    </li>
+                    <li aria-hidden="true">/</li>
+                    <li>
+                        <a
+                            href="/cursos"
+                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >Cursos</a
+                        >
+                    </li>
+                    <li aria-hidden="true">/</li>
+                    <li>
+                        <a
+                            href="/cursos#planes-de-estudio"
+                            class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >Planes de Estudio</a
+                        >
+                    </li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-slate-900 dark:text-white font-medium">
+                        {plan.title}
+                    </li>
+                </ol>
+            </nav>
+
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="text-6xl mb-4 animate-bounce">{plan.icon}</div>
+                <h1
+                    class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-4"
+                >
+                    {plan.title}
+                </h1>
+                <p
+                    class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-6"
+                >
+                    {plan.description}
+                </p>
+                <p class="text-slate-500 dark:text-slate-500">
+                    {planCourses.length}
+                    {planCourses.length === 1 ? "curso" : "cursos"} en este plan
+                </p>
+            </div>
+
+            <!-- Learning Objectives -->
+            {
+                plan?.objectives?.length > 0 && (
+                    <div class="mb-12 p-6 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                            ¿Qué aprenderás?
+                        </h2>
+                        <ul class="space-y-3">
+                            {plan?.objectives?.map((objective) => (
+                                <li class="flex items-start gap-3 text-slate-700 dark:text-slate-300">
+                                    <svg
+                                        class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span>{objective}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }
+
+            <!-- Courses in Plan -->
+            <div class="mb-16">
+                <h2
+                    class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3"
+                >
+                    <svg
+                        class="w-6 h-6 text-blue-600 dark:text-blue-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        ></path>
+                    </svg>
+                    Cursos del Plan
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {
+                        planCourses.map((course, index) => (
+                            <a
+                                href={`/cursos/${course.slug}`}
+                                class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+                            >
+                                <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-600 dark:bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg">
+                                    {index + 1}
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                        {course.data.icon}
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                            {course.data.title}
+                                        </h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
+                                            {course.data.description}
+                                        </p>
+                                        {course.data.category && (
+                                            <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-500/20">
+                                                {course.data.category}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-600 dark:text-blue-400">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                    </svg>
+                                </div>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Plan-specific FAQs -->
+            {
+                plan?.faqs?.length > 0 && (
+                    <FAQSection
+                        faqs={plan.faqs}
+                        title={`Preguntas sobre este plan`}
+                    />
+                )
+            }
+        </div>
+    </div>
+
+    <!-- Schema.org Markup -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: plan.title,
+            description: pageDescription,
+            url: `https://devbyces4r.github.io/cursos/plan/${slug}`,
+            about: {
+                "@type": "LearningResource",
+                educationalLevel: "Beginner to Advanced",
+                teaches: plan.objectives,
+            },
+            mainEntity: {
+                "@type": "ItemList",
+                numberOfItems: planCourses.length,
+                itemListElement: planCourses.map((course, index) => ({
+                    "@type": "Course",
+                    position: index + 1,
+                    name: course.data.title,
+                    description: course.data.description,
+                    url: `https://devbyces4r.github.io/cursos/${course.slug}`,
+                    provider: {
+                        "@type": "Organization",
+                        name: "DevbyCes4r",
+                    },
+                })),
+            },
+        })}
+    />
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+title: 'Inglés B1'
+description: 'Mejora tu gramática, comprensión lectora y expresión oral para mantener conversaciones más fluidas y naturales.'
+icon: '🇬🇧'
+videoId: 'f47AoaPDHiQ'
+affiliateLink: 'https://edutin.com/sh-10472'
+category: 'Nivel B1'
+mainCategory: 'idiomas'
+group: 'Ruta Completa Ingles Cero a C1'
+orderGroup: 4
+publishDate: 2025-10-31
+---

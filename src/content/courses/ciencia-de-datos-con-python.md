@@ -5,7 +5,9 @@ icon: '📊'
 affiliateLink: 'https://edutin.com/sh-11567'
 category: 'Data Science'
 mainCategory: 'datos'
-group: '5 cursos gratis de inteligencia artificial'
+group: 'Inteligencia Artificial'
+orderGroup: 1
+publishDate: 2025-10-09
 ---
 
 ## Sobre este curso

@@ -5,6 +5,9 @@ icon: '🅰️'
 affiliateLink: 'https://edutin.com/sh-10489'
 category: 'Frontend'
 mainCategory: 'programacion'
+group: 'Web Developer'
+orderGroup: 1
+publishDate: 2025-10-01
 ---
 
 ## Sobre este curso

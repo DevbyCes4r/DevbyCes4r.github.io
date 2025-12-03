@@ -28,6 +28,11 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Resource Hints para optimizar carga -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://gc.zgo.at" />
+
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -56,12 +61,41 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
     <meta name="gptbot" content="index, follow" />
     <meta name="google-extended" content="index, follow" />
 
-    <!-- Analytics -->
-    <!-- GoatCounter Analytics -->
-    <script
-      data-goatcounter="https://devbyces4r.goatcounter.com/count"
-      async
-      src="//gc.zgo.at/count.js"></script>
+    <!-- Optimized Font Loading -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      />
+    </noscript>
+
+    <!-- Analytics - Deferred Loading -->
+    <!-- GoatCounter Analytics - carga diferida para no bloquear renderizado -->
+    <script>
+      // Cargar GoatCounter solo después de que la página esté lista
+      if (document.readyState === "complete") {
+        loadGoatCounter();
+      } else {
+        window.addEventListener("load", loadGoatCounter);
+      }
+
+      function loadGoatCounter() {
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "//gc.zgo.at/count.js";
+        script.setAttribute(
+          "data-goatcounter",
+          "https://devbyces4r.goatcounter.com/count",
+        );
+        document.head.appendChild(script);
+      }
+    </script>
 
     <slot name="head" />
   </head>
