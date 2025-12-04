@@ -2,6 +2,7 @@
 title: 'DynamoDB'
 description: 'Aprende a diseñar y optimizar bases de datos en la nube con DynamoDB, gestionando datos a gran escala con alto rendimiento y disponibilidad para tus proyectos.'
 icon: '☁️'
+videoId: 'a-9qEbY7p9Q'
 affiliateLink: 'https://edutin.com/sh-10430'
 category: 'Data'
 mainCategory: 'datos'

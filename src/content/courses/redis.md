@@ -2,6 +2,7 @@
 title: 'Redis'
 description: 'Aprende a trabajar con Redis y aprovecha su potencia en memoria para procesar datos en tiempo real, optimizar el rendimiento y escalar tus aplicaciones al máximo.'
 icon: '⚡'
+videoId: '3XlVB9tU3n0'
 affiliateLink: 'https://edutin.com/sh-10317'
 category: 'Data'
 mainCategory: 'datos'
