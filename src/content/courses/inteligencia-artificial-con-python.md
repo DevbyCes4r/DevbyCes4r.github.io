@@ -2,6 +2,7 @@
 title: 'Inteligencia Artificial con Python'
 description: 'Aprende a implementar algoritmos de IA utilizando el lenguaje más popular para ciencia de datos.'
 icon: '🐍'
+videoId: 'nEqmSR3nZow'
 affiliateLink: 'https://edutin.com/sh-9911'
 category: 'AI'
 mainCategory: 'inteligencia-artificial'

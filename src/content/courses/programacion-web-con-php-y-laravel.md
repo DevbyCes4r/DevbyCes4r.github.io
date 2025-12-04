@@ -2,6 +2,7 @@
 title: 'Programación Web con PHP y Laravel'
 description: 'Construye aplicaciones escalables con uno de los frameworks más populares y demandados del mundo backend.'
 icon: '🐘'
+videoId: '50uf5yJ0j1Y'
 affiliateLink: 'https://edutin.com/sh-10486'
 category: 'Backend'
 mainCategory: 'programacion'

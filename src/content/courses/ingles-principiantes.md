@@ -5,7 +5,7 @@ icon: '🌱'
 affiliateLink: 'https://edutin.com/sh-10473'
 category: 'Nivel Principiante'
 mainCategory: 'idiomas'
-group: 'Ruta Completa Ingles Cero a C1'
+group: 'Ingles desde principiante a avanzado'
 videoId: 's4E85lYwgQU'
 orderGroup: 1
 publishDate: 2025-11-06

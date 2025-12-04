@@ -2,6 +2,7 @@
 title: 'JavaScript'
 description: 'Aprende a programar con el lenguaje que da interactividad a las páginas web y construye proyectos dinámicos.'
 icon: '⚡'
+videoId: '2Ch0d2YokVc'
 affiliateLink: 'https://edutin.com/sh-10488'
 category: 'Frontend'
 mainCategory: 'programacion'
