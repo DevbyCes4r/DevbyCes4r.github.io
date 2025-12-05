@@ -4,8 +4,8 @@ description: 'Desarrolla habilidades básicas de lectura, escritura y conversaci
 icon: '🔤'
 videoId: 'FoT7c62Vios'
 affiliateLink: 'https://edutin.com/sh-10476'
-category: 'Nivel A1'
-mainCategory: 'idiomas'
+tags: ['Nivel A1']
+category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'
 orderGroup: 2
 publishDate: 2025-11-04

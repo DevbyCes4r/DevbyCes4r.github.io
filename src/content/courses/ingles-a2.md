@@ -4,8 +4,8 @@ description: 'Amplía tu vocabulario y comprensión auditiva para hablar con may
 icon: '🗣️'
 videoId: 'OcfvOAAk8-8'
 affiliateLink: 'https://edutin.com/sh-10477'
-category: 'Nivel A2'
-mainCategory: 'idiomas'
+tags: ['Nivel A2']
+category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'
 orderGroup: 3
 publishDate: 2025-10-27

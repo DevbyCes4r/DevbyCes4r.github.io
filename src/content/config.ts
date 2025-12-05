@@ -36,7 +36,7 @@ const coursesCollection = defineCollection({
         affiliateLink: z.string(),
         price: z.string().optional(),
         // Main category for broad classification
-        mainCategory: z.enum([
+        category: z.enum([
             'programacion',
             'inteligencia-artificial',
             'datos',
@@ -46,8 +46,8 @@ const coursesCollection = defineCollection({
             'productividad',
             'negocios'
         ]).optional(),
-        // Subcategory for more specific classification (kept for backward compatibility)
-        category: z.string().optional(),
+        // Tags for more specific classification
+        tags: z.array(z.string()).optional(),
         // Group for custom study plans
         group: z.union([
             z.string(),
@@ -61,7 +61,35 @@ const coursesCollection = defineCollection({
     }),
 });
 
+const categoriesCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        name: z.string(),
+        icon: z.string(),
+        description: z.string(),
+        order: z.number().default(1),
+    }),
+});
+
+const routesCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        icon: z.string(),
+        group: z.string(),
+        order: z.number().default(1),
+        objectives: z.array(z.string()),
+        faqs: z.array(z.object({
+            question: z.string(),
+            answer: z.string(),
+        })),
+    }),
+});
+
 export const collections = {
     'blog': blogCollection,
     'courses': coursesCollection,
+    'categories': categoriesCollection,
+    'routes': routesCollection,
 };

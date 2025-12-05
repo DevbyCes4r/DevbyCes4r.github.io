@@ -4,8 +4,8 @@ description: 'Aprende a diseñar, relacionar y optimizar bases de datos reales c
 icon: '🗄️'
 videoId: 'm5aJ2OFz5Fg'
 affiliateLink: 'https://edutin.com/sh-10314'
-category: 'Data'
-mainCategory: 'datos'
+tags: ['Data']
+category: 'datos'
 group: 'Analistas de Datos y DBA'
 orderGroup: 1
 publishDate: 2025-10-05

@@ -4,8 +4,8 @@ description: 'Transforma datos en insights con informes interactivos y visuales.
 icon: '📊'
 videoId: 'W5BXXZmbZiE'
 affiliateLink: 'https://edutin.com/sh-8990'
-category: 'Data'
-mainCategory: 'datos'
+tags: ['Data']
+category: 'datos'
 group: 
   - 'Inteligencia Artificial'
   - 'Analistas de Datos y DBA'

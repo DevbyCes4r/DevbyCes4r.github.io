@@ -4,8 +4,8 @@ description: 'Construye aplicaciones escalables con uno de los frameworks más p
 icon: '🐘'
 videoId: '50uf5yJ0j1Y'
 affiliateLink: 'https://edutin.com/sh-10486'
-category: 'Backend'
-mainCategory: 'programacion'
+tags: ['Backend']
+category: 'programacion'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-11-24

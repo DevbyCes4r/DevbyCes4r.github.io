@@ -4,8 +4,8 @@ description: 'Aprende a aplicar principios éticos en la gestión y análisis de
 icon: '⚖️'
 videoId: 'mzQnuz2VBhY'
 affiliateLink: 'https://edutin.com/sh-10313'
-category: 'Data'
-mainCategory: 'datos'
+tags: ['Data']
+category: 'datos'
 group: 'Analistas de Datos y DBA'
 orderGroup: 1
 publishDate: 2025-10-21

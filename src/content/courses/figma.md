@@ -4,8 +4,8 @@ description: 'Crea interfaces visuales atractivas y prototipos profesionales par
 icon: '🎨'
 videoId: 'HmMY1p0sBCc'
 affiliateLink: 'https://edutin.com/sh-10485'
-category: 'Design'
-mainCategory: 'diseno'
+tags: ['Design']
+category: 'diseno'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-10-23

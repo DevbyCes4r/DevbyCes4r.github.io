@@ -4,8 +4,8 @@ description: 'Aprende a implementar algoritmos de IA utilizando el lenguaje más
 icon: '🐍'
 videoId: 'nEqmSR3nZow'
 affiliateLink: 'https://edutin.com/sh-9911'
-category: 'AI'
-mainCategory: 'inteligencia-artificial'
+tags: ['AI']
+category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'
 orderGroup: 1
 publishDate: 2025-11-08

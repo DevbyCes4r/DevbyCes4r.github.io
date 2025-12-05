@@ -3,8 +3,8 @@ title: 'Introducción a la Inteligencia Artificial'
 description: 'Comprende los fundamentos de la IA, sus aplicaciones y cómo está transformando el mundo.'
 icon: '🤖'
 affiliateLink: 'https://edutin.com/sh-11568'
-category: 'AI'
-mainCategory: 'inteligencia-artificial'
+tags: ['AI']
+category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'
 orderGroup: 1
 publishDate: 2025-11-10

@@ -4,8 +4,8 @@ description: 'Dale estilo, color y vida a tus proyectos web con animaciones, tra
 icon: '🎨'
 videoId: '2feXqelJ8_o'
 affiliateLink: 'https://edutin.com/sh-10490'
-category: 'Frontend'
-mainCategory: 'programacion'
+tags: ['Frontend']
+category: 'programacion'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-10-11

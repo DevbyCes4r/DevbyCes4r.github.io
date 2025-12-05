@@ -4,8 +4,8 @@ description: 'Aprende a estructurar sitios web modernos y optimizados desde cero
 icon: '📄'
 videoId: 'd4E4MuZrKF0'
 affiliateLink: 'https://edutin.com/sh-10487'
-category: 'Frontend'
-mainCategory: 'programacion'
+tags: ['Frontend']
+category: 'programacion'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-10-25

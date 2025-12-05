@@ -4,8 +4,8 @@ description: 'Aprende a gestionar y optimizar grandes volúmenes de datos con SQ
 icon: '🔷'
 videoId: 'OuH1LBfABRQ'
 affiliateLink: 'https://edutin.com/sh-9947'
-category: 'Data'
-mainCategory: 'datos'
+tags: ['Data']
+category: 'datos'
 group: 'Analistas de Datos y DBA'
 orderGroup: 1
 publishDate: 2025-11-28

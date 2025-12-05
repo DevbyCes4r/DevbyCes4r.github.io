@@ -4,8 +4,8 @@ description: 'Desarrolla un dominio casi nativo del idioma: comprende textos com
 icon: '🏆'
 videoId: 'Qrum4nOKPEo'
 affiliateLink: 'https://edutin.com/sh-10475'
-category: 'Nivel C1–C2'
-mainCategory: 'idiomas'
+tags: ['Nivel C1–C2']
+category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'
 orderGroup: 7
 publishDate: 2025-10-29

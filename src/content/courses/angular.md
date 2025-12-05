@@ -4,8 +4,8 @@ description: 'Crea aplicaciones web modernas y escalables con uno de los framewo
 icon: '🅰️'
 videoId: 'DpuILWC-0PI'
 affiliateLink: 'https://edutin.com/sh-10489'
-category: 'Frontend'
-mainCategory: 'programacion'
+tags: ['Frontend']
+category: 'programacion'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-10-01

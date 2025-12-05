@@ -4,8 +4,8 @@ description: 'Domina la IA generativa y aprende a usar ChatGPT para potenciar tu
 icon: '💬'
 videoId: 'WV-0tgqJ1eo'
 affiliateLink: 'https://edutin.com/sh-11566'
-category: 'AI Tools'
-mainCategory: 'inteligencia-artificial'
+tags: ['AI Tools']
+category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'
 orderGroup: 1
 publishDate: 2025-10-07

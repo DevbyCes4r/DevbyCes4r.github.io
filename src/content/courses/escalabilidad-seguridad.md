@@ -3,8 +3,8 @@ title: 'Escalabilidad y Seguridad de Aplicaciones'
 description: 'Protege tus proyectos y aprende a crear aplicaciones seguras, estables y preparadas para crecer.'
 icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10492'
-category: 'DevOps'
-mainCategory: 'devops-cloud'
+tags: ['DevOps']
+category: 'devops-cloud'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-10-19

@@ -3,8 +3,8 @@ title: 'Ciencia de Datos con Python'
 description: 'Domina el arte de extraer conocimiento de los datos para tomar mejores decisiones.'
 icon: '📊'
 affiliateLink: 'https://edutin.com/sh-11567'
-category: 'Data Science'
-mainCategory: 'datos'
+tags: ['Data Science']
+category: 'datos'
 group: 'Inteligencia Artificial'
 orderGroup: 1
 publishDate: 2025-10-09

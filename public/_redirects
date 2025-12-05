@@ -1,0 +1,18 @@
+# Redirects for SEO URL Restructuring
+
+# Categories
+/cursos/categoria/:slug  /cursos/:slug  301
+
+# Study Plans (Legacy) -> Learning Paths
+/cursos/plan/:slug  /rutas/:slug  301
+/planes/:slug       /rutas/:slug  301
+
+# Shortened Course Slugs
+/cursos/desarrollo-web-con-python-y-django/  /cursos/python-django/  301
+/cursos/ciencia-de-datos-con-python/  /cursos/ciencia-datos-python/  301
+/cursos/escalabilidad-y-seguridad-de-aplicaciones/  /cursos/escalabilidad-seguridad/  301
+/cursos/etica-en-el-analisis-de-datos/  /cursos/etica-datos/  301
+/cursos/inteligencia-artificial-con-python/  /cursos/ia-python/  301
+/cursos/introduccion-a-la-inteligencia-artificial/  /cursos/intro-ia/  301
+/cursos/leyes-de-proteccion-de-datos/  /cursos/leyes-datos/  301
+/cursos/programacion-web-con-php-y-laravel/  /cursos/php-laravel/  301

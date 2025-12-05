@@ -4,8 +4,8 @@ description: 'Conoce las normativas internacionales sobre privacidad y aprende a
 icon: '🔒'
 videoId: '-lA_FvAMtMo'
 affiliateLink: 'https://edutin.com/sh-10311'
-category: 'Data'
-mainCategory: 'datos'
+tags: ['Data']
+category: 'datos'
 group: 'Analistas de Datos y DBA'
 orderGroup: 1
 publishDate: 2025-11-14

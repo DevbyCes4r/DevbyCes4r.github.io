@@ -4,8 +4,8 @@ description: 'Aprende a programar con el lenguaje que da interactividad a las p√
 icon: '‚ö°'
 videoId: '2Ch0d2YokVc'
 affiliateLink: 'https://edutin.com/sh-10488'
-category: 'Frontend'
-mainCategory: 'programacion'
+tags: ['Frontend']
+category: 'programacion'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-11-12

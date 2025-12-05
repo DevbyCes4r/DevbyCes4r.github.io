@@ -1,29 +1,32 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import FAQSection from "../../../components/FAQSection.astro";
-import { STUDY_PLANS, type StudyPlanKey } from "../../../lib/studyPlans";
+import FAQSection from "../../components/FAQSection.astro";
+import { getAllRoutes, getRouteBySlug } from "../../lib/routes";
 
 export async function getStaticPaths() {
-    return Object.keys(STUDY_PLANS).map((key) => ({
-        params: { slug: key },
+    const plans = await getAllRoutes();
+    return plans.map((plan) => ({
+        params: { slug: plan.slug },
     }));
 }
 
 const { slug } = Astro.params;
-const plan = STUDY_PLANS[slug as StudyPlanKey];
+const planEntry = await getRouteBySlug(slug);
 
-if (!plan) {
+if (!planEntry) {
     return Astro.redirect("/404");
 }
+
+const plan = planEntry.data;
 
 const allCourses = await getCollection("courses");
 const planCourses = allCourses
     .filter((course) => course.data.group.includes(plan.group))
     .sort((a, b) => a.data.orderGroup - b.data.orderGroup);
 
-const pageTitle = `${plan.title} | Plan de Estudio Gratuito | DevbyCes4r`;
-const pageDescription = `${plan.description} Aprende con ${planCourses.length} cursos gratuitos organizados en un plan de estudio completo.`;
+const pageTitle = `${plan.title} | Ruta de Estudio Gratuita | DevbyCes4r`;
+const pageDescription = `${plan.description} Aprende con ${planCourses.length} cursos gratuitos organizados en una ruta de estudio completa.`;
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -52,9 +55,9 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                     <li aria-hidden="true">/</li>
                     <li>
                         <a
-                            href="/cursos#planes-de-estudio"
+                            href="/cursos#rutas-de-estudio"
                             class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                            >Planes de Estudio</a
+                            >Rutas de Estudio</a
                         >
                     </li>
                     <li aria-hidden="true">/</li>
@@ -79,7 +82,7 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                 </p>
                 <p class="text-slate-500 dark:text-slate-500">
                     {planCourses.length}
-                    {planCourses.length === 1 ? "curso" : "cursos"} en este plan
+                    {planCourses.length === 1 ? "curso" : "cursos"} en esta ruta
                 </p>
             </div>
 
@@ -130,7 +133,7 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                         ></path>
                     </svg>
-                    Cursos del Plan
+                    Cursos de la Ruta
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {
@@ -153,11 +156,12 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                                         <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
                                             {course.data.description}
                                         </p>
-                                        {course.data.category && (
-                                            <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-500/20">
-                                                {course.data.category}
-                                            </span>
-                                        )}
+                                        {course.data.tags &&
+                                            course.data.tags.length > 0 && (
+                                                <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-500/20">
+                                                    {course.data.tags[0]}
+                                                </span>
+                                            )}
                                     </div>
                                 </div>
 
@@ -187,7 +191,7 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                 plan?.faqs?.length > 0 && (
                     <FAQSection
                         faqs={plan.faqs}
-                        title={`Preguntas sobre este plan`}
+                        title={`Preguntas sobre esta ruta`}
                     />
                 )
             }
@@ -202,7 +206,7 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
             "@type": "CollectionPage",
             name: plan.title,
             description: pageDescription,
-            url: `https://devbyces4r.github.io/cursos/plan/${slug}`,
+            url: `https://devbyces4r.github.io/rutas/${slug}`,
             about: {
                 "@type": "LearningResource",
                 educationalLevel: "Beginner to Advanced",

@@ -66,3 +66,33 @@ collections:
       - {label: "Group", name: "group", widget: "list", default: ["Web Developer"]}
       - {label: "Video ID", name: "videoId", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "categories"
+    label: "Categories"
+    folder: "src/content/categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Icon", name: "icon", widget: "string", hint: "Emoji icon"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Order", name: "order", widget: "number", default: 1}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
+
+  - name: "routes"
+    label: "Routes"
+    folder: "src/content/routes"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Icon", name: "icon", widget: "string", hint: "Emoji icon"}
+      - {label: "Group", name: "group", widget: "string"}
+      - {label: "Order", name: "order", widget: "number", default: 1}
+      - {label: "Objectives", name: "objectives", widget: "list"}
+      - {label: "FAQs", name: "faqs", widget: "list", fields: [
+          {label: "Question", name: "question", widget: "string"},
+          {label: "Answer", name: "answer", widget: "text"}
+        ]}
+      - {label: "Body", name: "body", widget: "markdown", required: false}

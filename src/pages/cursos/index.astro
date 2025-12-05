@@ -2,16 +2,17 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import FAQSection from "../../components/FAQSection.astro";
-import { COURSE_CATEGORIES, type CategoryKey } from "../../lib/categories";
-
-import { STUDY_PLANS } from "../../lib/studyPlans";
+import { getAllCategories } from "../../lib/categories";
+import { getAllRoutes } from "../../lib/routes";
 
 const courses = await getCollection("courses");
+const categories = await getAllCategories();
+const routes = await getAllRoutes();
 
 // Group courses by main category
 type CategoryGrouped = Record<string, typeof courses>;
 const coursesByCategory = courses.reduce<CategoryGrouped>((acc, course) => {
-    const category = course.data.mainCategory || "otros";
+    const category = course.data.category || "otros";
     if (!acc[category]) {
         acc[category] = [];
     }
@@ -44,10 +45,7 @@ Object.keys(groupedCourses).forEach((group) => {
     groupedCourses[group].sort((a, b) => a.data.orderGroup - b.data.orderGroup);
 });
 
-// Sort study plans by order
-const sortedPlans = Object.entries(STUDY_PLANS).sort(
-    ([, a], [, b]) => a.order - b.order,
-);
+// Study plans are already sorted by the helper function
 
 // FAQ Data
 const generalFAQs = [
@@ -131,33 +129,31 @@ const pageDescription =
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
                 >
                     {
-                        Object.entries(COURSE_CATEGORIES).map(
-                            ([key, category]) => {
-                                const count =
-                                    coursesByCategory[key]?.length || 0;
-                                if (count === 0) return null;
-                                return (
-                                    <a
-                                        href={`/cursos/categoria/${key}`}
-                                        class="group p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg"
-                                    >
-                                        <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
-                                            {category.icon}
-                                        </div>
-                                        <h3 class="font-bold text-slate-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                            {category.name}
-                                        </h3>
-                                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                                            {category.description}
-                                        </p>
-                                        <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full">
-                                            {count}{" "}
-                                            {count === 1 ? "curso" : "cursos"}
-                                        </span>
-                                    </a>
-                                );
-                            },
-                        )
+                        categories.map((category) => {
+                            const count =
+                                coursesByCategory[category.slug]?.length || 0;
+                            if (count === 0) return null;
+                            return (
+                                <a
+                                    href={`/cursos/${category.slug}`}
+                                    class="group p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg"
+                                >
+                                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                                        {category.data.icon}
+                                    </div>
+                                    <h3 class="font-bold text-slate-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        {category.data.name}
+                                    </h3>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">
+                                        {category.data.description}
+                                    </p>
+                                    <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full">
+                                        {count}{" "}
+                                        {count === 1 ? "curso" : "cursos"}
+                                    </span>
+                                </a>
+                            );
+                        })
                     }
                 </div>
             </div>
@@ -166,23 +162,23 @@ const pageDescription =
 
             <!-- Category Sections -->
             {
-                Object.entries(COURSE_CATEGORIES).map(([key, category]) => {
-                    const categoryCourses = coursesByCategory[key];
+                categories.map((category) => {
+                    const categoryCourses = coursesByCategory[category.slug];
                     if (!categoryCourses || categoryCourses.length === 0)
                         return null;
 
                     return (
-                        <div class="mb-20" id={`categoria-${key}`}>
+                        <div class="mb-20" id={`categoria-${category.slug}`}>
                             <div class="flex items-center gap-4 mb-8">
                                 <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-purple-600 dark:border-purple-500 pl-4 flex items-center gap-3">
                                     <span class="text-3xl">
-                                        {category.icon}
+                                        {category.data.icon}
                                     </span>
                                     <a
-                                        href={`#categoria-${key}`}
+                                        href={`#categoria-${category.slug}`}
                                         class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                                     >
-                                        {category.name}
+                                        {category.data.name}
                                     </a>
                                 </h2>
                                 <div class="h-px bg-slate-200 dark:bg-slate-800 flex-grow" />
@@ -191,7 +187,7 @@ const pageDescription =
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {categoryCourses.map((course) => (
                                     <a
-                                        href={`/cursos/${course.slug}?ref=categoria-${key}`}
+                                        href={`/cursos/${course.slug}?ref=${category.slug}`}
                                         class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
                                     >
                                         <div class="flex items-start gap-4">
@@ -205,11 +201,16 @@ const pageDescription =
                                                 <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
                                                     {course.data.description}
                                                 </p>
-                                                {course.data.category && (
-                                                    <span class="text-xs font-medium px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-500/20">
-                                                        {course.data.category}
-                                                    </span>
-                                                )}
+                                                {course.data.tags &&
+                                                    course.data.tags.length >
+                                                        0 && (
+                                                        <span class="text-xs font-medium px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-500/20">
+                                                            {
+                                                                course.data
+                                                                    .tags[0]
+                                                            }
+                                                        </span>
+                                                    )}
                                             </div>
                                         </div>
 
@@ -237,7 +238,7 @@ const pageDescription =
             }
 
             <!-- Study Plans Section -->
-            <div id="planes-de-estudio" class="mb-12 scroll-mt-24">
+            <div id="rutas-de-estudio" class="mb-12 scroll-mt-24">
                 <div class="flex items-center gap-3 mb-6">
                     <svg
                         class="w-6 h-6 text-blue-600 dark:text-blue-400"
@@ -254,22 +255,22 @@ const pageDescription =
                     <h2
                         class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white"
                     >
-                        Planes de estudio curados
+                        Rutas de estudio
                     </h2>
                 </div>
                 <nav class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {
-                        sortedPlans.map(([slug, plan], index) => {
+                        routes.map((plan, index) => {
                             return (
                                 <a
-                                    href={`/cursos/plan/${slug}`}
+                                    href={`/rutas/${plan.slug}`}
                                     class="group flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500/10 border border-slate-200 dark:border-slate-600 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                                 >
                                     <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg font-bold text-sm group-hover:scale-110 transition-transform">
                                         {index + 1}
                                     </span>
                                     <span class="text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 font-medium transition-colors">
-                                        {plan.title}
+                                        {plan.data.title}
                                     </span>
                                     <svg
                                         class="w-5 h-5 ml-auto text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all"
@@ -292,27 +293,27 @@ const pageDescription =
             </div>
 
             {
-                sortedPlans.map(
-                    ([slug, plan]) =>
-                        groupedCourses[plan.group] && (
-                            <div class="mb-20" id={slug}>
+                routes.map(
+                    (plan) =>
+                        groupedCourses[plan.data.group] && (
+                            <div class="mb-20" id={plan.slug}>
                                 <div class="flex items-center gap-4 mb-8">
                                     <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-blue-600 dark:border-blue-500 pl-4">
                                         <a
-                                            href={`#${slug}`}
+                                            href={`#${plan.slug}`}
                                             class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                         >
-                                            {plan.title}
+                                            {plan.data.title}
                                         </a>
                                     </h2>
                                     <div class="h-px bg-slate-200 dark:bg-slate-800 flex-grow" />
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {groupedCourses[plan.group].map(
+                                    {groupedCourses[plan.data.group].map(
                                         (course) => (
                                             <a
-                                                href={`/cursos/${course.slug}?ref=${slug}`}
+                                                href={`/cursos/${course.slug}?ref=${plan.slug}`}
                                                 class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                                             >
                                                 <div class="flex items-start gap-4">
@@ -332,7 +333,7 @@ const pageDescription =
                                                         <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-500/20">
                                                             {
                                                                 course.data
-                                                                    .category
+                                                                    .tags?.[0]
                                                             }
                                                         </span>
                                                     </div>
@@ -397,12 +398,12 @@ const pageDescription =
         </a>
         <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
         <a
-            href="#planes-de-estudio"
+            href="#rutas-de-estudio"
             class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             title="Ver planes de estudio"
         >
             <span class="text-lg">📚</span>
-            <span class="hidden sm:inline">Planes de Estudio</span>
+            <span class="hidden sm:inline">Rutas de Estudio</span>
         </a>
     </div>
 </BaseLayout>

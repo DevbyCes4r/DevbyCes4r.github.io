@@ -1,0 +1,591 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import FAQSection from "../../components/FAQSection.astro";
+import { getAllCategories } from "../../lib/categories";
+
+export async function getStaticPaths() {
+    const courses = await getCollection("courses");
+    const categories = await getAllCategories();
+
+    const coursePaths = courses.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { type: "course" as const, entry },
+    }));
+
+    const categoryPaths = categories.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { type: "category" as const, entry },
+    }));
+
+    return [...coursePaths, ...categoryPaths];
+}
+
+const { type, entry } = Astro.props;
+
+// --- COURSE LOGIC ---
+let CourseContent: any;
+if (type === "course") {
+    const { Content } = await entry.render();
+    CourseContent = Content;
+}
+
+// --- CATEGORY LOGIC ---
+let categoryCourses: CollectionEntry<"courses">[] = [];
+if (type === "category") {
+    const allCourses = await getCollection("courses");
+    categoryCourses = allCourses
+        .filter((course) => course.data.category === entry.slug)
+        .sort(
+            (a, b) =>
+                b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+        );
+}
+
+// FAQ Data (Shared)
+const generalFAQs = [
+    {
+        question: "¿Cómo funcionan los cursos?",
+        answer: "Los cursos son 100% en línea y puedes hacerlos a tu ritmo. Tienes acceso completo a todas las clases en video, lecturas y actividades desde el momento de tu inscripción gratuita.",
+    },
+    {
+        question: "¿Los cursos son realmente gratuitos?",
+        answer: "Sí, la inscripción es 100% gratuita y te da acceso completo a todas las clases en video, lecturas y actividades. No necesitas pagar nada para aprender.",
+    },
+    {
+        question: "¿Puedo obtener un certificado?",
+        answerHTML: `<p class="mb-3">Sí, puedes obtener un <strong>certificado verificable internacionalmente</strong>. Tienes dos opciones:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Adquirirlo al momento de inscribirte con un <strong>descuento especial</strong></li>
+                <li>Comprarlo al finalizar el curso en su valor normal</li>
+            </ul>`,
+    },
+    {
+        question: "¿Qué incluye la certificación?",
+        answerHTML: `<p class="mb-3">Al certificarte recibirás beneficios adicionales:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Acompañamiento personalizado</strong> del profesor</li>
+                <li><strong>Retroalimentación</strong> de actividades</li>
+                <li><strong>Soporte académico</strong> continuo</li>
+                <li><strong>Constancias de estudio</strong> verificables</li>
+            </ul>`,
+    },
+];
+
+// Page Metadata
+const pageTitle =
+    type === "course"
+        ? `${entry.data.title} | Cursos Gratuitos`
+        : `Cursos de ${entry.data.name} Gratuitos | DevbyCes4r`;
+
+const pageDescription =
+    type === "course"
+        ? entry.data.description
+        : `Aprende ${entry.data.name.toLowerCase()} con nuestros ${categoryCourses.length} cursos gratuitos. ${entry.data.description}. Certificación opcional disponible.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+    {
+        type === "course" ? (
+            /* COURSE LAYOUT */
+            <div class="w-full max-w-5xl py-12">
+                <a
+                    id="back-button"
+                    href="/cursos/"
+                    data-category={entry.data.category}
+                    class="inline-flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white mb-8 transition-colors"
+                >
+                    <svg
+                        class="w-5 h-5 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                        />
+                    </svg>
+                    Volver
+                </a>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 md:p-12 border border-slate-200 dark:border-slate-700 shadow-2xl">
+                    <header class="mb-8">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-6">
+                            <div class="flex-shrink-0">
+                                <div class="text-5xl md:text-6xl p-4 md:p-6 bg-slate-100 dark:bg-slate-700/50 rounded-2xl shadow-inner">
+                                    {entry.data.icon}
+                                </div>
+                            </div>
+                            <div class="flex-grow text-center md:text-left w-full">
+                                <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-3">
+                                    {entry.data.tags && entry.data.tags.map(tag => (
+                                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-500/30">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                    <span class="px-3 py-1 bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded-full text-sm font-medium border border-green-200 dark:border-green-500/30">
+                                        Gratis
+                                    </span>
+                                </div>
+                                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4">
+                                    {entry.data.title}
+                                </h1>
+                                <p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    {entry.data.description}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        {/* Primary CTA Button - More Natural Design */}
+                        <div class="flex justify-center md:justify-start">
+                            <a
+                                href={entry.data.affiliateLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 w-full md:w-auto"
+                            >
+                                <svg
+                                    class="w-5 h-5 transition-transform group-hover:scale-110"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                                Acceder al Curso
+                                <svg
+                                    class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                    </header>
+
+                    {entry.data.videoId && (
+                        <div class="mb-8 md:mb-12 rounded-2xl overflow-hidden shadow-xl aspect-video bg-slate-100 dark:bg-slate-900">
+                            <iframe
+                                class="w-full h-full"
+                                src={`https://www.youtube.com/embed/${entry.data.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                            />
+                        </div>
+                    )}
+
+                    <div class="ai-content-wrapper mb-8 md:mb-12">
+                        <CourseContent />
+                    </div>
+
+                    <div class="flex flex-col items-center gap-4 pt-6 md:pt-8 border-t border-slate-200 dark:border-slate-700">
+                        <a
+                            href={entry.data.affiliateLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 w-full md:w-auto"
+                        >
+                            <svg
+                                class="w-5 h-5 transition-transform group-hover:scale-110"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                                />
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                            Acceder al Curso
+                            <svg
+                                class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                />
+                            </svg>
+                        </a>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 text-center px-4">
+                            Al hacer clic serás redirigido a la plataforma del curso
+                        </p>
+                    </div>
+                </article>
+
+                {/* Sticky Floating CTA Button */}
+                <div id="sticky-cta" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300">
+                    <a
+                        href={entry.data.affiliateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full font-semibold shadow-2xl hover:shadow-blue-500/50 hover:scale-105 transition-all duration-200"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                            />
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                        <span class="hidden sm:inline">Ir al Curso</span>
+                    </a>
+                </div>
+            </div>
+        ) : (
+            /* CATEGORY LAYOUT */
+            <div class="min-h-screen py-10 px-4">
+                <div class="max-w-5xl mx-auto">
+                    {/* Breadcrumbs */}
+                    <nav class="mb-8 text-sm" aria-label="Breadcrumb">
+                        <ol class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                            <li>
+                                <a
+                                    href="/"
+                                    class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                >
+                                    Inicio
+                                </a>
+                            </li>
+                            <li aria-hidden="true">/</li>
+                            <li>
+                                <a
+                                    href="/cursos"
+                                    class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                >
+                                    Cursos
+                                </a>
+                            </li>
+                            <li aria-hidden="true">/</li>
+                            <li>
+                                <a
+                                    href="/cursos#categorias"
+                                    class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >Categorias</a
+                                >
+                            </li>
+                            <li aria-hidden="true">/</li>
+                            <li class="text-slate-900 dark:text-white font-medium">
+                                {entry.data.name}
+                            </li>
+                        </ol>
+                    </nav>
+
+                    {/* Header */}
+                    <div class="text-center mb-12">
+                        <div class="text-6xl mb-4 animate-bounce">
+                            {entry.data.icon}
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 dark:from-purple-400 dark:via-blue-500 dark:to-pink-500 mb-4">
+                            Cursos de {entry.data.name}
+                        </h1>
+                        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-2">
+                            {entry.data.description}
+                        </p>
+                        <p class="text-slate-500 dark:text-slate-500">
+                            {categoryCourses.length}{" "}
+                            {categoryCourses.length === 1 ? "curso" : "cursos"}{" "}
+                            disponibles
+                        </p>
+                    </div>
+
+                    {/* Courses Grid */}
+                    <div class="mb-16">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {categoryCourses.map((course) => (
+                                <a
+                                    href={`/cursos/${course.slug}`}
+                                    class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                                >
+                                    <div class="flex items-start gap-4">
+                                        <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                            {course.data.icon}
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                                {course.data.title}
+                                            </h3>
+                                            <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
+                                                {course.data.description}
+                                            </p>
+                                            {course.data.tags && course.data.tags.length > 0 && (
+                                                <span class="text-xs font-medium px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-500/20">
+                                                    {course.data.tags[0]}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
+                                        <svg
+                                            class="w-6 h-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                            />
+                                        </svg>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* CTA */}
+                    <div class="mt-16 p-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl text-center text-white shadow-lg">
+                        <h2 class="text-2xl font-bold mb-4">
+                            🚀 ¿Listo para comenzar?
+                        </h2>
+                        <p class="mb-6 text-purple-50">
+                            Explora todos nuestros cursos gratuitos
+                        </p>
+                        <a
+                            href="/cursos"
+                            class="inline-block px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
+                        >
+                            Ver Todos los Cursos 📚
+                        </a>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    <FAQSection faqs={generalFAQs} />
+
+    {
+        type === "course" && (
+            <script>
+                // Smart Back Button Logic
+                const backButton = document.getElementById(
+                    "back-button",
+                ) as HTMLAnchorElement;
+
+                if (backButton) {
+                    const urlParams = new URLSearchParams(
+                        window.location.search,
+                    );
+                    const ref = urlParams.get("ref");
+                    const referrer = document.referrer;
+
+                    let backUrl = "/cursos";
+                    let backText = "Volver a Cursos";
+
+                    // Priority 1: Check URL parameter (ref)
+                    if (ref) {
+                        // Known category slugs
+                        const knownCategories = [
+                            "programacion",
+                            "inteligencia-artificial",
+                            "datos",
+                            "idiomas",
+                            "diseno",
+                            "devops-cloud",
+                            "productividad",
+                            "negocios"
+                        ];
+
+                        // Known study plan slugs
+                        const knownStudyPlans = [
+                            "web-developer",
+                            "inteligencia-artificial",
+                            "analista-datos",
+                            "ingles"
+                        ];
+
+                        if (ref.startsWith("categoria-")) {
+                            // From category page (old format)
+                            const categorySlug = ref.replace("categoria-", "");
+                            backUrl = `/cursos#categoria-${categorySlug}`;
+                            backText = "Volver a Categoría";
+                        } else if (knownCategories.includes(ref)) {
+                            // From category section in index
+                            backUrl = `/cursos#categoria-${ref}`;
+                            backText = "Volver a Categoría";
+                        } else if (knownStudyPlans.includes(ref)) {
+                            // From study plan page
+                            backUrl = `/rutas/${ref}`;
+                            backText = "Volver a la Ruta";
+                        } else if (ref.includes("#")) {
+                            // Anchor-based ref
+                            backUrl = `/cursos#${ref}`;
+                        } else {
+                            // Default: assume it's a category anchor
+                            backUrl = `/cursos#${ref}`;
+                        }
+                    }
+                    // Priority 2: Check document.referrer
+                    else if (
+                        referrer &&
+                        referrer.includes(window.location.origin)
+                    ) {
+                        const referrerUrl = new URL(referrer);
+
+                        if (referrerUrl.pathname.includes("/cursos/")) {
+                            // Came from a category page (now under /cursos/) or another course
+                             // This is tricky because /cursos/slug could be a category or course.
+                             // But if they came from there, going back is safe.
+                            backUrl = referrerUrl.pathname;
+                            backText = "Volver";
+                        } else if (referrerUrl.pathname.includes("/rutas/")) {
+                            // Came from a study plan page
+                            backUrl = referrerUrl.pathname;
+                            backText = "Volver a la Ruta";
+                        } else if (referrerUrl.pathname.includes("/blog/")) {
+                            // Came from a blog post
+                            backUrl = referrerUrl.pathname;
+                            backText = "Volver al Blog";
+                        } else if (
+                            referrerUrl.pathname === "/cursos" ||
+                            referrerUrl.pathname === "/cursos/"
+                        ) {
+                            // Came from main courses page
+                            backUrl = "/cursos";
+                            if (referrerUrl.hash) {
+                                backUrl += referrerUrl.hash;
+                            }
+                        }
+                    }
+                    // Priority 3: Default to category page
+                    else {
+                        const categorySlug = backButton.dataset.category;
+                        if (categorySlug) {
+                            backUrl = `/cursos/${categorySlug}`; // Updated to new URL structure
+                            backText = "Volver a Categoría";
+                        } else {
+                            backUrl = "/cursos";
+                            backText = "Volver a Cursos";
+                        }
+                    }
+
+                    // Update button
+                    backButton.href = backUrl;
+                    const textNode = backButton.childNodes[2]; // The text node after SVG
+                    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                        textNode.textContent = backText;
+                    }
+                }
+
+                // Sticky Floating CTA Button Logic
+                const stickyCTA = document.getElementById("sticky-cta");
+                let lastScrollY = window.scrollY;
+                let ticking = false;
+
+                function updateStickyCTA() {
+                    const scrollY = window.scrollY;
+                    const windowHeight = window.innerHeight;
+                    const documentHeight = document.documentElement.scrollHeight;
+                    
+                    // Show button after scrolling down 400px
+                    // Hide when near bottom (within 200px of footer)
+                    if (scrollY > 400 && (documentHeight - scrollY - windowHeight) > 200) {
+                        stickyCTA?.classList.remove("opacity-0", "pointer-events-none");
+                        stickyCTA?.classList.add("opacity-100", "pointer-events-auto");
+                    } else {
+                        stickyCTA?.classList.add("opacity-0", "pointer-events-none");
+                        stickyCTA?.classList.remove("opacity-100", "pointer-events-auto");
+                    }
+                    
+                    lastScrollY = scrollY;
+                    ticking = false;
+                }
+
+                function onScroll() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateStickyCTA);
+                        ticking = true;
+                    }
+                }
+
+                window.addEventListener("scroll", onScroll, { passive: true });
+                
+                // Initial check
+                updateStickyCTA();
+            </script>
+        )
+    }
+
+    {
+        type === "category" && (
+            <script
+                type="application/ld+json"
+                set:html={JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "CollectionPage",
+                    name: `Cursos de ${entry.data.name}`,
+                    description: pageDescription,
+                    url: `https://devbyces4r.github.io/cursos/${entry.slug}`,
+                    mainEntity: {
+                        "@type": "ItemList",
+                        itemListElement: categoryCourses.map(
+                            (course, index) => ({
+                                "@type": "Course",
+                                position: index + 1,
+                                name: course.data.title,
+                                description: course.data.description,
+                                url: `https://devbyces4r.github.io/cursos/${course.slug}`,
+                                provider: {
+                                    "@type": "Organization",
+                                    name: "DevbyCes4r",
+                                },
+                            }),
+                        ),
+                    },
+                })}
+            />
+        )
+    }
+</BaseLayout>
