@@ -2,6 +2,7 @@
 title: 'MongoDB'
 description: 'Aprende a gestionar datos no estructurados con MongoDB y diseña bases de datos escalables, rápidas y eficientes para proyectos de análisis y desarrollo moderno.'
 icon: '🍃'
+videoId: 'XRSB20n971Q'
 affiliateLink: 'https://edutin.com/sh-10318'
 category: 'Data'
 mainCategory: 'datos'

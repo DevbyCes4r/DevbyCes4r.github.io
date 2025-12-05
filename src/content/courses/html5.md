@@ -2,6 +2,7 @@
 title: 'HTML5'
 description: 'Aprende a estructurar sitios web modernos y optimizados desde cero.'
 icon: '📄'
+videoId: 'd4E4MuZrKF0'
 affiliateLink: 'https://edutin.com/sh-10487'
 category: 'Frontend'
 mainCategory: 'programacion'

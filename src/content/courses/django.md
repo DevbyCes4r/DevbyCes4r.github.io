@@ -2,6 +2,7 @@
 title: 'Django'
 description: 'Construye sitios web profesionales con Django, uno de los frameworks más usados por desarrolladores.'
 icon: '🎯'
+videoId: 'mfpVC6Xw7UU'
 affiliateLink: 'https://edutin.com/sh-10491'
 category: 'Backend'
 mainCategory: 'programacion'

@@ -2,6 +2,7 @@
 title: 'ChatGPT'
 description: 'Domina la IA generativa y aprende a usar ChatGPT para potenciar tu productividad.'
 icon: '💬'
+videoId: 'WV-0tgqJ1eo'
 affiliateLink: 'https://edutin.com/sh-11566'
 category: 'AI Tools'
 mainCategory: 'inteligencia-artificial'

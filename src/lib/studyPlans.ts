@@ -82,10 +82,10 @@ export const STUDY_PLANS = {
         ]
     },
     'ingles': {
-        title: 'Ruta de Ingles desde principiante a avanzado',
+        title: 'Ingles desde principiante a avanzado',
         description: 'Aprende inglés desde nivel básico hasta avanzado con este plan estructurado. Mejora tu gramática, vocabulario y conversación.',
         icon: '🌐',
-        group: 'Ruta Completa Ingles Cero a C1',
+        group: 'Ingles desde principiante a avanzado',
         order: 4,
         objectives: [
             'Dominar gramática y vocabulario desde A1 hasta C2',

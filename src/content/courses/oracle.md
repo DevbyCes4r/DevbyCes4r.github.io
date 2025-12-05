@@ -2,6 +2,7 @@
 title: 'Oracle'
 description: 'Aprende a administrar y optimizar bases de datos empresariales con Oracle, garantizando seguridad, eficiencia y análisis avanzado para decisiones estratégicas basadas en datos.'
 icon: '🔴'
+videoId: 'zmiHkdOCqoY'
 affiliateLink: 'https://edutin.com/sh-10308'
 category: 'Data'
 mainCategory: 'datos'

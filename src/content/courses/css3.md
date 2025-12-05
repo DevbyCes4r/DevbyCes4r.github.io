@@ -2,6 +2,7 @@
 title: 'CSS3'
 description: 'Dale estilo, color y vida a tus proyectos web con animaciones, transiciones y diseños responsivos.'
 icon: '🎨'
+videoId: '2feXqelJ8_o'
 affiliateLink: 'https://edutin.com/sh-10490'
 category: 'Frontend'
 mainCategory: 'programacion'

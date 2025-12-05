@@ -2,6 +2,7 @@
 title: 'Angular'
 description: 'Crea aplicaciones web modernas y escalables con uno de los frameworks más potentes.'
 icon: '🅰️'
+videoId: 'DpuILWC-0PI'
 affiliateLink: 'https://edutin.com/sh-10489'
 category: 'Frontend'
 mainCategory: 'programacion'

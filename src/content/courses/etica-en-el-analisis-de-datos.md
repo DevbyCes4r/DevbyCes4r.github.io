@@ -2,6 +2,7 @@
 title: 'Ética en el análisis de datos'
 description: 'Aprende a aplicar principios éticos en la gestión y análisis de datos, garantizando privacidad, transparencia y responsabilidad en cada decisión basada en información.'
 icon: '⚖️'
+videoId: 'mzQnuz2VBhY'
 affiliateLink: 'https://edutin.com/sh-10313'
 category: 'Data'
 mainCategory: 'datos'

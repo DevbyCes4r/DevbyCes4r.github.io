@@ -6,7 +6,7 @@ videoId: 'f47AoaPDHiQ'
 affiliateLink: 'https://edutin.com/sh-10472'
 category: 'Nivel B1'
 mainCategory: 'idiomas'
-group: 'Ruta Completa Ingles Cero a C1'
+group: 'Ingles desde principiante a avanzado'
 orderGroup: 4
 publishDate: 2025-10-31
 ---
