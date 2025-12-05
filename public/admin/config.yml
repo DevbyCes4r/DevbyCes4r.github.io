@@ -2,7 +2,8 @@ backend:
   name: github
   repo: DevbyCes4r/DevbyCes4r.github.io
   branch: main
-  base_url: https://devbyces4r.netlify.app
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 # Enable local development mode (Uncomment for local dev)
 # local_backend: true
