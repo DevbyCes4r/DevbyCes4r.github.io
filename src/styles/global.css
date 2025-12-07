@@ -164,7 +164,7 @@
 /* Headings */
 .ai-content-wrapper h2 {
   @apply text-3xl font-bold mt-12 mb-6 text-slate-900 dark:text-white;
-  @apply border-b-2 border-blue-200 dark:border-blue-900 pb-3;
+  @apply pb-3;
   @apply bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400;
   @apply bg-clip-text text-transparent;
 }
@@ -197,11 +197,40 @@
 }
 
 .ai-content-wrapper ol {
-  @apply list-decimal list-inside;
+  @apply list-none counter-reset-item space-y-8 pl-4 relative my-8;
+  counter-reset: item;
+}
+
+/* Timeline line */
+.ai-content-wrapper ol::before {
+  content: "";
+  @apply absolute left-4 top-0 bottom-0 w-0.5 bg-blue-100 dark:bg-slate-700/50;
+  @apply -translate-x-1/2 z-0;
 }
 
 .ai-content-wrapper ol li {
-  @apply text-slate-700 dark:text-slate-300 pl-2;
+  @apply relative pl-8 text-slate-700 dark:text-slate-300;
+  counter-increment: item;
+}
+
+.ai-content-wrapper ol li::before {
+  content: counter(item);
+  @apply absolute left-0 top-1 flex items-center justify-center;
+  @apply w-8 h-8 rounded-full text-sm font-bold z-10;
+  @apply bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400;
+  @apply border-2 border-blue-500 dark:border-blue-400;
+  @apply shadow-sm;
+  /* Centering relative to the line */
+  @apply -translate-x-1/2;
+}
+
+.ai-content-wrapper ol li p {
+  @apply mt-0 mb-2;
+}
+
+/* Enhance strong tags inside steps */
+.ai-content-wrapper ol li strong {
+  @apply text-slate-900 dark:text-white block text-lg mb-1;
 }
 
 .ai-content-wrapper li>ul,
