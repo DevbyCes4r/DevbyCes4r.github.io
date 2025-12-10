@@ -6,7 +6,7 @@ group: Web Developer
 order: 1
 objectives:
   - Dominar HTML, CSS y JavaScript desde cero
-  - Aprender frameworks modernos como React y Vue
+  - Aprender frameworks modernos como Angular y Django
   - Construir aplicaciones web completas y funcionales
   - Trabajar con bases de datos y APIs
 faqs:

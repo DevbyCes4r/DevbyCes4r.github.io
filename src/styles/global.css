@@ -197,7 +197,7 @@
 }
 
 .ai-content-wrapper ol {
-  @apply list-none counter-reset-item space-y-8 pl-4 relative my-8;
+  @apply list-none space-y-8 pl-4 relative my-8;
   counter-reset: item;
 }
 

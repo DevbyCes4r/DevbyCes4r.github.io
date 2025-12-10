@@ -139,16 +139,16 @@ const pageDescription =
                             </div>
                         </div>
                         
-                        {/* Primary CTA Button - More Natural Design */}
-                        <div class="flex justify-center md:justify-start">
+                        {/* Primary CTA Button - Apple-Inspired Design */}
+                        <div class="flex justify-center md:justify-end">
                             <a
                                 href={entry.data.affiliateLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 w-full md:w-auto"
+                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto"
                             >
                                 <svg
-                                    class="w-5 h-5 transition-transform group-hover:scale-110"
+                                    class="w-5 h-5 transition-transform group-hover:scale-110 duration-300"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -166,9 +166,9 @@ const pageDescription =
                                         d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                     />
                                 </svg>
-                                Acceder al Curso
+                                <span>Acceder al Curso</span>
                                 <svg
-                                    class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                                    class="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -177,15 +177,86 @@ const pageDescription =
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                                     />
                                 </svg>
                             </a>
                         </div>
+                        
+                        <style>
+                            /* Apple-Inspired CTA Button */
+                            .apple-cta-btn {
+                                position: relative;
+                                overflow: hidden;
+                            }
+                            
+                            .apple-cta-btn::before {
+                                content: '';
+                                position: absolute;
+                                inset: 0;
+                                background: linear-gradient(
+                                    135deg,
+                                    rgba(255, 255, 255, 0.1) 0%,
+                                    rgba(255, 255, 255, 0) 50%,
+                                    rgba(255, 255, 255, 0.1) 100%
+                                );
+                                opacity: 0;
+                                transition: opacity 0.3s ease;
+                            }
+                            
+                            .apple-cta-btn:hover::before {
+                                opacity: 1;
+                            }
+                            
+                            .apple-cta-btn:hover {
+                                transform: translateY(-1px);
+                                box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
+                            }
+                            
+                            .apple-cta-btn:active {
+                                transform: translateY(0);
+                                box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2), 0 4px 6px -2px rgba(59, 130, 246, 0.1);
+                            }
+                            
+                            /* Sticky Floating Button */
+                            .sticky-floating-btn {
+                                position: relative;
+                                overflow: hidden;
+                                backdrop-filter: blur(10px);
+                                -webkit-backdrop-filter: blur(10px);
+                            }
+                            
+                            .sticky-floating-btn::before {
+                                content: '';
+                                position: absolute;
+                                inset: 0;
+                                background: linear-gradient(
+                                    135deg,
+                                    rgba(255, 255, 255, 0.15) 0%,
+                                    rgba(255, 255, 255, 0) 50%,
+                                    rgba(255, 255, 255, 0.15) 100%
+                                );
+                                opacity: 0;
+                                transition: opacity 0.3s ease;
+                            }
+                            
+                            .sticky-floating-btn:hover::before {
+                                opacity: 1;
+                            }
+                            
+                            .sticky-floating-btn:hover {
+                                transform: translateY(-2px) scale(1.02);
+                                box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3), 0 10px 10px -5px rgba(59, 130, 246, 0.2);
+                            }
+                            
+                            .sticky-floating-btn:active {
+                                transform: translateY(0) scale(0.98);
+                            }
+                        </style>
                     </header>
 
                     {entry.data.videoId && (
-                        <div class="mb-8 md:mb-12 rounded-2xl overflow-hidden shadow-xl aspect-video bg-slate-100 dark:bg-slate-900">
+                        <div class="mb-8 md:mb-12 rounded-2xl overflow-hidden shadow-xl aspect-video bg-slate-100 dark:bg-slate-900 relative">
                             <iframe
                                 class="w-full h-full"
                                 src={`https://www.youtube.com/embed/${entry.data.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
@@ -195,70 +266,45 @@ const pageDescription =
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen
                             />
+                            
+                            {/* Audio Reminder Notification */}
+                            <div id="audio-reminder" class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900/90 dark:bg-slate-800/90 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-medium transition-opacity duration-500 pointer-events-none">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                </svg>
+                                <span>Activa el audio en la barra del video</span>
+                            </div>
+                            
+                            <script>
+                                // Fade out audio reminder after 5 seconds
+                                const audioReminder = document.getElementById('audio-reminder');
+                                if (audioReminder) {
+                                    setTimeout(() => {
+                                        audioReminder.style.opacity = '0';
+                                        setTimeout(() => {
+                                            audioReminder.style.display = 'none';
+                                        }, 500);
+                                    }, 5000);
+                                }
+                            </script>
                         </div>
                     )}
 
                     <div class="ai-content-wrapper mb-8 md:mb-12">
                         <CourseContent />
                     </div>
-
-                    <div class="flex flex-col items-center gap-4 pt-6 md:pt-8 border-t border-slate-200 dark:border-slate-700">
-                        <a
-                            href={entry.data.affiliateLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 w-full md:w-auto"
-                        >
-                            <svg
-                                class="w-5 h-5 transition-transform group-hover:scale-110"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                                />
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
-                            Acceder al Curso
-                            <svg
-                                class="w-5 h-5 transition-transform group-hover:translate-x-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                />
-                            </svg>
-                        </a>
-                        <p class="text-sm text-slate-500 dark:text-slate-500 text-center px-4">
-                            Al hacer clic serás redirigido a la plataforma del curso
-                        </p>
-                    </div>
                 </article>
 
-                {/* Sticky Floating CTA Button */}
+                {/* Sticky Floating CTA Button - Apple-Inspired Design */}
                 <div id="sticky-cta" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300">
                     <a
                         href={entry.data.affiliateLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="group flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full font-semibold shadow-2xl hover:shadow-blue-500/50 hover:scale-105 transition-all duration-200"
+                        class="sticky-floating-btn group flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-full font-semibold shadow-xl transition-all duration-300"
                     >
                         <svg
-                            class="w-5 h-5"
+                            class="w-5 h-5 transition-transform group-hover:scale-110 duration-300"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -422,7 +468,6 @@ const pageDescription =
                     const referrer = document.referrer;
 
                     let backUrl = "/cursos";
-                    let backText = "Volver a Cursos";
 
                     // Priority 1: Check URL parameter (ref)
                     if (ref) {
@@ -450,15 +495,12 @@ const pageDescription =
                             // From category page (old format)
                             const categorySlug = ref.replace("categoria-", "");
                             backUrl = `/cursos#categoria-${categorySlug}`;
-                            backText = "Volver a Categoría";
                         } else if (knownCategories.includes(ref)) {
                             // From category section in index
                             backUrl = `/cursos#categoria-${ref}`;
-                            backText = "Volver a Categoría";
                         } else if (knownStudyPlans.includes(ref)) {
                             // From study plan page
                             backUrl = `/rutas/${ref}`;
-                            backText = "Volver a la Ruta";
                         } else if (ref.includes("#")) {
                             // Anchor-based ref
                             backUrl = `/cursos#${ref}`;
@@ -479,15 +521,12 @@ const pageDescription =
                              // This is tricky because /cursos/slug could be a category or course.
                              // But if they came from there, going back is safe.
                             backUrl = referrerUrl.pathname;
-                            backText = "Volver";
                         } else if (referrerUrl.pathname.includes("/rutas/")) {
                             // Came from a study plan page
                             backUrl = referrerUrl.pathname;
-                            backText = "Volver a la Ruta";
                         } else if (referrerUrl.pathname.includes("/blog/")) {
                             // Came from a blog post
                             backUrl = referrerUrl.pathname;
-                            backText = "Volver al Blog";
                         } else if (
                             referrerUrl.pathname === "/cursos" ||
                             referrerUrl.pathname === "/cursos/"
@@ -503,20 +542,14 @@ const pageDescription =
                     else {
                         const categorySlug = backButton.dataset.category;
                         if (categorySlug) {
-                            backUrl = `/cursos/${categorySlug}`; // Updated to new URL structure
-                            backText = "Volver a Categoría";
+                            backUrl = `/cursos/${categorySlug}`;
                         } else {
                             backUrl = "/cursos";
-                            backText = "Volver a Cursos";
                         }
                     }
 
                     // Update button
                     backButton.href = backUrl;
-                    const textNode = backButton.childNodes[2]; // The text node after SVG
-                    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-                        textNode.textContent = backText;
-                    }
                 }
 
                 // Sticky Floating CTA Button Logic
@@ -530,8 +563,8 @@ const pageDescription =
                     const documentHeight = document.documentElement.scrollHeight;
                     
                     // Show button after scrolling down 400px
-                    // Hide when near bottom (within 200px of footer)
-                    if (scrollY > 400 && (documentHeight - scrollY - windowHeight) > 200) {
+                    // Hide when near bottom (within 50px of footer)
+                    if (scrollY > 400 && (documentHeight - scrollY - windowHeight) > 50) {
                         stickyCTA?.classList.remove("opacity-0", "pointer-events-none");
                         stickyCTA?.classList.add("opacity-100", "pointer-events-auto");
                     } else {
