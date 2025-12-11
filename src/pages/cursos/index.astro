@@ -95,12 +95,89 @@ const pageDescription =
                     Cursos Gratuitos
                 </h1>
                 <p
-                    class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                    class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8"
                 >
                     Aprende programación, inteligencia artificial, análisis de
                     datos, idiomas y más. Cursos 100% gratuitos con opción de
                     certificación.
                 </p>
+
+                <!-- Search Filter -->
+                <div
+                    id="buscar"
+                    class="max-w-2xl mx-auto relative z-30 scroll-mt-24"
+                >
+                    <div class="relative group">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                        >
+                        </div>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                id="courseSearch"
+                                placeholder="Buscar cursos por título, descripción o etiquetas..."
+                                class="w-full px-6 py-4 pl-12 pr-12 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border-2 border-slate-200 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:border-purple-500 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 transition-all duration-300 text-base shadow-lg"
+                            />
+                            <svg
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500 pointer-events-none"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                ></path>
+                            </svg>
+                            <button
+                                id="clearSearch"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-all opacity-0 invisible"
+                                aria-label="Limpiar búsqueda"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Results Container -->
+            <div id="searchResultsSection" class="mb-12 hidden">
+                <div
+                    id="searchResultsHeader"
+                    class="flex items-center gap-3 mb-8"
+                >
+                    <h2
+                        class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white"
+                    >
+                        ✨ <span id="resultsCount">0</span> cursos encontrados
+                    </h2>
+                </div>
+                <div
+                    id="searchResultsGrid"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
+                    <!-- Results will be injected here -->
+                </div>
+                <div id="noResults" class="hidden text-center py-10">
+                    <p class="text-xl text-slate-600 dark:text-slate-400">
+                        No se encontraron cursos que coincidan con tu búsqueda
+                    </p>
+                </div>
             </div>
 
             <!-- Category Navigation -->
@@ -389,6 +466,15 @@ const pageDescription =
         class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 p-1.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-full shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 transition-all hover:scale-105"
     >
         <a
+            href="#buscar"
+            class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            title="Ver categorías"
+        >
+            <span class="text-lg">🔍</span>
+            <span class="hidden sm:inline">Buscar</span>
+        </a>
+        <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
+        <a
             href="#categorias"
             class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             title="Ver categorías"
@@ -406,4 +492,154 @@ const pageDescription =
             <span class="hidden sm:inline">Rutas de Estudio</span>
         </a>
     </div>
+
+    <script>
+        // Course search/filter functionality
+        const searchInput = document.getElementById(
+            "courseSearch",
+        ) as HTMLInputElement;
+        const searchResultsSection = document.getElementById(
+            "searchResultsSection",
+        ) as HTMLElement;
+        const searchResultsHeader = document.getElementById(
+            "searchResultsHeader",
+        ) as HTMLElement;
+        const searchResultsGrid = document.getElementById(
+            "searchResultsGrid",
+        ) as HTMLElement;
+        const noResults = document.getElementById("noResults") as HTMLElement;
+        const resultsCount = document.getElementById(
+            "resultsCount",
+        ) as HTMLElement;
+        const clearButton = document.getElementById(
+            "clearSearch",
+        ) as HTMLButtonElement;
+
+        // Get all course cards and their parent sections
+        // Filter out duplicates based on course slug
+        const distinctCourses = new Set();
+        const courseCards = Array.from(
+            document.querySelectorAll(
+                'a[href^="/cursos/"][class*="group relative block"]',
+            ),
+        ).filter((card) => {
+            const href = card.getAttribute("href")?.split("?")[0];
+            if (!href || distinctCourses.has(href)) {
+                return false;
+            }
+            distinctCourses.add(href);
+            return true;
+        });
+
+        // Debounce function for performance
+        function debounce(func: Function, wait: number) {
+            let timeout: ReturnType<typeof setTimeout>;
+            return function executedFunction(...args: any[]) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Scroll to search element on focus
+        searchInput.addEventListener("focus", () => {
+            setTimeout(() => {
+                const searchElement = document.getElementById("buscar");
+                if (searchElement) {
+                    searchElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                }
+            }, 100);
+        });
+
+        // Clear search functionality
+        clearButton.addEventListener("click", () => {
+            searchInput.value = "";
+            updateSearchUI();
+            searchInput.focus();
+        });
+
+        // Helper to normalize text (remove accents and lower case)
+        function normalizeText(text: string) {
+            return text
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function updateSearchUI() {
+            const searchTerm = normalizeText(searchInput.value.trim());
+
+            // Toggle clear button visibility
+            if (searchTerm) {
+                clearButton.classList.remove("opacity-0", "invisible");
+            } else {
+                clearButton.classList.add("opacity-0", "invisible");
+                // Hide results section when search is empty
+                searchResultsSection.classList.add("hidden");
+                searchResultsGrid.innerHTML = "";
+                return;
+            }
+
+            // Perform search
+            const matchedCards = courseCards.filter((card) => {
+                const cardElement = card as HTMLElement;
+                const title = normalizeText(
+                    cardElement.querySelector("h3")?.textContent || "",
+                );
+                const description = normalizeText(
+                    cardElement.querySelector("p")?.textContent || "",
+                );
+                const tag = normalizeText(
+                    cardElement.querySelector(
+                        'span[class*="bg-purple-100"], span[class*="bg-blue-100"]',
+                    )?.textContent || "",
+                );
+
+                return (
+                    title.includes(searchTerm) ||
+                    description.includes(searchTerm) ||
+                    tag.includes(searchTerm)
+                );
+            });
+
+            // Show results section
+            searchResultsSection.classList.remove("hidden");
+            searchResultsGrid.innerHTML = "";
+
+            if (matchedCards.length > 0) {
+                searchResultsHeader.classList.remove("hidden");
+                noResults.classList.add("hidden");
+                resultsCount.textContent = matchedCards.length.toString();
+
+                // Clone and append matched cards
+                matchedCards.forEach((card) => {
+                    const clone = card.cloneNode(true) as HTMLElement;
+                    // Reset opacity and display styles on clone
+                    clone.style.opacity = "0";
+                    clone.style.display = "";
+                    searchResultsGrid.appendChild(clone);
+
+                    // Animate in
+                    requestAnimationFrame(() => {
+                        clone.style.transition =
+                            "opacity 0.3s ease-out, transform 0.3s ease-out";
+                        clone.style.opacity = "1";
+                    });
+                });
+            } else {
+                searchResultsHeader.classList.add("hidden");
+                noResults.classList.remove("hidden");
+                resultsCount.textContent = "0";
+            }
+        }
+
+        // Add event listener with debouncing
+        searchInput.addEventListener("input", debounce(updateSearchUI, 300));
+    </script>
 </BaseLayout>
