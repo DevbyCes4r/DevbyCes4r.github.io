@@ -5,6 +5,7 @@ icon: '📊'
 videoId: 'Feib3mkzFlA'
 coverImage: ''
 affiliateLink: 'https://edutin.com/sh-9738'
+documentUrl: '/documents/gestion-de-proyectos.pdf'
 tags: ['Gestión', 'Metodologías Ágiles']
 category: 'negocios'
 group: 'Negocios y Emprendimiento'

@@ -35,6 +35,9 @@ const coursesCollection = defineCollection({
         icon: z.string(),
         affiliateLink: z.string(),
         price: z.string().optional(),
+        // Optional cover image for the course page and social sharing
+        coverImage: z.string().optional(),
+        documentUrl: z.string().optional(),
         // Main category for broad classification
         category: z.enum([
             'programacion',
@@ -58,8 +61,6 @@ const coursesCollection = defineCollection({
         orderGroup: z.number().default(1),
         // Date for sorting in category lists
         publishDate: z.date().default(() => new Date()),
-        // Optional cover image for the course page and social sharing
-        coverImage: z.string().optional(),
     }),
 });
 
