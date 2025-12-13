@@ -58,6 +58,8 @@ const coursesCollection = defineCollection({
         orderGroup: z.number().default(1),
         // Date for sorting in category lists
         publishDate: z.date().default(() => new Date()),
+        // Optional cover image for the course page and social sharing
+        coverImage: z.string().optional(),
     }),
 });
 
