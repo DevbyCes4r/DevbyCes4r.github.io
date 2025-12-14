@@ -1,5 +1,5 @@
 ---
-title: 'Leyes de protección de datos'
+title: 'Curso de Leyes de protección de datos'
 description: 'Conoce las normativas internacionales sobre privacidad y aprende a implementar políticas que aseguren el cumplimiento legal y la protección de la información en entornos digitales.'
 icon: '🔒'
 videoId: '-lA_FvAMtMo'

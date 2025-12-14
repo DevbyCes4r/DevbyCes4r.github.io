@@ -1,5 +1,5 @@
 ---
-title: 'Escalabilidad y Seguridad de Aplicaciones'
+title: 'Curso de Escalabilidad y Seguridad de Aplicaciones'
 description: 'Protege tus proyectos y aprende a crear aplicaciones seguras, estables y preparadas para crecer.'
 icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10492'

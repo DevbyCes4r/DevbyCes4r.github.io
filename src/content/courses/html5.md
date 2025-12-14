@@ -1,5 +1,5 @@
 ---
-title: 'HTML5'
+title: 'Curso de HTML5'
 description: 'Aprende a estructurar sitios web modernos y optimizados desde cero.'
 icon: '📄'
 videoId: 'd4E4MuZrKF0'

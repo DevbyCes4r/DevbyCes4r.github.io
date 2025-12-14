@@ -1,5 +1,5 @@
 ---
-title: 'Figma'
+title: 'Curso de Figma'
 description: 'Crea interfaces visuales atractivas y prototipos profesionales para páginas web o aplicaciones.'
 icon: '🎨'
 videoId: 'HmMY1p0sBCc'

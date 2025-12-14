@@ -1,5 +1,5 @@
 ---
-title: 'Inglés Básico A1'
+title: 'Curso de Inglés Básico A1'
 description: 'Desarrolla habilidades básicas de lectura, escritura y conversación para desenvolverte en contextos sencillos.'
 icon: '🔤'
 videoId: 'FoT7c62Vios'

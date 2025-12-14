@@ -1,5 +1,5 @@
 ---
-title: 'Inglés Intermedio B1+'
+title: 'Curso de Inglés Intermedio B1+'
 description: 'Domina estructuras gramaticales más complejas y amplía tu vocabulario para comunicarte con claridad en entornos laborales o académicos.'
 icon: '💼'
 videoId: '_i_RzYoKpxc'

@@ -1,5 +1,5 @@
 ---
-title: 'JavaScript'
+title: 'Curso de JavaScript'
 description: 'Aprende a programar con el lenguaje que da interactividad a las páginas web y construye proyectos dinámicos.'
 icon: '⚡'
 videoId: '2Ch0d2YokVc'

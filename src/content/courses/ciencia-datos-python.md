@@ -1,5 +1,5 @@
 ---
-title: 'Ciencia de Datos con Python'
+title: 'Curso de Ciencia de Datos con Python'
 description: 'Domina el arte de extraer conocimiento de los datos para tomar mejores decisiones.'
 icon: '📊'
 affiliateLink: 'https://edutin.com/sh-11567'

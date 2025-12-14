@@ -1,5 +1,5 @@
 ---
-title: 'CSS3'
+title: 'Curso de CSS3'
 description: 'Dale estilo, color y vida a tus proyectos web con animaciones, transiciones y diseños responsivos.'
 icon: '🎨'
 videoId: '2feXqelJ8_o'

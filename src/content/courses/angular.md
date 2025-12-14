@@ -1,5 +1,5 @@
 ---
-title: 'Angular'
+title: 'Curso de Angular'
 description: 'Crea aplicaciones web modernas y escalables con uno de los frameworks más potentes.'
 icon: '🅰️'
 videoId: 'DpuILWC-0PI'

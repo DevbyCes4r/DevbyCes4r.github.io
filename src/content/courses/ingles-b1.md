@@ -1,5 +1,5 @@
 ---
-title: 'Inglés B1'
+title: 'Curso de Inglés B1'
 description: 'Mejora tu gramática, comprensión lectora y expresión oral para mantener conversaciones más fluidas y naturales.'
 icon: '🇬🇧'
 videoId: 'f47AoaPDHiQ'

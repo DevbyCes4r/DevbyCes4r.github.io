@@ -1,5 +1,5 @@
 ---
-title: 'Ética en el análisis de datos'
+title: 'Curso de Ética en el análisis de datos'
 description: 'Aprende a aplicar principios éticos en la gestión y análisis de datos, garantizando privacidad, transparencia y responsabilidad en cada decisión basada en información.'
 icon: '⚖️'
 videoId: 'mzQnuz2VBhY'

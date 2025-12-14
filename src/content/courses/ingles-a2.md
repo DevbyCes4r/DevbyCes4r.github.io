@@ -1,5 +1,5 @@
 ---
-title: 'Inglés A2'
+title: 'Curso de Inglés A2'
 description: 'Amplía tu vocabulario y comprensión auditiva para hablar con mayor confianza sobre temas familiares o personales.'
 icon: '🗣️'
 videoId: 'OcfvOAAk8-8'

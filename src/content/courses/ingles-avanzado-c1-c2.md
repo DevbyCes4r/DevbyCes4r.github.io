@@ -1,5 +1,5 @@
 ---
-title: 'Inglés Avanzado C1–C2'
+title: 'Curso de Inglés Avanzado C1–C2'
 description: 'Desarrolla un dominio casi nativo del idioma: comprende textos complejos, expresa ideas con precisión y mejora tu fluidez oral y escrita.'
 icon: '🏆'
 videoId: 'Qrum4nOKPEo'

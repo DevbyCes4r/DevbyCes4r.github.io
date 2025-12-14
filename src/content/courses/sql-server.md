@@ -1,5 +1,5 @@
 ---
-title: 'SQL Server'
+title: 'Curso de SQL Server'
 description: 'Aprende a gestionar y optimizar grandes volúmenes de datos con SQL Server, creando consultas avanzadas y soluciones que impulsen decisiones empresariales basadas en datos.'
 icon: '🔷'
 videoId: 'OuH1LBfABRQ'

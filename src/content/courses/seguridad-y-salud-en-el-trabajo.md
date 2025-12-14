@@ -1,5 +1,5 @@
 ---
-title: 'Seguridad y Salud en el Trabajo'
+title: 'Curso de Seguridad y Salud en el Trabajo'
 description: 'Aprende normativas internacionales y buenas prácticas para crear ambientes laborales seguros. Implementa protocolos de prevención de riesgos y bienestar ocupacional en tu organización.'
 icon: '🛡️'
 videoId: 'DGXq5Q46rn0'

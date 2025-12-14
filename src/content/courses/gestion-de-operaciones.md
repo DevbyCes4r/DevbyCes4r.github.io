@@ -1,5 +1,5 @@
 ---
-title: 'Gestión de Operaciones'
+title: 'Curso de Gestión de Operaciones'
 description: 'Optimiza procesos operativos, cadenas de suministro y eficiencia productiva. Aprende técnicas de mejora continua y producción esbelta para maximizar rentabilidad empresarial.'
 icon: '⚙️'
 videoId: '-YQ-E2HGS-M'

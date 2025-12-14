@@ -1,5 +1,5 @@
 ---
-title: 'Gestión de Calidad'
+title: 'Curso de Gestión de Calidad'
 description: 'Implementa sistemas de calidad ISO, auditoría y mejora continua en tu organización. Aprende estándares internacionales para garantizar excelencia operativa y satisfacción del cliente.'
 icon: '✅'
 videoId: 'SI1WKRqYVcA'

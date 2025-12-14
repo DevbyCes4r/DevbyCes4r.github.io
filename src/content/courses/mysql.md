@@ -1,5 +1,5 @@
 ---
-title: 'MySQL'
+title: 'Curso de MySQL'
 description: 'Domina una de las bases de datos más usadas en el mundo: aprende a diseñar, gestionar y optimizar sistemas de información con MySQL para potenciar el análisis de datos.'
 icon: '🐬'
 videoId: 'kg4KfFfGNGA'

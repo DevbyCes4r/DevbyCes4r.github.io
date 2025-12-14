@@ -1,5 +1,5 @@
 ---
-title: 'Gestión Ambiental'
+title: 'Curso de Gestión Ambiental'
 description: 'Implementa sistemas de gestión ambiental sostenibles y certificaciones ISO 14001. Aprende prácticas ecológicas para reducir impacto ambiental y mejorar responsabilidad corporativa.'
 icon: '🌱'
 videoId: 'BoNzotFt4XU'

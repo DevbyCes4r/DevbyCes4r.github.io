@@ -1,5 +1,5 @@
 ---
-title: 'Introducción a la Inteligencia Artificial'
+title: 'Curso de Introducción a la Inteligencia Artificial'
 description: 'Comprende los fundamentos de la IA, sus aplicaciones y cómo está transformando el mundo.'
 icon: '🤖'
 affiliateLink: 'https://edutin.com/sh-11568'

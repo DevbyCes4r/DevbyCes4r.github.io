@@ -1,5 +1,5 @@
 ---
-title: 'Docker'
+title: 'Curso de Docker'
 description: 'Domina la contenedorización con Docker para crear, gestionar y desplegar aplicaciones escalables. Aprende a optimizar flujos de trabajo y garantizar portabilidad entre entornos de desarrollo y producción.'
 icon: '🐳'
 videoId: 'YwOYEUt6jeo'

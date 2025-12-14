@@ -1,5 +1,5 @@
 ---
-title: 'Excel para Contadores'
+title: 'Curso de Excel para Contadores'
 description: 'Domina Excel avanzado con fórmulas financieras, tablas dinámicas y análisis de datos. Optimiza tu trabajo contable y finanzas con técnicas profesionales para profesionales del área contable.'
 icon: '💰'
 videoId: 'rSACuW4WLqg'

@@ -1,5 +1,5 @@
 ---
-title: 'Inteligencia Artificial con Python'
+title: 'Curso de Inteligencia Artificial con Python'
 description: 'Aprende a implementar algoritmos de IA utilizando el lenguaje más popular para ciencia de datos.'
 icon: '🐍'
 videoId: 'nEqmSR3nZow'

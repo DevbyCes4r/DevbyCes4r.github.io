@@ -1,5 +1,5 @@
 ---
-title: 'Desarrollo Web con Python y Django'
+title: 'Curso de Desarrollo Web con Python y Django'
 description: 'Aprende a crear aplicaciones web completas con Python y Django desde cero.'
 icon: '🐍'
 videoId: 'OfhijqO3P0U'

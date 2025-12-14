@@ -1,5 +1,5 @@
 ---
-title: 'Inglés B2'
+title: 'Curso de Inglés B2'
 description: 'Perfecciona tus habilidades lingüísticas, mejora tu pronunciación y alcanza un nivel que te permitirá desenvolverte en contextos profesionales.'
 icon: '🚀'
 videoId: 'xF6fO9-xQ_Y'

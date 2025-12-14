@@ -1,5 +1,5 @@
 ---
-title: 'Bases de Datos'
+title: 'Curso de Bases de Datos'
 description: 'Aprende a diseñar, relacionar y optimizar bases de datos reales con MySQL y PostgreSQL para impulsar tus proyectos de análisis de datos.'
 icon: '🗄️'
 videoId: 'm5aJ2OFz5Fg'

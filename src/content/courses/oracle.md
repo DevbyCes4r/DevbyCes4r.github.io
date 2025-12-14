@@ -1,5 +1,5 @@
 ---
-title: 'Oracle'
+title: 'Curso de Oracle'
 description: 'Aprende a administrar y optimizar bases de datos empresariales con Oracle, garantizando seguridad, eficiencia y análisis avanzado para decisiones estratégicas basadas en datos.'
 icon: '🔴'
 videoId: 'zmiHkdOCqoY'

@@ -1,5 +1,5 @@
 ---
-title: 'Power BI'
+title: 'Curso de Power BI'
 description: 'Transforma datos en insights con informes interactivos y visuales. Aprende a analizar tendencias y crear dashboards que impulsen decisiones estratégicas basadas en datos.'
 icon: '📊'
 videoId: 'W5BXXZmbZiE'

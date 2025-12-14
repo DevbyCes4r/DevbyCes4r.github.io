@@ -1,5 +1,5 @@
 ---
-title: 'ChatGPT'
+title: 'Curso de ChatGPT'
 description: 'Domina la IA generativa y aprende a usar ChatGPT para potenciar tu productividad.'
 icon: '💬'
 videoId: 'WV-0tgqJ1eo'
