@@ -1,0 +1,47 @@
+---
+
+---
+
+<div class="max-w-4xl mx-auto">
+    <div
+        class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
+    >
+        <!-- Game Container -->
+        <div class="p-6 md:p-8">
+            <div class="flex flex-col items-center gap-6">
+                <!-- Info Display -->
+                <div class="text-center">
+                    <div class="text-2xl text-slate-600 dark:text-slate-400">
+                        Presiona <strong>ESPACIO</strong> para comenzar
+                    </div>
+                </div>
+
+                <!-- Iframe Container -->
+                <div class="relative w-full bg-white rounded-2xl shadow-lg overflow-hidden" style="height: 600px;">
+                    <iframe 
+                        src="https://chromedino.com/"
+                        class="w-full h-full border-0"
+                        title="Juego del Dinosaurio de Chrome"
+                        loading="lazy"
+                    ></iframe>
+                </div>
+
+                <!-- Instructions -->
+                <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="p-4 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                        <div class="text-2xl mb-2">⌨️</div>
+                        <div class="text-sm text-slate-700 dark:text-slate-300 font-medium">Espacio para saltar</div>
+                    </div>
+                    <div class="p-4 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                        <div class="text-2xl mb-2">⬇️</div>
+                        <div class="text-sm text-slate-700 dark:text-slate-300 font-medium">Flecha abajo para agacharse</div>
+                    </div>
+                    <div class="p-4 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                        <div class="text-2xl mb-2">🦖</div>
+                        <div class="text-sm text-slate-700 dark:text-slate-300 font-medium">Evita los cactus</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

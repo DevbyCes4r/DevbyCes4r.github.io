@@ -4,6 +4,8 @@ import ScreenRecorder from "../../components/tools/ScreenRecorder.astro";
 import TextToSpeech from "../../components/tools/TextToSpeech.astro";
 import ImageCompressor from "../../components/tools/ImageCompressor.astro";
 import QRGenerator from "../../components/tools/QRGenerator.astro";
+import FlappyBird from "../../components/tools/FlappyBird.astro";
+import DinoGame from "../../components/tools/DinoGame.astro";
 
 export function getStaticPaths() {
     return [
@@ -45,6 +47,26 @@ export function getStaticPaths() {
                     "Crea códigos QR personalizados con colores y alta resolución. Gratis y sin registro.",
                 icon: "📱",
                 component: "QRGenerator",
+            },
+        },
+        {
+            params: { slug: "flappy-bird" },
+            props: {
+                title: "Flappy Jet - Edición Espacial",
+                description:
+                    "Juega al clásico Flappy Bird con un jet espacial. ¡Desafía tu mejor puntuación!",
+                icon: "🚀",
+                component: "FlappyBird",
+            },
+        },
+        {
+            params: { slug: "dinosaurio-chrome" },
+            props: {
+                title: "Dinosaurio de Chrome - T-Rex Runner",
+                description:
+                    "El famoso juego del dinosaurio de Google Chrome cuando no hay internet. ¡Juega sin límites!",
+                icon: "🦖",
+                component: "DinoGame",
             },
         },
     ];
@@ -95,64 +117,37 @@ const { title, description, icon, component } = Astro.props;
                 </p>
             </div>
 
-            <!-- Tool Component -->
+            <!-- Tool Component --> 
             <div class="mb-16">
                 {component === "ScreenRecorder" && <ScreenRecorder />}
                 {component === "TextToSpeech" && <TextToSpeech />}
                 {component === "ImageCompressor" && <ImageCompressor />}
                 {component === "QRGenerator" && <QRGenerator />}
+                {component === "FlappyBird" && <FlappyBird />}
+                {component === "DinoGame" && <DinoGame />}
             </div>
 
-            <!-- SEO Content / Instructions -->
-            <article
-                class="prose dark:prose-invert mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700"
-            >
+            <!-- Info Section -->
+            <div class="max-w-3xl mx-auto">
                 {
                     component === "ScreenRecorder" && (
                         <>
-                            <h2>¿Cómo usar la Grabadora de Pantalla?</h2>
-                            <ol>
-                                <li>
-                                    Haz clic en el botón{" "}
-                                    <strong>"Grabar Pantalla"</strong>.
-                                </li>
-                                <li>
-                                    Selecciona qué quieres compartir:{" "}
-                                    <strong>Pantalla completa</strong>,{" "}
-                                    <strong>Ventana</strong> o{" "}
-                                    <strong>Pestaña del navegador</strong>.
-                                </li>
-                                <li>
-                                    ¡Empieza a grabar! Puedes pausar o detener
-                                    la grabación cuando quieras.
-                                </li>
-                                <li>
-                                    Al finalizar, podrás ver una vista previa y{" "}
-                                    <strong>descargar el video</strong> en
-                                    formato WebM.
-                                </li>
-                            </ol>
-
-                            <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-100 dark:border-green-800 my-6">
-                                <h3 class="text-green-800 dark:text-green-300 mt-0">
-                                    🔒 Privacidad Garantizada
-                                </h3>
-                                <p class="text-green-700 dark:text-green-400 mb-0">
-                                    Esta herramienta funciona 100% en tu
-                                    navegador. El video se procesa localmente en
-                                    tu dispositivo y nunca se sube a ningún
-                                    servidor externo.
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Cómo usar</h2>
+                                <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    Haz clic en <strong>"Grabar Pantalla"</strong>, selecciona qué compartir (pantalla, ventana o pestaña), y graba. Al terminar, descarga tu video en formato WebM.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 p-5 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border-l-4 border-green-500 mb-8">
+                                <span class="text-2xl">🔒</span>
+                                <p class="text-green-900 dark:text-green-100 font-medium">
+                                    <strong>100% privado</strong> - Todo se procesa en tu navegador, nada se sube a servidores.
                                 </p>
                             </div>
 
-                            <h3>¿Para qué sirve una grabadora de pantalla?</h3>
-                            <p>
-                                Una grabadora de pantalla es perfecta para crear
-                                tutoriales, presentaciones, demos de productos,
-                                reportes de bugs o simplemente compartir lo que
-                                haces en tu computadora. No necesitas instalar
-                                ningún software - funciona directamente desde tu
-                                navegador.
+                            <p class="text-slate-600 dark:text-slate-400 italic">
+                                Ideal para tutoriales, presentaciones, demos y reportes de bugs.
                             </p>
                         </>
                     )
@@ -161,56 +156,22 @@ const { title, description, icon, component } = Astro.props;
                 {
                     component === "TextToSpeech" && (
                         <>
-                            <h2>¿Cómo convertir texto a voz?</h2>
-                            <ol>
-                                <li>
-                                    Escribe o pega el texto que quieres
-                                    convertir a voz en el área de texto.
-                                </li>
-                                <li>
-                                    Selecciona el <strong>idioma</strong> y la{" "}
-                                    <strong>voz</strong> que prefieras de las
-                                    disponibles en tu sistema.
-                                </li>
-                                <li>
-                                    Ajusta la <strong>velocidad</strong> (0.5x a
-                                    2x) y el <strong>tono</strong> (0.5 a 2.0)
-                                    según tus preferencias.
-                                </li>
-                                <li>
-                                    Haz clic en <strong>"Reproducir"</strong>{" "}
-                                    para escuchar el resultado.
-                                </li>
-                            </ol>
-
-                            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl border border-purple-100 dark:border-purple-800 my-6">
-                                <h3 class="text-purple-800 dark:text-purple-300 mt-0">
-                                    🎯 Funcionalidades destacadas
-                                </h3>
-                                <ul class="text-purple-700 dark:text-purple-400 mb-0">
-                                    <li>
-                                        Soporte para múltiples idiomas (español,
-                                        inglés, francés, alemán, etc.)
-                                    </li>
-                                    <li>Control preciso de velocidad y tono</li>
-                                    <li>
-                                        Procesamiento local - sin enviar datos a
-                                        servidores
-                                    </li>
-                                    <li>
-                                        Completamente gratuito y sin límites
-                                    </li>
-                                </ul>
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Cómo usar</h2>
+                                <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    Escribe tu texto, selecciona idioma y voz, ajusta velocidad y tono, y reproduce.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 p-5 bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-2xl border-l-4 border-purple-500 mb-8">
+                                <span class="text-2xl">🎯</span>
+                                <p class="text-purple-900 dark:text-purple-100 font-medium">
+                                    <strong>Múltiples idiomas</strong> • Control de velocidad y tono • 100% gratuito
+                                </p>
                             </div>
 
-                            <h3>¿Para qué usar un conversor de texto a voz?</h3>
-                            <p>
-                                Esta herramienta TTS (Text-to-Speech) es ideal
-                                para crear narraciones de videos, audiolibros,
-                                asistir a personas con dificultades visuales,
-                                aprender pronunciación en otros idiomas, o
-                                simplemente escuchar contenido mientras haces
-                                otras tareas.
+                            <p class="text-slate-600 dark:text-slate-400 italic">
+                                Perfecto para narraciones, audiolibros, accesibilidad y aprendizaje de idiomas.
                             </p>
                         </>
                     )
@@ -219,65 +180,70 @@ const { title, description, icon, component } = Astro.props;
                 {
                     component === "ImageCompressor" && (
                         <>
-                            <h2>¿Cómo comprimir imágenes?</h2>
-                            <ol>
-                                <li>
-                                    Haz clic en{" "}
-                                    <strong>"Seleccionar Imágenes"</strong> o
-                                    arrastra tus archivos a la zona indicada.
-                                </li>
-                                <li>
-                                    Puedes subir múltiples imágenes a la vez en
-                                    formatos JPG, PNG o WebP.
-                                </li>
-                                <li>
-                                    Ajusta el nivel de{" "}
-                                    <strong>calidad de compresión</strong>{" "}
-                                    (0-100%) con el control deslizante.
-                                </li>
-                                <li>
-                                    Visualiza la comparación antes/después y el
-                                    porcentaje de reducción de tamaño.
-                                </li>
-                                <li>
-                                    Descarga las imágenes comprimidas de forma
-                                    individual o todas juntas.
-                                </li>
-                            </ol>
-
-                            <div class="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl border border-orange-100 dark:border-orange-800 my-6">
-                                <h3 class="text-orange-800 dark:text-orange-300 mt-0">
-                                    ⚡ Ventajas de comprimir localmente
-                                </h3>
-                                <ul class="text-orange-700 dark:text-orange-400 mb-0">
-                                    <li>
-                                        <strong>100% privado:</strong> Tus
-                                        imágenes nunca salen de tu dispositivo
-                                    </li>
-                                    <li>
-                                        <strong>Rapidez:</strong> Sin tiempos de
-                                        espera de carga/descarga
-                                    </li>
-                                    <li>
-                                        <strong>Sin límites:</strong> Comprime
-                                        tantas imágenes como necesites
-                                    </li>
-                                    <li>
-                                        <strong>Gratis:</strong> Sin costos
-                                        ocultos ni suscripciones
-                                    </li>
-                                </ul>
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Cómo usar</h2>
+                                <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    Selecciona o arrastra imágenes (JPG, PNG, WebP), ajusta la calidad, y descarga. Soporta múltiples imágenes a la vez.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 p-5 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl border-l-4 border-orange-500 mb-8">
+                                <span class="text-2xl">⚡</span>
+                                <p class="text-orange-900 dark:text-orange-100 font-medium">
+                                    <strong>100% privado</strong> • Rápido • Sin límites • Gratis
+                                </p>
                             </div>
 
-                            <h3>¿Por qué comprimir imágenes?</h3>
-                            <p>
-                                Reducir el peso de tus imágenes es crucial para
-                                mejorar la velocidad de carga de sitios web,
-                                ahorrar espacio de almacenamiento, facilitar el
-                                envío por email o mensajería, y optimizar el
-                                rendimiento general. Con esta herramienta puedes
-                                lograr reducciones de hasta 70-90% manteniendo
-                                una calidad visual excelente.
+                            <p class="text-slate-600 dark:text-slate-400 italic">
+                                Reduce hasta 90% el peso manteniendo la calidad. Ideal para webs, emails y almacenamiento.
+                            </p>
+                        </>
+                    )
+                }
+
+                {
+                    component === "FlappyBird" && (
+                        <>
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Cómo jugar</h2>
+                                <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    Haz <strong>clic</strong> o presiona <strong>ESPACIO</strong> para volar. Evita los tubos, el suelo y el techo. Cada tubo que pases suma 1 punto.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 p-5 bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 rounded-2xl border-l-4 border-red-500 mb-8">
+                                <span class="text-2xl">🎮</span>
+                                <p class="text-red-900 dark:text-red-100 font-medium">
+                                    <strong>Consejo:</strong> Clics cortos, ritmo constante, mantén la calma
+                                </p>
+                            </div>
+
+                            <p class="text-slate-600 dark:text-slate-400 italic">
+                                Tu mejor puntuación se guarda automáticamente. ¡Desafía tus reflejos!
+                            </p>
+                        </>
+                    )
+                }
+
+                {
+                    component === "DinoGame" && (
+                        <>
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Cómo jugar</h2>
+                                <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    Haz clic en el juego. Presiona <strong>ESPACIO</strong> o <strong>↑</strong> para saltar. Presiona <strong>↓</strong> para agacharte. Evita cactus y pterodáctilos.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 p-5 bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-800/50 dark:to-gray-800/50 rounded-2xl border-l-4 border-slate-500 mb-8">
+                                <span class="text-2xl">🦖</span>
+                                <p class="text-slate-900 dark:text-slate-100 font-medium">
+                                    <strong>Dato curioso:</strong> Creado por Google en 2014. Se vuelve más rápido cada 100 puntos.
+                                </p>
+                            </div>
+
+                            <p class="text-slate-600 dark:text-slate-400 italic">
+                                El clásico juego de Chrome sin necesidad de desconectarte. Diseño minimalista, desafío creciente.
                             </p>
                         </>
                     )
@@ -286,70 +252,27 @@ const { title, description, icon, component } = Astro.props;
                 {
                     component === "QRGenerator" && (
                         <>
-                            <h2>¿Cómo generar un código QR?</h2>
-                            <ol>
-                                <li>
-                                    Ingresa el contenido que quieres codificar:
-                                    URL, texto, información de contacto, etc.
-                                </li>
-                                <li>
-                                    Personaliza el diseño:{" "}
-                                    <strong>color del código</strong> y{" "}
-                                    <strong>color de fondo</strong>.
-                                </li>
-                                <li>
-                                    Ajusta el <strong>tamaño</strong> del código
-                                    QR según tus necesidades.
-                                </li>
-                                <li>
-                                    El código QR se genera instantáneamente
-                                    mientras escribes.
-                                </li>
-                                <li>
-                                    Descarga el resultado en{" "}
-                                    <strong>alta resolución PNG</strong> listo
-                                    para usar.
-                                </li>
-                            </ol>
-
-                            <div class="bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-xl border border-cyan-100 dark:border-cyan-800 my-6">
-                                <h3 class="text-cyan-800 dark:text-cyan-300 mt-0">
-                                    📱 Casos de uso populares
-                                </h3>
-                                <ul class="text-cyan-700 dark:text-cyan-400 mb-0">
-                                    <li>
-                                        Compartir enlaces de forma rápida y
-                                        visual
-                                    </li>
-                                    <li>
-                                        WiFi: Permitir conexión sin escribir
-                                        contraseñas
-                                    </li>
-                                    <li>
-                                        Tarjetas de presentación digitales
-                                        (vCard)
-                                    </li>
-                                    <li>Menús de restaurantes sin contacto</li>
-                                    <li>
-                                        Pagos y transferencias bancarias rápidas
-                                    </li>
-                                </ul>
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Cómo usar</h2>
+                                <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    Ingresa tu URL o texto, personaliza colores y tamaño, y descarga. El QR se genera instantáneamente mientras escribes.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 p-5 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-2xl border-l-4 border-cyan-500 mb-8">
+                                <span class="text-2xl">📱</span>
+                                <p class="text-cyan-900 dark:text-cyan-100 font-medium">
+                                    <strong>Usos:</strong> Enlaces, WiFi, tarjetas de presentación, menús, pagos
+                                </p>
                             </div>
 
-                            <h3>¿Qué es un código QR?</h3>
-                            <p>
-                                Un código QR (Quick Response) es un tipo de
-                                código de barras 2D que puede almacenar
-                                información como URLs, texto, datos de contacto
-                                y más. Se escanean fácilmente con la cámara de
-                                cualquier smartphone moderno, convirtiéndolos en
-                                una forma eficiente de compartir información sin
-                                necesidad de escribir.
+                            <p class="text-slate-600 dark:text-slate-400 italic">
+                                Descarga en alta resolución PNG. Escaneable con cualquier smartphone.
                             </p>
                         </>
                     )
                 }
-            </article>
+            </div>
         </div>
     </div>
 </BaseLayout>
