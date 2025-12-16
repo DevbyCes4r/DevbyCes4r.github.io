@@ -90,9 +90,25 @@ const routesCollection = defineCollection({
     }),
 });
 
+const packsCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        emoji: z.string().optional(),
+        publishDate: z.date().default(() => new Date()),
+        links: z.array(z.object({
+            title: z.string(),
+            url: z.string(),
+            icon: z.string().optional(),
+        })),
+    }),
+});
+
 export const collections = {
     'blog': blogCollection,
     'courses': coursesCollection,
     'categories': categoriesCollection,
     'routes': routesCollection,
+    'packs': packsCollection,
 };

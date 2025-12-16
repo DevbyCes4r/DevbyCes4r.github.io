@@ -12,87 +12,319 @@ const pageDescription =
   description={pageDescription}
   image={"/images/lading.webp"}
 >
-  <section
-    class="min-h-[80vh] flex flex-col justify-center items-center text-center"
-  >
-    <div class="mb-8 relative">
-      <div
-        class="absolute inset-0 bg-blue-500 blur-3xl opacity-20 rounded-full"
-      >
-      </div>
-      <img
-        src="/images/profile-cesar.webp"
-        alt="Foto de perfil de Cesar"
-        class="w-32 h-32 relative z-10 rounded-full object-cover shadow-xl border-4 border-slate-300 dark:border-slate-800"
-      />
+  <section class="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-28">
+    <!-- Background Stars/Dots -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute top-10 left-10 w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full animate-pulse"></div>
+      <div class="absolute top-20 right-20 w-1 h-1 bg-purple-400 dark:bg-purple-300 rounded-full animate-pulse animation-delay-1000"></div>
+      <div class="absolute bottom-20 left-40 w-1.5 h-1.5 bg-pink-400 dark:bg-pink-300 rounded-full animate-pulse animation-delay-2000"></div>
+      <div class="absolute top-40 right-40 w-1 h-1 bg-blue-300 dark:bg-blue-200 rounded-full animate-pulse animation-delay-1500"></div>
+      <div class="absolute bottom-40 right-60 w-2 h-2 bg-purple-300 dark:bg-purple-200 rounded-full animate-pulse animation-delay-500"></div>
     </div>
 
-    <h1
-      class="text-5xl md:text-7xl font-bold mb-6 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500"
-    >
-      DevbyCes4r
-    </h1>
-
-    <p
-      class="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mb-12 leading-relaxed"
-    >
-      Explorando el universo del desarrollo, compartiendo conocimientos y
-      construyendo el futuro digital.
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-6">
-      <a
-        href="/blog"
-        class="group px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-blue-500 rounded-xl transition-all duration-300 flex items-center gap-3 shadow-sm"
-      >
-        <span class="text-2xl">📝</span>
-        <div class="text-left">
-          <div
-            class="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+    <!-- Solar System Container -->
+    <div class="relative w-full max-w-5xl mx-auto px-4">
+      
+      <!-- Layout centrado -->
+      <div class="flex flex-col items-center justify-center">
+        
+        <!-- Top Cards (2) - Only on large screens -->
+        <div class="hidden lg:flex justify-center gap-6 mb-6">
+          <!-- Blog Card -->
+          <a
+            href="/blog"
+            class="planet-card group animate-float-1"
           >
-            Leer el Blog
+            <div class="planet-icon planet-blog-icon">📝</div>
+            <h3 class="planet-title group-hover:text-blue-600 dark:group-hover:text-blue-400">
+              Blog
+            </h3>
+            <p class="planet-subtitle">
+              Artículos
+            </p>
+          </a>
+
+          <!-- Cursos Card -->
+          <a
+            href="/cursos"
+            class="planet-card group animate-float-2"
+          >
+            <div class="planet-icon planet-cursos-icon">🎓</div>
+            <h3 class="planet-title group-hover:text-green-600 dark:group-hover:text-green-400">
+              Cursos
+            </h3>
+            <p class="planet-subtitle">
+              Gratuitos
+            </p>
+          </a>
+        </div>
+
+        <!-- Center Section: Left Card + Photo + Right Card -->
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-6">
+          
+          <!-- Left Card: Packs - Desktop only -->
+          <a
+            href="/packs"
+            class="planet-card planet-card-desktop group animate-float-3"
+          >
+            <div class="planet-icon planet-packs-icon">📦</div>
+            <h3 class="planet-title group-hover:text-orange-600 dark:group-hover:text-orange-400">
+              Packs
+            </h3>
+            <p class="planet-subtitle">
+              Recursos
+            </p>
+          </a>
+
+          <!-- Center: Profile Photo + Title -->
+          <div class="text-center flex-shrink-0">
+            <div class="relative group mb-4">
+              <!-- Glow Effect -->
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full blur-2xl opacity-30 group-hover:opacity-40 transition-opacity animate-pulse-slow"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full blur-xl opacity-20 animate-spin-slow"></div>
+              
+              <!-- Profile Image -->
+              <div class="relative w-28 h-28 md:w-36 md:h-36 mx-auto">
+                <img
+                  src="/images/profile-cesar.webp"
+                  alt="Foto de perfil de Cesar"
+                  class="w-full h-full rounded-full object-cover shadow-2xl border-4 border-white dark:border-slate-800 relative z-10"
+                />
+              </div>
+            </div>
+
+            <!-- Title Below Photo -->
+            <h1 class="text-3xl md:text-5xl font-bold mb-2 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500">
+              DevbyCes4r
+            </h1>
+            <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
+              Explorando el universo del desarrollo, compartiendo conocimientos
+            </p>
           </div>
-          <div class="text-xs text-slate-500 dark:text-slate-400">
-            Artículos y Guías
+
+          <!-- Right Card: Herramientas - Desktop only -->
+          <a
+            href="/herramientas"
+            class="planet-card planet-card-desktop group animate-float-4"
+          >
+            <div class="planet-icon planet-tools-icon">🛠️</div>
+            <h3 class="planet-title group-hover:text-purple-600 dark:group-hover:text-purple-400">
+              Herramientas
+            </h3>
+            <p class="planet-subtitle">
+              IA y Dev
+            </p>
+          </a>
+        </div>
+
+        <!-- Mobile: All 4 Cards in grid -->
+        <div class="lg:hidden mt-8">
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Blog Card Mobile -->
+            <a href="/blog" class="planet-card-mobile group">
+              <div class="planet-icon-mobile">📝</div>
+              <h3 class="planet-title-mobile group-hover:text-blue-600 dark:group-hover:text-blue-400">Blog</h3>
+            </a>
+
+            <!-- Cursos Card Mobile -->
+            <a href="/cursos" class="planet-card-mobile group">
+              <div class="planet-icon-mobile">🎓</div>
+              <h3 class="planet-title-mobile group-hover:text-green-600 dark:group-hover:text-green-400">Cursos</h3>
+            </a>
+
+            <!-- Packs Card Mobile -->
+            <a href="/packs" class="planet-card-mobile group">
+              <div class="planet-icon-mobile">📦</div>
+              <h3 class="planet-title-mobile group-hover:text-orange-600 dark:group-hover:text-orange-400">Packs</h3>
+            </a>
+
+            <!-- Herramientas Card Mobile -->
+            <a href="/herramientas" class="planet-card-mobile group">
+              <div class="planet-icon-mobile">🛠️</div>
+              <h3 class="planet-title-mobile group-hover:text-purple-600 dark:group-hover:text-purple-400">Herramientas</h3>
+            </a>
           </div>
         </div>
-      </a>
 
-      <a
-        href="/cursos"
-        class="group px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-green-500 rounded-xl transition-all duration-300 flex items-center gap-3 shadow-sm"
-      >
-        <span class="text-2xl">🎓</span>
-        <div class="text-left">
-          <div
-            class="font-bold text-slate-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors"
-          >
-            Cursos Gratuitos
-          </div>
-          <div class="text-xs text-slate-500 dark:text-slate-400">
-            Video clases y certificados
-          </div>
-        </div>
-      </a>
-
-      <a
-        href="/herramientas"
-        class="group px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-purple-500 rounded-xl transition-all duration-300 flex items-center gap-3 shadow-sm"
-      >
-        <span class="text-2xl">🛠️</span>
-        <div class="text-left">
-          <div
-            class="font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors"
-          >
-            Herramientas
-          </div>
-          <div class="text-xs text-slate-500 dark:text-slate-400">
-            IA y Desarrollo
-          </div>
-        </div>
-      </a>
+      </div>
     </div>
   </section>
+
+  <style>
+    /* Planet Cards - Desktop (uniform size) */
+    .planet-card {
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(203, 213, 225, 0.3);
+      border-radius: 20px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hide desktop-only cards on mobile */
+    .planet-card-desktop {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .planet-card-desktop {
+        display: flex;
+      }
+    }
+
+    :global(.dark) .planet-card {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(71, 85, 105, 0.3);
+    }
+
+    .planet-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Planet Card Elements */
+    .planet-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+    .group:hover .planet-icon {
+      transform: scale(1.1);
+    }
+
+    .planet-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: #0f172a;
+      transition: color 0.3s ease;
+      margin-bottom: 0.25rem;
+    }
+    :global(.dark) .planet-title {
+      color: white;
+    }
+
+    .planet-subtitle {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    :global(.dark) .planet-subtitle {
+      color: #94a3b8;
+    }
+
+    /* Mobile Cards */
+    .planet-card-mobile {
+      width: 100%;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(203, 213, 225, 0.3);
+      border-radius: 16px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    :global(.dark) .planet-card-mobile {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(71, 85, 105, 0.3);
+    }
+
+    .planet-icon-mobile {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .planet-title-mobile {
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #0f172a;
+      transition: color 0.3s ease;
+    }
+    :global(.dark) .planet-title-mobile {
+      color: white;
+    }
+
+    /* Hover colors for icons */
+    .planet-blog-icon { color: #3b82f6; }
+    .planet-cursos-icon { color: #22c55e; }
+    .planet-packs-icon { color: #f97316; }
+    .planet-tools-icon { color: #a855f7; }
+
+    /* Floating Animations - Small movements in place */
+    @keyframes float-1 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes float-2 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes float-3 {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-12px) translateX(-5px); }
+    }
+
+    @keyframes float-4 {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-12px) translateX(5px); }
+    }
+
+    .animate-float-1 {
+      animation: float-1 3s ease-in-out infinite;
+    }
+
+    .animate-float-2 {
+      animation: float-2 3.5s ease-in-out infinite;
+      animation-delay: 0.5s;
+    }
+
+    .animate-float-3 {
+      animation: float-3 4s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+
+    .animate-float-4 {
+      animation: float-4 4s ease-in-out infinite;
+      animation-delay: 1.5s;
+    }
+
+    /* Additional Animations */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+    }
+
+    .animate-pulse-slow {
+      animation: pulse-slow 4s ease-in-out infinite;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-spin-slow {
+      animation: spin-slow 10s linear infinite;
+    }
+
+    .animation-delay-500 { animation-delay: 0.5s; }
+    .animation-delay-1000 { animation-delay: 1s; }
+    .animation-delay-1500 { animation-delay: 1.5s; }
+    .animation-delay-2000 { animation-delay: 2s; }
+
+  </style>
 
   <section class="py-16 border-t border-slate-200 dark:border-slate-800/50">
     <div class="max-w-3xl mx-auto text-center px-4">

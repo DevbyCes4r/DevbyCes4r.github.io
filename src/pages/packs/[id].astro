@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const packs = await getCollection('packs');
+  return packs.map((pack) => ({
+    params: { id: pack.id.replace('.md', '') },
+    props: { pack },
+  }));
+}
+
+const { pack } = Astro.props;
+const { data } = pack;
+const { Content } = await pack.render();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": data.title,
+  "description": data.description,
+  "numberOfItems": data.links.length,
+  "itemListElement": data.links.map((link, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": link.title,
+    "url": link.url
+  }))
+};
+---
+
+<BaseLayout 
+  title={`${data.title} | DevbyCes4r`}
+  description={data.description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  
+  <div class="min-h-screen py-10 px-4 flex justify-center">
+    <div class="w-full max-w-4xl">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        {data.emoji && (
+          <div class="text-6xl mb-4 animate-bounce">{data.emoji}</div>
+        )}
+        <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
+          {data.title}
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          {data.description}
+        </p>
+      </div>
+
+      <!-- Links Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {data.links.map((link) => (
+          <a 
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+          >
+            <div class="flex items-start gap-4">
+              {link.icon && (
+                <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  {link.icon}
+                </div>
+              )}
+              <div class="flex-grow">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                  {link.title}
+                </h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                  Click para acceder →
+                </p>
+              </div>
+            </div>
+
+            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Content (if any) -->
+      {Content && (
+        <div class="mt-12 prose prose-slate dark:prose-invert max-w-none bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+          <Content />
+        </div>
+      )}
+
+      <!-- Back link -->
+      <div class="text-center mt-12">
+        <a 
+          href="/packs" 
+          class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Ver todos los packs
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

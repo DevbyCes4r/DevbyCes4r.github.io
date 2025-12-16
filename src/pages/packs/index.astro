@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const packs = await getCollection('packs');
+const sortedPacks = packs.sort((a, b) => 
+  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+---
+
+<BaseLayout 
+  title="Packs de Recursos | DevbyCes4r"
+  description="Colecciones curadas de recursos, cursos, herramientas y productos recomendados para impulsar tu carrera tech"
+>
+  <div class="min-h-screen py-10 px-4 flex justify-center">
+    <div class="w-full max-w-6xl">
+      
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <div class="text-6xl mb-4 animate-bounce">📦</div>
+        <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
+          Packs de Recursos
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          Colecciones de cursos, herramientas, productos y recursos seleccionados especialmente para ti
+        </p>
+      </div>
+
+      <!-- Packs Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPacks.map((pack) => (
+          <a 
+            href={`/packs/${pack.id.replace('.md', '')}`}
+            class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
+          >
+            {/* Emoji Header with Gradient Background */}
+            <div class="relative bg-gradient-to-br from-purple-50 to-blue-50 dark:from-slate-800 dark:to-slate-700 p-8 text-center border-b border-slate-200 dark:border-slate-700">
+              {pack.data.emoji && (
+                <span class="text-6xl inline-block group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                  {pack.data.emoji}
+                </span>
+              )}
+            </div>
+
+            {/* Content */}
+            <div class="p-6">
+              <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-2">
+                {pack.data.title}
+              </h2>
+              <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
+                {pack.data.description}
+              </p>
+              
+              {/* Stats */}
+              <div class="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-4">
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  <span class="font-medium">{pack.data.links.length} {pack.data.links.length === 1 ? 'recurso' : 'recursos'}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>{new Date(pack.data.publishDate).toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}</span>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
+                <span class="text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:gap-2 transition-all">
+                  Ver colección
+                </span>
+                <svg class="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Hover Arrow Indicator */}
+            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="bg-purple-100 dark:bg-purple-500/20 p-2 rounded-full">
+                <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Empty state -->
+      {sortedPacks.length === 0 && (
+        <div class="text-center py-20">
+          <div class="text-6xl mb-4">📦</div>
+          <p class="text-xl text-slate-600 dark:text-slate-400">
+            Aún no hay packs disponibles
+          </p>
+        </div>
+      )}
+
+      <!-- Back to home -->
+      <div class="text-center mt-16">
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Volver al inicio
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
