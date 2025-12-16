@@ -1,7 +1,6 @@
 ---
 title: "Cursos tech para empleo en 2026"
 description: "Colección de cursos fundamentales en Ciberseguridad, Cloud, Data Analytics y Gestión de Proyectos"
-emoji: "🎯"
 publishDate: 2025-12-16
 links:
   - title: "Ciberseguridad"
@@ -26,5 +25,3 @@ links:
     url: "https://edutin.com/sh-9366"
     icon: "🤝"
 ---
-
-Pack de cursos esenciales para profesionales tech que buscan ampliar sus habilidades en áreas clave del desarrollo tecnológico y gestión de proyectos.

@@ -27,20 +27,12 @@ const sortedPacks = packs.sort((a, b) =>
       </div>
 
       <!-- Packs Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {sortedPacks.map((pack) => (
           <a 
             href={`/packs/${pack.id.replace('.md', '')}`}
             class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
           >
-            {/* Emoji Header with Gradient Background */}
-            <div class="relative bg-gradient-to-br from-purple-50 to-blue-50 dark:from-slate-800 dark:to-slate-700 p-8 text-center border-b border-slate-200 dark:border-slate-700">
-              {pack.data.emoji && (
-                <span class="text-6xl inline-block group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                  {pack.data.emoji}
-                </span>
-              )}
-            </div>
 
             {/* Content */}
             <div class="p-6">
@@ -74,15 +66,6 @@ const sortedPacks = packs.sort((a, b) =>
                 </span>
                 <svg class="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </div>
-            </div>
-
-            {/* Hover Arrow Indicator */}
-            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div class="bg-purple-100 dark:bg-purple-500/20 p-2 rounded-full">
-                <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </div>
             </div>

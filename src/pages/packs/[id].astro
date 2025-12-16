@@ -11,8 +11,9 @@ export async function getStaticPaths() {
 }
 
 const { pack } = Astro.props;
-const { data } = pack;
+const { data, body } = pack;
 const { Content } = await pack.render();
+const hasContent = body && body.trim().length > 0;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,9 +41,6 @@ const jsonLd = {
       
       <!-- Header -->
       <div class="text-center mb-12">
-        {data.emoji && (
-          <div class="text-6xl mb-4 animate-bounce">{data.emoji}</div>
-        )}
         <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
           {data.title}
         </h1>
@@ -75,19 +73,13 @@ const jsonLd = {
                 </p>
               </div>
             </div>
-
-            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
           </a>
         ))}
       </div>
 
-      <!-- Content (if any) -->
-      {Content && (
-        <div class="mt-12 prose prose-slate dark:prose-invert max-w-none bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+      <!-- Content (only if there's actual content) -->
+      {hasContent && (
+        <div class="mt-12 prose prose-slate dark:prose-invert max-w-none">
           <Content />
         </div>
       )}
