@@ -1,0 +1,31 @@
+---
+title: 'Curso de IA para Desarrollo de Software'
+description: 'Acelera tu flujo de trabajo integrando Inteligencia Artificial. Aprende a programar más rápido y con mayor calidad utilizando las mejores herramientas de IA.'
+icon: '🧑‍💻'
+videoId: 'arzfG14EmSM'
+affiliateLink: 'https://edutin.com/sh-12030'
+tags: ['AI', 'Software Development', 'Productividad', 'Programming Tools']
+category: 'inteligencia-artificial'
+group: 'Inteligencia Artificial'
+orderGroup: 2
+publishDate: 2025-12-16
+---
+
+## Sobre este curso
+
+Transforma tu manera de programar. Este curso te enseña a usar la IA como tu copiloto para **escribir código limpio**, detectar errores y resolver problemas complejos en menos tiempo. Automatiza lo aburrido y enfócate en crear.
+
+### Lo mejor:
+Estudias a tu ritmo, sin horarios fijos y con acceso completamente gratuito.
+
+👉 [Empieza gratis hoy](https://edutin.com/sh-12030)
+
+### Este curso es ideal si deseas:
+- ✅ **Maximizar tu productividad:** Aprende a usar la IA para programar más rápido sin sacrificar la calidad.
+- ✅ **Optimizar el ciclo de vida del software:** Implementa mejoras en tus procesos de desarrollo sin aumentar tu carga laboral.
+- ✅ **Potenciar tu perfil profesional:** Mejora tus habilidades como programador o ingeniero de software adoptando herramientas de vanguardia.
+- ✅ **Liderar con innovación:** Mantente actualizado con las tecnologías emergentes que hoy lideran y redefinen la industria tech.
+
+🎓 Además, puedes obtener tu certificado con descuento por tiempo limitado, perfecto para potenciar tu hoja de vida, demostrar tus habilidades y acceder a mejores oportunidades laborales.
+
+[Inscríbete gratis y obtén tu certificado con descuento](https://edutin.com/sh-12030)

@@ -208,5 +208,21 @@ const articleSchema = {
 
     window.addEventListener("scroll", updateProgress);
     window.addEventListener("resize", updateProgress);
+
+    // Open all blog content links in new tab
+    document.addEventListener("DOMContentLoaded", () => {
+      const contentWrapper = document.querySelector(".ai-content-wrapper");
+      if (contentWrapper) {
+        const links = contentWrapper.querySelectorAll("a");
+        links.forEach((link) => {
+          const href = link.getAttribute("href");
+          // If it's not an internal anchor link
+          if (href && !href.startsWith("#")) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+      }
+    });
   </script>
 </BaseLayout>
