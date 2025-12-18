@@ -1,0 +1,186 @@
+---
+title: 'Cómo Creé 4 Herramientas Web Usando IA en Tiempo Récord'
+description: 'Mi experiencia creando juegos y utilidades web con ayuda de inteligencia artificial. Desde Flappy Bird hasta una grabadora de pantalla, todo sin salir del navegador.'
+publishDate: 2025-12-18
+updatedDate: 2025-12-18
+author: 'Cesar Nuñez'
+image: '/images/blog/games-tools.webp'
+categories: ['AI', 'Desarrollo Web', 'Herramientas', 'Experiencia Personal']
+tags: ['ia', 'desarrollo', 'juegos', 'herramientas', 'astro', 'javascript']
+featured: true
+readingTime: '5 min lectura'
+contentType: 'article'
+
+difficulty: 'beginner'
+prerequisites: ['Curiosidad por la IA', 'Nociones básicas de programación']
+learningOutcomes:
+  - 'Entender cómo la IA acelera el desarrollo web'
+  - 'Conocer herramientas útiles que funcionan 100% en el navegador'
+  - 'Inspirarse para crear proyectos propios con IA'
+
+faqs:
+  - question: '¿Necesito saber programar para usar IA en mis proyectos?'
+    answer: 'No necesariamente. La IA puede ayudarte a generar código funcional, pero entender los conceptos básicos te permitirá hacer mejoras y personalizaciones.'
+    keywords: ['programar con ia', 'no code', 'ia desarrollo']
+  - question: '¿Las herramientas funcionan sin internet?'
+    answer: 'Sí, una vez cargada la página, herramientas como el Texto a Voz y la Grabadora de Pantalla funcionan completamente en tu navegador sin enviar datos a ningún servidor.'
+    keywords: ['offline', 'privacidad', 'sin internet']
+  - question: '¿Puedo crear mis propias herramientas así?'
+    answer: 'Absolutamente. Con herramientas de IA como ChatGPT, Copilot o Claude, puedes describir lo que necesitas y obtener código funcional que luego puedes adaptar.'
+    keywords: ['crear herramientas', 'ia generativa', 'desarrollo propio']
+---
+
+## La chispa inicial
+
+Todo empezó cuando quería agregar contenido interactivo a mi sitio web. Tenía la visión, pero no el tiempo para escribir cientos de líneas de código desde cero. Ahí es donde la **IA se convirtió en mi copiloto de desarrollo**.
+
+En este artículo te cuento cómo creé **4 herramientas** que ahora están disponibles en mi sitio: dos juegos clásicos y dos utilidades que uso constantemente.
+
+---
+
+## 🎮 Juegos y Entretenimiento
+
+### Dino Game - El clásico de Chrome
+
+**[Jugar al Dino Game →](/herramientas/dino-game)**
+
+¿Recuerdas el dinosaurio que aparece cuando no tienes internet? Quería tenerlo disponible en mi sitio sin depender de estar offline.
+
+**¿Cómo lo hice?** Le pedí a la IA que me ayudara a integrar una versión embebida del juego. La solución fue elegante: un iframe que carga el juego desde una fuente confiable, envuelto en un diseño responsivo con instrucciones claras.
+
+```astro
+<iframe 
+    src="https://chromedino.com/"
+    class="w-full h-full border-0"
+    title="Juego del Dinosaurio de Chrome"
+    loading="lazy"
+></iframe>
+```
+
+**El resultado:** Un juego funcional con controles intuitivos (Espacio para saltar, flecha abajo para agacharse) que se adapta a cualquier pantalla. La IA me sugirió agregar tarjetas de instrucciones visuales que mejoran mucho la experiencia del usuario.
+
+---
+
+### Flappy Bird - Rehecho desde cero
+
+**[Jugar Flappy Jet →](/herramientas/flappy-bird)**
+
+Este fue más ambicioso. Quería una **versión completamente personalizada** del clásico Flappy Bird, usando Canvas de HTML5.
+
+**El proceso con IA:**
+1. Describí la mecánica básica: un pájaro que sube al hacer clic y baja por gravedad
+2. Pedí obstáculos tipo tubería que se mueven de derecha a izquierda
+3. Solicité un sistema de puntuación con guardado del mejor puntaje
+
+La IA generó más de **400 líneas de JavaScript** que incluyen:
+- Física realista con gravedad y velocidad
+- Generación procedural de obstáculos
+- Detección de colisiones
+- Sistema de partículas para efectos visuales
+- Tema espacial con estrellas de fondo
+- Guardado del mejor puntaje en `localStorage`
+
+```javascript
+const bird = {
+    x: 100,
+    y: 0,
+    velocity: 0,
+    gravity: 0.5,
+    jump: -10,
+};
+```
+
+**Lo que más me sorprendió:** La IA sugirió hacer el canvas responsivo para que se adapte al tamaño del contenedor. Un detalle que yo habría olvidado.
+
+---
+
+## 🛠️ Utilidades Online Gratuitas
+
+### Grabadora de Pantalla
+
+**[Usar la Grabadora →](/herramientas/grabador-de-pantalla)**
+
+Necesitaba grabar tutoriales rápidos sin instalar software adicional. La solución: usar la **API MediaRecorder** del navegador.
+
+**Lo que le pedí a la IA:**
+- Grabar pantalla, ventana o pestaña específica
+- Opción de incluir audio del sistema y/o micrófono
+- Mostrar un timer durante la grabación
+- Pausar y reanudar la grabación
+- Descargar el video al terminar
+
+**El código resultante** maneja todo esto con elegancia:
+
+```javascript
+const stream = await navigator.mediaDevices.getDisplayMedia({
+    video: { cursor: 'always' },
+    audio: includeSystemAudio,
+});
+```
+
+**Características que agregó la IA por iniciativa propia:**
+- Indicador de grabación con animación pulsante
+- Contador de tiempo en formato `MM:SS`
+- Vista previa del video antes de descargar
+- Múltiples formatos de descarga (WebM)
+- Mensaje de privacidad: "No se está enviando nada a internet"
+
+Este último punto es clave: **todo se procesa localmente en tu navegador**.
+
+---
+
+### Texto a Voz
+
+**[Usar Texto a Voz →](/herramientas/texto-a-voz)**
+
+Quería una herramienta para escuchar textos mientras hago otras cosas. La **Web Speech API** lo hace posible sin necesidad de APIs externas.
+
+**Funcionalidades implementadas:**
+- Selección de voces disponibles en el sistema
+- Control de velocidad (0.5x a 2x)
+- Control de tono
+- Pausar, reanudar y detener
+- Descarga del audio generado
+
+**El truco más interesante** que me sugirió la IA fue filtrar las voces para mostrar primero las de español:
+
+```javascript
+const voices = speechSynthesis.getVoices();
+const spanishVoices = voices.filter(v => v.lang.includes('es'));
+```
+
+También agregó recomendaciones de las voces más naturales según el sistema operativo:
+- **Google Español** (Chrome)
+- **Microsoft Helena/Sabina** (Windows)  
+- **Samantha** (macOS)
+
+---
+
+## 💡 Lecciones aprendidas
+
+### 1. La IA acelera, pero no reemplaza
+La IA me dio el 80% del código, pero el 20% restante (integración, estilos, pruebas) sigue siendo trabajo humano.
+
+### 2. Describe bien lo que necesitas
+Cuanto más específico seas con tus requerimientos, mejor será el resultado. "Quiero un juego" es muy diferente a "Quiero un juego estilo Flappy Bird con física de gravedad, obstáculos aleatorios y puntuación guardada".
+
+### 3. Itera rápidamente
+La primera versión nunca es perfecta. Usé la IA para hacer ajustes incrementales: "Ahora hazlo responsivo", "Agrega modo oscuro", "Mejora las animaciones".
+
+### 4. Aprende mientras construyes
+Aunque la IA escribió el código, lo revisé línea por línea. Aprendí sobre Canvas, MediaRecorder y Web Speech API en el proceso.
+
+---
+
+## Próximos pasos
+
+Estoy planeando agregar más herramientas:
+- Convertidor de formatos de imagen
+- Generador de paletas de colores
+- Editor de markdown en tiempo real
+
+¿Tienes alguna idea de herramienta útil? Déjamelo saber en mis redes.
+
+---
+
+**¿Quieres aprender a usar IA para programar?** Revisa mi curso de [ChatGPT](/cursos/chatgpt) o explora la ruta de [Inteligencia Artificial](/rutas/inteligencia-artificial).
