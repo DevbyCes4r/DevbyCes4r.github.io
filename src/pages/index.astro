@@ -12,77 +12,93 @@ const pageDescription =
   description={pageDescription}
   image={"/images/lading.webp"}
 >
-  <section class="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-28">
+  <section
+    class="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-28"
+  >
     <!-- Background Stars/Dots -->
     <div class="absolute inset-0 opacity-30">
-      <div class="absolute top-10 left-10 w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full animate-pulse"></div>
-      <div class="absolute top-20 right-20 w-1 h-1 bg-purple-400 dark:bg-purple-300 rounded-full animate-pulse animation-delay-1000"></div>
-      <div class="absolute bottom-20 left-40 w-1.5 h-1.5 bg-pink-400 dark:bg-pink-300 rounded-full animate-pulse animation-delay-2000"></div>
-      <div class="absolute top-40 right-40 w-1 h-1 bg-blue-300 dark:bg-blue-200 rounded-full animate-pulse animation-delay-1500"></div>
-      <div class="absolute bottom-40 right-60 w-2 h-2 bg-purple-300 dark:bg-purple-200 rounded-full animate-pulse animation-delay-500"></div>
+      <div
+        class="absolute top-10 left-10 w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full animate-pulse"
+      >
+      </div>
+      <div
+        class="absolute top-20 right-20 w-1 h-1 bg-purple-400 dark:bg-purple-300 rounded-full animate-pulse animation-delay-1000"
+      >
+      </div>
+      <div
+        class="absolute bottom-20 left-40 w-1.5 h-1.5 bg-pink-400 dark:bg-pink-300 rounded-full animate-pulse animation-delay-2000"
+      >
+      </div>
+      <div
+        class="absolute top-40 right-40 w-1 h-1 bg-blue-300 dark:bg-blue-200 rounded-full animate-pulse animation-delay-1500"
+      >
+      </div>
+      <div
+        class="absolute bottom-40 right-60 w-2 h-2 bg-purple-300 dark:bg-purple-200 rounded-full animate-pulse animation-delay-500"
+      >
+      </div>
     </div>
 
     <!-- Solar System Container -->
     <div class="relative w-full max-w-5xl mx-auto px-4">
-      
       <!-- Layout centrado -->
       <div class="flex flex-col items-center justify-center">
-        
         <!-- Top Cards (2) - Only on large screens -->
         <div class="hidden lg:flex justify-center gap-6 mb-6">
           <!-- Blog Card -->
-          <a
-            href="/blog"
-            class="planet-card group animate-float-1"
-          >
+          <a href="/blog" class="planet-card group animate-float-1">
             <div class="planet-icon planet-blog-icon">📝</div>
-            <h3 class="planet-title group-hover:text-blue-600 dark:group-hover:text-blue-400">
+            <h3
+              class="planet-title group-hover:text-blue-600 dark:group-hover:text-blue-400"
+            >
               Blog
             </h3>
-            <p class="planet-subtitle">
-              Artículos
-            </p>
+            <p class="planet-subtitle">Artículos</p>
           </a>
 
           <!-- Cursos Card -->
-          <a
-            href="/cursos"
-            class="planet-card group animate-float-2"
-          >
+          <a href="/cursos" class="planet-card group animate-float-2">
             <div class="planet-icon planet-cursos-icon">🎓</div>
-            <h3 class="planet-title group-hover:text-green-600 dark:group-hover:text-green-400">
+            <h3
+              class="planet-title group-hover:text-green-600 dark:group-hover:text-green-400"
+            >
               Cursos
             </h3>
-            <p class="planet-subtitle">
-              Gratuitos
-            </p>
+            <p class="planet-subtitle">Gratuitos</p>
           </a>
         </div>
 
         <!-- Center Section: Left Card + Photo + Right Card -->
-        <div class="flex flex-col lg:flex-row items-center justify-center gap-6">
-          
+        <div
+          class="flex flex-col lg:flex-row items-center justify-center gap-6"
+        >
           <!-- Left Card: Packs - Desktop only -->
           <a
             href="/packs"
             class="planet-card planet-card-desktop group animate-float-3"
           >
             <div class="planet-icon planet-packs-icon">📦</div>
-            <h3 class="planet-title group-hover:text-orange-600 dark:group-hover:text-orange-400">
+            <h3
+              class="planet-title group-hover:text-orange-600 dark:group-hover:text-orange-400"
+            >
               Packs
             </h3>
-            <p class="planet-subtitle">
-              Recursos
-            </p>
+            <p class="planet-subtitle">Recursos</p>
           </a>
 
           <!-- Center: Profile Photo + Title -->
           <div class="text-center flex-shrink-0">
             <div class="relative group mb-4">
               <!-- Glow Effect -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full blur-2xl opacity-30 group-hover:opacity-40 transition-opacity animate-pulse-slow"></div>
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full blur-xl opacity-20 animate-spin-slow"></div>
-              
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full blur-2xl opacity-30 group-hover:opacity-40 transition-opacity animate-pulse-slow"
+              >
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full blur-xl opacity-20 animate-spin-slow"
+              >
+              </div>
+
               <!-- Profile Image -->
               <div class="relative w-28 h-28 md:w-36 md:h-36 mx-auto">
                 <img
@@ -94,10 +110,14 @@ const pageDescription =
             </div>
 
             <!-- Title Below Photo -->
-            <h1 class="text-3xl md:text-5xl font-bold mb-2 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500">
+            <h1
+              class="text-3xl md:text-5xl font-bold mb-2 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500"
+            >
               DevbyCes4r
             </h1>
-            <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
+            <p
+              class="text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-sm mx-auto leading-relaxed"
+            >
               Explorando el universo del desarrollo, compartiendo conocimientos
             </p>
           </div>
@@ -108,12 +128,12 @@ const pageDescription =
             class="planet-card planet-card-desktop group animate-float-4"
           >
             <div class="planet-icon planet-tools-icon">🛠️</div>
-            <h3 class="planet-title group-hover:text-purple-600 dark:group-hover:text-purple-400">
+            <h3
+              class="planet-title group-hover:text-purple-600 dark:group-hover:text-purple-400"
+            >
               Herramientas
             </h3>
-            <p class="planet-subtitle">
-              IA y Dev
-            </p>
+            <p class="planet-subtitle">IA y Dev</p>
           </a>
         </div>
 
@@ -123,29 +143,44 @@ const pageDescription =
             <!-- Blog Card Mobile -->
             <a href="/blog" class="planet-card-mobile group">
               <div class="planet-icon-mobile">📝</div>
-              <h3 class="planet-title-mobile group-hover:text-blue-600 dark:group-hover:text-blue-400">Blog</h3>
+              <h3
+                class="planet-title-mobile group-hover:text-blue-600 dark:group-hover:text-blue-400"
+              >
+                Blog
+              </h3>
             </a>
 
             <!-- Cursos Card Mobile -->
             <a href="/cursos" class="planet-card-mobile group">
               <div class="planet-icon-mobile">🎓</div>
-              <h3 class="planet-title-mobile group-hover:text-green-600 dark:group-hover:text-green-400">Cursos</h3>
+              <h3
+                class="planet-title-mobile group-hover:text-green-600 dark:group-hover:text-green-400"
+              >
+                Cursos
+              </h3>
             </a>
 
             <!-- Packs Card Mobile -->
             <a href="/packs" class="planet-card-mobile group">
               <div class="planet-icon-mobile">📦</div>
-              <h3 class="planet-title-mobile group-hover:text-orange-600 dark:group-hover:text-orange-400">Packs</h3>
+              <h3
+                class="planet-title-mobile group-hover:text-orange-600 dark:group-hover:text-orange-400"
+              >
+                Packs
+              </h3>
             </a>
 
             <!-- Herramientas Card Mobile -->
             <a href="/herramientas" class="planet-card-mobile group">
               <div class="planet-icon-mobile">🛠️</div>
-              <h3 class="planet-title-mobile group-hover:text-purple-600 dark:group-hover:text-purple-400">Herramientas</h3>
+              <h3
+                class="planet-title-mobile group-hover:text-purple-600 dark:group-hover:text-purple-400"
+              >
+                Herramientas
+              </h3>
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -255,30 +290,58 @@ const pageDescription =
     }
 
     /* Hover colors for icons */
-    .planet-blog-icon { color: #3b82f6; }
-    .planet-cursos-icon { color: #22c55e; }
-    .planet-packs-icon { color: #f97316; }
-    .planet-tools-icon { color: #a855f7; }
+    .planet-blog-icon {
+      color: #3b82f6;
+    }
+    .planet-cursos-icon {
+      color: #22c55e;
+    }
+    .planet-packs-icon {
+      color: #f97316;
+    }
+    .planet-tools-icon {
+      color: #a855f7;
+    }
 
     /* Floating Animations - Small movements in place */
     @keyframes float-1 {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
     @keyframes float-2 {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
     }
 
     @keyframes float-3 {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      50% { transform: translateY(-12px) translateX(-5px); }
+      0%,
+      100% {
+        transform: translateY(0px) translateX(0px);
+      }
+      50% {
+        transform: translateY(-12px) translateX(-5px);
+      }
     }
 
     @keyframes float-4 {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      50% { transform: translateY(-12px) translateX(5px); }
+      0%,
+      100% {
+        transform: translateY(0px) translateX(0px);
+      }
+      50% {
+        transform: translateY(-12px) translateX(5px);
+      }
     }
 
     .animate-float-1 {
@@ -302,8 +365,13 @@ const pageDescription =
 
     /* Additional Animations */
     @keyframes pulse-slow {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.5; }
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.5;
+      }
     }
 
     .animate-pulse-slow {
@@ -311,19 +379,30 @@ const pageDescription =
     }
 
     @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .animate-spin-slow {
       animation: spin-slow 10s linear infinite;
     }
 
-    .animation-delay-500 { animation-delay: 0.5s; }
-    .animation-delay-1000 { animation-delay: 1s; }
-    .animation-delay-1500 { animation-delay: 1.5s; }
-    .animation-delay-2000 { animation-delay: 2s; }
-
+    .animation-delay-500 {
+      animation-delay: 0.5s;
+    }
+    .animation-delay-1000 {
+      animation-delay: 1s;
+    }
+    .animation-delay-1500 {
+      animation-delay: 1.5s;
+    }
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
   </style>
 
   <section class="py-16 border-t border-slate-200 dark:border-slate-800/50">
@@ -334,25 +413,24 @@ const pageDescription =
       <p
         class="text-slate-700 dark:text-slate-400 text-lg mb-8 leading-relaxed text-justify"
       >
-        Hola, mi nombre es Cesar Nuñez, soy ingeniero de sistemas y
-        desarrollador con más de 7 años de experiencia creando soluciones para
-        la web y el ecosistema móvil.
+        Hola, soy Cesar Nuñez, ingeniero de sistemas y desarrollador con más de
+        7 años de experiencia creando soluciones para web y aplicaciones
+        móviles.
         <br /><br />
-        He trabajado construyendo interfaces modernas, rápidas y bien estructuradas,
-        siempre con un enfoque fuerte en UX/UI y en ofrecer experiencias fluidas y
-        agradables para el usuario.
+        Me especializo en construir interfaces modernas, rápidas y bien estructuradas,
+        con un enfoque en UX/UI y en ofrecer experiencias fluidas e intuitivas para
+        el usuario.
         <br /><br />
-        Tengo experiencia en múltiples tecnologías y frameworks, incluyendo TypeScript,
-        PHP, Python, Angular, Node.js, Ionic, Kotlin, Swift, AWS, AppSync, Oracle,
-        PL/SQL, MySQL, Github, Figma, etc.
+        He trabajado con tecnologías como TypeScript, Python, PHP, Angular, Node.js,
+        Ionic, Kotlin, Swift y AWS, integrando servicios backend y funcionalidades
+        nativas en aplicaciones híbridas para Android e iOS.
         <br /><br />
-        Actualmente soy líder de desarrollo móvil, donde diseño y mantengo aplicaciones
-        híbridas para Android e iOS, integrando funciones nativas y optimizando cada
-        detalle para lograr productos estables e intuitivos.
+        Actualmente me desempeño como líder de desarrollo móvil, diseñando y manteniendo
+        productos estables, escalables y optimizados al detalle.
         <br /><br />
-        Me apasiona aprender, mejorar procesos y compartir conocimiento. Por eso creé
-        este espacio: para documentar mi camino y brindar herramientas que impulsen
-        el crecimiento de otros desarrolladores.
+        Me apasiona aprender, mejorar procesos y compartir conocimiento. Este espacio
+        nace para documentar mi camino y brindar herramientas que ayuden a otros desarrolladores
+        a crecer.
       </p>
     </div>
   </section>
