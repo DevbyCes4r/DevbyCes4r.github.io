@@ -6,7 +6,7 @@ affiliateLink: 'https://edutin.com/sh-11567'
 tags: ['Data Science']
 category: 'datos'
 group: 'Inteligencia Artificial'
-orderGroup: 1
+orderGroup: 3
 publishDate: 2025-10-09
 ---
 

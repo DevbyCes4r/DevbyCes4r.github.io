@@ -7,7 +7,6 @@ affiliateLink: 'https://edutin.com/sh-8990'
 tags: ['Data']
 category: 'datos'
 group: 
-  - 'Inteligencia Artificial'
   - 'Analistas de Datos y DBA'
 orderGroup: 1
 publishDate: 2025-11-22

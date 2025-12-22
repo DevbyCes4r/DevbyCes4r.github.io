@@ -7,7 +7,7 @@ affiliateLink: 'https://edutin.com/sh-11566'
 tags: ['AI Tools']
 category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'
-orderGroup: 1
+orderGroup: 2
 publishDate: 2025-10-07
 ---
 

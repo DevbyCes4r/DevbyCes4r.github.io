@@ -7,7 +7,7 @@ affiliateLink: 'https://edutin.com/sh-9911'
 tags: ['AI']
 category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'
-orderGroup: 1
+orderGroup: 4
 publishDate: 2025-11-08
 ---
 

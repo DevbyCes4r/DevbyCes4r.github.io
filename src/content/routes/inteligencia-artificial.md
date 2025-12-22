@@ -1,6 +1,7 @@
 ---
-title: Inteligencia Artificial
-description: Domina la inteligencia artificial desde cero con estos 5 cursos especializados. Aprende Machine Learning, Deep Learning y aplicaciones prácticas de IA.
+title: Inteligencia Artificial para Devs
+slug: inteligencia-artificial-devs
+description: 'Aprende IA desde cero: fundamentos, ciencia de datos, ChatGPT, Python y desarrollo de software con IA.'
 icon: 🤖
 group: Inteligencia Artificial
 order: 2

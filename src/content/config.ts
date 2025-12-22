@@ -71,6 +71,7 @@ const categoriesCollection = defineCollection({
         icon: z.string(),
         description: z.string(),
         order: z.number().default(1),
+        moreCoursesLink: z.string().url().optional(),
     }),
 });
 
