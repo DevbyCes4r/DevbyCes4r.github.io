@@ -90,7 +90,7 @@ const routesCollection = defineCollection({
     }),
 });
 
-const packsCollection = defineCollection({
+const linksCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
@@ -110,5 +110,5 @@ export const collections = {
     'courses': coursesCollection,
     'categories': categoriesCollection,
     'routes': routesCollection,
-    'packs': packsCollection,
+    'links': linksCollection,
 };

@@ -3,16 +3,16 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const packs = await getCollection('packs');
-  return packs.map((pack) => ({
-    params: { id: pack.id.replace('.md', '') },
-    props: { pack },
+  const links = await getCollection('links');
+  return links.map((link) => ({
+    params: { id: link.id.replace('.md', '') },
+    props: { link },
   }));
 }
 
-const { pack } = Astro.props;
-const { data, body } = pack;
-const { Content } = await pack.render();
+const { link } = Astro.props;
+const { data, body } = link;
+const { Content } = await link.render();
 const hasContent = body && body.trim().length > 0;
 
 const jsonLd = {
@@ -87,13 +87,13 @@ const jsonLd = {
       <!-- Back link -->
       <div class="text-center mt-12">
         <a 
-          href="/packs" 
+          href="/links" 
           class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Ver todos los packs
+          Ver todos los links
         </a>
       </div>
     </div>

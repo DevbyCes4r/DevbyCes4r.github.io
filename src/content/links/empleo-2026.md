@@ -1,6 +1,6 @@
 ---
 title: "Cursos tech para empleo en 2026"
-description: "Colección de cursos fundamentales en Ciberseguridad, Cloud, Data Analytics y Gestión de Proyectos"
+description: "Ciberseguridad, Cloud, Data Analytics y Gestión de Proyectos"
 publishDate: 2025-12-16
 links:
   - title: "Ciberseguridad"

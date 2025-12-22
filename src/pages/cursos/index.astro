@@ -8,7 +8,7 @@ import { getAllRoutes } from "../../lib/routes";
 const courses = await getCollection("courses");
 const categories = await getAllCategories();
 const routes = await getAllRoutes();
-const packs = await getCollection("packs");
+const links = await getCollection("links");
 
 // Group courses by main category
 type CategoryGrouped = Record<string, typeof courses>;
@@ -445,8 +445,8 @@ const pageDescription =
                 )
             }
 
-            <!-- Packs Section -->
-            <div class="mb-20" id="packs-recomendados">
+            <!-- Links Section -->
+            <div class="mb-20" id="links-recomendados">
                 <div class="flex items-center gap-3 mb-8">
                     <svg
                         class="w-6 h-6 text-orange-600 dark:text-orange-400"
@@ -465,30 +465,30 @@ const pageDescription =
                         class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white"
                     >
                         <a
-                            href="/packs"
+                            href="/links"
                             class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                         >
-                            Packs de Recursos
+                            Links de Recursos
                         </a>
                     </h2>
                 </div>
                 <p class="text-slate-600 dark:text-slate-400 mb-8 max-w-3xl">
-                    Colecciones de cursos, herramientas, productos y recursos
+                    Colecciones de cursos, herramientas y productos
                     seleccionados especialmente para ti
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {
-                        packs.map((pack) => (
+                        links.map((link) => (
                             <a
-                                href={`/packs/${pack.id.replace(".md", "")}`}
+                                href={`/links/${link.id.replace(".md", "")}`}
                                 class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 overflow-hidden"
                             >
                                 <div class="p-6">
                                     <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors line-clamp-2">
-                                        {pack.data.title}
+                                        {link.data.title}
                                     </h2>
                                     <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
-                                        {pack.data.description}
+                                        {link.data.description}
                                     </p>
 
                                     <div class="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-4">
@@ -507,8 +507,8 @@ const pageDescription =
                                                 />
                                             </svg>
                                             <span class="font-medium">
-                                                {pack.data.links.length}{" "}
-                                                {pack.data.links.length === 1
+                                                {link.data.links.length}{" "}
+                                                {link.data.links.length === 1
                                                     ? "recurso"
                                                     : "recursos"}
                                             </span>
@@ -529,7 +529,7 @@ const pageDescription =
                                             </svg>
                                             <span>
                                                 {new Date(
-                                                    pack.data.publishDate,
+                                                    link.data.publishDate,
                                                 ).toLocaleDateString("es-ES", {
                                                     month: "short",
                                                     year: "numeric",
@@ -594,7 +594,6 @@ const pageDescription =
             title="Ver categorías"
         >
             <span class="text-lg">🔍</span>
-            <!-- <span class="hidden sm:inline">Buscar</span> -->
         </a>
         <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
         <a
@@ -613,6 +612,14 @@ const pageDescription =
         >
             <span class="text-lg">📚</span>
             <span class="hidden sm:inline">Rutas de Estudio</span>
+        </a>
+        <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
+                <a
+            href="/links"
+            class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            title="Ver categorías"
+        >
+            <span class="text-lg">🔗</span>
         </a>
     </div>
 

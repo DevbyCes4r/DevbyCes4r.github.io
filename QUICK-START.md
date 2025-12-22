@@ -39,7 +39,7 @@ npx astro add tailwind sitemap
 ```bash
 # Crear estructura
 mkdir -p src/{components,content/blog,layouts,pages/blog,styles,utils}
-mkdir -p public/images/{blog,packs}
+mkdir -p public/images/{blog,links}
 ```
 
 ### 3️⃣ Copiar Archivos Base (1 min)
@@ -60,7 +60,7 @@ Copia estos archivos del artifact a tu proyecto:
 - ✅ `BlogPost.astro`
 
 **Components** (`src/components/`):
-- ✅ `PackCard.astro`
+- ✅ `LinkCard.astro`
 
 **Pages** (`src/pages/`):
 - ✅ `index.astro`
@@ -88,10 +88,10 @@ const socialLinks = [
   // ...
 ];
 
-// Línea ~6: Actualiza tus packs de cursos
-const packs = [
+// Línea ~6: Actualiza tus links de cursos
+const links = [
   {
-    title: 'TU PACK',
+    title: 'TU LINK',
     description: 'DESCRIPCIÓN',
     price: '$299',
     affiliateLink: 'TU-LINK-DE-AFILIADO',
@@ -125,7 +125,7 @@ npm run dev
 # Abrir navegador en http://localhost:4321
 ```
 
-✅ **Deberías ver**: Tu página de inicio con tus packs
+✅ **Deberías ver**: Tu página de inicio con tus links
 
 ### 7️⃣ Deploy en Vercel (1 min)
 

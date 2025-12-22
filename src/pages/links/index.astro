@@ -2,14 +2,14 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const packs = await getCollection('packs');
-const sortedPacks = packs.sort((a, b) => 
+const links = await getCollection('links');
+const sortedLinks = links.sort((a, b) => 
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 ---
 
 <BaseLayout 
-  title="Packs de Recursos | DevbyCes4r"
+  title="Links de Recursos | DevbyCes4r"
   description="Colecciones curadas de recursos, cursos, herramientas y productos recomendados para impulsar tu carrera tech"
 >
   <div class="min-h-screen py-10 px-4 flex justify-center">
@@ -17,30 +17,30 @@ const sortedPacks = packs.sort((a, b) =>
       
       <!-- Header -->
       <div class="text-center mb-16">
-        <div class="text-6xl mb-4 animate-bounce">📦</div>
+        <div class="text-6xl mb-4 animate-bounce">🔗</div>
         <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
-          Packs de Recursos
+          Links de Recursos
         </h1>
         <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          Colecciones de cursos, herramientas, productos y recursos seleccionados especialmente para ti
+          Colecciones de cursos, herramientas y productos seleccionados especialmente para ti
         </p>
       </div>
 
-      <!-- Packs Grid -->
+      <!-- Links Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {sortedPacks.map((pack) => (
+        {sortedLinks.map((link) => (
           <a 
-            href={`/packs/${pack.id.replace('.md', '')}`}
+            href={`/links/${link.id.replace('.md', '')}`}
             class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
           >
 
             {/* Content */}
             <div class="p-6">
               <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-2">
-                {pack.data.title}
+                {link.data.title}
               </h2>
               <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
-                {pack.data.description}
+                {link.data.description}
               </p>
               
               {/* Stats */}
@@ -49,13 +49,13 @@ const sortedPacks = packs.sort((a, b) =>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  <span class="font-medium">{pack.data.links.length} {pack.data.links.length === 1 ? 'recurso' : 'recursos'}</span>
+                  <span class="font-medium">{link.data.links.length} {link.data.links.length === 1 ? 'recurso' : 'recursos'}</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span>{new Date(pack.data.publishDate).toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}</span>
+                  <span>{new Date(link.data.publishDate).toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}</span>
                 </div>
               </div>
 
@@ -74,11 +74,11 @@ const sortedPacks = packs.sort((a, b) =>
       </div>
 
       <!-- Empty state -->
-      {sortedPacks.length === 0 && (
+      {sortedLinks.length === 0 && (
         <div class="text-center py-20">
-          <div class="text-6xl mb-4">📦</div>
+          <div class="text-6xl mb-4">🔗</div>
           <p class="text-xl text-slate-600 dark:text-slate-400">
-            Aún no hay packs disponibles
+            Aún no hay links disponibles
           </p>
         </div>
       )}

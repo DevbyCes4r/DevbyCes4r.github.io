@@ -77,10 +77,10 @@ El sitio estará disponible en `http://localhost:4321`
 │   ├── robots.txt
 │   └── images/
 │       ├── blog/
-│       └── packs/
+│       └── links/
 ├── src/
 │   ├── components/
-│   │   └── PackCard.astro
+│   │   └── LinkCard.astro
 │   ├── content/
 │   │   ├── config.ts
 │   │   └── blog/
@@ -125,7 +125,7 @@ Edita los siguientes archivos:
 - Línea 79: Cambia `'@tuusuario'`
 
 **src/pages/index.astro**:
-- Líneas 6-65: Actualiza información de packs
+- Líneas 6-65: Actualiza información de links
 - Líneas 67-72: Actualiza links sociales
 
 ### 3. Añadir tus Imágenes
@@ -134,7 +134,7 @@ Coloca las imágenes en:
 - `/public/logo.png` - Logo principal (96x96px)
 - `/public/favicon.svg` - Favicon
 - `/public/images/blog/` - Imágenes de posts
-- `/public/images/packs/` - Imágenes de packs
+- `/public/images/links/` - Imágenes de links
 
 ### 4. Crear tu Primer Post
 
@@ -248,7 +248,7 @@ Cada página incluye:
 - FAQs con schema markup
 - Breadcrumbs semánticos
 - Article schema para posts
-- Course schema para packs
+- Course schema para links
 
 ### Contenido Semántico
 
@@ -277,7 +277,7 @@ faqs:
 7. **Reading time**: Calcular e incluir
 8. **FAQs**: Al menos 3 preguntas relevantes
 
-### Para Packs/Productos
+### Para Links/Productos
 
 1. **Schema Course**: Incluir precio, descripción, proveedor
 2. **Reviews**: Añadir si tienes testimonios

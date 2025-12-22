@@ -29,7 +29,7 @@ export default defineConfig({
           item.priority = 0.9;
           item.changefreq = 'monthly';
         }
-        if (item.url.includes('/packs/')) {
+        if (item.url.includes('/links/')) {
           item.priority = 0.8;
           item.changefreq = 'weekly';
         }

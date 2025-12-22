@@ -344,13 +344,13 @@ Respuesta que realmente ayuda...
 }
 ```
 
-### Course Schema (para packs)
+### Course Schema (para links)
 
 ```javascript
 {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "Pack Web Developer desde Cero",
+  "name": "Link Web Developer desde Cero",
   "description": "Conviértete en desarrollador web profesional",
   "provider": {
     "@type": "Organization",
@@ -381,7 +381,7 @@ Respuesta que realmente ayuda...
     "price": "299.00",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
-    "url": "https://tudominio.com/packs/web-dev",
+    "url": "https://tudominio.com/links/web-dev",
     "validFrom": "2025-01-01"
   },
   
