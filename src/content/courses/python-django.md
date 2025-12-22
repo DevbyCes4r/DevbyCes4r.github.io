@@ -7,7 +7,7 @@ affiliateLink: 'https://edutin.com/sh-10084'
 tags: ['Fullstack']
 category: 'programacion'
 group: 'Web Developer'
-orderGroup: 1
+orderGroup: 7
 publishDate: 2025-10-13
 ---
 

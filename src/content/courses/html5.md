@@ -7,7 +7,7 @@ affiliateLink: 'https://edutin.com/sh-10487'
 tags: ['Frontend']
 category: 'programacion'
 group: 'Web Developer'
-orderGroup: 1
+orderGroup: 2
 publishDate: 2025-10-25
 ---
 

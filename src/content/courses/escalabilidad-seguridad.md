@@ -6,7 +6,7 @@ affiliateLink: 'https://edutin.com/sh-10492'
 tags: ['DevOps']
 category: 'devops-cloud'
 group: 'Web Developer'
-orderGroup: 1
+orderGroup: 10
 publishDate: 2025-10-19
 ---
 
