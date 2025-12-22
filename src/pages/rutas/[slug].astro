@@ -60,10 +60,6 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                             >Rutas de Estudio</a
                         >
                     </li>
-                    <li aria-hidden="true">/</li>
-                    <li class="text-slate-900 dark:text-white font-medium">
-                        {plan.title}
-                    </li>
                 </ol>
             </nav>
 
@@ -85,35 +81,6 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                     {planCourses.length === 1 ? "curso" : "cursos"} en esta ruta
                 </p>
             </div>
-
-            <!-- Learning Objectives -->
-            {
-                plan?.objectives?.length > 0 && (
-                    <div class="mb-12 p-6 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl">
-                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                            ¿Qué aprenderás?
-                        </h2>
-                        <ul class="space-y-3">
-                            {plan?.objectives?.map((objective) => (
-                                <li class="flex items-start gap-3 text-slate-700 dark:text-slate-300">
-                                    <svg
-                                        class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"
-                                        />
-                                    </svg>
-                                    <span>{objective}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )
-            }
 
             <!-- Courses in Plan -->
             <div class="mb-16">
@@ -186,9 +153,38 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                 </div>
             </div>
 
+            <!-- Learning Objectives -->
+            {
+                plan?.objectives && plan.objectives.length > 0 && (
+                    <div class="mb-12 p-6 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                            ¿Qué aprenderás?
+                        </h2>
+                        <ul class="space-y-3">
+                            {plan.objectives.map((objective) => (
+                                <li class="flex items-start gap-3 text-slate-700 dark:text-slate-300">
+                                    <svg
+                                        class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span>{objective}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }
+
             <!-- Plan-specific FAQs -->
             {
-                plan?.faqs?.length > 0 && (
+                plan?.faqs && plan.faqs.length > 0 && (
                     <FAQSection
                         faqs={plan.faqs}
                         title={`Preguntas sobre esta ruta`}

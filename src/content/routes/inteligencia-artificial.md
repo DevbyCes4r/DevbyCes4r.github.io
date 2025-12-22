@@ -4,11 +4,6 @@ description: Domina la inteligencia artificial desde cero con estos 5 cursos esp
 icon: 🤖
 group: Inteligencia Artificial
 order: 2
-objectives:
-  - Entender los fundamentos de IA y Machine Learning
-  - Aplicar IA con Python y bibliotecas especializadas
-  - Crear proyectos de IA y modelos de ML
-  - Implementar soluciones de Deep Learning
 faqs:
   - question: ¿Necesito experiencia previa en programación?
     answer: Se recomienda tener conocimientos básicos de Python, aunque algunos cursos comienzan desde cero. La experiencia en matemáticas también es útil.

@@ -4,11 +4,6 @@ description: Conviértete en analista de datos o administrador de bases de datos
 icon: 📊
 group: Analistas de Datos y DBA
 order: 3
-objectives:
-  - Dominar SQL y consultas complejas
-  - Administrar bases de datos relacionales y NoSQL
-  - Realizar análisis de datos y visualizaciones
-  - Usar herramientas como Power BI y Excel avanzado
 faqs:
   - question: ¿Qué bases de datos aprenderé?
     answer: Aprenderás MySQL, SQL Server, Oracle, MongoDB y Redis, cubriendo tanto bases de datos relacionales como NoSQL.

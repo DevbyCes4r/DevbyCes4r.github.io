@@ -82,11 +82,11 @@ const routesCollection = defineCollection({
         icon: z.string(),
         group: z.string(),
         order: z.number().default(1),
-        objectives: z.array(z.string()),
+        objectives: z.array(z.string()).optional(),
         faqs: z.array(z.object({
             question: z.string(),
             answer: z.string(),
-        })),
+        })).optional(),
     }),
 });
 

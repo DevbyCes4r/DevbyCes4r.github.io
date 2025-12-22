@@ -4,11 +4,6 @@ description: Conviértete en desarrollador web full-stack con este plan curado d
 icon: 💻
 group: Web Developer
 order: 1
-objectives:
-  - Dominar HTML, CSS y JavaScript desde cero
-  - Aprender frameworks modernos como Angular y Django
-  - Construir aplicaciones web completas y funcionales
-  - Trabajar con bases de datos y APIs
 faqs:
   - question: ¿Cuánto tiempo toma completar este plan de estudio?
     answer: Aproximadamente 3-6 meses estudiando de 2 a 3 horas diarias. El tiempo puede variar según tu ritmo de aprendizaje y experiencia previa.
