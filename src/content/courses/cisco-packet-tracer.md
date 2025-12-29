@@ -1,0 +1,12 @@
+---
+title: 'Cisco Packet Tracer'
+description: 'Simula redes y practica configuraciones en un entorno virtual.'
+icon: '🖥️'
+videoId: 'fMi8z9Osz5A'
+affiliateLink: 'https://edutin.com/sh-11108'
+tags: ['Infraestructura', 'Simulación']
+category: 'devops-cloud'
+group: 'Infraestructura'
+orderGroup: 4
+publishDate: 2025-10-01
+---
