@@ -29,11 +29,11 @@ const pageDescription =
         <a href={`/blog/${post.slug}`} class="group">
           <article class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full flex flex-col">
             {post.data.image && (
-              <div class="aspect-video overflow-hidden">
+              <div class="aspect-[3/1] overflow-hidden">
                 <img
                   src={post.data.image}
                   alt={post.data.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             )}

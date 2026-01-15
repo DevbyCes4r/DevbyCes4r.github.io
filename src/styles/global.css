@@ -193,49 +193,82 @@
 
 /* Lists */
 .ai-content-wrapper ul {
+  @apply space-y-3 my-6;
+}
+
+.ai-content-wrapper ul li {
+  @apply text-slate-700 dark:text-slate-300 leading-relaxed;
+}
+
+/* Only add custom bullets to plain text lists */
+.ai-content-wrapper > ul > li {
+  @apply relative pl-6 list-none;
+}
+
+.ai-content-wrapper > ul > li::before {
+  content: "";
+  @apply absolute left-0 top-2.5 w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full;
+}
+
+/* Remove bullets from lists with checkboxes */
+.ai-content-wrapper ul li:has(input[type="checkbox"]) {
+  @apply pl-0 list-none;
+}
+
+.ai-content-wrapper ul li:has(input[type="checkbox"])::before {
+  content: none;
+}
+
+.ai-content-wrapper ul li input[type="checkbox"] {
+  @apply mr-3 w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500;
+}
+
+/* Don't add bullets to lists that already have visual markers (like the AIOptimizedContent component) */
+.ai-content-wrapper > div ul li {
   @apply list-none;
 }
 
+.ai-content-wrapper > div ul li::before {
+  content: none;
+}
+
+/* Ordered lists with timeline effect */
 .ai-content-wrapper ol {
-  @apply list-none space-y-8 pl-4 relative my-8;
+  @apply list-none space-y-6 pl-0 relative my-8;
   counter-reset: item;
 }
 
-/* Timeline line */
-.ai-content-wrapper ol::before {
-  content: "";
-  @apply absolute left-4 top-0 bottom-0 w-0.5 bg-blue-100 dark:bg-slate-700/50;
-  @apply -translate-x-1/2 z-0;
-}
-
 .ai-content-wrapper ol li {
-  @apply relative pl-8 text-slate-700 dark:text-slate-300;
+  @apply relative pl-10 text-slate-700 dark:text-slate-300 leading-relaxed;
   counter-increment: item;
 }
 
 .ai-content-wrapper ol li::before {
   content: counter(item);
-  @apply absolute left-0 top-1 flex items-center justify-center;
-  @apply w-8 h-8 rounded-full text-sm font-bold z-10;
-  @apply bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400;
-  @apply border-2 border-blue-500 dark:border-blue-400;
-  @apply shadow-sm;
-  /* Centering relative to the line */
-  @apply -translate-x-1/2;
+  @apply absolute left-0 top-0 flex items-center justify-center;
+  @apply w-7 h-7 rounded-full text-sm font-bold;
+  @apply bg-gradient-to-br from-blue-500 to-purple-600 text-white;
+  @apply shadow-md;
 }
 
 .ai-content-wrapper ol li p {
   @apply mt-0 mb-2;
 }
 
-/* Enhance strong tags inside steps */
-.ai-content-wrapper ol li strong {
-  @apply text-slate-900 dark:text-white block text-lg mb-1;
+/* Enhance strong tags inside lists */
+.ai-content-wrapper li strong {
+  @apply text-slate-900 dark:text-white font-bold;
 }
 
-.ai-content-wrapper li>ul,
-.ai-content-wrapper li>ol {
-  @apply mt-3 ml-6;
+/* Nested lists */
+.ai-content-wrapper li > ul,
+.ai-content-wrapper li > ol {
+  @apply mt-3 ml-0;
+}
+
+/* Remove emoji styling from list markers */
+.ai-content-wrapper li::marker {
+  @apply text-transparent;
 }
 
 /* Code Blocks */
@@ -244,6 +277,7 @@
   @apply border border-slate-700 dark:border-slate-800;
   @apply overflow-x-auto shadow-lg;
   @apply relative;
+  @apply max-w-4xl mx-auto;
 }
 
 .ai-content-wrapper pre::before {
@@ -255,6 +289,12 @@
 .ai-content-wrapper pre code {
   @apply text-sm font-mono text-slate-100;
   @apply block relative z-10 pt-8;
+  @apply leading-relaxed;
+}
+
+/* Adjust code blocks inside lists */
+.ai-content-wrapper li pre {
+  @apply max-w-full;
 }
 
 /* Inline Code */
@@ -271,10 +311,11 @@
   @apply pl-6 pr-6 py-4 my-8 rounded-r-xl;
   @apply italic text-slate-700 dark:text-slate-300;
   @apply shadow-sm;
+  @apply max-w-3xl mx-auto;
 }
 
 .ai-content-wrapper blockquote p {
-  @apply mb-0;
+  @apply mb-0 text-base leading-relaxed;
 }
 
 /* Tables */
@@ -282,6 +323,7 @@
   @apply w-full my-8 border-collapse;
   @apply bg-white dark:bg-slate-800 rounded-xl overflow-hidden;
   @apply shadow-lg;
+  @apply max-w-4xl mx-auto;
 }
 
 .ai-content-wrapper thead {
@@ -289,17 +331,21 @@
 }
 
 .ai-content-wrapper th {
-  @apply px-6 py-4 text-left text-sm font-semibold text-white;
+  @apply px-4 py-3 text-left text-xs md:text-sm font-semibold text-white;
   @apply uppercase tracking-wider;
 }
 
 .ai-content-wrapper td {
-  @apply px-6 py-4 text-slate-700 dark:text-slate-300;
+  @apply px-4 py-3 text-sm md:text-base text-slate-700 dark:text-slate-300;
   @apply border-b border-slate-200 dark:border-slate-700;
 }
 
 .ai-content-wrapper tbody tr:hover {
   @apply bg-slate-50 dark:bg-slate-700/50 transition-colors;
+}
+
+.ai-content-wrapper tbody tr:last-child td {
+  @apply border-b-0;
 }
 
 /* Images */
