@@ -1,89 +1,67 @@
 # robots.txt para DevbyCes4r.me
-# Optimizado para Google Search Console y bots de IA
+# Optimizado para Google Search Console
 
 # Sitemap principal
 Sitemap: https://devbyces4r.me/sitemap-index.xml
 
-# Googlebot - Crawler principal
+# Googlebot - Crawler principal de Google
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0
-
-# Googlebot Images
-User-agent: Googlebot-Image
-Allow: /images/
-Allow: /favicon/
-
-# Todos los bots (configuración general)
-User-agent: *
-Allow: /
-Crawl-delay: 1
-
-# Páginas específicas que queremos que se indexen
-Allow: /blog/
-Allow: /cursos/
-Allow: /herramientas/
-Allow: /links/
-Allow: /rutas/
-
-# Páginas que NO queremos indexar
 Disallow: /admin/
 Disallow: /_astro/
 Disallow: /chunks/
-Disallow: *.json
-Disallow: /api/
 
-# === BOTS DE IA - Explícitamente Permitidos ===
+# Googlebot Images
+User-agent: Googlebot-Image
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Crawl-delay: 1
+
+# === BOTS DE IA - Permitidos para entrenamiento ===
 
 # OpenAI GPT
 User-agent: GPTBot
 Allow: /
-Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
-Crawl-delay: 1
 
-# Google Bard/Gemini
+# Google Gemini
 User-agent: Google-Extended
 Allow: /
-Crawl-delay: 1
 
 # Anthropic Claude
 User-agent: Claude-Web
 Allow: /
-Crawl-delay: 1
 
 User-agent: anthropic-ai
 Allow: /
-Crawl-delay: 1
 
 # Perplexity AI
 User-agent: PerplexityBot
 Allow: /
-Crawl-delay: 1
 
 # Meta AI
 User-agent: FacebookBot
 Allow: /
 Crawl-delay: 2
 
-# Common Crawl (dataset para IA)
+# Common Crawl
 User-agent: CCBot
 Allow: /
 Crawl-delay: 2
 
-# Bytedance (TikTok)
+# Bytedance
 User-agent: Bytespider
 Allow: /
 Crawl-delay: 2
 
-# Bing
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
+# === BLOQUEAR BOTS MALICIOSOS ===
 
-# === Bloquear bots maliciosos ===
 User-agent: AhrefsBot
 Disallow: /
 
@@ -96,5 +74,11 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# Host (para prevenir mirror sites)
-Host: https://devbyces4r.me
+# === REGLAS GENERALES (otros bots) ===
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /chunks/
+Crawl-delay: 1
