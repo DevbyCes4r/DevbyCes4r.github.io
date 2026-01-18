@@ -191,6 +191,46 @@ const articleSchema = {
   </div>
 
   <script>
+    import { trackBlogComplete, waitForGoatCounter } from '../utils/analytics';
+
+    // Solo trackear lectura completa (100%) - el dato más valioso
+    const blogSlug = window.location.pathname.split('/').filter(Boolean).pop() || '';
+    let tracked = false;
+
+    function checkComplete() {
+      if (tracked) return;
+      
+      const article = document.querySelector('article');
+      if (!article) return;
+
+      const scrollPercentage = Math.round(
+        ((window.scrollY + window.innerHeight - article.offsetTop) / article.offsetHeight) * 100
+      );
+
+      if (scrollPercentage >= 95) {
+        tracked = true;
+        waitForGoatCounter(() => trackBlogComplete(blogSlug));
+      }
+    }
+
+    window.addEventListener('scroll', () => requestAnimationFrame(checkComplete), { passive: true });
+
+    // Abrir enlaces en nueva pestaña
+    document.addEventListener('DOMContentLoaded', () => {
+      const contentWrapper = document.querySelector('.ai-content-wrapper');
+      if (contentWrapper) {
+        contentWrapper.querySelectorAll('a').forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href && !href.startsWith('#')) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+          }
+        });
+      }
+    });
+  </script>
+
+  <script>
     const progressBar = document.getElementById("progress-bar");
 
     function updateProgress() {

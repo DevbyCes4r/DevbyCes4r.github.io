@@ -142,9 +142,13 @@ const pageDescription =
                         {/* Primary CTA Button - Apple-Inspired Design */}
                         <div class="flex justify-center md:justify-end">
                             <a
+                                id="course-access-btn"
                                 href={entry.data.affiliateLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                data-course-slug={entry.slug}
+                                data-course-title={entry.data.title}
+                                data-course-category={entry.data.category}
                                 class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto"
                             >
                                 <svg
@@ -332,9 +336,12 @@ const pageDescription =
                 {/* Sticky Floating CTA Button - Apple-Inspired Design */}
                 <div id="sticky-cta" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300">
                     <a
+                        id="sticky-course-btn"
                         href={entry.data.affiliateLink}
                         target="_blank"
                         rel="noopener noreferrer"
+                        data-course-slug={entry.slug}
+                        data-course-title={entry.data.title}
                         class="sticky-floating-btn group flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-full font-semibold shadow-xl transition-all duration-300"
                     >
                         <svg
@@ -420,7 +427,9 @@ const pageDescription =
                                 <a
                                     href={`/cursos/${course.slug}`}
                                     target="_blank"
-                                    class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                                    data-course-slug={course.slug}
+                                    data-course-title={course.data.title}
+                                    class="course-card-link group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
                                 >
                                     <div class="flex items-start gap-4">
                                         <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
@@ -659,6 +668,23 @@ const pageDescription =
                 
                 // Initial check
                 updateStickyCTA();
+            </script>
+            <script>
+                import { trackCourseClick, waitForGoatCounter } from '../../utils/analytics';
+
+                // Solo trackear clicks en "Acceder al Curso" (conversión importante)
+                const accessBtn = document.getElementById('course-access-btn');
+                const stickyBtn = document.getElementById('sticky-course-btn');
+                
+                accessBtn?.addEventListener('click', () => {
+                    const slug = accessBtn.getAttribute('data-course-slug') || '';
+                    waitForGoatCounter(() => trackCourseClick(slug));
+                });
+
+                stickyBtn?.addEventListener('click', () => {
+                    const slug = stickyBtn.getAttribute('data-course-slug') || '';
+                    waitForGoatCounter(() => trackCourseClick(slug));
+                });
             </script>
             <script>
                 // Open all course content links in new tab

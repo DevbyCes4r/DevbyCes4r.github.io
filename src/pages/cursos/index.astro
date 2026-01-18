@@ -622,26 +622,15 @@ const pageDescription =
     </div>
 
     <script>
-        // Course search/filter functionality
-        const searchInput = document.getElementById(
-            "courseSearch",
-        ) as HTMLInputElement;
-        const searchResultsSection = document.getElementById(
-            "searchResultsSection",
-        ) as HTMLElement;
-        const searchResultsHeader = document.getElementById(
-            "searchResultsHeader",
-        ) as HTMLElement;
-        const searchResultsGrid = document.getElementById(
-            "searchResultsGrid",
-        ) as HTMLElement;
+        import { trackSearch, waitForGoatCounter } from '../../utils/analytics';
+
+        const searchInput = document.getElementById("courseSearch") as HTMLInputElement;
+        const searchResultsSection = document.getElementById("searchResultsSection") as HTMLElement;
+        const searchResultsHeader = document.getElementById("searchResultsHeader") as HTMLElement;
+        const searchResultsGrid = document.getElementById("searchResultsGrid") as HTMLElement;
         const noResults = document.getElementById("noResults") as HTMLElement;
-        const resultsCount = document.getElementById(
-            "resultsCount",
-        ) as HTMLElement;
-        const clearButton = document.getElementById(
-            "clearSearch",
-        ) as HTMLButtonElement;
+        const resultsCount = document.getElementById("resultsCount") as HTMLElement;
+        const clearButton = document.getElementById("clearSearch") as HTMLButtonElement;
 
         // Get all course cards and their parent sections
         // Filter out duplicates based on course slug
@@ -745,18 +734,14 @@ const pageDescription =
                 noResults.classList.add("hidden");
                 resultsCount.textContent = matchedCards.length.toString();
 
-                // Clone and append matched cards
                 matchedCards.forEach((card) => {
                     const clone = card.cloneNode(true) as HTMLElement;
-                    // Reset opacity and display styles on clone
                     clone.style.opacity = "0";
                     clone.style.display = "";
                     searchResultsGrid.appendChild(clone);
 
-                    // Animate in
                     requestAnimationFrame(() => {
-                        clone.style.transition =
-                            "opacity 0.3s ease-out, transform 0.3s ease-out";
+                        clone.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
                         clone.style.opacity = "1";
                     });
                 });
@@ -765,6 +750,9 @@ const pageDescription =
                 noResults.classList.remove("hidden");
                 resultsCount.textContent = "0";
             }
+            
+            // Solo trackear búsquedas (clave para detectar contenido faltante)
+            waitForGoatCounter(() => trackSearch(searchTerm, matchedCards.length));
         }
 
         // Add event listener with debouncing
