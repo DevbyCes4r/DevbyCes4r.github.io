@@ -1,28 +1,100 @@
-User-agent: *
-Allow: /
+# robots.txt para DevbyCes4r.me
+# Optimizado para Google Search Console y bots de IA
+
+# Sitemap principal
 Sitemap: https://devbyces4r.me/sitemap-index.xml
 
-# AI Bots - Explicitly Allowed
+# Googlebot - Crawler principal
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Googlebot Images
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /favicon/
+
+# Todos los bots (configuración general)
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Páginas específicas que queremos que se indexen
+Allow: /blog/
+Allow: /cursos/
+Allow: /herramientas/
+Allow: /links/
+Allow: /rutas/
+
+# Páginas que NO queremos indexar
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /chunks/
+Disallow: *.json
+Disallow: /api/
+
+# === BOTS DE IA - Explícitamente Permitidos ===
+
+# OpenAI GPT
 User-agent: GPTBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
+Crawl-delay: 1
 
+# Google Bard/Gemini
 User-agent: Google-Extended
 Allow: /
+Crawl-delay: 1
 
-User-agent: CCBot
-Allow: /
-
+# Anthropic Claude
 User-agent: Claude-Web
 Allow: /
+Crawl-delay: 1
 
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+# Perplexity AI
 User-agent: PerplexityBot
 Allow: /
+Crawl-delay: 1
 
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+Crawl-delay: 2
+
+# Common Crawl (dataset para IA)
+User-agent: CCBot
+Allow: /
+Crawl-delay: 2
+
+# Bytedance (TikTok)
 User-agent: Bytespider
 Allow: /
+Crawl-delay: 2
 
-# Disallow admin or private paths if any
-Disallow: /admin/
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# === Bloquear bots maliciosos ===
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Host (para prevenir mirror sites)
+Host: https://devbyces4r.me

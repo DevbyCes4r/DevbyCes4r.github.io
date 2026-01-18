@@ -15,26 +15,62 @@ export default defineConfig({
       extendMarkdownConfig: true,
     }),
     sitemap({
+      filter: (page) => {
+        // Excluir páginas que no queremos en el sitemap
+        return !page.includes('/404') && 
+               !page.includes('/_') &&
+               !page.includes('/admin');
+      },
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      // Personalizar URLs del sitemap
+      // Personalizar URLs del sitemap con prioridades SEO optimizadas
       serialize(item) {
-        // Priorizar páginas importantes
-        if (item.url.includes('/blog/')) {
+        // Homepage - Máxima prioridad
+        if (item.url === 'https://devbyces4r.me/' || item.url === 'https://devbyces4r.me') {
+          item.priority = 1.0;
+          item.changefreq = 'daily';
+        }
+        // Blog posts - Alta prioridad para contenido
+        else if (item.url.includes('/blog/') && !item.url.endsWith('/blog/')) {
+          item.priority = 0.9;
+          item.changefreq = 'weekly';
+        }
+        // Blog index
+        else if (item.url.includes('/blog')) {
           item.priority = 0.9;
           item.changefreq = 'daily';
         }
-        if (item.url.includes('/cursos/')) {
+        // Cursos individuales - Alta prioridad para conversión
+        else if (item.url.includes('/cursos/') && !item.url.endsWith('/cursos/')) {
           item.priority = 0.9;
           item.changefreq = 'monthly';
         }
-        if (item.url.includes('/links/')) {
-          item.priority = 0.8;
+        // Cursos index
+        else if (item.url.includes('/cursos')) {
+          item.priority = 0.95;
           item.changefreq = 'weekly';
         }
+        // Herramientas
+        else if (item.url.includes('/herramientas')) {
+          item.priority = 0.8;
+          item.changefreq = 'monthly';
+        }
+        // Links
+        else if (item.url.includes('/links')) {
+          item.priority = 0.7;
+          item.changefreq = 'weekly';
+        }
+        // Rutas de estudio
+        else if (item.url.includes('/rutas')) {
+          item.priority = 0.8;
+          item.changefreq = 'monthly';
+        }
         return item;
-      }
+      },
+      // Generar sitemap index para mejor organización
+      i18n: undefined,
+      entryLimit: 45000,
     })
   ],
 

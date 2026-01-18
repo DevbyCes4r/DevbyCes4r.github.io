@@ -37,33 +37,51 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://gc.zgo.at" />
 
-    <!-- SEO -->
+    <!-- SEO Básico -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <meta name="author" content={author} />
+    <meta name="keywords" content="cursos gratuitos, programación, inteligencia artificial, desarrollo web, Python, JavaScript, DevbyCes4r, tutoriales, certificación" />
 
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
-    <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:site_name" content="DevbyCes4r" />
+    <meta property="og:locale" content="es_ES" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:site" content={twitterHandle} />
 
-    <!-- AI / LLM Specific Meta Tags -->
+    <!-- Robots & Crawling - Optimizado para Google -->
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="bingbot" content="index, follow" />
+    
+    <!-- AI / LLM Specific Meta Tags -->
     <meta name="gptbot" content="index, follow" />
     <meta name="google-extended" content="index, follow" />
+    <meta name="claude-web" content="index, follow" />
+    
+    <!-- Geo Targeting -->
+    <meta name="geo.region" content="MX" />
+    <meta name="language" content="Spanish" />
+    
+    <!-- Otros metadatos importantes -->
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="color-scheme" content="light dark" />
 
     <!-- Optimized Font Loading -->
     <link
