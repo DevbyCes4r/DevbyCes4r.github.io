@@ -196,24 +196,50 @@ const articleSchema = {
     // Solo trackear lectura completa (100%) - el dato más valioso
     const blogSlug = window.location.pathname.split('/').filter(Boolean).pop() || '';
     let tracked = false;
+    let ticking = false;
+    
+    // Cache de valores para evitar reflow
+    let articleTop = 0;
+    let articleHeight = 0;
+
+    function updateArticleMetrics() {
+      const article = document.querySelector('article');
+      if (article) {
+        articleTop = article.offsetTop;
+        articleHeight = article.offsetHeight;
+      }
+    }
 
     function checkComplete() {
       if (tracked) return;
-      
-      const article = document.querySelector('article');
-      if (!article) return;
 
       const scrollPercentage = Math.round(
-        ((window.scrollY + window.innerHeight - article.offsetTop) / article.offsetHeight) * 100
+        ((window.scrollY + window.innerHeight - articleTop) / articleHeight) * 100
       );
 
       if (scrollPercentage >= 95) {
         tracked = true;
         waitForGoatCounter(() => trackBlogComplete(blogSlug));
       }
+      
+      ticking = false;
     }
 
-    window.addEventListener('scroll', () => requestAnimationFrame(checkComplete), { passive: true });
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(checkComplete);
+        ticking = true;
+      }
+    }
+
+    // Inicializar métricas después de que el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateArticleMetrics);
+    } else {
+      updateArticleMetrics();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // Abrir enlaces en nueva pestaña
     document.addEventListener('DOMContentLoaded', () => {

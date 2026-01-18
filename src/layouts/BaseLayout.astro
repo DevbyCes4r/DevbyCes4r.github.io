@@ -36,6 +36,17 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://gc.zgo.at" />
+    
+    <!-- Preload LCP Image (solo en homepage) -->
+    {Astro.url.pathname === '/' && (
+      <link 
+        rel="preload" 
+        href="/images/profile-cesar.webp" 
+        as="image" 
+        type="image/webp"
+        fetchpriority="high"
+      />
+    )}
 
     <!-- SEO Básico -->
     <title>{title}</title>
