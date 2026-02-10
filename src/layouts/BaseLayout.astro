@@ -3,6 +3,7 @@ import { SEO } from "../utils/seo";
 import "../styles/global.css";
 
 import ThemeToggle from "../components/ThemeToggle.astro";
+import WebViewBanner from "../components/WebViewBanner.astro";
 
 interface Props {
   title: string;
@@ -157,6 +158,9 @@ const twitterHandle = "@devbyces4r"; // Update with actual handle
   <body
     class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300"
   >
+    <!-- Banner para WebViews de redes sociales -->
+    <WebViewBanner />
+    
     <header
       class="py-6 px-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50"
     >
