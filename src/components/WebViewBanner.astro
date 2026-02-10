@@ -6,7 +6,7 @@
  */
 ---
 
-<!-- Banner discreto en la parte superior -->
+<!-- Banner discreto en la parte inferior -->
 <div id="webview-banner" class="webview-banner" role="alert" aria-live="polite" style="display: none;">
   <div class="webview-banner__container">
     <div class="webview-banner__content">
@@ -17,25 +17,15 @@
       </svg>
       <div class="webview-banner__text">
         <p class="webview-banner__message">
-          Para una <strong>mejor experiencia</strong>, abre este enlace en tu navegador
+          <strong>Mejor experiencia:</strong> abre este enlace en tu navegador
         </p>
         <p class="webview-banner__hint" id="platform-hint"></p>
       </div>
     </div>
     <div class="webview-banner__actions">
       <button 
-        id="copy-url-btn" 
-        class="webview-banner__button webview-banner__button--primary"
-        aria-label="Copiar enlace">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-        <span id="copy-btn-text">Copiar enlace</span>
-      </button>
-      <button 
         id="open-browser-btn" 
-        class="webview-banner__button webview-banner__button--secondary"
+        class="webview-banner__button webview-banner__button--primary"
         aria-label="Abrir en navegador">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -43,6 +33,16 @@
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
         <span>Abrir</span>
+      </button>
+      <button
+        id="copy-url-btn"
+        class="webview-banner__button webview-banner__button--secondary"
+        aria-label="Copiar enlace">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span id="copy-btn-text">Copiar enlace</span>
       </button>
       <button 
         id="dismiss-banner-btn" 
@@ -105,7 +105,7 @@
     // Configurar mensaje según plataforma
     if (platformHint && detection.platform) {
       const platformName = getPlatformName(detection.platform);
-      platformHint.textContent = `Detectamos que vienes desde ${platformName}`;
+      platformHint.textContent = `Desde ${platformName}`;
     }
 
     // Mostrar banner con animación suave
@@ -207,14 +207,15 @@
 <style>
   .webview-banner {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
     z-index: 9999;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 12px 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 36px 10px 12px;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -233,21 +234,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
   }
 
   .webview-banner__content {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
     flex: 1;
     min-width: 0;
   }
 
   .webview-banner__icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
     opacity: 0.9;
   }
@@ -259,8 +260,8 @@
 
   .webview-banner__message {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 13px;
+    line-height: 1.35;
   }
 
   .webview-banner__message strong {
@@ -268,15 +269,17 @@
   }
 
   .webview-banner__hint {
-    margin: 4px 0 0 0;
-    font-size: 12px;
+    margin: 2px 0 0 0;
+    font-size: 11px;
     opacity: 0.85;
   }
 
   .webview-banner__actions {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
+    align-items: center;
+    width: min(360px, 100%);
     flex-shrink: 0;
   }
 
@@ -284,14 +287,16 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 14px;
+    padding: 7px 12px;
     border: none;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    justify-content: center;
+    width: 100%;
   }
 
   .webview-banner__button svg {
@@ -301,62 +306,63 @@
 
   .webview-banner__button--primary {
     background: white;
-    color: #667eea;
+    color: #5b4bb7;
   }
 
   .webview-banner__button--primary:hover {
     background: #f7f7f7;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
   }
 
   .webview-banner__button--primary:active {
     transform: translateY(0);
   }
 
-  .webview-banner__button--success {
-    background: #10b981 !important;
-    color: white !important;
-  }
-
   .webview-banner__button--secondary {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.18);
     color: white;
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   .webview-banner__button--secondary:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  .webview-banner__button--success {
+    background: #10b981 !important;
+    color: white !important;
+    border-color: transparent !important;
   }
 
   .webview-banner__close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 22px;
     padding: 0;
     border: none;
-    background: rgba(255, 255, 255, 0.15);
     color: white;
-    border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
+    position: absolute;
+    top: 6px;
+    right: 6px;
   }
 
   .webview-banner__close svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .webview-banner__close:hover {
-    background: rgba(255, 255, 255, 0.25);
+    width: 16px;
+    height: 16px;
   }
 
   /* Responsive: Mobile */
   @media (max-width: 640px) {
     .webview-banner {
-      padding: 10px 12px;
+      padding: 10px 32px 10px 10px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
     }
 
     .webview-banner__container {
@@ -365,35 +371,40 @@
 
     .webview-banner__content {
       width: 100%;
-      gap: 10px;
+      gap: 8px;
     }
 
     .webview-banner__icon {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     .webview-banner__message {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .webview-banner__hint {
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .webview-banner__actions {
       width: 100%;
-      justify-content: flex-start;
+      justify-content: stretch;
     }
 
     .webview-banner__button {
-      padding: 7px 12px;
-      font-size: 12px;
+      padding: 6px 10px;
+      font-size: 11px;
     }
 
     .webview-banner__button svg {
       width: 14px;
       height: 14px;
+    }
+
+    .webview-banner__actions {
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
     }
   }
 
