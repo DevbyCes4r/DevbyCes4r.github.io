@@ -71,6 +71,23 @@
     initWebViewBanner();
   });
 
+  // Si el WebView queda oculto por un tiempo, permitimos mostrar de nuevo
+  let resetDismissTimer: number | null = null;
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      resetDismissTimer = window.setTimeout(() => {
+        try {
+          sessionStorage.removeItem('webview-banner-dismissed');
+        } catch {
+          // Ignorar errores de storage
+        }
+      }, 4000);
+    } else if (resetDismissTimer) {
+      clearTimeout(resetDismissTimer);
+      resetDismissTimer = null;
+    }
+  });
+
   function initWebViewBanner() {
     // Detectar WebView
     const detection = detectWebView();

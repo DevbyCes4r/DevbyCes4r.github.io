@@ -97,34 +97,28 @@ export function getPlatformName(platform?: string): string {
 }
 
 /**
- * Verifica si el usuario ya cerró el banner (localStorage)
+ * Verifica si el usuario ya cerró el banner en esta sesion (sessionStorage)
  */
 export function hasUserDismissedBanner(): boolean {
-  if (typeof localStorage === 'undefined') return false;
+  if (typeof sessionStorage === 'undefined') return false;
   
   try {
-    const dismissed = localStorage.getItem('webview-banner-dismissed');
-    if (!dismissed) return false;
-
-    // Respetar dismissal por 7 días
-    const dismissedTime = parseInt(dismissed, 10);
-    const sevenDays = 7 * 24 * 60 * 60 * 1000;
-    return Date.now() - dismissedTime < sevenDays;
+    return sessionStorage.getItem('webview-banner-dismissed') === '1';
   } catch {
     return false;
   }
 }
 
 /**
- * Guarda que el usuario cerró el banner
+ * Guarda que el usuario cerró el banner en esta sesion
  */
 export function dismissBanner(): void {
-  if (typeof localStorage === 'undefined') return;
+  if (typeof sessionStorage === 'undefined') return;
   
   try {
-    localStorage.setItem('webview-banner-dismissed', Date.now().toString());
+    sessionStorage.setItem('webview-banner-dismissed', '1');
   } catch {
-    // Fallar silenciosamente si localStorage no está disponible
+    // Fallar silenciosamente si sessionStorage no está disponible
   }
 }
 
