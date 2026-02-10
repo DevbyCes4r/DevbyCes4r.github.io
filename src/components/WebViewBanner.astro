@@ -17,32 +17,21 @@
       </svg>
       <div class="webview-banner__text">
         <p class="webview-banner__message">
-          <strong>Mejor experiencia:</strong> abre este enlace en tu navegador
+          <strong>Mejor experiencia:</strong> abre en tu navegador para guardar avances y navegar con mayor estabilidad.
         </p>
         <p class="webview-banner__hint" id="platform-hint"></p>
       </div>
     </div>
     <div class="webview-banner__actions">
-      <button 
-        id="open-browser-btn" 
-        class="webview-banner__button webview-banner__button--primary"
-        aria-label="Abrir en navegador">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-          <polyline points="15 3 21 3 21 9"></polyline>
-          <line x1="10" y1="14" x2="21" y2="3"></line>
-        </svg>
-        <span>Abrir</span>
-      </button>
       <button
         id="copy-url-btn"
-        class="webview-banner__button webview-banner__button--secondary"
+        class="webview-banner__button webview-banner__button--primary"
         aria-label="Copiar enlace">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
         </svg>
-        <span id="copy-btn-text">Copiar enlace</span>
+        <span id="copy-btn-text">Copiar y abrir en tu navegador</span>
       </button>
       <button 
         id="dismiss-banner-btn" 
@@ -65,7 +54,6 @@
     hasUserDismissedBanner,
     dismissBanner,
     getCurrentUrl,
-    openInExternalBrowser,
     copyUrlToClipboard,
   } from '../utils/webviewDetector';
 
@@ -97,7 +85,6 @@
     const platformHint = document.getElementById('platform-hint');
     const copyBtn = document.getElementById('copy-url-btn');
     const copyBtnText = document.getElementById('copy-btn-text');
-    const openBtn = document.getElementById('open-browser-btn');
     const dismissBtn = document.getElementById('dismiss-banner-btn');
 
     if (!banner) return;
@@ -105,7 +92,7 @@
     // Configurar mensaje según plataforma
     if (platformHint && detection.platform) {
       const platformName = getPlatformName(detection.platform);
-      platformHint.textContent = `Desde ${platformName}`;
+      platformHint.textContent = `Detectamos que estas desde ${platformName}`;
     }
 
     // Mostrar banner con animación suave
@@ -152,20 +139,6 @@
         setTimeout(() => {
           copyBtnText.textContent = 'Copiar enlace';
         }, 2000);
-      }
-    });
-
-    // Botón: Abrir en navegador
-    openBtn?.addEventListener('click', () => {
-      openInExternalBrowser();
-      
-      // Track: Intentó abrir navegador
-      if (window.goatcounter) {
-        window.goatcounter.count({
-          path: 'webview_banner_open',
-          title: 'WebView Banner - Open in Browser',
-          event: true,
-        });
       }
     });
 
@@ -276,10 +249,10 @@
 
   .webview-banner__actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 8px;
     align-items: center;
-    width: min(360px, 100%);
+    width: min(260px, 100%);
     flex-shrink: 0;
   }
 
@@ -317,16 +290,6 @@
 
   .webview-banner__button--primary:active {
     transform: translateY(0);
-  }
-
-  .webview-banner__button--secondary {
-    background: rgba(255, 255, 255, 0.18);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .webview-banner__button--secondary:hover {
-    background: rgba(255, 255, 255, 0.28);
   }
 
   .webview-banner__button--success {
@@ -403,7 +366,7 @@
     }
 
     .webview-banner__actions {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 6px;
     }
   }
