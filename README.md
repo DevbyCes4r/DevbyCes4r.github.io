@@ -43,3 +43,12 @@ src/
 npm run build
 # Output: dist/
 ```
+
+## 🌐 Deployment
+
+Este proyecto se despliega automáticamente en:
+
+- **GitHub Pages**: Configurado en `.github/workflows/astro.yml`
+- **Cloudflare Pages**: Configurado en `.github/workflows/cloudflare-pages.yml`
+
+Para configurar el despliegue en Cloudflare Pages, consulta [CLOUDFLARE_PAGES_SETUP.md](./CLOUDFLARE_PAGES_SETUP.md).
