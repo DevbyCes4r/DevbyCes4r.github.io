@@ -40,10 +40,13 @@ Aunque el workflow puede crear el proyecto automáticamente, es recomendable cre
 2. Haz clic en **Create application** → **Pages** → **Connect to Git**
 3. Selecciona tu repositorio de GitHub
 4. Configura el proyecto:
-   - **Project name**: `devbyces4r` (debe coincidir con el valor en el workflow)
+   - **Project name**: `devbyces4r` (o el nombre que prefieras - debe coincidir con `projectName` en el workflow)
    - **Production branch**: `main`
    - **Build command**: `npm run build`
    - **Build output directory**: `dist`
+   
+   > **Nota**: Si cambias el nombre del proyecto aquí, también debes actualizar el campo `projectName` en `.github/workflows/cloudflare-pages.yml` para que coincidan.
+   
 5. Haz clic en **Save and Deploy**
 
 ## 🔄 Despliegue Automático
@@ -58,8 +61,8 @@ Una vez configurados los secretos, cada push a la rama `main` disparará automá
 
 Después del despliegue, tu sitio estará disponible en:
 
-- **Cloudflare Pages**: `https://devbyces4r.pages.dev` (URL predeterminada)
-- **GitHub Pages**: `https://devbyces4r.github.io`
+- **Cloudflare Pages**: `https://<tu-proyecto>.pages.dev` (ejemplo: `https://devbyces4r.pages.dev`)
+- **GitHub Pages**: `https://<tu-usuario>.github.io` (ejemplo: `https://devbyces4r.github.io`)
 - **Dominio personalizado**: `https://devbyces4r.me` (configurado en `astro.config.mjs`)
 
 ### Configurar dominio personalizado en Cloudflare
@@ -67,7 +70,7 @@ Después del despliegue, tu sitio estará disponible en:
 1. En Cloudflare Pages, ve a tu proyecto
 2. Ve a la pestaña **Custom domains**
 3. Haz clic en **Set up a custom domain**
-4. Ingresa tu dominio (`devbyces4r.me`)
+4. Ingresa tu dominio (ejemplo: `devbyces4r.me`)
 5. Cloudflare configurará automáticamente los registros DNS necesarios
 
 ## 🐛 Solución de Problemas
