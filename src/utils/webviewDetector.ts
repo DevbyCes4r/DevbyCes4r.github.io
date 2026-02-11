@@ -11,7 +11,7 @@ export interface WebViewDetectionResult {
 }
 
 // Forzar deteccion en desarrollo cuando sea necesario
-export const FORCE_WEBVIEW_TEST = false;
+export const FORCE_WEBVIEW_TEST = true;
 
 /**
  * Detecta si el usuario está en un WebView basándose en User-Agent
@@ -68,7 +68,7 @@ export function detectWebView(): WebViewDetectionResult {
   }
 
   // Detección genérica de WebView (cuando no se identifica la plataforma)
-  const isGenericWebView = 
+  const isGenericWebView =
     (ua.includes('wv') && ua.includes('android')) || // Android WebView
     (ua.includes('iphone') && !ua.includes('safari')) || // iOS sin Safari
     ua.includes('webview');
@@ -101,7 +101,7 @@ export function getPlatformName(platform?: string): string {
  */
 export function hasUserDismissedBanner(): boolean {
   if (typeof sessionStorage === 'undefined') return false;
-  
+
   try {
     return sessionStorage.getItem('webview-banner-dismissed') === '1';
   } catch {
@@ -114,7 +114,7 @@ export function hasUserDismissedBanner(): boolean {
  */
 export function dismissBanner(): void {
   if (typeof sessionStorage === 'undefined') return;
-  
+
   try {
     sessionStorage.setItem('webview-banner-dismissed', '1');
   } catch {
@@ -176,10 +176,10 @@ export async function copyUrlToClipboard(url: string = getCurrentUrl()): Promise
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    
+
     const successful = document.execCommand('copy');
     document.body.removeChild(textArea);
-    
+
     return successful;
   } catch {
     return false;

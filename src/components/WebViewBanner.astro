@@ -7,17 +7,33 @@
 ---
 
 <!-- Banner discreto en la parte inferior -->
-<div id="webview-banner" class="webview-banner" role="alert" aria-live="polite" style="display: none;">
+<div
+  id="webview-banner"
+  class="webview-banner"
+  role="alert"
+  aria-live="polite"
+  style="display: none;"
+>
   <div class="webview-banner__container">
     <div class="webview-banner__content">
-      <svg class="webview-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="webview-banner__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="12" y1="16" x2="12" y2="12"></line>
         <line x1="12" y1="8" x2="12.01" y2="8"></line>
       </svg>
       <div class="webview-banner__text">
         <p class="webview-banner__message">
-          <strong>Mejor experiencia:</strong> abre en tu navegador para guardar avances y navegar con mayor estabilidad.
+          <strong>Disfruta de la mejor experiencia</strong> y guarda tus avances abriendo
+          el sitio en tu navegador.
         </p>
         <p class="webview-banner__hint" id="platform-hint"></p>
       </div>
@@ -26,18 +42,37 @@
       <button
         id="copy-url-btn"
         class="webview-banner__button webview-banner__button--primary"
-        aria-label="Copiar enlace">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        aria-label="Copiar enlace"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+          ></path>
         </svg>
-        <span id="copy-btn-text">Copiar URL y abrir en tu navegador</span>
+        <span id="copy-btn-text">Copiar enlace</span>
       </button>
-      <button 
-        id="dismiss-banner-btn" 
+      <button
+        id="dismiss-banner-btn"
         class="webview-banner__close"
-        aria-label="Cerrar mensaje">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        aria-label="Cerrar mensaje"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
@@ -55,7 +90,7 @@
     dismissBanner,
     getCurrentUrl,
     copyUrlToClipboard,
-  } from '../utils/webviewDetector';
+  } from "../utils/webviewDetector";
 
   // Tipos para GoatCounter
   declare global {
@@ -67,17 +102,17 @@
   }
 
   // Ejecutar detección al cargar el DOM
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     initWebViewBanner();
   });
 
   // Si el WebView queda oculto por un tiempo, permitimos mostrar de nuevo
   let resetDismissTimer: number | null = null;
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
       resetDismissTimer = window.setTimeout(() => {
         try {
-          sessionStorage.removeItem('webview-banner-dismissed');
+          sessionStorage.removeItem("webview-banner-dismissed");
         } catch {
           // Ignorar errores de storage
         }
@@ -93,16 +128,19 @@
     const detection = detectWebView();
 
     // No mostrar si no es WebView o si el usuario ya cerró el banner
-    if (!detection.shouldShowBanner || (!FORCE_WEBVIEW_TEST && hasUserDismissedBanner())) {
+    if (
+      !detection.shouldShowBanner ||
+      (!FORCE_WEBVIEW_TEST && hasUserDismissedBanner())
+    ) {
       return;
     }
 
     // Obtener elementos del DOM
-    const banner = document.getElementById('webview-banner');
-    const platformHint = document.getElementById('platform-hint');
-    const copyBtn = document.getElementById('copy-url-btn');
-    const copyBtnText = document.getElementById('copy-btn-text');
-    const dismissBtn = document.getElementById('dismiss-banner-btn');
+    const banner = document.getElementById("webview-banner");
+    const platformHint = document.getElementById("platform-hint");
+    const copyBtn = document.getElementById("copy-url-btn");
+    const copyBtnText = document.getElementById("copy-btn-text");
+    const dismissBtn = document.getElementById("dismiss-banner-btn");
 
     if (!banner) return;
 
@@ -113,62 +151,62 @@
     }
 
     // Mostrar banner con animación suave
-    banner.style.display = 'block';
+    banner.style.display = "block";
     // Pequeño delay para la animación de entrada
     setTimeout(() => {
-      banner.classList.add('webview-banner--visible');
-      
+      banner.classList.add("webview-banner--visible");
+
       // Track: Banner mostrado
       if (window.goatcounter) {
         window.goatcounter.count({
-          path: 'webview_banner_shown',
-          title: `WebView Banner Shown - ${detection.platform || 'unknown'}`,
+          path: "webview_banner_shown",
+          title: `WebView Banner Shown - ${detection.platform || "unknown"}`,
           event: true,
         });
       }
     }, 100);
 
     // Botón: Copiar enlace
-    copyBtn?.addEventListener('click', async () => {
+    copyBtn?.addEventListener("click", async () => {
       const url = getCurrentUrl();
       const success = await copyUrlToClipboard(url);
 
       if (success && copyBtnText) {
         // Feedback visual
-        copyBtnText.textContent = '✓ Copiado';
-        copyBtn.classList.add('webview-banner__button--success');
-        
+        copyBtnText.textContent = "¡Copiado! Pégalo en tu navegador";
+        copyBtn.classList.add("webview-banner__button--success");
+
         // Track: Usuario copió URL
         if (window.goatcounter) {
           window.goatcounter.count({
-            path: 'webview_banner_copy',
-            title: 'WebView Banner - Copy URL',
+            path: "webview_banner_copy",
+            title: "WebView Banner - Copy URL",
             event: true,
           });
         }
-        
+
         setTimeout(() => {
-          copyBtnText.textContent = 'Copiar enlace';
-          copyBtn.classList.remove('webview-banner__button--success');
-        }, 2000);
+          copyBtnText.textContent = "Copiar enlace";
+          copyBtn.classList.remove("webview-banner__button--success");
+        }, 4500);
       } else if (copyBtnText) {
-        copyBtnText.textContent = 'Error';
+        copyBtnText.textContent = "Error";
         setTimeout(() => {
-          copyBtnText.textContent = 'Copiar enlace';
+          copyBtnText.textContent = "Copiar enlace";
         }, 2000);
       }
     });
 
     // Botón: Cerrar banner
-    dismissBtn?.addEventListener('click', () => {
+    dismissBtn?.addEventListener("click", () => {
       dismissBanner();
       hideBanner(banner);
-      
+
       // Track: Cerró el banner
       if (window.goatcounter) {
         window.goatcounter.count({
-          path: 'webview_banner_dismiss',
-          title: 'WebView Banner - Dismissed',
+          path: "webview_banner_dismiss",
+          title: "WebView Banner - Dismissed",
           event: true,
         });
       }
@@ -177,19 +215,19 @@
     // Auto-ocultar después de 18 segundos si no hay interacción
     // (menos intrusivo para usuarios que ignoran el mensaje)
     setTimeout(() => {
-      if (banner.classList.contains('webview-banner--visible')) {
+      if (banner.classList.contains("webview-banner--visible")) {
         hideBanner(banner);
       }
     }, 18000);
   }
 
   function hideBanner(banner: HTMLElement) {
-    banner.classList.remove('webview-banner--visible');
-    banner.classList.add('webview-banner--hidden');
-    
+    banner.classList.remove("webview-banner--visible");
+    banner.classList.add("webview-banner--hidden");
+
     // Remover del DOM después de la animación
     setTimeout(() => {
-      banner.style.display = 'none';
+      banner.style.display = "none";
     }, 300);
   }
 </script>
@@ -403,6 +441,13 @@
 
     .webview-banner__button {
       transition: none;
+    }
+  }
+
+  /* Ocultar en pantallas grandes (Desktop) */
+  @media (min-width: 1025px) {
+    .webview-banner {
+      display: none !important;
     }
   }
 </style>
