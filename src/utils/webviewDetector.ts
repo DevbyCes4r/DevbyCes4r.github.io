@@ -61,7 +61,8 @@ export function detectWebView(): WebViewDetectionResult {
     if (referer.includes('instagram.com')) {
       return { isWebView: true, platform: 'instagram', shouldShowBanner: true };
     }
-    if (referer.includes('linkedin.com')) {
+    // LinkedIn: incluye tanto el referer web como el de la app Android
+    if (referer.includes('linkedin.com') || referer.includes('com.linkedin.android')) {
       return { isWebView: true, platform: 'linkedin', shouldShowBanner: true };
     }
     if (referer.includes('t.co') || referer.includes('twitter.com')) {
@@ -72,17 +73,18 @@ export function detectWebView(): WebViewDetectionResult {
   // Detección específica: Android WebView + LinkedIn referer
   // LinkedIn en Android a veces usa un WebView genérico sin identificador en UA
   const isAndroidWebView = ua.includes('wv') && ua.includes('android');
-  if (isAndroidWebView && referer.includes('linkedin.com')) {
+  if (isAndroidWebView && (referer.includes('linkedin.com') || referer.includes('com.linkedin.android'))) {
     return { isWebView: true, platform: 'linkedin', shouldShowBanner: true };
   }
 
   // Detección específica: Chrome Custom Tabs (CCT) usado por LinkedIn
   // LinkedIn en Android frecuentemente usa CCT en lugar de WebView tradicional
+  // Referer típico: android-app://com.linkedin.android/
   const isChromeCustomTab =
     ua.includes('chrome') &&
     ua.includes('android') &&
     !ua.includes('wv') &&
-    (referer.includes('linkedin.com') || referer.includes('lnkd.in'));
+    (referer.includes('linkedin.com') || referer.includes('lnkd.in') || referer.includes('com.linkedin.android'));
 
   if (isChromeCustomTab) {
     return { isWebView: true, platform: 'linkedin', shouldShowBanner: true };
