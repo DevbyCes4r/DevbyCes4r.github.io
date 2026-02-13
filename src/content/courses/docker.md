@@ -4,6 +4,7 @@ description: 'Domina la contenedorización con Docker para crear, gestionar y de
 icon: '🐳'
 videoId: 'YwOYEUt6jeo'
 affiliateLink: 'https://edutin.com/sh-14083'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12857/card_imagen.jpg'
 tags: ['Contenedores', 'DevOps']
 category: 'devops-cloud'
 group: 'Escalabilidad y Seguridad de Aplicaciones'

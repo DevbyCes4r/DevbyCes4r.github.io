@@ -4,6 +4,7 @@ description: 'Domina estructuras gramaticales más complejas y amplía tu vocabu
 icon: '💼'
 videoId: '_i_RzYoKpxc'
 affiliateLink: 'https://edutin.com/sh-10474'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4616/card_imagen.jpg'
 tags: ['Nivel B1+']
 category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'

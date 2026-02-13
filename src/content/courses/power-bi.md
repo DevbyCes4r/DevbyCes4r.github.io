@@ -4,6 +4,7 @@ description: 'Transforma datos en insights con informes interactivos y visuales.
 icon: '📊'
 videoId: 'W5BXXZmbZiE'
 affiliateLink: 'https://edutin.com/sh-8990'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12532/card_imagen.jpg'
 tags: ['Data']
 category: 'datos'
 group: 

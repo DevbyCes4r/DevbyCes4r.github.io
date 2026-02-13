@@ -429,13 +429,16 @@ const pageDescription =
                                     target="_blank"
                                     data-course-slug={course.slug}
                                     data-course-title={course.data.title}
-                                    class="course-card-link group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                                    class="course-card-link group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
                                 >
                                     <div class="flex items-start gap-4">
-                                        <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                                            {course.data.icon}
+                                        {/* Icon - se oculta en hover */}
+                                        <div class="flex-shrink-0 w-16 transition-opacity duration-300 group-hover:opacity-0">
+                                            <div class="h-16 w-16 bg-slate-100 dark:bg-slate-700/50 p-2 rounded-xl flex items-center justify-center text-center text-lg leading-tight overflow-hidden">
+                                                {course.data.icon}
+                                            </div>
                                         </div>
-                                        <div class="flex-1">
+                                        <div class="transition-transform duration-300 group-hover:-translate-x-20" style="width: calc(100% - 80px);">
                                             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                                 {course.data.title}
                                             </h3>
@@ -449,6 +452,18 @@ const pageDescription =
                                             )}
                                         </div>
                                     </div>
+
+                                    {/* Image preview near arrow */}
+                                    {course.data.coverImage && (
+                                        <div class="absolute top-16 right-4 w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 overflow-hidden transition-all duration-300">
+                                            <img 
+                                                src={course.data.coverImage} 
+                                                alt={course.data.title}
+                                                class="w-20 h-12 object-cover rounded-lg shadow-md ring-2 ring-purple-500/50"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                    )}
 
                                     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
                                         <svg

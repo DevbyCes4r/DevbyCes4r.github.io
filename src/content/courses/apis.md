@@ -4,6 +4,7 @@ description: 'Aprende a diseñar y consumir APIs RESTful para conectar aplicacio
 icon: '🔗'
 videoId: 'gFhNnn1MvB4'
 affiliateLink: 'https://edutin.com/sh-10492'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12736/card_imagen.jpg'
 tags: ['Backend']
 category: 'programacion'
 group: 'Web Developer'

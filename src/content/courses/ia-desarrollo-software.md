@@ -4,6 +4,7 @@ description: 'Acelera tu flujo de trabajo integrando Inteligencia Artificial. Ap
 icon: '🧑‍💻'
 videoId: 'arzfG14EmSM'
 affiliateLink: 'https://edutin.com/sh-12030'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/13029/card_imagen.jpg'
 tags: ['AI', 'Software Development', 'Productividad', 'Programming Tools']
 category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'

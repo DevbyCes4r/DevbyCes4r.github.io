@@ -4,6 +4,7 @@ description: 'Aprende a crear aplicaciones web completas con Python y Django des
 icon: '🐍'
 videoId: 'OfhijqO3P0U'
 affiliateLink: 'https://edutin.com/sh-10084'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4492/card_imagen.jpg'
 tags: ['Fullstack']
 category: 'programacion'
 group: 'Web Developer'

@@ -4,6 +4,7 @@ description: 'Domina Adobe Photoshop para retoque fotográfico, composición dig
 icon: '🖌️'
 videoId: 'kygTrpAA_iY'
 affiliateLink: 'https://edutin.com/sh-13336'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4555/card_imagen.jpg'
 tags: ['Design', 'Photo']
 category: 'diseno'
 group: 'Web Developer'

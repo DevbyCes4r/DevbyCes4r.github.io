@@ -4,6 +4,7 @@ description: 'Descubre cómo la Inteligencia Artificial está revolucionando la 
 icon: '🤖🔒'
 videoId: ''
 affiliateLink: 'https://edutin.com/sh-13058'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/13166/card_imagen.jpg'
 tags: ['AI', 'Ciberseguridad', 'Machine Learning', 'Seguridad']
 category: 'inteligencia-artificial'
 group: ['Inteligencia Artificial', 'Escalabilidad y Seguridad de Aplicaciones']

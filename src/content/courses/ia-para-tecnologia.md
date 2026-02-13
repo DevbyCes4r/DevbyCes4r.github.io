@@ -2,6 +2,7 @@
 title: "Curso de IA para Tecnología"
 description: "Aprende a diseñar y aplicar flujos de prompts con IA generativa para automatizar tareas, documentar procesos y mejorar la eficiencia técnica en entornos tecnológicos."
 icon: "🧠"
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/13021/card_imagen.jpg'
 videoId: 'u7cN6xFg0Ss'
 affiliateLink: "https://edutin.com/sh-12563"
 tags: ["AI", "Tecnología", "Automatización"]

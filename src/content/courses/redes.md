@@ -4,6 +4,7 @@ description: 'Aprende los fundamentos de las redes de computadoras y comunicacio
 icon: '📡'
 videoId: 'XNIlwXXkHnM'
 affiliateLink: 'https://edutin.com/sh-10901'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12814/card_imagen.jpg'
 tags: ['Infraestructura', 'Networking', 'Protocolos']
 category: 'devops-cloud'
 group: ['Infraestructura', 'Escalabilidad y Seguridad de Aplicaciones']

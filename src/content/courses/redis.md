@@ -4,6 +4,7 @@ description: 'Aprende a trabajar con Redis y aprovecha su potencia en memoria pa
 icon: '⚡'
 videoId: '3XlVB9tU3n0'
 affiliateLink: 'https://edutin.com/sh-10317'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12625/card_imagen.jpg'
 tags: ['Data']
 category: 'datos'
 group: 'Analistas de Datos y DBA'

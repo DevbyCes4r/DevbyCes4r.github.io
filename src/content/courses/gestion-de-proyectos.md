@@ -3,7 +3,7 @@ title: 'Curso de Gestión de Proyectos'
 description: 'Domina metodologías ágiles y tradicionales como Agile, Scrum, Waterfall y Lean. Aprende a planificar, ejecutar y optimizar proyectos adaptándose a cualquier entorno empresarial moderno.'
 icon: '📊'
 videoId: 'Feib3mkzFlA'
-coverImage: ''
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12549/card_imagen.jpg'
 affiliateLink: 'https://edutin.com/sh-9738'
 documentUrl: '/documents/gestion-de-proyectos.pdf'
 tags: ['Gestión', 'Metodologías Ágiles']

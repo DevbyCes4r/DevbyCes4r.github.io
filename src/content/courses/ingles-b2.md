@@ -4,6 +4,7 @@ description: 'Perfecciona tus habilidades lingüísticas, mejora tu pronunciaci�
 icon: '🚀'
 videoId: 'xF6fO9-xQ_Y'
 affiliateLink: 'https://edutin.com/sh-10471'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4617/card_imagen.jpg'
 tags: ['Nivel B2']
 category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'

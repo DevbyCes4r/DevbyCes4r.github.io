@@ -4,6 +4,7 @@ description: 'Aprende normativas internacionales y buenas prácticas para crear 
 icon: '🛡️'
 videoId: 'DGXq5Q46rn0'
 affiliateLink: 'https://edutin.com/sh-9817'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12987/card_imagen.jpg'
 tags: ['Seguridad', 'Normativas']
 category: 'negocios'
 group: 'Negocios y Emprendimiento'

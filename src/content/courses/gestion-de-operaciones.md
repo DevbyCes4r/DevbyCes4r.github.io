@@ -4,6 +4,7 @@ description: 'Optimiza procesos operativos, cadenas de suministro y eficiencia p
 icon: '⚙️'
 videoId: '-YQ-E2HGS-M'
 affiliateLink: 'https://edutin.com/sh-9739'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12366/card_imagen.jpg'
 tags: ['Operaciones', 'Procesos']
 category: 'negocios'
 group: 'Negocios y Emprendimiento'

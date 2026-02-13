@@ -4,6 +4,7 @@ description: 'Desarrolla habilidades clave para asistencia administrativa: gesti
 icon: '📋'
 # videoId: 'tLZH4pr_GOw'
 affiliateLink: 'https://edutin.com/sh-9981'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12854/card_imagen.jpg'
 tags: ['Administración', 'Ofimática']
 category: 'negocios'
 group: 'Negocios y Emprendimiento'

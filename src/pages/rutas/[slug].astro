@@ -107,16 +107,19 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                         planCourses.map((course, index) => (
                             <a
                                 href={`/cursos/${course.slug}`}
-                                class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+                                class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                             >
                                 <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-600 dark:bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg">
                                     {index + 1}
                                 </div>
                                 <div class="flex items-start gap-4">
-                                    <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                                        {course.data.icon}
+                                    {/* Icon - se oculta en hover */}
+                                    <div class="flex-shrink-0 w-16 transition-opacity duration-300 group-hover:opacity-0">
+                                        <div class="h-16 w-16 bg-slate-100 dark:bg-slate-700/50 p-2 rounded-xl flex items-center justify-center text-center text-lg leading-tight overflow-hidden">
+                                            {course.data.icon}
+                                        </div>
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="transition-transform duration-300 group-hover:-translate-x-20" style="width: calc(100% - 80px);">
                                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                             {course.data.title}
                                         </h3>
@@ -131,6 +134,18 @@ const pageDescription = `${plan.description} Aprende con ${planCourses.length} c
                                             )}
                                     </div>
                                 </div>
+
+                                {/* Image preview near arrow */}
+                                {course.data.coverImage && (
+                                    <div class="absolute top-16 right-4 w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 overflow-hidden transition-all duration-300">
+                                        <img 
+                                            src={course.data.coverImage} 
+                                            alt={course.data.title}
+                                            class="w-20 h-12 object-cover rounded-lg shadow-md ring-2 ring-blue-500/50"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
 
                                 <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-600 dark:text-blue-400">
                                     <svg

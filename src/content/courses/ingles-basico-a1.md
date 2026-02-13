@@ -4,6 +4,7 @@ description: 'Desarrolla habilidades básicas de lectura, escritura y conversaci
 icon: '🔤'
 videoId: 'FoT7c62Vios'
 affiliateLink: 'https://edutin.com/sh-10476'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4541/card_imagen.jpg'
 tags: ['Nivel A1']
 category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'

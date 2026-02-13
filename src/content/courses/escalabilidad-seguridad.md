@@ -3,6 +3,7 @@ title: 'Curso de Escalabilidad y Seguridad de Aplicaciones'
 description: 'Protege tus proyectos y aprende a crear aplicaciones seguras, estables y preparadas para crecer.'
 icon: '🔒'
 affiliateLink: 'https://edutin.com/sh-10492'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12736/card_imagen.jpg'
 tags: ['DevOps']
 category: 'devops-cloud'
 group: 'Web Developer'

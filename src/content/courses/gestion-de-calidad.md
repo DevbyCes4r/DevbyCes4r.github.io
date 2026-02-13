@@ -4,6 +4,7 @@ description: 'Implementa sistemas de calidad ISO, auditoría y mejora continua e
 icon: '✅'
 videoId: 'SI1WKRqYVcA'
 affiliateLink: 'https://edutin.com/sh-9090'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12938/card_imagen.jpg'
 tags: ['Calidad', 'Estándares ISO']
 category: 'negocios'
 group: 'Negocios y Emprendimiento'

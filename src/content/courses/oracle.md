@@ -4,6 +4,7 @@ description: 'Aprende a administrar y optimizar bases de datos empresariales con
 icon: '🔴'
 videoId: 'zmiHkdOCqoY'
 affiliateLink: 'https://edutin.com/sh-10308'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12859/card_imagen.jpg'
 tags: ['Data']
 category: 'datos'
 group: 'Analistas de Datos y DBA'

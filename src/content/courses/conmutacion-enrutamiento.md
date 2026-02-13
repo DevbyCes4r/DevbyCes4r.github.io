@@ -4,6 +4,7 @@ description: 'Domina el tráfico de datos en redes complejas.'
 icon: '🔀'
 videoId: 'VZSiBsIuv08'
 affiliateLink: 'https://edutin.com/sh-11299'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/3844/card_imagen.jpg'
 tags: ['Infraestructura', 'Networking']
 category: 'devops-cloud'
 group: 'Infraestructura'

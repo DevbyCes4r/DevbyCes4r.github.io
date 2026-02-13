@@ -4,6 +4,7 @@ description: 'Aprende los fundamentos de la ciberseguridad para proteger sistema
 icon: '🔐'
 videoId: ''
 affiliateLink: 'https://edutin.com/sh-10402'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12386/card_imagen.jpg'
 tags: ['Ciberseguridad', 'Seguridad Informática', 'Protección Digital']
 category: 'devops-cloud'
 group: 'Escalabilidad y Seguridad de Aplicaciones'

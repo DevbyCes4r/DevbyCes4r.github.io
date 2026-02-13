@@ -4,6 +4,7 @@ description: 'Edita videos como un profesional con Adobe Premiere Pro. Domina el
 icon: '🎞️'
 videoId: 'u5-AzN2oBWw'
 affiliateLink: 'https://edutin.com/sh-13337'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4613/card_imagen.jpg'
 tags: ['Design', 'Video']
 category: 'diseno'
 group: 'Web Developer'

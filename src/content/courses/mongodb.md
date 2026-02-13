@@ -4,6 +4,7 @@ description: 'Aprende a gestionar datos no estructurados con MongoDB y diseña b
 icon: '🍃'
 videoId: 'XRSB20n971Q'
 affiliateLink: 'https://edutin.com/sh-10318'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12611/card_imagen.jpg'
 tags: ['Data']
 category: 'datos'
 group: 'Analistas de Datos y DBA'

@@ -4,6 +4,7 @@ description: 'Construye sitios web profesionales con Django, uno de los framewor
 icon: '🎯'
 videoId: 'mfpVC6Xw7UU'
 affiliateLink: 'https://edutin.com/sh-10491'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4502/card_imagen.jpg'
 tags: ['Backend']
 category: 'programacion'
 group: 'Web Developer'

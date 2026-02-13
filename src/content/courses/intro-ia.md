@@ -3,6 +3,7 @@ title: 'Curso de Introducción a la Inteligencia Artificial'
 description: 'Comprende los fundamentos de la IA, sus aplicaciones y cómo está transformando el mundo.'
 icon: '🤖'
 affiliateLink: 'https://edutin.com/sh-11568'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4243/card_imagen.jpg'
 tags: ['AI']
 category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'

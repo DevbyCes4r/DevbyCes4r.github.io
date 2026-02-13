@@ -4,6 +4,7 @@ description: 'Aprende los fundamentos de la edición de video, desde la narrativ
 icon: '🎬'
 videoId: 'vbu9gx-MMcs'
 affiliateLink: 'https://edutin.com/sh-13335'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4349/card_imagen.jpg'
 tags: ['Design', 'Video']
 category: 'diseno'
 group: 'Web Developer'

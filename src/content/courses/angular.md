@@ -4,6 +4,7 @@ description: 'Crea aplicaciones web modernas y escalables con uno de los framewo
 icon: '🅰️'
 videoId: 'DpuILWC-0PI'
 affiliateLink: 'https://edutin.com/sh-10489'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12579/card_imagen.jpg'
 tags: ['Frontend']
 category: 'programacion'
 group: 'Web Developer'

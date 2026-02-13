@@ -4,6 +4,7 @@ description: 'Mejora tu gramática, comprensión lectora y expresión oral para 
 icon: '🇬🇧'
 videoId: 'f47AoaPDHiQ'
 affiliateLink: 'https://edutin.com/sh-10472'
+coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/4615/card_imagen.jpg'
 tags: ['Nivel B1']
 category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'
