@@ -1,0 +1,301 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+// Author information
+const author = {
+  name: "Cesar Nuñez",
+  slug: "cesar-nunez",
+  bio: "Ingeniero de sistemas y desarrollador con más de 7 años de experiencia creando soluciones para web y aplicaciones móviles. Me especializo en construir interfaces modernas, rápidas y bien estructuradas, con un enfoque en UX/UI y en ofrecer experiencias fluidas e intuitivas para el usuario.",
+  role: "Líder de Desarrollo Móvil & Ingeniero de Sistemas",
+  location: "España",
+  website: "https://devbyces4r.github.io",
+  social: {
+    github: "https://github.com/DevbyCes4r",
+    linkedin: null, // Add if available
+    twitter: null, // Add if available
+  },
+  expertise: [
+    "TypeScript",
+    "Python",
+    "PHP",
+    "Angular",
+    "Node.js",
+    "Ionic",
+    "Kotlin",
+    "Swift",
+    "AWS"
+  ]
+};
+
+// Get all blog posts by this author
+const allPosts = await getCollection("blog");
+const authorPosts = allPosts
+  .filter((post) => post.data.author === author.name)
+  .sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  );
+
+// Calculate total reading time
+const totalReadingMins = authorPosts.reduce((acc, post) => {
+  const mins = parseInt(post.data.readingTime.match(/\d+/)?.[0] || "0");
+  return acc + mins;
+}, 0);
+
+// SEO metadata
+const pageTitle = `${author.name} | Autor en DevbyCes4r`;
+const pageDescription = `${author.bio} Descubre todos los artículos escritos por ${author.name} sobre desarrollo web, inteligencia artificial y tecnología.`;
+
+// Schema.org Person + ItemList markup
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: author.name,
+  jobTitle: author.role,
+  description: author.bio,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  image: new URL("/images/profile-cesar.webp", Astro.site).toString(),
+  sameAs: Object.values(author.social).filter(Boolean),
+  knowsAbout: author.expertise,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": new URL(Astro.url.pathname, Astro.site).toString()
+  }
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: authorPosts.map((post, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Article",
+      headline: post.data.title,
+      description: post.data.description,
+      url: new URL(`/blog/${post.slug}`, Astro.site).toString(),
+      datePublished: post.data.publishDate.toISOString(),
+      author: {
+        "@type": "Person",
+        name: author.name
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Schema.org markup -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(personSchema)}
+    slot="head"
+  />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(itemListSchema)}
+    slot="head"
+  />
+
+  <!-- Breadcrumb -->
+  <nav class="mb-8 text-sm" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+      <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400">Inicio</a></li>
+      <li>/</li>
+      <li><a href="/blog" class="hover:text-blue-600 dark:hover:text-blue-400">Blog</a></li>
+      <li>/</li>
+      <li class="text-slate-900 dark:text-white font-medium">Autor</li>
+    </ol>
+  </nav>
+
+  <!-- Author Profile -->
+  <article class="mb-16">
+    <div class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 rounded-2xl p-8 md:p-12 border border-slate-200 dark:border-slate-700 shadow-xl">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <!-- Author Avatar -->
+        <div class="flex-shrink-0">
+          <div class="relative group">
+            <!-- Glow Effect -->
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full blur-2xl opacity-30 group-hover:opacity-40 transition-opacity"
+            >
+            </div>
+            <img
+              src="/images/profile-cesar.webp"
+              alt={`Foto de ${author.name}`}
+              width="128"
+              height="128"
+              class="relative z-10 w-32 h-32 rounded-full object-cover shadow-2xl ring-4 ring-white dark:ring-slate-700"
+            />
+          </div>
+        </div>
+
+        <!-- Author Info -->
+        <div class="flex-grow">
+          <h1
+            class="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+          >
+            {author.name}
+          </h1>
+          <p class="text-xl text-slate-700 dark:text-slate-300 font-medium mb-4">
+            {author.role}
+          </p>
+          <p class="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed max-w-3xl">
+            {author.bio}
+          </p>
+
+          <!-- Stats -->
+          <div class="flex flex-wrap gap-6 mb-6">
+            <div class="flex items-center gap-2">
+              <span class="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                {authorPosts.length}
+              </span>
+              <span class="text-slate-600 dark:text-slate-400">
+                {authorPosts.length === 1 ? "Artículo" : "Artículos"}
+              </span>
+            </div>
+            <div class="w-px bg-slate-300 dark:bg-slate-600"></div>
+            <div class="flex items-center gap-2">
+              <span class="text-3xl font-bold text-purple-600 dark:text-purple-400">
+                {totalReadingMins}
+              </span>
+              <span class="text-slate-600 dark:text-slate-400">
+                Minutos de contenido
+              </span>
+            </div>
+          </div>
+
+          <!-- Expertise Tags -->
+          <div class="mb-6">
+            <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+              Áreas de Experiencia:
+            </h2>
+            <div class="flex flex-wrap gap-2">
+              {author.expertise.map((skill) => (
+                <span class="px-3 py-1.5 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-600">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          {Object.values(author.social).filter(Boolean).length > 0 && (
+            <div class="flex gap-4">
+              {author.social.github && (
+                <a
+                  href={author.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-slate-700 text-white rounded-lg hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                  </svg>
+                  GitHub
+                </a>
+              )}
+              {author.social.linkedin && (
+                <a
+                  href={author.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" clip-rule="evenodd" />
+                  </svg>
+                  LinkedIn
+                </a>
+              )}
+              {author.social.twitter && (
+                <a
+                  href={author.social.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors"
+                  aria-label="Twitter/X"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  Twitter
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Articles Section -->
+  <section>
+    <header class="mb-8">
+      <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        Artículos de {author.name.split(' ')[0]}
+      </h2>
+      <p class="text-slate-600 dark:text-slate-400">
+        {authorPosts.length} {authorPosts.length === 1 ? "artículo publicado" : "artículos publicados"}
+      </p>
+    </header>
+
+    {authorPosts.length === 0 ? (
+      <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-12 text-center">
+        <p class="text-slate-600 dark:text-slate-400 text-lg">
+          No hay artículos disponibles todavía.
+        </p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {authorPosts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="group">
+            <article class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full flex flex-col">
+              {post.data.image && (
+                <div class="aspect-[3/1] overflow-hidden">
+                  <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+
+              <div class="p-6 flex flex-col flex-grow">
+                <div class="flex gap-2 mb-3">
+                  {post.data.categories.slice(0, 2).map((cat: string) => (
+                    <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-slate-700 text-blue-700 dark:text-blue-300 rounded-full">
+                      {cat}
+                    </span>
+                  ))}
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {post.data.title}
+                </h3>
+
+                <p class="text-slate-600 dark:text-slate-400 mb-4 flex-grow line-clamp-3">
+                  {post.data.description}
+                </p>
+
+                <div class="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <time datetime={post.data.publishDate.toISOString()}>
+                    {post.data.publishDate.toLocaleDateString("es-ES", { 
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric"
+                    })}
+                  </time>
+                  <span>{post.data.readingTime}</span>
+                </div>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
