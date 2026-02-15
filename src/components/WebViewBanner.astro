@@ -6,7 +6,7 @@
  */
 ---
 
-<!-- Banner discreto en la parte inferior -->
+<!-- Banner inferior: invitar a abrir en navegador externo -->
 <div
   id="webview-banner"
   class="webview-banner"
@@ -14,68 +14,55 @@
   aria-live="polite"
   style="display: none;"
 >
+  <!-- Foto de perfil para confianza -->
+  <img
+    src="/images/profile-cesar.webp"
+    alt="Cesar"
+    width="40"
+    height="40"
+    loading="lazy"
+    class="webview-banner__avatar"
+  />
   <div class="webview-banner__container">
-    <div class="webview-banner__content">
-      <svg
-        class="webview-banner__icon"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="16" x2="12" y2="12"></line>
-        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    <!-- Badge de plataforma + Encabezado -->
+    <span class="webview-banner__badge" id="platform-badge"></span>
+    <h3 class="webview-banner__title">
+      <svg class="webview-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
       </svg>
-      <div class="webview-banner__text">
-        <p class="webview-banner__message">
-          <strong>Disfruta de la mejor experiencia</strong> y guarda tus avances abriendo
-          el sitio en tu navegador.
-        </p>
-        <p class="webview-banner__hint" id="platform-hint"></p>
-      </div>
-    </div>
-    <div class="webview-banner__actions">
-      <button
-        id="copy-url-btn"
-        class="webview-banner__button webview-banner__button--primary"
-        aria-label="Copiar enlace"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-          ></path>
-        </svg>
-        <span id="copy-btn-text">Copiar enlace</span>
-      </button>
+      Abre en tu navegador
+    </h3>
+    <!-- Mensaje corto orientado a pérdida -->
+    <p class="webview-banner__message">
+      Algunas funciones no cargan bien aquí y <strong>tu progreso no se guarda</strong>.
+    </p>
+    <!-- CTA principal -->
+    <button
+      id="copy-url-btn"
+      class="webview-banner__button webview-banner__button--primary"
+      aria-label="Copiar enlace para abrir en navegador"
+    >
+      <svg class="webview-banner__btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span id="copy-btn-text">Copiar enlace y abrir fuera</span>
+    </button>
+    <!-- Micro-instrucción post-copia (oculta por defecto) -->
+    <p class="webview-banner__step" id="post-copy-step" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span>¡Listo! Ahora pégalo en <strong id="browser-name">Chrome o Safari</strong></span>
+    </p>
+    <!-- Dismiss: texto con delay, no icono X -->
+    <div class="webview-banner__dismiss-wrapper" id="dismiss-wrapper">
       <button
         id="dismiss-banner-btn"
-        class="webview-banner__close"
-        aria-label="Cerrar mensaje"
+        class="webview-banner__dismiss-text"
+        aria-label="Continuar en esta aplicación"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
+        Continuar aquí de todos modos
       </button>
     </div>
   </div>
@@ -120,44 +107,78 @@
 
     // Obtener elementos del DOM
     const banner = document.getElementById("webview-banner");
-    const platformHint = document.getElementById("platform-hint");
     const copyBtn = document.getElementById("copy-url-btn");
     const copyBtnText = document.getElementById("copy-btn-text");
     const dismissBtn = document.getElementById("dismiss-banner-btn");
 
     if (!banner) return;
 
-    // Configurar mensaje según plataforma
-    if (platformHint && detection.platform) {
+    // Configurar badge de plataforma
+    const platformBadge = document.getElementById("platform-badge");
+    if (platformBadge && detection.platform) {
       const platformName = getPlatformName(detection.platform);
-      platformHint.textContent = `Detectamos que estas desde ${platformName}`;
+      platformBadge.textContent = `Desde ${platformName}`;
     }
 
-    // Mostrar banner con animación suave
-    banner.style.display = "block";
-    // Pequeño delay para la animación de entrada
+    // Mostrar banner con delay de 4s para dejar navegar primero
     setTimeout(() => {
-      banner.classList.add("webview-banner--visible");
+      // Verificar que no se haya cerrado mientras esperaba
+      if (hasUserDismissedBanner()) return;
 
-      // Track: Banner mostrado
-      if (window.goatcounter) {
-        window.goatcounter.count({
-          path: "webview_banner_shown",
-          title: `WebView Banner Shown - ${detection.platform || "unknown"}`,
-          event: true,
+      banner.style.display = "block";
+      // Pequeño delay extra para la animación de entrada
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          banner.classList.add("webview-banner--visible");
+
+          // Mostrar el botón de cerrar después de 3s extra
+          // con transición suave de altura
+          setTimeout(() => {
+            const dismissWrapper = document.getElementById("dismiss-wrapper");
+            if (dismissWrapper) {
+              dismissWrapper.classList.add("webview-banner__dismiss-wrapper--visible");
+            }
+          }, 3000);
+
+          // Track: Banner mostrado
+          if (window.goatcounter) {
+            window.goatcounter.count({
+              path: "webview_banner_shown",
+              title: `WebView Banner Shown - ${detection.platform || "unknown"}`,
+              event: true,
+            });
+          }
         });
-      }
-    }, 100);
+      });
+    }, 4000);
 
     // Botón: Copiar enlace
+    const postCopyStep = document.getElementById("post-copy-step");
+    const browserName = document.getElementById("browser-name");
+
+    // Detectar nombre del navegador sugerido
+    const ua = navigator.userAgent.toLowerCase();
+    if (browserName) {
+      if (ua.includes("iphone") || ua.includes("ipad")) {
+        browserName.textContent = "Safari";
+      } else if (ua.includes("android")) {
+        browserName.textContent = "Chrome";
+      }
+    }
+
     copyBtn?.addEventListener("click", async () => {
       const url = getCurrentUrl();
       const success = await copyUrlToClipboard(url);
 
       if (success && copyBtnText) {
-        // Feedback visual
-        copyBtnText.textContent = "¡Copiado! Pégalo en tu navegador";
+        // Feedback visual en el botón
+        copyBtnText.textContent = "¡Enlace copiado!";
         copyBtn.classList.add("webview-banner__button--success");
+
+        // Mostrar micro-paso de instrucción
+        if (postCopyStep) {
+          postCopyStep.style.display = "flex";
+        }
 
         // Track: Usuario copió URL
         if (window.goatcounter) {
@@ -168,15 +189,17 @@
           });
         }
 
+        // Restaurar después de 6s
         setTimeout(() => {
-          copyBtnText.textContent = "Copiar enlace";
+          copyBtnText.textContent = "Copiar enlace y abrir fuera";
           copyBtn.classList.remove("webview-banner__button--success");
-        }, 4500);
+          if (postCopyStep) postCopyStep.style.display = "none";
+        }, 6000);
       } else if (copyBtnText) {
-        copyBtnText.textContent = "Error";
+        copyBtnText.textContent = "No se pudo copiar";
         setTimeout(() => {
-          copyBtnText.textContent = "Copiar enlace";
-        }, 2000);
+          copyBtnText.textContent = "Copiar enlace y abrir fuera";
+        }, 2500);
       }
     });
 
@@ -195,13 +218,12 @@
       }
     });
 
-    // Auto-ocultar después de 18 segundos si no hay interacción
-    // (menos intrusivo para usuarios que ignoran el mensaje)
+    // Auto-ocultar después de 30 segundos si no hay interacción
     setTimeout(() => {
       if (banner.classList.contains("webview-banner--visible")) {
         hideBanner(banner);
       }
-    }, 18000);
+    }, 30000);
   }
 
   function hideBanner(banner: HTMLElement) {
@@ -218,201 +240,262 @@
 <style>
   .webview-banner {
     position: fixed;
-    bottom: 12px;
+    bottom: 16px;
     left: 12px;
     right: 12px;
     z-index: 9999;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
     color: white;
-    padding: 10px 36px 10px 12px;
-    border-radius: 12px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-    transform: translateY(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 16px 16px 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    transform: translateY(calc(100% + 24px));
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  }
+
+  /* Avatar esquina superior derecha */
+  .webview-banner__avatar {
+    position: absolute;
+    top: -12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    z-index: 1;
   }
 
   .webview-banner--visible {
     transform: translateY(0);
+    opacity: 1;
   }
 
   .webview-banner--hidden {
-    transform: translateY(100%);
+    transform: translateY(calc(100% + 24px));
+    opacity: 0;
   }
 
   .webview-banner__container {
-    max-width: 1200px;
+    max-width: 500px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .webview-banner__content {
+  /* Badge de plataforma (arriba del título) */
+  .webview-banner__badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+
+  .webview-banner__badge:empty {
+    display: none;
+  }
+
+  /* Título con icono inline */
+  .webview-banner__title {
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex: 1;
-    min-width: 0;
+    gap: 8px;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   .webview-banner__icon {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    opacity: 0.9;
+    color: #a5b4fc;
   }
 
-  .webview-banner__text {
-    flex: 1;
-    min-width: 0;
-  }
-
+  /* Mensaje */
   .webview-banner__message {
     margin: 0;
     font-size: 13px;
-    line-height: 1.35;
+    line-height: 1.4;
+    opacity: 0.88;
   }
 
   .webview-banner__message strong {
     font-weight: 600;
+    color: #fbbf24;
   }
 
-  .webview-banner__hint {
-    margin: 2px 0 0 0;
-    font-size: 11px;
-    opacity: 0.85;
-  }
-
-  .webview-banner__actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    align-items: center;
-    width: min(260px, 100%);
-    flex-shrink: 0;
-  }
-
+  /* CTA Button */
   .webview-banner__button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 12px 16px;
+    gap: 8px;
+    padding: 14px 18px;
     border: none;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    white-space: nowrap;
     justify-content: center;
     width: 100%;
+    position: relative;
   }
 
-  .webview-banner__button svg {
-    width: 16px;
-    height: 16px;
+  .webview-banner__btn-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
   }
 
   .webview-banner__button--primary {
     background: white;
-    color: #5b4bb7;
+    color: #312e81;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
   }
 
   .webview-banner__button--primary:hover {
-    background: #f7f7f7;
+    background: #f0f0ff;
     transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 
   .webview-banner__button--primary:active {
     transform: translateY(0);
   }
 
+  /* Animación de pulso sutil en el botón */
+  @keyframes subtle-pulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); }
+    50% { box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35); }
+  }
+
+  .webview-banner--visible .webview-banner__button--primary {
+    animation: subtle-pulse 2.5s ease-in-out 1s 3;
+  }
+
   .webview-banner__button--success {
     background: #10b981 !important;
     color: white !important;
-    border-color: transparent !important;
+    animation: none !important;
   }
 
-  .webview-banner__close {
-    display: inline-flex;
+  .webview-banner__button--success .webview-banner__btn-icon {
+    display: none;
+  }
+
+  /* Paso post-copia */
+  .webview-banner__step {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    padding: 0;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: absolute;
-    top: 6px;
-    right: 6px;
+    gap: 6px;
+    margin: 0;
+    padding: 8px 12px;
+    background: rgba(16, 185, 129, 0.15);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6ee7b7;
+    animation: fadeInUp 0.3s ease;
   }
 
-  .webview-banner__close svg {
+  .webview-banner__step svg {
     width: 16px;
     height: 16px;
+    flex-shrink: 0;
+    color: #10b981;
   }
 
-  /* Responsive: Mobile */
-  @media (max-width: 640px) {
+  .webview-banner__step strong {
+    color: white;
+    font-weight: 600;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Dismiss: wrapper con transición de altura suave */
+  .webview-banner__dismiss-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .webview-banner__dismiss-wrapper--visible {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .webview-banner__dismiss-text {
+    min-height: 0;
+    width: 100%;
+    padding: 6px 0 0;
+    border: none;
+    background: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .webview-banner__dismiss-text:hover {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  /* Responsive: teléfonos pequeños */
+  @media (max-width: 380px) {
     .webview-banner {
-      padding: 10px 32px 10px 10px;
       left: 8px;
       right: 8px;
       bottom: 8px;
+      padding: 14px 12px 16px;
+      padding-right: 54px;
     }
 
-    .webview-banner__container {
-      gap: 12px;
+    .webview-banner__avatar {
+      width: 34px;
+      height: 34px;
+      top: -10px;
+      right: 10px;
     }
 
-    .webview-banner__content {
-      width: 100%;
-      gap: 8px;
-    }
-
-    .webview-banner__icon {
-      width: 18px;
-      height: 18px;
+    .webview-banner__title {
+      font-size: 15px;
+      padding-right: 0;
     }
 
     .webview-banner__message {
       font-size: 12px;
     }
 
-    .webview-banner__hint {
-      font-size: 10px;
-    }
-
-    .webview-banner__actions {
-      width: 100%;
-      justify-content: stretch;
-    }
-
     .webview-banner__button {
-      padding: 10px 14px;
-      font-size: 12px;
-    }
-
-    .webview-banner__button svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .webview-banner__actions {
-      grid-template-columns: 1fr;
-      gap: 6px;
+      padding: 12px 14px;
+      font-size: 13px;
     }
   }
 
-  /* Modo oscuro - respeta las preferencias del usuario */
+  /* Modo oscuro - fondo más profundo */
   @media (prefers-color-scheme: dark) {
     .webview-banner {
-      background: linear-gradient(135deg, #4c51bf 0%, #5a3a8f 100%);
+      background: linear-gradient(135deg, #0f0e2a 0%, #1e1b4b 50%, #312e81 100%);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
     }
   }
 
@@ -424,6 +507,11 @@
 
     .webview-banner__button {
       transition: none;
+      animation: none !important;
+    }
+
+    .webview-banner__step {
+      animation: none;
     }
   }
 
