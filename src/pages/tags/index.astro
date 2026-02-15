@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+
+// Contar posts por cada tag
+const tagCount = new Map<string, number>();
+posts.forEach((post) => {
+  post.data.tags.forEach((tag: string) => {
+    tagCount.set(tag, (tagCount.get(tag) || 0) + 1);
+  });
+});
+
+// Ordenar tags: más usados primero
+const sortedTags = Array.from(tagCount.entries()).sort(
+  (a, b) => b[1] - a[1],
+);
+
+const pageTitle = "Tags | DevbyCes4r";
+const pageDescription =
+  "Explora todos los temas del blog organizados por etiquetas.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="mb-10 text-center">
+    <h1
+      class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4"
+    >
+      Tags
+    </h1>
+    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-3">
+      {pageDescription}
+    </p>
+  </section>
+
+  <div class="flex flex-wrap gap-3 justify-center max-w-3xl mx-auto">
+    {
+      sortedTags.map(([tag, count]) => (
+        <a
+          href={`/tags/${tag}`}
+          class="group inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-blue-500 hover:shadow-md hover:shadow-blue-500/10 transition-all duration-200"
+        >
+          <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+            #{tag}
+          </span>
+          <span class="text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+            {count}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>
