@@ -11,7 +11,7 @@ export interface WebViewDetectionResult {
 }
 
 // Forzar deteccion en desarrollo cuando sea necesario
-export const FORCE_WEBVIEW_TEST = false;
+export const FORCE_WEBVIEW_TEST = true;
 
 /**
  * Detecta si el usuario está en un WebView basándose en User-Agent
