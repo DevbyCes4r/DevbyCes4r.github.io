@@ -115,10 +115,17 @@
 
     // Configurar badge de plataforma
     const platformBadge = document.getElementById("platform-badge");
+    let platformName = "unknown";
     if (platformBadge && detection.platform) {
-      const platformName = getPlatformName(detection.platform);
+      platformName = getPlatformName(detection.platform);
       platformBadge.textContent = `Desde ${platformName}`;
     }
+
+    // Detectar sistema operativo y navegador (single UA access)
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = ua.includes("iphone") || ua.includes("ipad") || ua.includes("ipod");
+    const isAndroid = ua.includes("android");
+    const osName = isIOS ? "iOS" : isAndroid ? "Android" : "unknown";
 
     // Mostrar banner con delay de 4s para dejar navegar primero
     setTimeout(() => {
@@ -144,7 +151,7 @@
           if (window.goatcounter) {
             window.goatcounter.count({
               path: "webview_banner_shown",
-              title: `WebView Banner Shown - ${detection.platform || "unknown"}`,
+              title: `WebView Banner Shown - ${platformName} (${osName})`,
               event: true,
             });
           }
@@ -157,11 +164,10 @@
     const browserName = document.getElementById("browser-name");
 
     // Detectar nombre del navegador sugerido
-    const ua = navigator.userAgent.toLowerCase();
     if (browserName) {
-      if (ua.includes("iphone") || ua.includes("ipad")) {
+      if (isIOS) {
         browserName.textContent = "Safari";
-      } else if (ua.includes("android")) {
+      } else if (isAndroid) {
         browserName.textContent = "Chrome";
       }
     }
