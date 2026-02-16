@@ -149,8 +149,10 @@
 
           // Track: Banner mostrado
           if (window.goatcounter) {
+            const platformKey = (detection.platform || "unknown").toLowerCase();
+            const osKey = osName.toLowerCase();
             window.goatcounter.count({
-              path: "webview_banner_shown",
+              path: `webview_banner_shown_${platformKey}_${osKey}`,
               title: `WebView Banner Shown - ${platformName} (${osName})`,
               event: true,
             });
@@ -188,9 +190,10 @@
 
         // Track: Usuario copió URL
         if (window.goatcounter) {
+          const osKey = osName.toLowerCase();
           window.goatcounter.count({
-            path: "webview_banner_copy",
-            title: "WebView Banner - Copy URL",
+            path: `webview_banner_copy_${osKey}`,
+            title: `WebView Banner - Copy URL (${osName})`,
             event: true,
           });
         }
@@ -216,9 +219,10 @@
 
       // Track: Cerró el banner
       if (window.goatcounter) {
+        const osKey = osName.toLowerCase();
         window.goatcounter.count({
-          path: "webview_banner_dismiss",
-          title: "WebView Banner - Dismissed",
+          path: `webview_banner_dismiss_${osKey}`,
+          title: `WebView Banner - Dismissed (${osName})`,
           event: true,
         });
       }
