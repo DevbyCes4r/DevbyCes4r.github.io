@@ -11,7 +11,7 @@ export interface WebViewDetectionResult {
 }
 
 // Forzar deteccion en desarrollo cuando sea necesario
-export const FORCE_WEBVIEW_TEST = true;
+export const FORCE_WEBVIEW_TEST = false;
 
 /**
  * Detecta si el usuario está en un WebView basándose en User-Agent
@@ -36,7 +36,7 @@ export function detectWebView(): WebViewDetectionResult {
     instagram: /instagram|ig_[\w]+/i,
     // LinkedIn: múltiples variantes para Android/iOS
     // Incluye: LinkedInApp, LinkedIn, liapp, y variantes de Chrome Custom Tabs
-    linkedin: /linkedinapp|linkedin\/[\d.]+|liapp|linkedin.*android/i,
+    linkedin: /linkedinapp|linkedin\/[\d.]+|liapp|linkedin.*android|linkedin.*ios/i,
     twitter: /twitter/i,
     tiktok: /tiktok|musical_ly/i,
     messenger: /\bmessenger\b|fbmessenger/i,
