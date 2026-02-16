@@ -42,6 +42,23 @@ if (type === "category") {
         );
 }
 
+// --- RELATED COURSES LOGIC ---
+let relatedCourses: CollectionEntry<"courses">[] = [];
+if (type === "course") {
+    const allCourses = await getCollection("courses");
+    // Filter courses from the same category, excluding the current course
+    const sameCategoryCourses = allCourses.filter(
+        (course) => 
+            course.data.category === entry.data.category && 
+            course.slug !== entry.slug
+    );
+    
+    // Shuffle and take 2 random courses
+    relatedCourses = sameCategoryCourses
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 2);
+}
+
 // FAQ Data (Shared)
 const generalFAQs = [
     {
@@ -528,6 +545,79 @@ const pageDescription =
                         Ver Todos los Cursos
                         </a>
                     </div>
+                </div>
+            </div>
+        )
+    }
+
+    {
+        type === "course" && relatedCourses.length > 0 && (
+            <div class="w-full max-w-5xl pb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-purple-600 dark:border-purple-500 pl-4">
+                        Cursos Relacionados
+                    </h2>
+                    <div class="h-px bg-slate-200 dark:bg-slate-800 flex-grow" />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {relatedCourses.map((course) => (
+                        <a
+                            href={`/cursos/${course.slug}?ref=${entry.data.category}`}
+                            class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                        >
+                            <div class="flex items-start gap-4">
+                                {/* Icon - se oculta en hover */}
+                                <div class="flex-shrink-0 w-16 transition-opacity duration-300 group-hover:opacity-0">
+                                    <div class="h-16 w-16 bg-slate-100 dark:bg-slate-700/50 p-2 rounded-xl flex items-center justify-center text-center text-lg leading-tight overflow-hidden">
+                                        {course.data.icon}
+                                    </div>
+                                </div>
+                                <div class="transition-transform duration-300 group-hover:-translate-x-20" style="width: calc(100% - 80px);">
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-2">
+                                        {course.data.title}
+                                    </h3>
+                                    <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
+                                        {course.data.description}
+                                    </p>
+                                    {course.data.tags &&
+                                        course.data.tags.length > 0 && (
+                                            <span class="text-xs font-medium px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-500/20">
+                                                {course.data.tags[0]}
+                                            </span>
+                                        )}
+                                </div>
+                            </div>
+
+                            {/* Image preview near arrow */}
+                            {course.data.coverImage && (
+                                <div class="absolute top-16 right-4 w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 overflow-hidden transition-all duration-300">
+                                    <img 
+                                        src={course.data.coverImage} 
+                                        alt={course.data.title}
+                                        class="w-20 h-12 object-cover rounded-lg shadow-md ring-2 ring-purple-500/50"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            )}
+
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-600 dark:text-purple-400">
+                                <svg
+                                    class="w-6 h-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                    ))}
                 </div>
             </div>
         )
