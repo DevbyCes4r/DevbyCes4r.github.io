@@ -9,13 +9,14 @@ interface Props {
     faqs: readonly FAQ[];
     title?: string;
     icon?: string;
+    className?: string;
 }
 
-const { faqs, title = "Preguntas Frecuentes", icon = "question" } = Astro.props;
+const { faqs, title = "Preguntas Frecuentes", icon = "question", className = "" } = Astro.props;
 ---
 
 <!-- FAQ Section - Optimized for AI Bots -->
-<section class="mb-16" itemscope itemtype="https://schema.org/FAQPage">
+<section itemscope itemtype="https://schema.org/FAQPage" class={className}>
     <div class="flex items-center gap-3 mb-8">
         {
             icon === "question" && (

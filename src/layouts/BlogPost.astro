@@ -170,9 +170,7 @@ const articleSchema = {
       </AIOptimizedContent>
       {
         faqs && faqs.length > 0 && (
-          <div class="mt-8 not-prose">
-            <FAQSection faqs={faqs} />
-          </div>
+          <FAQSection faqs={faqs} className="mt-8" />
         )
       }
 
