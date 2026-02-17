@@ -105,12 +105,12 @@ const pageDescription =
     {
         type === "course" ? (
             /* COURSE LAYOUT */
-            <div class="w-full max-w-5xl py-12">
+            <div class="w-full max-w-5xl pb-8">
                 <a
                     id="back-button"
                     href="/cursos/"
                     data-category={entry.data.category}
-                    class="inline-flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white mb-8 transition-colors"
+                    class="inline-flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white mb-4 md:mb-6 transition-colors"
                 >
                     <svg
                         class="w-5 h-5 mr-2"
@@ -128,36 +128,60 @@ const pageDescription =
                     Volver
                 </a>
 
-                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 md:p-12 border border-slate-200 dark:border-slate-700 shadow-2xl">
                     <header>
-                        <div class="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-6">
-                            <div class="flex-shrink-0">
-                                <div class="text-5xl md:text-6xl p-4 md:p-6 bg-slate-100 dark:bg-slate-700/50 rounded-2xl shadow-inner">
+                        <div class="flex items-start gap-3 md:gap-4 lg:gap-6 mb-4 md:mb-5">
+                            {/* Mobile: Sin icono (distrae) */}
+                            {/* Tablet: Icono mediano */}
+                            {/* Desktop: Cover image grande */}
+                            
+                            {/* Cover Image - Solo desktop con fallback a icono */}
+                            {entry.data.coverImage ? (
+                                <div class="hidden lg:block flex-shrink-0 w-44 h-28 rounded-xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src={entry.data.coverImage} 
+                                        alt={entry.data.title}
+                                        class="w-full h-full object-cover"
+                                        loading="eager"
+                                    />
+                                </div>
+                            ) : (
+                                <div class="hidden lg:flex flex-shrink-0 w-44 h-28 bg-slate-100 dark:bg-slate-700/50 rounded-xl items-center justify-center text-5xl shadow-inner">
                                     {entry.data.icon}
                                 </div>
+                            )}
+                            
+                            {/* Icon - Solo tablet (md a lg) */}
+                            <div class="hidden md:flex lg:hidden flex-shrink-0 w-16 h-16 bg-slate-100 dark:bg-slate-700/50 rounded-xl items-center justify-center text-3xl shadow-inner">
+                                {entry.data.icon}
                             </div>
-                            <div class="flex-grow text-left w-full">
-                                <div class="flex flex-wrap justify-start gap-2 mb-3">
-                                    {entry.data.tags && entry.data.tags.map(tag => (
-                                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-500/30">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                    <span class="px-3 py-1 bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded-full text-sm font-medium border border-green-200 dark:border-green-500/30">
+                            
+                            <div class="flex-1 min-w-0">
+                                {/* Badge Gratis minimalista - Arriba del título */}
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="inline-block px-2.5 py-0.5 bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold">
                                         Gratis
                                     </span>
+                                    {/* Solo primer tag en móvil/tablet, oculto en desktop */}
+                                    {entry.data.tags && entry.data.tags[0] && (
+                                        <span class="lg:hidden inline-block px-2.5 py-0.5 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">
+                                            {entry.data.tags[0]}
+                                        </span>
+                                    )}
                                 </div>
-                                <h1 class="text-1xl md:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4">
+                                
+                                <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2 md:mb-3 leading-tight">
                                     {entry.data.title}
                                 </h1>
-                                <p class="text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+                                
+                                {/* Descripción: Oculta en móvil, visible tablet+ */}
+                                <p class="hidden md:block text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-snug line-clamp-2">
                                     {entry.data.description}
                                 </p>
                             </div>
                         </div>
                         
                         {/* Primary CTA Button - Apple-Inspired Design */}
-                        <div class="flex flex-col items-start md:items-end gap-2">
+                        <div class="flex flex-col items-stretch md:items-end gap-1.5">
                             <a
                                 id="course-access-btn"
                                 href={entry.data.affiliateLink}
@@ -166,7 +190,7 @@ const pageDescription =
                                 data-course-slug={entry.slug}
                                 data-course-title={entry.data.title}
                                 data-course-category={entry.data.category}
-                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto"
+                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-xl font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                                 <span>Ver Curso Gratis</span>
                                 <svg
@@ -183,7 +207,7 @@ const pageDescription =
                                     />
                                 </svg>
                             </a>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center md:justify-end gap-1">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -264,7 +288,7 @@ const pageDescription =
                     </header>
 
                     {entry.data.videoId && (
-                        <div class="mt-8 rounded-2xl overflow-hidden shadow-xl aspect-video bg-slate-100 dark:bg-slate-900 relative">
+                        <div class="mt-5 md:mt-6 rounded-2xl overflow-hidden shadow-xl aspect-video bg-slate-100 dark:bg-slate-900 relative">
                             <iframe
                                 class="w-full h-full"
                                 src={`https://www.youtube.com/embed/${entry.data.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
@@ -335,7 +359,6 @@ const pageDescription =
                             </div>
                         </div>
                     )}
-                </article>
 
                 {/* Sticky Floating CTA Button - Apple-Inspired Design */}
                 <div id="sticky-cta" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300">
@@ -367,7 +390,7 @@ const pageDescription =
             </div>
         ) : (
             /* CATEGORY LAYOUT */
-            <div class="min-h-screen py-10 px-4">
+            <div class="min-h-screen pb-8 px-4">
                 <div class="max-w-5xl mx-auto">
                     {/* Breadcrumbs */}
                     <nav class="mb-8 text-sm" aria-label="Breadcrumb">
