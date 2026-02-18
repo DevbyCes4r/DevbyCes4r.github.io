@@ -1,17 +1,19 @@
 # ==============================
-# Seguridad moderna (CSP)
+# Seguridad (CSP unificada)
 # ==============================
 
-# Permitir iframe solo para PDFs dentro de /docs/ desde el mismo dominio
-/docs/*
-  Content-Security-Policy: frame-ancestors 'self';
-
-# Bloquear iframes para todo lo demás
+# Política base: bloquear iframes en todo el sitio
 /*
-  Content-Security-Policy: frame-ancestors 'none';
+  Content-Security-Policy: default-src 'self'; frame-ancestors 'none';
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Excepción: permitir iframe SOLO para PDFs en /docs/
+# (Sobrescribe únicamente frame-ancestors)
+# Importante: debe ir DESPUÉS de la regla global
+/docs/*
+  Content-Security-Policy: default-src 'self'; frame-ancestors 'self';
 
 
 # ==============================
