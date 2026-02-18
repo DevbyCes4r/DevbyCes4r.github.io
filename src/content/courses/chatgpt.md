@@ -10,6 +10,8 @@ category: 'inteligencia-artificial'
 group: 'Inteligencia Artificial'
 orderGroup: 2
 publishDate: 2025-10-07
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

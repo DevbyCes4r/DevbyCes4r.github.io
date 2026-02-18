@@ -10,4 +10,6 @@ category: 'idiomas'
 group: 'Ingles desde principiante a avanzado'
 orderGroup: 6
 publishDate: 2025-11-02
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---

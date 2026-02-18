@@ -10,6 +10,8 @@ category: 'programacion'
 group: 'Web Developer'
 orderGroup: 8
 publishDate: 2025-10-15
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

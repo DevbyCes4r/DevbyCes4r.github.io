@@ -62,6 +62,32 @@ const coursesCollection = defineCollection({
         orderGroup: z.number().default(1),
         // Date for sorting in category lists
         publishDate: z.date().default(() => new Date()),
+        // === Structured content (LinkedIn-optimized) ===
+        // Intro: por qué importa este curso (máx 2-3 frases)
+        whyIntro: z.string().optional(),
+        whyDetail: z.string().optional(),
+        // Perfil profesional al terminar
+        profileRoles: z.array(z.object({
+            role: z.string(),
+            detail: z.string(),
+            salary: z.string().optional(),
+        })).optional(),
+        // Tip de LinkedIn
+        linkedinTip: z.string().optional(),
+        // Aplicación en empresa
+        businessAreas: z.array(z.object({
+            area: z.string(),
+            solves: z.string(),
+            impact: z.string(),
+        })).optional(),
+        // Resultado concreto + CTA final
+        concreteResult: z.string().optional(),
+        closingCTA: z.string().optional(),
+        // === Optional social proof fields ===
+        studentsCount: z.number().optional(),
+        rating: z.number().min(0).max(5).optional(),
+        reviewsCount: z.number().optional(),
+        platformProvider: z.string().optional(),
     }),
 });
 

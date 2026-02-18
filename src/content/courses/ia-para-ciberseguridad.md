@@ -10,6 +10,8 @@ category: 'inteligencia-artificial'
 group: ['Inteligencia Artificial', 'Escalabilidad y Seguridad de Aplicaciones']
 orderGroup: 4
 publishDate: 2026-02-03
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

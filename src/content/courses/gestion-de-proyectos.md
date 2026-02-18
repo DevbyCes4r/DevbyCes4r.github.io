@@ -5,12 +5,14 @@ icon: '📊'
 videoId: 'Feib3mkzFlA'
 coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12549/card_imagen.jpg'
 affiliateLink: 'https://edutin.com/sh-9738'
-documentUrl: '/documents/gestion-de-proyectos.pdf'
+documentUrl: '/docs/gestion-de-proyectos.pdf'
 tags: ['Gestión', 'Metodologías Ágiles']
 category: 'negocios'
 group: 'Negocios y Emprendimiento'
 orderGroup: 1
 publishDate: 2025-12-11
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

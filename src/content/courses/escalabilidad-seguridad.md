@@ -10,6 +10,8 @@ category: 'devops-cloud'
 group: 'Web Developer'
 orderGroup: 10
 publishDate: 2025-10-19
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

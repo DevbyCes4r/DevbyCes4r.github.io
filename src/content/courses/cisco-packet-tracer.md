@@ -10,4 +10,6 @@ category: 'devops-cloud'
 group: 'Infraestructura'
 orderGroup: 4
 publishDate: 2025-10-01
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---

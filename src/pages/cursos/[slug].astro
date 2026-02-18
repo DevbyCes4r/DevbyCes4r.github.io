@@ -156,32 +156,62 @@ const pageDescription =
                             </div>
                             
                             <div class="flex-1 min-w-0">
-                                {/* Badge Gratis minimalista - Arriba del título */}
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="inline-block px-2.5 py-0.5 bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold">
-                                        Gratis
+                                {/* Badge 100% Gratis con gradiente - Arriba del título */}
+                                <div class="flex flex-wrap items-center gap-1.5 md:gap-2 mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 md:px-3 md:py-1 bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-emerald-400 dark:to-teal-400 text-white rounded-full text-xs font-bold shadow-sm">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        100% Gratis
                                     </span>
-                                    {/* Solo primer tag en móvil/tablet, oculto en desktop */}
-                                    {entry.data.tags && entry.data.tags[0] && (
-                                        <span class="lg:hidden inline-block px-2.5 py-0.5 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">
-                                            {entry.data.tags[0]}
-                                        </span>
-                                    )}
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 md:px-2.5 md:py-1 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full text-xs font-semibold">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
+                                        Incluye certificado
+                                    </span>
                                 </div>
                                 
-                                <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2 md:mb-3 leading-tight">
+                                <h1 class="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-1.5 md:mb-3 leading-tight">
                                     {entry.data.title}
                                 </h1>
                                 
-                                {/* Descripción: Oculta en móvil, visible tablet+ */}
-                                <p class="hidden md:block text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-snug line-clamp-2">
+                                {/* Descripción: Siempre visible con line-clamp */}
+                                <p class="text-sm md:text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-snug line-clamp-2 mb-1.5 md:mb-2">
                                     {entry.data.description}
                                 </p>
+
+                                {/* Social proof condicional */}
+                                {(entry.data.studentsCount || entry.data.rating || entry.data.platformProvider) && (
+                                    <div class="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+                                        {entry.data.studentsCount && (
+                                            <>
+                                                <span class="inline-flex items-center gap-1">
+                                                    <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+                                                    +{entry.data.studentsCount.toLocaleString('es')} estudiantes
+                                                </span>
+                                                {(entry.data.rating || entry.data.platformProvider) && <span class="text-slate-300 dark:text-slate-600">•</span>}
+                                            </>
+                                        )}
+                                        {entry.data.rating && (
+                                            <>
+                                                <span class="inline-flex items-center gap-1">
+                                                    <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L10 14.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L2.818 8.374a.75.75 0 01.416-1.28l4.21-.611L9.327 2.42A.75.75 0 0110 2z"/></svg>
+                                                    {entry.data.rating.toFixed(1)}{entry.data.reviewsCount ? ` (${entry.data.reviewsCount.toLocaleString('es')} reseñas)` : ''}
+                                                </span>
+                                                {entry.data.platformProvider && <span class="text-slate-300 dark:text-slate-600">•</span>}
+                                            </>
+                                        )}
+                                        {entry.data.platformProvider && (
+                                            <span class="inline-flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                                {entry.data.platformProvider}
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
                         
-                        {/* Primary CTA Button - Apple-Inspired Design */}
-                        <div class="flex flex-col items-stretch md:items-end gap-1.5">
+                        {/* Primary CTA Block - Optimized for conversion */}
+                        <div class="flex flex-col items-stretch gap-2 mt-3 md:mt-4">
+                            {/* CTA Button */}
                             <a
                                 id="course-access-btn"
                                 href={entry.data.affiliateLink}
@@ -190,29 +220,46 @@ const pageDescription =
                                 data-course-slug={entry.slug}
                                 data-course-title={entry.data.title}
                                 data-course-category={entry.data.category}
-                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-xl font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 md:px-10 py-3.5 md:py-4 my-4 md:my-8 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-lg font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto md:min-w-[280px] md:self-end"
                             >
-                                <span>Ver Curso Gratis</span>
-                                <svg
-                                    class="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 duration-300"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                    />
-                                </svg>
+                                <span>Empezar curso gratis</span>
+                               <svg
+                                class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                />
+                            </svg>
                             </a>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center md:justify-end gap-1">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>Enlace directo a la plataforma oficial</span>
+                            
+                            {/* Micro-copy de seguimiento - Oculto en móvil */}
+                            <p class="hidden md:block text-xs text-center md:text-right text-slate-500 dark:text-slate-400 -mt-2 md:-mt-1">
+                                Desarrolla habilidades demandadas y potencia tu perfil profesional.
                             </p>
+
+                            {/* Trust signals - alineados a la izquierda en móvil */}
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-start md:justify-end gap-1.5 sm:gap-3 text-xs text-slate-600 dark:text-slate-400 pt-0.5 md:pt-1">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span class="font-medium">Sin datos de tarjeta</span>
+                                </span>
+                                <span class="hidden sm:inline text-slate-300 dark:text-slate-600">|</span>
+                                <span class="inline-flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span class="font-medium">Acceso inmediato</span>
+                                </span>
+                                <span class="hidden sm:inline text-slate-300 dark:text-slate-600">|</span>
+                                <span class="inline-flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span class="font-medium">Certificado opcional</span>
+                                </span>
+                            </div>
                         </div>
                         
                         <style>
@@ -393,9 +440,101 @@ const pageDescription =
                         </div>
                     )}
 
-                    <div class="ai-content-wrapper">
-                        <CourseContent />
-                    </div>
+                    {/* Structured content from frontmatter */}
+                    {entry.data.whyIntro ? (
+                        <div class="ai-content-wrapper mt-8 space-y-10">
+                            {/* Sección: ¿Por qué este curso? */}
+                            <section>
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                                    ¿Por qué tomar este {entry.data.title} en {new Date().getFullYear()}?
+                                </h2>
+                                <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+                                    {entry.data.whyIntro}
+                                </p>
+                                {entry.data.whyDetail && (
+                                    <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                                        {entry.data.whyDetail}
+                                    </p>
+                                )}
+                            </section>
+
+                            <hr class="border-slate-200 dark:border-slate-700" />
+
+                            {/* Sección: Perfil profesional */}
+                            {entry.data.profileRoles && entry.data.profileRoles.length > 0 && (
+                                <section>
+                                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                                        Tu perfil profesional al terminar
+                                    </h2>
+                                    <ul class="space-y-3">
+                                        {entry.data.profileRoles.map((pr: any) => (
+                                            <li class="flex items-start gap-2 text-slate-700 dark:text-slate-300">
+                                                <span class="text-blue-500 mt-1 flex-shrink-0">•</span>
+                                                <span>
+                                                    <strong class="text-slate-900 dark:text-white">{pr.role}</strong>{' '}
+                                                    {pr.detail}
+                                                    {pr.salary && (
+                                                        <span class="text-sm text-slate-500 dark:text-slate-400"> (rango salarial: {pr.salary})</span>
+                                                    )}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {entry.data.linkedinTip && (
+                                        <blockquote class="mt-5 border-l-4 border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-500/10 px-4 py-3 rounded-r-lg text-slate-700 dark:text-slate-300 text-sm">
+                                            {entry.data.linkedinTip}
+                                        </blockquote>
+                                    )}
+                                </section>
+                            )}
+
+                            <hr class="border-slate-200 dark:border-slate-700" />
+
+                            {/* Sección: Aplicación en empresa */}
+                            {entry.data.businessAreas && entry.data.businessAreas.length > 0 && (
+                                <section>
+                                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                                        Aplicación laboral
+                                    </h2>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-sm text-left border-collapse">
+                                            <thead>
+                                                <tr class="border-b border-slate-200 dark:border-slate-700">
+                                                    <th class="py-3 pr-4 font-semibold text-slate-900 dark:text-white">Área</th>
+                                                    <th class="py-3 pr-4 font-semibold text-slate-900 dark:text-white">Qué resuelves</th>
+                                                    <th class="py-3 font-semibold text-slate-900 dark:text-white">Impacto empresarial</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {entry.data.businessAreas.map((ba: any) => (
+                                                    <tr class="border-b border-slate-100 dark:border-slate-800">
+                                                        <td class="py-3 pr-4 font-semibold text-slate-900 dark:text-white whitespace-nowrap">{ba.area}</td>
+                                                        <td class="py-3 pr-4 text-slate-600 dark:text-slate-400">{ba.solves}</td>
+                                                        <td class="py-3 text-slate-600 dark:text-slate-400">{ba.impact}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {entry.data.concreteResult && (
+                                        <p class="mt-5 text-slate-700 dark:text-slate-300 leading-relaxed">
+                                            <strong class="text-slate-900 dark:text-white">Resultado concreto:</strong>{' '}
+                                            {entry.data.concreteResult}
+                                        </p>
+                                    )}
+                                    {entry.data.closingCTA && (
+                                        <p class="mt-3 text-sm italic text-slate-500 dark:text-slate-400">
+                                            {entry.data.closingCTA}
+                                        </p>
+                                    )}
+                                </section>
+                            )}
+                        </div>
+                    ) : (
+                        <div class="ai-content-wrapper">
+                            <CourseContent />
+                        </div>
+                    )}
 
                     {entry.data.documentUrl && (
                         <div class="mt-12">
@@ -407,17 +546,17 @@ const pageDescription =
                                 </span>
                                 Material adicional
                             </h2>
-                            <div class="w-full h-[600px] md:h-[850px] rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900">
+                            <div class="w-full max-w-3xl h-[600px] md:h-[900px] rounded-2xl overflow-x-auto overflow-y-hidden shadow-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900">
                                 <iframe
-                                    src={`${entry.data.documentUrl}#toolbar=0`}
-                                    class="w-full h-full"
+                                    src={`${entry.data.documentUrl}#view=Fit`}
+                                    class="w-full h-full rounded-2xl md:scroll-mt-20"
                                     title={`Documento del curso ${entry.data.title}`}
                                 >
                                 </iframe>
                             </div>
                             <div class="mt-4 text-center md:text-right">
                                 <a 
-                                    href={entry.data.documentUrl} 
+                                    href={`${entry.data.documentUrl}#view=Fit`} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
@@ -442,7 +581,7 @@ const pageDescription =
                         data-course-title={entry.data.title}
                         class="sticky-floating-btn group flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-full font-semibold shadow-xl transition-all duration-300"
                     >
-                        <span>Ver Curso</span>
+                        <span>Empezar curso</span>
                         <svg
                             class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
                             fill="none"
@@ -633,6 +772,21 @@ const pageDescription =
                         Ver Todos los Cursos
                         </a>
                     </div>
+                </div>
+            </div>
+        )
+    }
+
+    {/* Tags Section */}
+    {
+        type === "course" && entry.data.tags && entry.data.tags.length > 0 && (
+            <div class="w-full max-w-5xl pb-8">
+                <div class="flex flex-wrap gap-2">
+                    {entry.data.tags.map((tag: string) => (
+                        <span class="inline-block px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            #{tag}
+                        </span>
+                    ))}
                 </div>
             </div>
         )

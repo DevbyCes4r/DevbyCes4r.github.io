@@ -10,4 +10,6 @@ category: 'negocios'
 group: 'Negocios y Emprendimiento'
 orderGroup: 8
 publishDate: 2025-12-11
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---

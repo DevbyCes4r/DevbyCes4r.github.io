@@ -9,6 +9,8 @@ category: 'datos'
 group: 'Inteligencia Artificial'
 orderGroup: 3
 publishDate: 2025-10-09
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

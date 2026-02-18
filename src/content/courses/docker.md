@@ -10,4 +10,6 @@ category: 'devops-cloud'
 group: 'Escalabilidad y Seguridad de Aplicaciones'
 orderGroup: 9
 publishDate: 2025-12-11
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---

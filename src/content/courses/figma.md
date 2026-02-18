@@ -10,6 +10,8 @@ category: 'diseno'
 group: 'Web Developer'
 orderGroup: 1
 publishDate: 2025-10-23
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
 
 ## Sobre este curso

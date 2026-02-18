@@ -1,6 +1,10 @@
 # Cache Control Headers para mejorar Performance
 # Este archivo es para Netlify/Cloudflare Pages
 
+## Permitir iframes solo para PDFs en /docs/ desde el mismo dominio
+/docs/*
+  X-Frame-Options: SAMEORIGIN
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff

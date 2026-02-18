@@ -10,4 +10,6 @@ group: 'Ingles desde principiante a avanzado'
 videoId: 's4E85lYwgQU'
 orderGroup: 1
 publishDate: 2025-11-06
+rating: 4.9
+platformProvider: 'Edutin Academy'
 ---
