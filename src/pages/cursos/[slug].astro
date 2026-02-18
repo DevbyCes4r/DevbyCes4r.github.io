@@ -178,17 +178,13 @@ const pageDescription =
                                 </p>
 
                                 {/* Social proof condicional */}
-                                {(entry.data.studentsCount || entry.data.rating || entry.data.platformProvider) && (
+                                {(entry.data.studentsCount != null || entry.data.rating || entry.data.platformProvider) && (
                                     <div class="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-                                        {entry.data.studentsCount && (
-                                            <>
-                                                <span class="inline-flex items-center gap-1">
-                                                    <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
-                                                    +{entry.data.studentsCount.toLocaleString('es')} estudiantes
-                                                </span>
-                                                {(entry.data.rating || entry.data.platformProvider) && <span class="text-slate-300 dark:text-slate-600">•</span>}
-                                            </>
-                                        )}
+                                        <span class="hidden md:inline-flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+                                            {entry.data.studentsCount != null ? `+${entry.data.studentsCount.toLocaleString('es')} estudiantes` : 'Comunidad y foros'}
+                                        </span>
+                                        {(entry.data.rating || entry.data.platformProvider) && <span class="hidden md:inline text-slate-300 dark:text-slate-600">•</span>}
                                         {entry.data.rating && (
                                             <>
                                                 <span class="inline-flex items-center gap-1">
