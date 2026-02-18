@@ -1,25 +1,13 @@
-# ==============================
-# Seguridad (CSP unificada)
-# ==============================
+# Cache Control Headers para mejorar Performance
+# Este archivo es para Netlify/Cloudflare Pages
 
-# Política base: bloquear iframes en todo el sitio
 /*
-  Content-Security-Policy: default-src 'self'; frame-ancestors 'none';
+  X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# Excepción: permitir iframe SOLO para PDFs en /docs/
-# (Sobrescribe únicamente frame-ancestors)
-# Importante: debe ir DESPUÉS de la regla global
-/docs/*
-  Content-Security-Policy: default-src 'self'; frame-ancestors 'self';
-
-
-# ==============================
 # Cache para recursos estáticos (1 año)
-# ==============================
-
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -29,19 +17,11 @@
 /favicon/*
   Cache-Control: public, max-age=31536000, immutable
 
-
-# ==============================
-# Cache para HTML (1 hora)
-# ==============================
-
+# Cache para páginas HTML (1 hora, revalidate)
 /*.html
   Cache-Control: public, max-age=3600, must-revalidate
 
-
-# ==============================
-# Archivos específicos
-# ==============================
-
+# Cache para archivos específicos
 /robots.txt
   Cache-Control: public, max-age=86400
 
