@@ -326,6 +326,11 @@
   @apply max-w-4xl mx-auto;
 }
 
+/* Tabla dentro de overflow-x-auto: sin margin-block para pegar al título */
+.ai-content-wrapper .overflow-x-auto table {
+  @apply my-0;
+}
+
 .ai-content-wrapper thead {
   @apply bg-gradient-to-r from-blue-600 to-purple-600;
 }

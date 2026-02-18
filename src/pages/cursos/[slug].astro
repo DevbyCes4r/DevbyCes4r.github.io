@@ -222,7 +222,7 @@ const pageDescription =
                                 data-course-category={entry.data.category}
                                 class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 md:px-10 py-3.5 md:py-4 my-4 md:my-8 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-lg font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto md:min-w-[280px] md:self-end"
                             >
-                                <span>Empezar curso gratis</span>
+                                <span>Acceder al curso gratis</span>
                                <svg
                                 class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
                                 fill="none"
@@ -358,7 +358,7 @@ const pageDescription =
                                     </div>
                                 </div>
                                 <div class="bg-slate-900/90 dark:bg-slate-800/90 px-4 py-2 shadow-xl">
-                                    <p class="text-sm text-white font-medium">Presentación del curso. Continúa con "Empezar curso gratis"</p>
+                                    <p class="text-sm text-white font-medium">Vídeo de presentación. Para ver el curso completo, haz clic en el botón «Acceder al curso gratis».</p>
                                 </div>
                             </div>
 
@@ -403,7 +403,7 @@ const pageDescription =
                                     </div>
                                 </div>
                                 <div class="bg-slate-900/90 dark:bg-slate-800/90 px-4 py-2 shadow-xl">
-                                    <p class="text-center text-sm text-white font-medium">Presentación del curso</p>
+                                    <p class="text-center text-sm text-white font-medium">Vídeo de presentación. Para ver el curso completo, pulsa el botón «Acceder al curso gratis».</p>
                                 </div>
                             </div>
 
@@ -493,7 +493,7 @@ const pageDescription =
                             {/* Sección: Aplicación en empresa */}
                             {entry.data.businessAreas && entry.data.businessAreas.length > 0 && (
                                 <section>
-                                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">
                                         Aplicación laboral
                                     </h2>
                                     <div class="overflow-x-auto">
@@ -572,8 +572,43 @@ const pageDescription =
                         </div>
                     )}
 
-                {/* Sticky Floating CTA Button - Apple-Inspired Design */}
-                <div id="sticky-cta" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300">
+                {/* CTA ancla y flotante: solo cuando hay contenido (whyIntro, body .md, documentUrl o closingCTA) que da alto para hacer scroll */}
+                {(entry.data.whyIntro || entry.data.closingCTA || entry.data.documentUrl || (typeof entry.body === "string" && entry.body.trim().length > 0)) && (
+                    <>
+                {/* Anchor CTA - Mismo diseño que el principal, arriba de los tags; el flotante se oculta al llegar aquí */}
+                <div id="cta-anchor" class="flex flex-col items-stretch gap-2 mt-10 md:mt-12 mb-2 scroll-mt-24">
+                    <a
+                        id="anchor-course-btn"
+                        href={entry.data.affiliateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-course-slug={entry.slug}
+                        data-course-title={entry.data.title}
+                        data-course-category={entry.data.category}
+                        class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 md:px-10 py-3.5 md:py-4 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-lg font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full max-w-2xl mx-auto"
+                    >
+                        <span>Acceder al curso gratis</span>
+                        <svg
+                            class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                        </svg>
+                    </a>
+                    <p class="text-xs text-center text-slate-500 dark:text-slate-400">
+                        Desarrolla habilidades demandadas y potencia tu perfil profesional.
+                    </p>
+                </div>
+
+                {/* Sticky Floating CTA Button - se oculta al llegar al CTA ancla, vuelve al subir */}
+                <div id="sticky-cta" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-opacity duration-150 ease-out">
                     <a
                         id="sticky-course-btn"
                         href={entry.data.affiliateLink}
@@ -583,7 +618,7 @@ const pageDescription =
                         data-course-title={entry.data.title}
                         class="sticky-floating-btn group flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-full font-semibold shadow-xl transition-all duration-300"
                     >
-                        <span>Empezar curso gratis</span>
+                        <span>Acceder al curso gratis</span>
                         <svg
                             class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
                             fill="none"
@@ -599,6 +634,8 @@ const pageDescription =
                         </svg>
                     </a>
                 </div>
+                    </>
+                )}
             </div>
         ) : (
             /* CATEGORY LAYOUT */
@@ -969,40 +1006,45 @@ const pageDescription =
                     backButton.href = backUrl;
                 }
 
-                // Sticky Floating CTA Button Logic
+                // Sticky Floating CTA: solo en el rango entre "el primer CTA ya se ocultó" y "aún no llegamos al segundo CTA fijo"
                 const stickyCTA = document.getElementById("sticky-cta");
-                let lastScrollY = window.scrollY;
-                let ticking = false;
+                const ctaMain = document.getElementById("course-access-btn");
+                const ctaAnchor = document.getElementById("cta-anchor");
 
                 function updateStickyCTA() {
-                    const scrollY = window.scrollY;
-                    const windowHeight = window.innerHeight;
-                    const documentHeight = document.documentElement.scrollHeight;
-                    
-                    // Show button after scrolling down 400px
-                    // Hide when near bottom (within 50px of footer)
-                    if (scrollY > 400 && (documentHeight - scrollY - windowHeight) > 50) {
-                        stickyCTA?.classList.remove("opacity-0", "pointer-events-none");
-                        stickyCTA?.classList.add("opacity-100", "pointer-events-auto");
+                    if (!stickyCTA || !ctaMain || !ctaAnchor) return;
+
+                    const mainRect = ctaMain.getBoundingClientRect();
+                    const anchorRect = ctaAnchor.getBoundingClientRect();
+
+                    // Primer CTA oculto = ya scrolleamos y salió por arriba (su borde inferior está por encima del viewport)
+                    const mainOutOfView = mainRect.bottom < 0;
+                    // Segundo CTA aún no llegado = está debajo del viewport (su borde superior está por debajo del viewport)
+                    const anchorNotReached = anchorRect.top > window.innerHeight;
+
+                    const shouldShowFloating = mainOutOfView && anchorNotReached;
+
+                    if (shouldShowFloating) {
+                        stickyCTA.classList.remove("opacity-0", "pointer-events-none");
+                        stickyCTA.classList.add("opacity-100", "pointer-events-auto");
                     } else {
-                        stickyCTA?.classList.add("opacity-0", "pointer-events-none");
-                        stickyCTA?.classList.remove("opacity-100", "pointer-events-auto");
+                        stickyCTA.classList.add("opacity-0", "pointer-events-none");
+                        stickyCTA.classList.remove("opacity-100", "pointer-events-auto");
                     }
-                    
-                    lastScrollY = scrollY;
-                    ticking = false;
                 }
 
+                let ticking = false;
                 function onScroll() {
                     if (!ticking) {
-                        window.requestAnimationFrame(updateStickyCTA);
+                        window.requestAnimationFrame(() => {
+                            updateStickyCTA();
+                            ticking = false;
+                        });
                         ticking = true;
                     }
                 }
 
                 window.addEventListener("scroll", onScroll, { passive: true });
-                
-                // Initial check
                 updateStickyCTA();
             </script>
             <script>
@@ -1011,7 +1053,8 @@ const pageDescription =
                 // Solo trackear clicks en "Acceder al Curso" (conversión importante)
                 const accessBtn = document.getElementById('course-access-btn');
                 const stickyBtn = document.getElementById('sticky-course-btn');
-                
+                const anchorBtn = document.getElementById('anchor-course-btn');
+
                 accessBtn?.addEventListener('click', () => {
                     const slug = accessBtn.getAttribute('data-course-slug') || '';
                     waitForGoatCounter(() => trackCourseClick(slug));
@@ -1019,6 +1062,11 @@ const pageDescription =
 
                 stickyBtn?.addEventListener('click', () => {
                     const slug = stickyBtn.getAttribute('data-course-slug') || '';
+                    waitForGoatCounter(() => trackCourseClick(slug));
+                });
+
+                anchorBtn?.addEventListener('click', () => {
+                    const slug = anchorBtn.getAttribute('data-course-slug') || '';
                     waitForGoatCounter(() => trackCourseClick(slug));
                 });
             </script>

@@ -57,6 +57,19 @@ const jsonLd = {
         )
       }
 
+      {
+        hasContent && (
+          <script>
+            document.querySelectorAll(".ai-content-wrapper a[href]").forEach((a) => {
+              const href = a.getAttribute("href");
+              if (href?.startsWith("#")) return;
+              a.setAttribute("target", "_blank");
+              a.setAttribute("rel", "noopener noreferrer");
+            });
+          </script>
+        )
+      }
+
       <!-- Links Grid -->
       {
         (data?.links ?? []).length > 0 && (
