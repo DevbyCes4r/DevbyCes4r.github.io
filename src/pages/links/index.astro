@@ -49,7 +49,10 @@ const sortedLinks = links.sort((a, b) =>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  <span class="font-medium">{link.data.links.length} {link.data.links.length === 1 ? 'recurso' : 'recursos'}</span>
+                  {
+                    link.data.pdfUrl? <span class="font-medium">1 recurso PDF</span>
+                      : <span class="font-medium">{link.data.links?.length || 0} {link.data.links?.length === 1 ? 'recurso' : 'recursos'}</span>
+                  }
                 </div>
                 <div class="flex items-center gap-1.5">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

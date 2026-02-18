@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const links = await getCollection('links');
+  const links = await getCollection("links");
   return links.map((link) => ({
-    params: { id: link.id.replace('.md', '') },
+    params: { id: link.id.replace(".md", "") },
     props: { link },
   }));
 }
@@ -18,82 +18,133 @@ const hasContent = body && body.trim().length > 0;
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": data.title,
-  "description": data.description,
-  "numberOfItems": data.links.length,
-  "itemListElement": data.links.map((link, index) => ({
+  name: data.title,
+  description: data.description,
+  numberOfItems: data.links?.length,
+  itemListElement: data.links?.map((link, index) => ({
     "@type": "ListItem",
-    "position": index + 1,
-    "name": link.title,
-    "url": link.url
-  }))
+    position: index + 1,
+    name: link.title,
+    url: link.url,
+  })),
 };
 ---
 
-<BaseLayout 
-  title={`${data.title} | DevbyCes4r`}
-  description={data.description}
->
+<BaseLayout title={`${data.title} | DevbyCes4r`} description={data.description}>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  
-  <div class="min-h-screen py-10 px-4 flex justify-center">
+
+  <div class="min-h-screen px-4 flex justify-center">
     <div class="w-full max-w-4xl">
-      
       <!-- Header -->
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
-          {data.title}
-        </h1>
-        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          {data.description}
-        </p>
-      </div>
+      {
+        !hasContent && (
+          <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
+              {data.title}
+            </h1>
+            <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              {data.description}
+            </p>
+          </div>
+        )
+      }
+      <!-- Content (only if there's actual content) -->
+      {
+        hasContent && (
+          <div class="ai-content-wrapper mb-8 px-1">
+            <Content />
+          </div>
+        )
+      }
 
       <!-- Links Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        {data.links.map((link) => (
-          <a 
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
-          >
-            <div class="flex items-start gap-4">
-              {link.icon && (
-                <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                  {link.icon}
-                </div>
-              )}
-              <div class="flex-grow">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                  {link.title}
-                </h3>
-                <p class="text-sm text-slate-500 dark:text-slate-400">
-                  Click para acceder →
-                </p>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
+      {
+        (data?.links ?? []).length > 0 && (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {
+              data?.links?.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+                >
+                  <div class="flex items-start gap-4">
+                    {link.icon && (
+                      <div class="text-4xl bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        {link.icon}
+                      </div>
+                    )}
+                    <div class="flex-grow">
+                      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                        {link.title}
+                      </h3>
+                      <p class="text-sm text-slate-500 dark:text-slate-400">
+                        Click para acceder →
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        )
+      }
 
-      <!-- Content (only if there's actual content) -->
-      {hasContent && (
-        <div class="mt-12 prose prose-slate dark:prose-invert max-w-none">
-          <Content />
+      <!-- Open and download file -->
+      {
+        data.pdfUrl && (
+          <div class="flex flex-col md:flex-row items-center gap-4 mb-12">
+            <a
+              href={data.pdfUrl}
+              download
+              class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >         
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              Descargar este recurso en PDF
+            </a>
+          </div>
+        )
+      }
+
+      <!-- Divider -->
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"
+        >
         </div>
-      )}
+      </div>
 
       <!-- Back link -->
       <div class="text-center mt-12">
-        <a 
-          href="/links" 
+        <a
+          href="/links"
           class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
-          Ver todos los links
+          Ver todos los recursos
         </a>
       </div>
     </div>

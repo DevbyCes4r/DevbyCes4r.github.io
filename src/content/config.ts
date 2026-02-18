@@ -129,9 +129,11 @@ const linksCollection = defineCollection({
             title: z.string(),
             url: z.string(),
             icon: z.string().optional(),
-        })),
+        })).optional(),
+        pdfUrl: z.string().optional(),
     }),
 });
+
 
 export const collections = {
     'blog': blogCollection,
