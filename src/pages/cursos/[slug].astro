@@ -358,7 +358,7 @@ const pageDescription =
                                     </div>
                                 </div>
                                 <div class="bg-slate-900/90 dark:bg-slate-800/90 px-4 py-2 shadow-xl">
-                                    <p class="text-center text-sm text-white font-medium">Presentación del curso</p>
+                                    <p class="text-sm text-white font-medium">Presentación del curso. Continúa con "Empezar curso gratis"</p>
                                 </div>
                             </div>
 
@@ -548,11 +548,13 @@ const pageDescription =
                             </h2>
                             <div class="w-full max-w-3xl h-[600px] md:h-[900px] overflow-x-auto overflow-y-hidden shadow-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900">
                                 <iframe
-                                    src={`${entry.data.documentUrl}#view=Fit`}
-                                    class="w-full h-full md:scroll-mt-20"
+                                    src={`https://docs.google.com/gview?url=${encodeURIComponent('https://devbyces4r.me' + entry.data.documentUrl)}&embedded=true`}
+                                    class="w-full h-full md:scroll-mt-20 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg"
                                     title={`Documento del curso ${entry.data.title}`}
-                                >
-                                </iframe>
+                                    allowfullscreen
+                                    loading="lazy"
+                                    style="min-height:400px;"
+                                ></iframe>
                             </div>
                             <div class="mt-4 text-center md:text-right">
                                 <a 
