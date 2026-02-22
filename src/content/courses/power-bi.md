@@ -7,7 +7,7 @@ affiliateLink: 'https://edutin.com/sh-8990'
 coverImage: 'https://d3puay5pkxu9s4.cloudfront.net/curso/12532/card_imagen.jpg'
 tags: ['Data', 'Power BI', 'Business Intelligence', 'Dashboards', 'DAX']
 category: 'datos'
-group: 
+group:
   - 'Analistas de Datos y DBA'
 orderGroup: 1
 publishDate: 2025-11-22
