@@ -16,7 +16,7 @@
 >
   <!-- Foto de perfil para confianza -->
   <img
-    src="/images/profile-cesar.webp"
+    src="/images/author/cesar.webp"
     alt="Cesar"
     width="40"
     height="40"
@@ -27,8 +27,18 @@
     <!-- Badge de plataforma + Encabezado -->
     <span class="webview-banner__badge" id="platform-badge"></span>
     <h3 class="webview-banner__title">
-      <svg class="webview-banner__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <svg
+        class="webview-banner__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+        ></path>
         <polyline points="15 3 21 3 21 9"></polyline>
         <line x1="10" y1="14" x2="21" y2="3"></line>
       </svg>
@@ -36,7 +46,9 @@
     </h3>
     <!-- Mensaje corto orientado a pérdida -->
     <p class="webview-banner__message">
-      Algunas funciones no cargan bien aquí y <strong>tu progreso no se guarda</strong>.
+      Algunas funciones no cargan bien aquí y <strong
+        >tu progreso no se guarda</strong
+      >.
     </p>
     <!-- CTA principal -->
     <button
@@ -44,16 +56,39 @@
       class="webview-banner__button webview-banner__button--primary"
       aria-label="Copiar enlace para abrir en navegador"
     >
-      <svg class="webview-banner__btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="webview-banner__btn-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+        ></path>
       </svg>
       <span id="copy-btn-text">Copiar enlace y abrir fuera</span>
     </button>
     <!-- Micro-instrucción post-copia (oculta por defecto) -->
     <p class="webview-banner__step" id="post-copy-step" style="display: none;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      <span>¡Listo! Ahora pégalo en <strong id="browser-name">Chrome o Safari</strong></span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="20 6 9 17 4 12"></polyline></svg
+      >
+      <span
+        >¡Listo! Ahora pégalo en <strong id="browser-name"
+          >Chrome o Safari</strong
+        ></span
+      >
     </p>
     <!-- Dismiss: texto con delay, no icono X -->
     <div class="webview-banner__dismiss-wrapper" id="dismiss-wrapper">
@@ -123,7 +158,8 @@
 
     // Detectar sistema operativo y navegador (single UA access)
     const ua = navigator.userAgent.toLowerCase();
-    const isIOS = ua.includes("iphone") || ua.includes("ipad") || ua.includes("ipod");
+    const isIOS =
+      ua.includes("iphone") || ua.includes("ipad") || ua.includes("ipod");
     const isAndroid = ua.includes("android");
     const osName = isIOS ? "iOS" : isAndroid ? "Android" : "unknown";
 
@@ -143,7 +179,9 @@
           setTimeout(() => {
             const dismissWrapper = document.getElementById("dismiss-wrapper");
             if (dismissWrapper) {
-              dismissWrapper.classList.add("webview-banner__dismiss-wrapper--visible");
+              dismissWrapper.classList.add(
+                "webview-banner__dismiss-wrapper--visible",
+              );
             }
           }, 3000);
 
@@ -260,10 +298,14 @@
     color: white;
     padding: 16px 16px 18px;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
     transform: translateY(calc(100% + 24px));
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.3s ease;
   }
 
   /* Avatar esquina superior derecha */
@@ -388,8 +430,13 @@
 
   /* Animación de pulso sutil en el botón */
   @keyframes subtle-pulse {
-    0%, 100% { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); }
-    50% { box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35); }
+    0%,
+    100% {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+    }
   }
 
   .webview-banner--visible .webview-banner__button--primary {
@@ -434,15 +481,23 @@
   }
 
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Dismiss: wrapper con transición de altura suave */
   .webview-banner__dismiss-wrapper {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s ease, opacity 0.4s ease;
+    transition:
+      grid-template-rows 0.4s ease,
+      opacity 0.4s ease;
     opacity: 0;
     overflow: hidden;
   }
@@ -509,7 +564,9 @@
       background: rgba(15, 14, 42, 0.7);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
     }
   }
 

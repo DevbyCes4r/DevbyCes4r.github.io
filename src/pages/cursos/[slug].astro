@@ -101,7 +101,7 @@ const pageDescription =
         : `Aprende ${entry.data.name.toLowerCase()} con nuestros ${categoryCourses.length} cursos gratuitos. ${entry.data.description}. Certificación opcional disponible.`;
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={type === "course" ? (entry.data.coverImage || "/images/courses/default.webp") : "/images/courses/categories.webp"}>
+<BaseLayout title={pageTitle} description={pageDescription} image={type === "course" ? (entry.data.coverImage || "/images/og-image/courses.webp") : "/images/og-image/category.webp"}>
     {
         type === "course" ? (
             /* COURSE LAYOUT */

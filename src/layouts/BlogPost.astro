@@ -93,7 +93,7 @@ const articleSchema = {
       >
         <div class="flex items-center gap-4">
           <img
-            src="/images/profile-cesar.webp"
+            src="/images/author/cesar.webp"
             alt={`Foto de ${author}`}
             width="48"
             height="48"
@@ -133,9 +133,9 @@ const articleSchema = {
     {
       image && (
         <div class="mb-12 rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
-          <img 
-            src={image} 
-            alt={imageAlt || title} 
+          <img
+            src={image}
+            alt={imageAlt || title}
             class="w-full h-auto object-cover"
             loading="eager"
             fetchpriority="high"
@@ -168,11 +168,7 @@ const articleSchema = {
       >
         <slot />
       </AIOptimizedContent>
-      {
-        faqs && faqs.length > 0 && (
-          <FAQSection faqs={faqs} className="mt-8" />
-        )
-      }
+      {faqs && faqs.length > 0 && <FAQSection faqs={faqs} className="mt-8" />}
 
       <footer
         class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 not-prose"
@@ -205,19 +201,20 @@ const articleSchema = {
   </div>
 
   <script>
-    import { trackBlogComplete, waitForGoatCounter } from '../utils/analytics';
+    import { trackBlogComplete, waitForGoatCounter } from "../utils/analytics";
 
     // Solo trackear lectura completa (100%) - el dato más valioso
-    const blogSlug = window.location.pathname.split('/').filter(Boolean).pop() || '';
+    const blogSlug =
+      window.location.pathname.split("/").filter(Boolean).pop() || "";
     let tracked = false;
     let ticking = false;
-    
+
     // Cache de valores para evitar reflow
     let articleTop = 0;
     let articleHeight = 0;
 
     function updateArticleMetrics() {
-      const article = document.querySelector('article');
+      const article = document.querySelector("article");
       if (article) {
         articleTop = article.offsetTop;
         articleHeight = article.offsetHeight;
@@ -228,14 +225,15 @@ const articleSchema = {
       if (tracked) return;
 
       const scrollPercentage = Math.round(
-        ((window.scrollY + window.innerHeight - articleTop) / articleHeight) * 100
+        ((window.scrollY + window.innerHeight - articleTop) / articleHeight) *
+          100,
       );
 
       if (scrollPercentage >= 95) {
         tracked = true;
         waitForGoatCounter(() => trackBlogComplete(blogSlug));
       }
-      
+
       ticking = false;
     }
 
@@ -247,23 +245,23 @@ const articleSchema = {
     }
 
     // Inicializar métricas después de que el DOM esté listo
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateArticleMetrics);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", updateArticleMetrics);
     } else {
       updateArticleMetrics();
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     // Abrir enlaces en nueva pestaña
-    document.addEventListener('DOMContentLoaded', () => {
-      const contentWrapper = document.querySelector('.ai-content-wrapper');
+    document.addEventListener("DOMContentLoaded", () => {
+      const contentWrapper = document.querySelector(".ai-content-wrapper");
       if (contentWrapper) {
-        contentWrapper.querySelectorAll('a').forEach((link) => {
-          const href = link.getAttribute('href');
-          if (href && !href.startsWith('#')) {
-            link.setAttribute('target', '_blank');
-            link.setAttribute('rel', 'noopener noreferrer');
+        contentWrapper.querySelectorAll("a").forEach((link) => {
+          const href = link.getAttribute("href");
+          if (href && !href.startsWith("#")) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
           }
         });
       }

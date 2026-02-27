@@ -46,7 +46,7 @@ const personSchema = {
   jobTitle: author.role,
   description: author.bio,
   url: new URL(Astro.url.pathname, Astro.site).toString(),
-  image: new URL("/images/profile-cesar.webp", Astro.site).toString(),
+  image: new URL("/images/author/cesar.webp", Astro.site).toString(),
   sameAs: Object.values(author.social).filter(Boolean),
   knowsAbout: author.expertise,
   mainEntityOfPage: {
@@ -94,12 +94,14 @@ const itemListSchema = {
     <ol class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
       <li>
         <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400"
-          >Inicio</a>
+          >Inicio</a
+        >
       </li>
       <li>/</li>
       <li>
         <a href="/blog" class="hover:text-blue-600 dark:hover:text-blue-400"
-          >Blog</a>
+          >Blog</a
+        >
       </li>
       <li>/</li>
       <li class="text-slate-900 dark:text-white font-medium">Autor</li>
@@ -121,7 +123,7 @@ const itemListSchema = {
             >
             </div>
             <img
-              src="/images/profile-cesar.webp"
+              src="/images/author/cesar.webp"
               alt={`Foto de ${author.name}`}
               width="128"
               height="128"

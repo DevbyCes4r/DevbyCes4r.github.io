@@ -1,99 +1,154 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const links = await getCollection('links');
-const sortedLinks = links.sort((a, b) => 
-  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+const links = await getCollection("links");
+const sortedLinks = links.sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 );
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Links de Recursos | DevbyCes4r"
   description="Colecciones curadas de recursos, cursos, herramientas y productos recomendados para impulsar tu carrera tech"
+  image={"/images/og-image/link.webp"}
 >
   <div class="min-h-screen py-10 px-4 flex justify-center">
     <div class="w-full max-w-6xl">
-      
       <!-- Header -->
       <div class="text-center mb-16">
         <div class="text-6xl mb-4 animate-bounce">🔗</div>
-        <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6">
+        <h1
+          class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 mb-6"
+        >
           Links de Recursos
         </h1>
         <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          Colecciones de cursos, herramientas y productos seleccionados especialmente para ti
+          Colecciones de cursos, herramientas y productos seleccionados
+          especialmente para ti
         </p>
       </div>
 
       <!-- Links Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {sortedLinks.map((link) => (
-          <a 
-            href={`/links/${link.id.replace('.md', '')}`}
-            class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
-          >
+        {
+          sortedLinks.map((link) => (
+            <a
+              href={`/links/${link.id.replace(".md", "")}`}
+              class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
+            >
+              {/* Content */}
+              <div class="p-6">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-2">
+                  {link.data.title}
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
+                  {link.data.description}
+                </p>
 
-            {/* Content */}
-            <div class="p-6">
-              <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-2">
-                {link.data.title}
-              </h2>
-              <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
-                {link.data.description}
-              </p>
-              
-              {/* Stats */}
-              <div class="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-4">
-                <div class="flex items-center gap-1.5">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  {
-                    link.data.pdfUrl? <span class="font-medium">1 recurso PDF</span>
-                      : <span class="font-medium">{link.data.links?.length || 0} {link.data.links?.length === 1 ? 'recurso' : 'recursos'}</span>
-                  }
+                {/* Stats */}
+                <div class="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-4">
+                  <div class="flex items-center gap-1.5">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                    {link.data.pdfUrl ? (
+                      <span class="font-medium">1 recurso PDF</span>
+                    ) : (
+                      <span class="font-medium">
+                        {link.data.links?.length || 0}{" "}
+                        {link.data.links?.length === 1 ? "recurso" : "recursos"}
+                      </span>
+                    )}
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>
+                      {new Date(link.data.publishDate).toLocaleDateString(
+                        "es-ES",
+                        { month: "short", year: "numeric" },
+                      )}
+                    </span>
+                  </div>
                 </div>
-                <div class="flex items-center gap-1.5">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+
+                {/* CTA */}
+                <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <span class="text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:gap-2 transition-all">
+                    Ver colección
+                  </span>
+                  <svg
+                    class="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
                   </svg>
-                  <span>{new Date(link.data.publishDate).toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}</span>
                 </div>
               </div>
-
-              {/* CTA */}
-              <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                <span class="text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:gap-2 transition-all">
-                  Ver colección
-                </span>
-                <svg class="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        }
       </div>
 
       <!-- Empty state -->
-      {sortedLinks.length === 0 && (
-        <div class="text-center py-20">
-          <div class="text-6xl mb-4">🔗</div>
-          <p class="text-xl text-slate-600 dark:text-slate-400">
-            Aún no hay links disponibles
-          </p>
-        </div>
-      )}
+      {
+        sortedLinks.length === 0 && (
+          <div class="text-center py-20">
+            <div class="text-6xl mb-4">🔗</div>
+            <p class="text-xl text-slate-600 dark:text-slate-400">
+              Aún no hay links disponibles
+            </p>
+          </div>
+        )
+      }
 
       <!-- Back to home -->
       <div class="text-center mt-16">
-        <a 
-          href="/" 
+        <a
+          href="/"
           class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            ></path>
           </svg>
           Volver al inicio
         </a>

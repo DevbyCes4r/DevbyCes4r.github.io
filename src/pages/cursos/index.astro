@@ -88,7 +88,7 @@ const pageDescription =
 <BaseLayout
     title={pageTitle}
     description={pageDescription}
-    image={"/images/courses/default.webp"}
+    image={"/images/og-image/courses.webp"}
 >
     <div class="min-h-screen py-10 px-4 flex justify-center">
         <div class="w-full max-w-5xl">
@@ -102,7 +102,8 @@ const pageDescription =
                 <p
                     class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8"
                 >
-                    Programación, IA, datos, idiomas, diseño, negocios y más. Certifícate gratis y aprende a tu ritmo.
+                    Programación, IA, datos, idiomas, diseño, negocios y más.
+                    Certifícate gratis y aprende a tu ritmo.
                 </p>
 
                 <!-- Search Filter -->
@@ -277,7 +278,10 @@ const pageDescription =
                                                     {course.data.icon}
                                                 </div>
                                             </div>
-                                            <div class="transition-transform duration-300 group-hover:-translate-x-20" style="width: calc(100% - 80px);">
+                                            <div
+                                                class="transition-transform duration-300 group-hover:-translate-x-20"
+                                                style="width: calc(100% - 80px);"
+                                            >
                                                 <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-2">
                                                     {course.data.title}
                                                 </h3>
@@ -300,8 +304,8 @@ const pageDescription =
                                         {/* Image preview near arrow */}
                                         {course.data.coverImage && (
                                             <div class="absolute top-16 right-4 w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 overflow-hidden transition-all duration-300">
-                                                <img 
-                                                    src={course.data.coverImage} 
+                                                <img
+                                                    src={course.data.coverImage}
                                                     alt={course.data.title}
                                                     class="w-20 h-12 object-cover rounded-lg shadow-md ring-2 ring-purple-500/50"
                                                     loading="lazy"
@@ -418,7 +422,10 @@ const pageDescription =
                                                             {course.data.icon}
                                                         </div>
                                                     </div>
-                                                    <div class="transition-transform duration-300 group-hover:-translate-x-20" style="width: calc(100% - 80px);">
+                                                    <div
+                                                        class="transition-transform duration-300 group-hover:-translate-x-20"
+                                                        style="width: calc(100% - 80px);"
+                                                    >
                                                         <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
                                                             {course.data.title}
                                                         </h3>
@@ -440,9 +447,15 @@ const pageDescription =
                                                 {/* Image preview near arrow */}
                                                 {course.data.coverImage && (
                                                     <div class="absolute top-16 right-4 w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 overflow-hidden transition-all duration-300">
-                                                        <img 
-                                                            src={course.data.coverImage} 
-                                                            alt={course.data.title}
+                                                        <img
+                                                            src={
+                                                                course.data
+                                                                    .coverImage
+                                                            }
+                                                            alt={
+                                                                course.data
+                                                                    .title
+                                                            }
                                                             class="w-20 h-12 object-cover rounded-lg shadow-md ring-2 ring-blue-500/50"
                                                             loading="lazy"
                                                         />
@@ -642,7 +655,7 @@ const pageDescription =
             <span class="hidden sm:inline">Rutas de Estudio</span>
         </a>
         <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
-                <a
+        <a
             href="/links"
             class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             title="Ver categorías"
@@ -652,15 +665,27 @@ const pageDescription =
     </div>
 
     <script>
-        import { trackSearch, waitForGoatCounter } from '../../utils/analytics';
+        import { trackSearch, waitForGoatCounter } from "../../utils/analytics";
 
-        const searchInput = document.getElementById("courseSearch") as HTMLInputElement;
-        const searchResultsSection = document.getElementById("searchResultsSection") as HTMLElement;
-        const searchResultsHeader = document.getElementById("searchResultsHeader") as HTMLElement;
-        const searchResultsGrid = document.getElementById("searchResultsGrid") as HTMLElement;
+        const searchInput = document.getElementById(
+            "courseSearch",
+        ) as HTMLInputElement;
+        const searchResultsSection = document.getElementById(
+            "searchResultsSection",
+        ) as HTMLElement;
+        const searchResultsHeader = document.getElementById(
+            "searchResultsHeader",
+        ) as HTMLElement;
+        const searchResultsGrid = document.getElementById(
+            "searchResultsGrid",
+        ) as HTMLElement;
         const noResults = document.getElementById("noResults") as HTMLElement;
-        const resultsCount = document.getElementById("resultsCount") as HTMLElement;
-        const clearButton = document.getElementById("clearSearch") as HTMLButtonElement;
+        const resultsCount = document.getElementById(
+            "resultsCount",
+        ) as HTMLElement;
+        const clearButton = document.getElementById(
+            "clearSearch",
+        ) as HTMLButtonElement;
 
         // Get all course cards and their parent sections
         // Filter out duplicates based on course slug
@@ -771,7 +796,8 @@ const pageDescription =
                     searchResultsGrid.appendChild(clone);
 
                     requestAnimationFrame(() => {
-                        clone.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
+                        clone.style.transition =
+                            "opacity 0.3s ease-out, transform 0.3s ease-out";
                         clone.style.opacity = "1";
                     });
                 });
@@ -780,9 +806,11 @@ const pageDescription =
                 noResults.classList.remove("hidden");
                 resultsCount.textContent = "0";
             }
-            
+
             // Solo trackear búsquedas (clave para detectar contenido faltante)
-            waitForGoatCounter(() => trackSearch(searchTerm, matchedCards.length));
+            waitForGoatCounter(() =>
+                trackSearch(searchTerm, matchedCards.length),
+            );
         }
 
         // Add event listener with debouncing
