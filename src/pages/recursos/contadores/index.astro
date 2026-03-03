@@ -245,3 +245,59 @@ const jsonLd = {
         white-space: pre-wrap; /* Permite que el texto baje de línea */
     }
 </style>
+
+<script>
+    import { waitForGoatCounter } from "../../../utils/analytics";
+
+    waitForGoatCounter(() => {
+        const gc = window.goatcounter;
+        if (!gc?.count) return;
+
+        // 1. Trackear clics en los 13 cursos del frontmatter (grid #cursos-principales)
+        document.querySelectorAll("#cursos-principales a[href]").forEach((a) => {
+            a.addEventListener("click", () => {
+                const h3 = a.querySelector("h3");
+                const label = (h3 as HTMLElement ?? a as HTMLElement).innerText.trim();
+                gc.count({
+                    path: `${label}`,
+                    title: "Clic en Curso - 13 Cursos Gratis Contadores",
+                    event: true,
+                });
+            });
+        });
+
+        // 2. Trackear clics en los 10 cursos de IA (solo los 2 ul inmediatos a #cursos-ia)
+        const cursosIaSelectors = "#cursos-ia + #ia-para-contabilidad + ul a[href], #cursos-ia + #ia-para-contabilidad + ul + #ia-para-finanzas + ul a[href]";
+        document.querySelectorAll<HTMLAnchorElement>(cursosIaSelectors).forEach((a) => {
+            a.addEventListener("click", () => {
+                gc.count({
+                    path: `${a.innerText.trim()}`,
+                    title: "Clic en Curso - 10 Cursos IA Contable",
+                    event: true,
+                });
+            });
+        });
+
+        // 3. Trackear cualquier clic en vacantes (sección #vacantes del markdown) — un solo registro
+        document.querySelectorAll("#vacantes + p + ul a[href]").forEach((a) => {
+            a.addEventListener("click", () => {
+                gc.count({
+                    path: "click-vacante-contadores",
+                    title: "Clic en Vacante - Recursos Contadores",
+                    event: true,
+                });
+            });
+        });
+
+        // 4. Trackear clic en el link de Plantillas de Canva (sección #plantillas-cv del markdown)
+        document.querySelectorAll("#plantillas-cv + p + p>a[href]").forEach((a) => {
+            a.addEventListener("click", () => {
+                gc.count({
+                    path: "click-plantillas-cv-contadores",
+                    title: "Clic en Plantillas CV Canva - Recursos Contadores",
+                    event: true,
+                });
+            });
+        });
+    });
+</script>
