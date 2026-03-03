@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const links = await getCollection("links");
+  const links = await getCollection("recursos");
   return links.map((link) => ({
     params: { id: link.id.replace(".md", "") },
     props: { link },
@@ -142,7 +142,7 @@ const jsonLd = {
       <!-- Back link -->
       <div class="text-center mt-12">
         <a
-          href="/links"
+          href="/recursos"
           class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
         >
           <svg

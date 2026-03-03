@@ -56,8 +56,8 @@ export default defineConfig({
           item.priority = 0.8;
           item.changefreq = 'monthly';
         }
-        // Links
-        else if (item.url.includes('/links')) {
+        // Recursos
+        else if (item.url.includes('/recursos')) {
           item.priority = 0.7;
           item.changefreq = 'weekly';
         }

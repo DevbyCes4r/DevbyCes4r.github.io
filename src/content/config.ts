@@ -140,5 +140,5 @@ export const collections = {
     'courses': coursesCollection,
     'categories': categoriesCollection,
     'routes': routesCollection,
-    'links': linksCollection,
+    'recursos': linksCollection,
 };

@@ -8,7 +8,7 @@ import { getAllRoutes } from "../../lib/routes";
 const courses = await getCollection("courses");
 const categories = await getAllCategories();
 const routes = await getAllRoutes();
-const links = await getCollection("links");
+const links = await getCollection("recursos");
 
 // Group courses by main category
 type CategoryGrouped = Record<string, typeof courses>;
@@ -489,27 +489,15 @@ const pageDescription =
             <!-- Links Section -->
             <div class="mb-20" id="links-recomendados">
                 <div class="flex items-center gap-3 mb-8">
-                    <svg
-                        class="w-6 h-6 text-orange-600 dark:text-orange-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                        ></path>
-                    </svg>
+                    <span class="text-2xl">🎁</span>
                     <h2
                         class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white"
                     >
                         <a
-                            href="/links"
+                            href="/recursos"
                             class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                         >
-                            Links de Recursos
+                            Recursos
                         </a>
                     </h2>
                 </div>
@@ -519,19 +507,21 @@ const pageDescription =
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {
-                        links.map((link) => (
+                        links.reverse().map((link) => (
                             <a
-                                href={`/links/${link.id.replace(".md", "")}`}
-                                class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 overflow-hidden"
+                                href={`/recursos/${link.id.replace(".md", "")}`}
+                                class="group relative block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-2 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
                             >
+                                {/* Content */}
                                 <div class="p-6">
-                                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors line-clamp-2">
+                                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-2">
                                         {link.data.title}
                                     </h2>
                                     <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
                                         {link.data.description}
                                     </p>
 
+                                    {/* Stats */}
                                     <div class="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-4">
                                         <div class="flex items-center gap-1.5">
                                             <svg
@@ -547,12 +537,20 @@ const pageDescription =
                                                     d="M13 10V3L4 14h7v7l9-11h-7z"
                                                 />
                                             </svg>
-                                            <span class="font-medium">
-                                                {link.data.links.length}{" "}
-                                                {link.data.links.length === 1
-                                                    ? "recurso"
-                                                    : "recursos"}
-                                            </span>
+                                            {link.data.pdfUrl ? (
+                                                <span class="font-medium">
+                                                    1 recurso PDF
+                                                </span>
+                                            ) : (
+                                                <span class="font-medium">
+                                                    {link.data.links?.length ||
+                                                        0}{" "}
+                                                    {link.data.links?.length ===
+                                                    1
+                                                        ? "recurso"
+                                                        : "recursos"}
+                                                </span>
+                                            )}
                                         </div>
                                         <div class="flex items-center gap-1.5">
                                             <svg
@@ -579,12 +577,13 @@ const pageDescription =
                                         </div>
                                     </div>
 
+                                    {/* CTA */}
                                     <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                        <span class="text-sm font-semibold text-orange-600 dark:text-orange-400 group-hover:gap-2 transition-all">
+                                        <span class="text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:gap-2 transition-all">
                                             Ver colección
                                         </span>
                                         <svg
-                                            class="w-5 h-5 text-orange-600 dark:text-orange-400 group-hover:translate-x-1 transition-transform"
+                                            class="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -656,11 +655,11 @@ const pageDescription =
         </a>
         <div class="w-px h-4 bg-slate-200 dark:bg-slate-700"></div>
         <a
-            href="/links"
+            href="/recursos"
             class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             title="Ver categorías"
         >
-            <span class="text-lg">🔗</span>
+            <span class="text-lg">🎁</span>
         </a>
     </div>
 

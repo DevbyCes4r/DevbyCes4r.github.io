@@ -1,0 +1,199 @@
+---
+import { getEntry } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const resource = await getEntry("recursos", "programacion");
+if (!resource) return Astro.redirect("/recursos");
+const { data } = resource;
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: data.title,
+    description: data.description,
+    numberOfItems: data.links?.length,
+    itemListElement: data.links?.map((link, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: link.title,
+        url: link.url,
+    })),
+};
+---
+
+<BaseLayout
+    title="Recursos para Programadores | DevbyCes4r"
+    description={data.description}
+    image={"/images/og-image/link.webp"}
+>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <div class="min-h-screen px-4 py-12 flex justify-center">
+        <div class="w-full max-w-5xl">
+            <!-- Hero para programadores -->
+            <div
+                class="relative rounded-3xl overflow-hidden mb-14 bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-700 p-10 text-white shadow-2xl"
+            >
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-4 right-8 text-9xl select-none">
+                        💻
+                    </div>
+                    <div class="absolute bottom-4 left-8 text-7xl select-none">
+                        🚀
+                    </div>
+                </div>
+                <div class="relative z-10">
+                    <div
+                        class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-5"
+                    >
+                        🎯 Recursos especializados
+                    </div>
+                    <h1
+                        class="text-4xl md:text-5xl font-bold mb-4 leading-tight"
+                    >
+                        Rutas y cursos para<br />
+                        <span class="text-indigo-200">Programadores Web</span>
+                    </h1>
+                    <p class="text-lg text-white/80 max-w-2xl">
+                        {data.description}
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <span
+                            class="bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full text-sm"
+                            >⚡ {data.links?.length} cursos seleccionados</span
+                        >
+                        <span
+                            class="bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full text-sm"
+                            >🎓 Certificados incluidos</span
+                        >
+                        <span
+                            class="bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full text-sm"
+                            >💡 Desarrollo Frontend y Backend</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Por qué estos cursos -->
+            <div
+                class="mb-12 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/50 rounded-2xl p-6"
+            >
+                <h2
+                    class="text-lg font-bold text-indigo-800 dark:text-indigo-300 mb-2 flex items-center gap-2"
+                >
+                    <span>💡</span> ¿Por qué empezar por aquí?
+                </h2>
+                <p
+                    class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed"
+                >
+                    El desarrollo de software exige estar actualizado
+                    constantemente. Dominar lenguajes clave para la <strong
+                        >web</strong
+                    > (HTML, CSS, JS), entender <strong>Bases de Datos</strong> y
+                    aprender <strong>Docker</strong> o <strong>Python</strong> te
+                    abrirá las puertas a la mayoría de las ofertas de empleo hoy en
+                    día con salarios competitivos a nivel internacional.
+                </p>
+            </div>
+
+            <!-- Cursos grid (diseño cards especial) -->
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+                📚 Rutas y Cursos recomendados
+            </h2>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14"
+            >
+                {
+                    data.links?.map((link, i) => (
+                        <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group flex flex-col gap-3 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:-translate-y-1.5 hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300"
+                        >
+                            <div class="flex items-center justify-between">
+                                <span class="text-3xl">{link.icon}</span>
+                                <span class="text-xs text-slate-400 font-mono">
+                                    #{String(i + 1).padStart(2, "0")}
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                                    {link.title}
+                                </h3>
+                            </div>
+                            <div class="mt-auto flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                                Acceder
+                                <svg
+                                    class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2.5"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <!-- CTA final -->
+            <div
+                class="text-center bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl p-8 text-white mb-10"
+            >
+                <h3 class="text-2xl font-bold mb-2">
+                    ¿Quieres más cursos como estos?
+                </h3>
+                <p class="text-white/80 mb-5 text-sm">
+                    Explora todas las colecciones disponibles para tu carrera
+                </p>
+                <a
+                    href="/cursos/programacion"
+                    class="inline-flex items-center gap-2 bg-white text-indigo-700 font-semibold px-6 py-3 rounded-xl hover:bg-indigo-50 transition-colors"
+                >
+                    Ver cursos de programación
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Back link -->
+            <div class="text-center">
+                <a
+                    href="/recursos"
+                    class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm font-medium"
+                >
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Volver a Recursos
+                </a>
+            </div>
+        </div>
+    </div>
+</BaseLayout>
