@@ -1,12 +1,22 @@
----
-const savedTheme = localStorage.getItem('color-theme');
-const initialTheme = savedTheme === 'dark' ? 'dark' : 'light'; // Set initial theme to light if no preference is saved
-
-// Theme Toggle Functionality
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.body.setAttribute('data-theme', newTheme);
-    localStorage.setItem('color-theme', newTheme);
-});
+<button id="theme-toggle" aria-label="Toggle theme">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M9 0a1 1 0 0 1 1 1v1h4a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-4v1a1 1 0 0 1-2 0V4H6a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h4V0z"/>
+  </svg>
+</button>
+<script>
+  const toggleButton = document.getElementById('theme-toggle');
+  const currentTheme = localStorage.getItem('color-theme') ? localStorage.getItem('color-theme') : 'light';
+  if (currentTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+  
+  toggleButton.addEventListener('click', () => {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('color-theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('color-theme', 'dark');
+    }
+  });
+</script>
