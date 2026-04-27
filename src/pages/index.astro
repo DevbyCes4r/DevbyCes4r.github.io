@@ -1,10 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "../components/ContactForm.astro";
+import { getCollection } from "astro:content";
 
-const pageTitle = "DevbyCes4r | Inicio";
+const pageTitle =
+  "La plataforma que filtra los mejores cursos gratis con salida laboral en Latinoamérica | DevbyCes4r";
 const pageDescription =
-  "Cursos gratuitos, herramientas web con IA, tutoriales de desarrollo y artículos sobre programación. Aprende TypeScript, Angular, Python, AWS y más tecnologías modernas.";
+  "Cursos gratis con certificación para conseguir empleo en 2026. Aprende habilidades digitales que sí están pagando.";
+
+const allCourses = await getCollection("courses");
+const recommendedCourses = allCourses
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4);
+
+const allPosts = await getCollection("blog");
+const latestPosts = allPosts
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -72,15 +84,20 @@ const pageDescription =
           </div>
 
           <!-- Title Below Photo -->
-          <h1
-            class="text-3xl md:text-5xl font-bold mb-2 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500"
+          <div
+            class="text-4xl md:text-5xl font-black mb-3 pb-1 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-500 dark:to-pink-500"
           >
             DevbyCes4r
+          </div>
+          <h1
+            class="text-lg md:text-xl font-bold text-slate-800 dark:text-slate-100 max-w-lg mx-auto leading-snug mb-3"
+          >
+            Ingeniería de Software, IA y Formación Digital
           </h1>
           <p
-            class="text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-sm mx-auto leading-relaxed"
+            class="text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-md mx-auto leading-relaxed"
           >
-            Explorando el universo del desarrollo, compartiendo conocimientos
+            Explorando el universo del desarrollo para crear soluciones tecnológicas para negocios y compartiendo conocimiento a través de cursos gratuitos.
           </p>
         </div>
 
@@ -378,109 +395,313 @@ const pageDescription =
     }
   </style>
 
-  <section class="py-16 border-t border-slate-200 dark:border-slate-800/50">
-    <div class="max-w-3xl mx-auto text-center px-4">
-      <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-        Sobre Mí
+  <!-- SEO Section: Cursos y Servicios -->
+  <section class="py-20 border-t border-slate-200 dark:border-slate-800/50">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-20">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight"
+        >
+          Cursos gratis con certificado para conseguir trabajo en Latinoamérica
+        </h2>
+        <p
+          class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed mb-4"
+        >
+          Descubre los mejores cursos online gratis con certificación en áreas digitales como programación, marketing e inteligencia artificial. <strong class="text-blue-600 dark:text-blue-400 font-semibold">Aprende habilidades con alta demanda y aumenta tus oportunidades laborales.</strong>
+        </p>
+        <p
+          class="text-base text-slate-500 dark:text-slate-500 max-w-2xl mx-auto leading-relaxed"
+        >
+          Explora contenido actualizado, guías prácticas y recursos seleccionados para ayudarte a crecer profesionalmente. También puedes impulsar tu negocio con soluciones digitales, desarrollo web y automatizaciones con IA.
+        </p>
+      </div>
+
+      <!-- Últimos Artículos -->
+      <div class="mb-24">
+        <div class="flex items-center justify-between mb-8">
+          <h3
+            class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3"
+          >
+            <span class="text-3xl">📝</span> Últimos Artículos
+          </h3>
+          <a
+            href="/blog"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"
+          >
+            Ver todos <svg
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path></svg
+            >
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            latestPosts.map((post) => (
+              <a
+                href={`/blog/${post.slug}`}
+                class="group flex flex-col bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-900">
+                  <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                  <h4 class="font-bold text-xl text-slate-900 dark:text-white mb-3 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {post.data.title}
+                  </h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mb-4 flex-grow">
+                    {post.data.description}
+                  </p>
+                  <div class="flex items-center justify-between text-xs text-slate-500 font-medium">
+                    <span>
+                      {new Date(post.data.publishDate).toLocaleDateString(
+                        "es-ES",
+                        { month: "short", day: "numeric", year: "numeric" },
+                      )}
+                    </span>
+                    <span class="text-blue-600 dark:text-blue-400 group-hover:underline">
+                      Leer más
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Cursos Destacados -->
+      <div class="mb-24">
+        <div class="flex items-center justify-between mb-8">
+          <h3
+            class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3"
+          >
+            <span class="text-3xl">🎓</span> Cursos Recomendados
+          </h3>
+          <a
+            href="/cursos"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"
+          >
+            Ver todos <svg
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path></svg
+            >
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {
+            recommendedCourses.map((course) => (
+              <a
+                href={`/cursos/${course.slug}`}
+                class="group relative block p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+              >
+                <div class="flex items-start gap-4">
+                  {/* Icon - se oculta en hover */}
+                  <div class="flex-shrink-0 w-16 transition-opacity duration-300 group-hover:opacity-0">
+                    <div class="h-16 w-16 bg-slate-100 dark:bg-slate-700/50 p-2 rounded-xl flex items-center justify-center text-center text-lg leading-tight overflow-hidden">
+                      {course.data.icon}
+                    </div>
+                  </div>
+                  <div
+                    class="transition-transform duration-300 group-hover:-translate-x-20"
+                    style="width: calc(100% - 80px);"
+                  >
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
+                      {course.data.title}
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-2 mb-3">
+                      {course.data.description}
+                    </p>
+                    {course.data.tags && course.data.tags.length > 0 && (
+                      <span class="text-xs font-medium px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-500/20">
+                        {course.data.tags[0]}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Image preview near arrow */}
+                {course.data.coverImage && (
+                  <div class="absolute top-16 right-4 w-0 opacity-0 group-hover:w-20 group-hover:opacity-100 overflow-hidden transition-all duration-300">
+                    <img
+                      src={course.data.coverImage}
+                      alt={course.data.title}
+                      class="w-20 h-12 object-cover rounded-lg shadow-md ring-2 ring-blue-500/50"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-600 dark:text-blue-400">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Servicios Disponibles -->
+      <div
+        class="bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]"
+        >
+        </div>
+
+        <div
+          class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
+          <div>
+            <div
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
+            >
+              <span
+                class="text-blue-400 text-sm font-bold tracking-wider uppercase"
+                >Para Negocios</span
+              >
+            </div>
+            <h3 class="text-3xl md:text-4xl font-black text-white mb-4">
+              Impulsa el crecimiento de tu empresa
+            </h3>
+            <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+              Ofrecemos servicios de <strong>Marketing Digital</strong> y <strong
+                >Páginas Web</strong
+              > diseñados específicamente para multiplicar tus ventas de forma automática.
+            </p>
+            <a
+              href="/servicios"
+              class="inline-flex items-center gap-2 px-8 py-4 bg-yellow-400 hover:bg-yellow-500 text-slate-900 rounded-xl font-bold transition-all hover:scale-105 shadow-lg shadow-yellow-400/20"
+            >
+              Transformar mi negocio
+            </a>
+          </div>
+          <div class="flex flex-col gap-4">
+            <div
+              class="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:bg-white/20 transition-colors"
+            >
+              <div class="text-4xl mb-4">📣</div>
+              <h4 class="text-xl font-bold text-white mb-2">
+                Marketing Digital
+              </h4>
+              <p class="text-sm text-slate-300">
+                Anuncios rentables y estrategias orientadas a resultados.
+              </p>
+            </div>
+            <div
+              class="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:bg-white/20 transition-colors"
+            >
+              <div class="text-4xl mb-4">💻</div>
+              <h4 class="text-xl font-bold text-white mb-2">Páginas Web</h4>
+              <p class="text-sm text-slate-300">
+                Sitios rápidos y diseñados para convertir visitas en clientes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Contact Section -->
+<section
+  id="contacto"
+  class="py-24 border-t border-slate-200 dark:border-slate-800/50 relative overflow-hidden"
+>
+  <div class="max-w-4xl mx-auto px-4 relative z-10">
+    <div class="text-center mb-12">
+      <span class="inline-block text-5xl mb-6">👋</span>
+      <h2
+        class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6"
+      >
+        ¿Hablamos?
       </h2>
       <p
-        class="text-slate-700 dark:text-slate-400 text-lg mb-8 leading-relaxed text-justify"
+        class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed"
       >
-        Hola, soy Cesar Nuñez, ingeniero de sistemas y desarrollador con más de
-        7 años de experiencia creando soluciones para web y aplicaciones
-        móviles.
-        <br /><br />
-        Me especializo en construir interfaces modernas, rápidas y bien estructuradas,
-        con un enfoque en UX/UI y en ofrecer experiencias fluidas e intuitivas para
-        el usuario.
-        <br /><br />
-        He trabajado con tecnologías como TypeScript, Python, PHP, Angular, Node.js,
-        Ionic, Kotlin, Swift y AWS, integrando servicios backend y funcionalidades
-        nativas en aplicaciones híbridas para Android e iOS.
-        <br /><br />
-        Actualmente me desempeño como líder de desarrollo móvil, diseñando y manteniendo
-        productos estables, escalables y optimizados al detalle.
-        <br /><br />
-        Me apasiona aprender, mejorar procesos y compartir conocimiento. Este espacio
-        nace para documentar mi camino y brindar herramientas que ayuden a otros desarrolladores
-        a crecer.
+        Ya sea para una duda técnica, propuestas de trabajo o adquirir nuestros
+        servicios B2B, me encantaría escucharte. Déjame un mensaje y te
+        responderé muy pronto.
       </p>
     </div>
-  </section>
 
-  <section class="py-20 border-t border-slate-200 dark:border-slate-800">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      <div class="p-6">
-        <div class="text-4xl mb-4">🚀</div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
-          Modern Stack
-        </h3>
-        <p class="text-slate-600 dark:text-slate-400">
-          Astro, Angular, Tailwind y las últimas tecnologías web y móviles.
-        </p>
-      </div>
-      <div class="p-6">
-        <div class="text-4xl mb-4">🤖</div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
-          AI Optimized
-        </h3>
-        <p class="text-slate-600 dark:text-slate-400">
-          Contenido estructurado para ser entendido por humanos y máquinas.
-        </p>
-      </div>
-      <div class="p-6">
-        <div class="text-4xl mb-4">⚡</div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
-          Performance
-        </h3>
-        <p class="text-slate-600 dark:text-slate-400">
-          Sitios ultrarrápidos optimizados para Core Web Vitals.
-        </p>
-      </div>
+    <div class="max-w-2xl mx-auto">
+      <ContactForm />
     </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section
-    id="contacto"
-    class="py-20 border-t border-slate-200 dark:border-slate-800"
-  >
-    <div class="max-w-3xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2
-          class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
-        >
-          Contáctame
-        </h2>
-        <p class="text-lg text-slate-600 dark:text-slate-400">
-          ¿Tienes alguna pregunta o propuesta? Me encantaría escucharte.
-        </p>
-      </div>
-
-      <div>
-        <ContactForm />
-      </div>
-
-      <div class="mt-12 text-center">
-        <p class="text-sm text-slate-500 dark:text-slate-400">
-          También puedes contactarme directamente por
+    <div
+      class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800/50 text-center"
+    >
+      <p
+        class="text-sm text-slate-500 dark:text-slate-400 flex flex-col md:flex-row items-center justify-center gap-3"
+      >
+        <span>También puedes encontrarme en mis redes:</span>
+        <span class="flex items-center gap-4 mt-2 md:mt-0">
           <a
             href="https://www.linkedin.com/in/devbyces4r/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-            >LinkedIn</a
+            class="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
           >
-          o
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+              ><path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+              ></path></svg
+            >
+          </a>
+          <span class="text-slate-300 dark:text-slate-600">•</span>
           <a
             href="https://x.com/DevbyCes4r"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-            >X (Twitter)</a
+            class="flex items-center gap-1.5 text-slate-900 dark:text-white hover:text-blue-500 font-medium transition-colors"
           >
-        </p>
-      </div>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+              ><path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              ></path></svg
+            >
+          </a>
+        </span>
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 </BaseLayout>
