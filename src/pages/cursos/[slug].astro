@@ -129,9 +129,10 @@ const pageDescription =
                 </a>
 
                     <header class="mb-8 md:mb-10">
-                        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+                        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-6 md:mb-8">
                             {/* Left Column: Image / Icon */}
-                            <div class="w-full lg:w-[45%] xl:w-[40%] flex-shrink-0">
+                            <div class="w-full lg:w-[45%] xl:w-[40%] flex-shrink-0 flex flex-col gap-5">
+                                {/* Cover Image / Icon */}
                                 {entry.data.coverImage ? (
                                     <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700/50">
                                         <img 
@@ -149,7 +150,7 @@ const pageDescription =
                             </div>
                             
                             {/* Right Column: Content */}
-                            <div class="flex-1 min-w-0 flex flex-col justify-center">
+                            <div class="flex-1 min-w-0 flex flex-col justify-start">
                                 {/* Badges */}
                                 <div class="flex flex-wrap items-center gap-2 mb-3">
                                     <span class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-400 text-white rounded-full text-sm font-bold shadow-sm">
@@ -197,10 +198,9 @@ const pageDescription =
                                 )}
                             </div>
                         </div>
-                        
-                        {/* Primary CTA Block - Optimized for conversion */}
-                        <div class="flex flex-col items-stretch gap-2 mt-3 md:mt-4">
-                            {/* CTA Button */}
+
+                        {/* Full Width CTA Block */}
+                        <div class="flex flex-col items-center w-full max-w-2xl mx-auto">
                             <a
                                 id="course-access-btn"
                                 href={entry.data.affiliateLink}
@@ -209,47 +209,43 @@ const pageDescription =
                                 data-course-slug={entry.slug}
                                 data-course-title={entry.data.title}
                                 data-course-category={entry.data.category}
-                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 md:px-10 py-3.5 md:py-4 my-4 md:my-8 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-lg font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto md:min-w-[280px] md:self-end"
+                                class="apple-cta-btn group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-[#60a5fa] dark:to-[#a855f7] text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full"
                             >
                                 <span>Acceder al curso gratis</span>
-                               <svg
-                                class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                />
-                            </svg>
+                                <svg
+                                    class="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
                             </a>
                             
-                            {/* Micro-copy de seguimiento - Oculto en móvil */}
-                            <p class="hidden md:block text-xs text-center md:text-right text-slate-500 dark:text-slate-400 -mt-2 md:-mt-1">
+                            {/* Micro-copy */}
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-3 text-center w-full">
                                 Desarrolla habilidades demandadas y potencia tu perfil profesional.
                             </p>
 
-                            {/* Trust signals - alineados a la izquierda en móvil */}
-                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-start md:justify-end gap-1.5 sm:gap-3 text-xs text-slate-600 dark:text-slate-400 pt-0.5 md:pt-1">
+                            {/* Trust signals */}
+                            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-sm text-slate-600 dark:text-slate-400 mt-3">
                                 <span class="inline-flex items-center gap-1.5">
-                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                                     <span class="font-medium">Sin datos de tarjeta</span>
                                 </span>
                                 <span class="hidden sm:inline text-slate-300 dark:text-slate-600">|</span>
                                 <span class="inline-flex items-center gap-1.5">
-                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                                     <span class="font-medium">Acceso inmediato</span>
                                 </span>
                                 <span class="hidden sm:inline text-slate-300 dark:text-slate-600">|</span>
                                 <span class="inline-flex items-center gap-1.5">
-                                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                                     <span class="font-medium">Certificado opcional</span>
                                 </span>
                             </div>
                         </div>
+                        
                         
                         <style>
                             /* Apple-Inspired CTA Button */
